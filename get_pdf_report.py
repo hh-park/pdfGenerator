@@ -86,7 +86,8 @@ class PdfGenerator:
         table_cell_width = 25
         table_cell_height = 6
 
-        pdf.set_font('malgunbd', '', 8)
+        pdf.set_font('malgun', '', 6)
+
 
         # Loop over to print column names
         cols = df.columns
@@ -94,7 +95,6 @@ class PdfGenerator:
             pdf.cell(table_cell_width, table_cell_height, col, align='C', border=1)
 
         pdf.ln(table_cell_height)
-        pdf.set_font('malgun', '', 6)
 
         # Loop over to print each data in the table
         for row in df.itertuples():
@@ -136,9 +136,7 @@ class PdfGenerator:
         # 1. Set up the PDF doc basics
         pdf = FPDF()
         pdf.add_page()
-        pdf.add_font('malgunbd', '', 'malgunbd.ttf', uni=True)
         pdf.add_font('malgun', '', 'malgun.ttf', uni=True)
-        pdf.set_font('malgunbd', '', 14)
 
         # 2. Layout the PDF doc contents
         ## Title
