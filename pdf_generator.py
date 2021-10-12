@@ -7,6 +7,8 @@ import numpy as np
 import pandas as pd
 import matplotlib as mpl
 import matplotlib.pyplot as plt
+import matplotlib.ticker as ticker
+import matplotlib.font_manager as fm
 import os
 import pdfkit
 
@@ -24,9 +26,22 @@ options = {
 class PdfGenerator():
 
     def __init__(self):
-        plt.rcParams["font.family"] = 'Malgun Gothic'
+        plt.rcParams["font.family"] = 'KT font'
 
     def run(self):
+
+        ''' 1. matplotlib 위치 찾기
+            2. mpl-data/fonts/ttf에 ttf 폰트 설치
+            3. cache directory 찾아서 fontlist-v330.json 파일 삭제
+            4. font family 이름 알아내서 rcParams 설정'''
+
+        # print('설정위치:', mpl.matplotlib_fname())
+        # print(mpl.get_cachedir())
+
+        # font_list = fm.findSystemFonts(fontpaths=None, fontext='ttf')
+        # print(font_list)
+        # f = [f.name for f in fm.fontManager.ttflist if 'KT' in f.name]
+        # print(f)
 
         df = pd.read_csv('annual_sales.csv')
         imageList = ['res/grp_alert.png', 'res/total_alert.png', 'res/total_hist.png', 'res/cpu_trend.png',
@@ -3051,14 +3066,22 @@ class PdfGenerator():
         # '항목별 비정상 추세'
         fig, ax = plt.subplots(figsize=(2.25, 2))
         ax.plot(df['date'].values[:7], df[name].values[:7], label=u'이번달', color="#1bc0e1")
+
+        # todo x축 눈금 간격 설정
+        ax.xaxis.set_major_locator(ticker.MultipleLocator(3))
+
+        # y축 범례
+        ax.set_ylabel('비정상\n 장비수', rotation=0, fontsize=8)
+        ax.yaxis.set_label_coords(-0.15, 0.9)# ylabel loc
+
         ax.spines['right'].set_visible(False)
         ax.spines['top'].set_visible(False)
-        # plt.ylabel('비정상 장비수', fontsize=10, rotation=90)
+
         plt.legend(fontsize=8, loc='upper right')
         plt.xticks(df['date'].values, fontsize=8)
         plt.yticks(fontsize=8)
 
-        plt.savefig(filename, dpi=100, bbox_inches='tight', pad_inches=0.05)
+        plt.savefig(filename, dpi=100, bbox_inches='tight', pad_inches=0.01)
         plt.show()
 
     def horizontal_bar(self, df, filename):
@@ -3066,16 +3089,23 @@ class PdfGenerator():
         # '그룹별 장비 비정상 현황', '비정상 항목 현황'
         fig, ax = plt.subplots(figsize=(3.2, 1.6))
         obj = df['total_obj'].values[:4]
-        y_pos = np.arange(len(obj))  # Todo position?
+        y_pos = np.arange(len(obj))
         performance = df['total_stat'].values[:4]
 
         ax.barh(y_pos, performance, align='center',
                 color=['#1bc0e1', '#9CCC3D', '#FF3333', '#FF9933', '#363b47'])
         ax.set_yticks(y_pos)
-        ax.set_yticklabels(obj, fontsize=10)
+        ax.set_yticklabels(obj, fontsize=8)
+
+        # 범례
+        ax.set_ylabel('항목', rotation=0, fontsize=8)
+        ax.yaxis.set_label_coords(-0.1, 1)
+        ax.set_xlabel('비정상 수', fontsize=8)
+        ax.xaxis.set_label_coords(1, -0.05)
+
         ax.spines['right'].set_visible(False)
         ax.spines['top'].set_visible(False)
-        # plt.xticks(fontsize=10)
+        plt.xticks(fontsize=8)
         plt.savefig(filename, dpi=100, bbox_inches='tight', pad_inches=0.01)
         plt.show()
 
@@ -3089,8 +3119,14 @@ class PdfGenerator():
 
         ax.spines['right'].set_visible(False)
         ax.spines['top'].set_visible(False)
+
+        # y축 범례
+        ax.set_ylabel('장비수', rotation=0, fontsize=8)
+        ax.yaxis.set_label_coords(-0.25, 0.95)
+
         plt.bar(x, values, width=0.25, color='#1bc0e1')
         plt.xticks(x, obj, fontsize=8)
+        plt.yticks(fontsize=8)
         plt.savefig(filename, dpi=100, bbox_inches='tight', pad_inches=0.01)
         plt.show()
 
