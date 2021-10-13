@@ -28,7 +28,9 @@ options = {
 
 class PdfGenerator():
 
-    def __init__(self):
+    def __init__(self, web):
+        self.web = web
+        self.opt = self.web['opt']
         self.plots = []
         plt.rcParams["font.family"] = 'KT font'
 
@@ -37,7 +39,7 @@ class PdfGenerator():
         ''' 1. matplotlib 위치 찾기
             2. mpl-data/fonts/ttf에 ttf 폰트 설치
             3. cache directory 찾아서 fontlist-v330.json 파일 삭제
-            4. font family 이름 알아내서 rcParams 설정'''
+            4. font family 이름 알아내서 rcParams 설정
 
         # print('설정위치:', mpl.matplotlib_fname())
         # print(mpl.get_cachedir())
@@ -46,10 +48,77 @@ class PdfGenerator():
         # print(font_list)
         # f = [f.name for f in fm.fontManager.ttflist if 'KT' in f.name]
         # print(f)
-        # df = pd.read_csv('annual_sales.csv')
+        '''
 
         example = {
             "inspection": [
+                {
+                    "category": "building",
+                    "buildingID": "b001",
+                    "inspection_data":
+                        {
+                            "date": "2020-12-31 14:58:27.089000",
+                            "id": "1002",
+                            "fan": 1,
+                            "port": 4,
+                            "cpu": 7,
+                            "port2": 2
+                        }
+                },
+                {
+                    "category": "building",
+                    "buildingID": "b001",
+                    "inspection_data":
+                        {
+                            "date": "2021-01-01 14:58:27.089000",
+                            "id": "1007",
+                            "fan": 2,
+                            "port": 5,
+                            "cpu": 5,
+                            "port2": 2
+                        }
+
+                },
+                {
+                    "category": "building",
+                    "buildingID": "b001",
+                    "inspection_data":
+                        {
+                            "date": "2021-01-02 14:58:27.089000",
+                            "id": "1004",
+                            "fan": 2,
+                            "port": 0,
+                            "cpu": 0,
+                            "port2": 2
+                        }
+                },
+                {
+                    "category": "building",
+                    "buildingID": "b001",
+                    "inspection_data":
+                        {
+                            "date": "2021-01-03 14:58:27.089000",
+                            "id": "1006",
+                            "fan": 5,
+                            "port": 6,
+                            "cpu": 2,
+                            "port2": 1
+                        }
+
+                },
+                {
+                    "category": "building",
+                    "buildingID": "b001",
+                    "inspection_data":
+                        {
+                            "date": "2021-01-04 14:58:27.089000",
+                            "id": "1009",
+                            "fan": 4,
+                            "port": 3,
+                            "cpu": 4,
+                            "port2": 1
+                        }
+                },
                 {
                     "category": "building",
                     "buildingID": "b001",
@@ -176,7 +245,7 @@ class PdfGenerator():
                     "buildingID": "b001",
                     "inspection_data":
                         {
-                            "date": "2021-01-15 14:58:27.089000",
+                            "date": "2021-01-14 14:58:27.089000",
                             "id": "1015",
                             "fan": 4,
                             "port": 4,
@@ -212,6 +281,13 @@ class PdfGenerator():
 
     def generate_html(self):
 
+        building_name = self.opt.get('building_name')
+        abnormal = self.opt.get('abnormal')
+        ap = self.opt.get('ap')
+
+        now = datetime.datetime.now()
+        now_time = now.strftime('%Y-%m-%d %H:%M:%S')
+        now_date = now.strftime('%Y%m%d')
         html = f'''
         <!DOCTYPE html>
     <html>
@@ -735,7 +811,7 @@ class PdfGenerator():
                 <h1>자동 점검 리포트</h1>
                 <h2>(점검명)</h2>
                 <div class="box">
-                    <p>점검일 : 2021-09-27 09:56:00</p>
+                    <p>점검일 : {now_time}</p>
                 </div>
                 <div class="summary">
                     <div class="box">
@@ -755,9 +831,9 @@ class PdfGenerator():
                             </thead>
                             <tbody>
                                 <tr>
-                                    <td>빌딩 A</td>
-                                    <td>비정상 1대</td>
-                                    <td>비정상 1대</td>
+                                    <td>{building_name}</td>
+                                    <td>비정상 {abnormal}대</td>
+                                    <td>비정상 {ap}대</td>
                                 </tr>
                                 <tr>
                                     <td>빌딩 B</td>
@@ -784,7 +860,7 @@ class PdfGenerator():
                             </thead>
                             <tbody>
                                 <tr>
-                                    <td>빌딩 A</td>
+                                    <td>{building_name}</td>
                                     <td>+ 1대</td>
                                     <td>0</td>
                                 </tr>
@@ -976,7 +1052,7 @@ class PdfGenerator():
                                 <th>D-3</th>
                                 <th>D-2</th>
                                 <th>D-1</th>
-                                <th>2021-09-27</th>
+                                <th>{now_time}</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -1045,7 +1121,7 @@ class PdfGenerator():
                             <ul>
                                 <li class="date">
                                     <p>점검일시</p>
-                                    <span>2021-09-27 14:43:25</span>
+                                    <span>{now_time}</span>
                                 </li>
                                 <li>
                                     <p>장비</p>
@@ -1116,7 +1192,7 @@ class PdfGenerator():
                             <ul>
                                 <li class="date">
                                     <p>점검일시</p>
-                                    <span>2021-09-27 14:43:25</span>
+                                    <span>{now_time}</span>
                                 </li>
                                 <li>
                                     <p>장비</p>
@@ -1223,20 +1299,20 @@ class PdfGenerator():
 
         
         '''
-        today = datetime.datetime.now().strftime('%Y%m%d')
 
-        with open(f'''{today}_일일점검리포트.html''', 'w', encoding='UTF-8') as f:
+        with open(f'''{now_date}_일일점검리포트.html''', 'w', encoding='UTF-8') as f:
             f.write(html)
 
-        pdfkit.from_file(f'''{today}_일일점검리포트.html''', f'''../{today}_일일점검리포트.pdf''', configuration=config, options=options)
+        pdfkit.from_file(f'''{now_date}_일일점검리포트.html''', f'''../{now_date}_일일점검리포트.pdf''', configuration=config, options=options)
 
         # '항목별 비정상 추세'
 
     def generate_plot(self, df, filename):
 
-        fig, ax = plt.subplots(figsize=(2.25, 2))
-
-        ax.plot(df['date'].values, df[filename].values, label=u'이번달', color="#1bc0e1")
+        fig, ax = plt.subplots(figsize=(2.25, 1.75))
+        ax.plot(df['date'].values[-7:], df[filename].values[-7:], label=u'현재', color="#1bc0e1")
+        ax.plot(df['date'].values[-7:], df[filename].values[-14:-7], label=u'1주전', color="#9CCC3D")
+        ax.plot(df['date'].values[-7:], df[filename].values[-7:] - 1, label=u'1달전', color="#FF3333")
 
         # todo x축 눈금 간격 설정
 
@@ -1244,21 +1320,21 @@ class PdfGenerator():
         xaxis = []
         xdate = list(np.array(df['date'].tolist()))
         for i in xdate:
-            a = datetime.datetime.strptime(i,'%Y-%m-%d %H:%M:%S.%f')
+            a = datetime.datetime.strptime(i, '%Y-%m-%d %H:%M:%S.%f')
             xaxis.append(datetime.datetime.strftime(a, '%m-%d'))
-        xnp = np.arange(len(xaxis))
+        xnp = np.arange(7)
 
         ax.xaxis.set_major_locator(ticker.MultipleLocator(3))
 
         # y축 범례
         ax.set_ylabel('비정상\n 장비수', rotation=0, fontsize=8)
-        ax.yaxis.set_label_coords(-0.15, 0.9)  # ylabel loc
+        ax.yaxis.set_label_coords(-0.15, 0.98)  # ylabel loc
 
         ax.spines['right'].set_visible(False)
         ax.spines['top'].set_visible(False)
 
         plt.legend(fontsize=8, loc='upper right')
-        plt.xticks(xnp, xaxis, fontsize=8, rotation=45)
+        plt.xticks(xnp, xaxis[-7:], fontsize=7, rotation=45)
         plt.yticks(fontsize=8)
 
         plt.savefig(str('res/' + filename + '_trend.png'), dpi=100, bbox_inches='tight', pad_inches=0.01)
@@ -1310,7 +1386,7 @@ class PdfGenerator():
 
         # y축 범례
         ax.set_ylabel('장비수', rotation=0, fontsize=8)
-        ax.yaxis.set_label_coords(-0.25, 0.95)
+        ax.yaxis.set_label_coords(-0.15, 0.95)
 
         plt.bar(x, values, width=0.25, color='#1bc0e1')
         plt.xticks(x, obj, fontsize=8)
@@ -1322,5 +1398,15 @@ class PdfGenerator():
 
 
 if __name__ == "__main__":
-    test = PdfGenerator()
+    web = {
+        'opt': {
+            'building_name': 'Building A',
+            'abnormal': 1,
+            'ap': 1,
+            'inspection_date': '',
+
+        }
+    }
+
+    test = PdfGenerator(web)
     test.run()
