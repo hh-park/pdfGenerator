@@ -1,11 +1,10 @@
 #!/usr/bin/env python
 # -*- coding: utf8 -*-
 
-from datetime import datetime, timedelta
+from datetime import datetime
 
 import numpy as np
 import pandas as pd
-import matplotlib as mpl
 import matplotlib.pyplot as plt
 import matplotlib.ticker as ticker
 import matplotlib.font_manager as fm
@@ -257,25 +256,25 @@ class PdfGenerator():
             ]
         }
 
-        df2 = []
+        df_list = []
         for i in range(len(example['inspection'])):
-            df2.append(example['inspection'][i]['inspection_data'])
-        df2DataFrame = pd.DataFrame(df2)
+            df_list.append(example['inspection'][i]['inspection_data'])
+        df = pd.DataFrame(df_list)
 
         # imageList = ['grp_alert', 'total_alert', 'total_hist', 'cpu_trend', 'fan_trend', 'port_trend']
-        for f in df2[0]:
+        for f in df_list[0]:
             if 'port' in f:
                 self.plots.append(f)
             elif f in ['cpu', 'fan']:
                 self.plots.append(f)
 
-        for i in self.plots:
-            self.generate_plot(df2DataFrame, i)
+        for key in self.plots:
+            self.generate_plot(df, key)
 
-        for i in ['grp', 'total']:
-            self.horizontal_bar(df2DataFrame, i)
+        for key in ['grp', 'total']:
+            self.horizontal_bar(df, key)
 
-        self.vertical_bar(df2DataFrame)
+        self.vertical_bar(df)
 
         return self.generate_html()
 
@@ -1306,15 +1305,13 @@ class PdfGenerator():
         pdfkit.from_file(f'''{now_date}_일일점검리포트.html''', f'''../{now_date}_일일점검리포트.pdf''', configuration=config, options=options)
 
         # '항목별 비정상 추세'
-
-    def generate_plot(self, df, filename):
+    def generate_plot(self, df, key):
 
         fig, ax = plt.subplots(figsize=(2.25, 1.75))
-        ax.plot(df['date'].values[-7:], df[filename].values[-7:], label=u'현재', color="#1bc0e1")
-        ax.plot(df['date'].values[-7:], df[filename].values[-14:-7], label=u'1주전', color="#9CCC3D")
-        ax.plot(df['date'].values[-7:], df[filename].values[-7:] - 1, label=u'1달전', color="#FF3333")
-
-        # todo x축 눈금 간격 설정
+        dates = df['date'].values[-7:]
+        ax.plot(dates, df[key].values[-7:], label=u'현재', color="#1bc0e1")
+        ax.plot(dates, df[key].values[-14:-7], label=u'1주전', color="#9CCC3D")
+        ax.plot(dates, df[key].values[-7:] - 1, label=u'1달전', color="#FF3333")
 
         # simple date format: M-D
         xaxis = []
@@ -1322,9 +1319,10 @@ class PdfGenerator():
         for i in xdate:
             a = datetime.datetime.strptime(i, '%Y-%m-%d %H:%M:%S.%f')
             xaxis.append(datetime.datetime.strftime(a, '%m-%d'))
-        xnp = np.arange(7)
+        xnp = np.arange(len(dates))
 
-        ax.xaxis.set_major_locator(ticker.MultipleLocator(3))
+        # todo x축 눈금 간격 설정(2-3일 간격으로 표시)
+        # ax.xaxis.set_major_locator(ticker.MultipleLocator(3))
 
         # y축 범례
         ax.set_ylabel('비정상\n 장비수', rotation=0, fontsize=8)
@@ -1335,25 +1333,23 @@ class PdfGenerator():
 
         plt.legend(fontsize=8, loc='upper right')
         plt.xticks(xnp, xaxis[-7:], fontsize=7, rotation=45)
-        plt.yticks(fontsize=8)
-
-        plt.savefig(str('res/' + filename + '_trend.png'), dpi=100, bbox_inches='tight', pad_inches=0.01)
+        plt.yticks(fontsize=7)
+        plt.savefig(str('res/' + key + '_trend.png'), dpi=100, bbox_inches='tight', pad_inches=0.01)
         plt.show()
 
     # '그룹별 장비 비정상 현황', '비정상 항목 현황'
-    def horizontal_bar(self, df, filename):
+    def horizontal_bar(self, df, key):
 
-        obj = self.plots
         fig, ax = plt.subplots(figsize=(3.2, 1.6))
-        y_pos = np.arange(len(obj))
-        perf = []
-        for i in obj:
-            perf.append(df[i].sum())
+        y_tick = np.arange(len(self.plots))
+        y_label = []
+        for i in self.plots:
+            y_label.append(df[i].sum())
 
-        ax.barh(y_pos, perf, align='center',
+        ax.barh(y_tick, y_label, align='center',
                 color=['#1bc0e1', '#9CCC3D', '#FF3333', '#FF9933', '#363b47'])
-        ax.set_yticks(y_pos)
-        ax.set_yticklabels(obj, fontsize=8)
+        ax.set_yticks(y_tick)
+        ax.set_yticklabels(y_label, fontsize=8)
 
         # 범례
         ax.set_ylabel('항목', rotation=0, fontsize=8)
@@ -1363,41 +1359,47 @@ class PdfGenerator():
 
         ax.spines['right'].set_visible(False)
         ax.spines['top'].set_visible(False)
-        plt.xticks(fontsize=8)
-        plt.savefig(str('res/' + filename + '_alert.png'), dpi=100, bbox_inches='tight', pad_inches=0.01)
+        plt.xticks(fontsize=7)
+        plt.savefig(str('res/' + key + '_alert.png'), dpi=100, bbox_inches='tight', pad_inches=0.01)
         plt.show()
 
     # '비정상 장비 추세'
     def vertical_bar(self, df):
 
-        x = np.arange(3)
-        # x = np.arange(len(self.plots))
-
-        obj = ['CPU 사용률', '팬상태', '포트상태']
-        values = [df['cpu'].sum(), df['fan'].sum(), df['port'].sum()]
-        # perf = []
-        # for i in self.plots:
-        #     perf.append(df[i].sum())
-
         fig, ax = plt.subplots(figsize=(2, 1.6))
+        x_label = self.plots
+        x_tick = np.arange(len(x_label))
+        x_name = ['' for i in range(len(x_label))]
 
-        ax.spines['right'].set_visible(False)
-        ax.spines['top'].set_visible(False)
+        for i in range(len(x_label)):
+            if 'cpu' in x_label[i]:
+                x_name[i] = 'CPU 사용률'
+            elif 'fan' in x_label[i]:
+                x_name[i] = '팬 상태'
+            elif 'port' in x_label[i]:
+                x_name[i] = '포트상태'
+
+        x_values = []
+        for i in x_label:
+            x_values.append(df[i].sum())
+
 
         # y축 범례
         ax.set_ylabel('장비수', rotation=0, fontsize=8)
         ax.yaxis.set_label_coords(-0.15, 0.95)
 
-        plt.bar(x, values, width=0.25, color='#1bc0e1')
-        plt.xticks(x, obj, fontsize=8)
-        plt.yticks(fontsize=8)
+        ax.spines['right'].set_visible(False)
+        ax.spines['top'].set_visible(False)
 
-        # 파일 이 함수에서 저장
+        plt.bar(x_tick, x_values, width=0.25, color='#1bc0e1')
+        plt.xticks(x_tick, x_name, fontsize=7)
+        plt.yticks(fontsize=7)
         plt.savefig(str('res/total_hist.png'), dpi=100, bbox_inches='tight', pad_inches=0.01)
         plt.show()
 
 
 if __name__ == "__main__":
+    # JSON EXAMPLE
     web = {
         'opt': {
             'building_name': 'Building A',
