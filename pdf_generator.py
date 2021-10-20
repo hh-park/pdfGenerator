@@ -298,25 +298,25 @@ class PdfGenerator():
                 font-family: "KT";
                 font-style: normal;
                 font-weight: 400;
-                src: url("./font/KTfontLight.woff") format('woff'),
-                    url("./font/KTfontLight.eot"),
-                    url("./font/KTfontLight.eot?#iefix") format('embedded-opentype');
+                src: url("../font/KTfontLight.woff") format('woff'),
+                    url("../font/KTfontLight.eot"),
+                    url("../font/KTfontLight.eot?#iefix") format('embedded-opentype');
             }}
             @font-face {{
                 font-family: "KT";
                 font-style: normal;
                 font-weight: 500;
-                src: url("./font/KTfontMedium.woff") format('woff'),
-                    url("./font/KTfontMedium.eot"),
-                    url("./font/KTfontMedium.eot?#iefix") format('embedded-opentype');
+                src: url("../font/KTfontMedium.woff") format('woff'),
+                    url("../font/KTfontMedium.eot"),
+                    url("../font/KTfontMedium.eot?#iefix") format('embedded-opentype');
             }}
             @font-face {{
                 font-family: "KT";
                 font-style: normal;
                 font-weight: 600;
-                src: url("./font/KTfontBold.woff") format('woff'),
-                    url("./font/KTfontBold.eot"),
-                    url("./font/KTfontBold.eot?#iefix") format('embedded-opentype');
+                src: url("../font/KTfontBold.woff") format('woff'),
+                    url("../font/KTfontBold.eot"),
+                    url("../font/KTfontBold.eot?#iefix") format('embedded-opentype');
             }}
     
             /* common */
@@ -443,7 +443,7 @@ class PdfGenerator():
                 position: relative;
                 display: inline-block;
                 top: 7px;
-                background: url("./images/ico_building.png") no-repeat;
+                background: url("../images/ico_building.png") no-repeat;
                 margin: 0 10px 0 0;
                 width: 25px;;
                 height: 25px;
@@ -590,7 +590,7 @@ class PdfGenerator():
                 display: inline-block;
                 width: 13px;
                 height: 20px;
-                background: url("./images/ico_up.png") no-repeat;
+                background: url("../images/ico_up.png") no-repeat;
                 margin: 0 5px 0 0;
             }} 
             .chart_view ul li.down span {{
@@ -603,7 +603,7 @@ class PdfGenerator():
                 display: inline-block;
                 width: 13px;
                 height: 20px;
-                background: url("./images/ico_down.png") no-repeat;
+                background: url("../images/ico_down.png") no-repeat;
                 margin: 0 5px 0 0;
             }} 
             .chart_view ul li.total {{
@@ -900,13 +900,13 @@ class PdfGenerator():
                         <div class="chart_view c2">
                             <h3>그룹별 장비 비정상 현황</h3>
                             <div class="chart">
-                                <img src="./res/grp_alert.png" alt="grp_alert">
+                                <img src="../img/grp_alert.png" alt="grp_alert">
                             </div>
                         </div>
                         <div class="chart_view c3">
                             <h3>비정상 항목 현황</h3>
                             <div class="chart">
-                                <img src="./res/total_alert.png" alt="total_alert">
+                                <img src="../img/total_alert.png" alt="total_alert">
                             </div>
                         </div>
                     </div>
@@ -925,7 +925,7 @@ class PdfGenerator():
                                 </li>
                             </ul>
                             <div class="chart">
-                                <img src="./res/total_hist.png" alt="total_hist">
+                                <img src="../img/total_hist.png" alt="total_hist">
                             </div>
                         </div>
                         <div class="chart_view c5">
@@ -934,19 +934,19 @@ class PdfGenerator():
                                 <div class="chart_wrap">
                                     <h4>CPU 사용률</h4>
                                     <div class="chart">
-                                        <img src="./res/cpu_trend.png" alt="cpu_trend">
+                                        <img src="../img/cpu_trend.png" alt="cpu_trend">
                                     </div>
                                 </div>
                                 <div class="chart_wrap">
                                     <h4>팬상태</h4>
                                     <div class="chart">
-                                        <img src="./res/fan_trend.png" alt="port_trend">
+                                        <img src="../img/fan_trend.png" alt="port_trend">
                                     </div>
                                 </div>
                                 <div class="chart_wrap">
                                     <h4>포트 상태</h4>
                                     <div class="chart">
-                                        <img src="./res/port_trend.png" alt="port_trend">
+                                        <img src="../img/port_trend.png" alt="port_trend">
                                     </div>
                                 </div>
                             <div>
@@ -1299,10 +1299,10 @@ class PdfGenerator():
         
         '''
 
-        with open(f'''{now_date}_일일점검리포트.html''', 'w', encoding='UTF-8') as f:
+        with open(f'''./etc/{now_date}_일일점검리포트.html''', 'w', encoding='UTF-8') as f:
             f.write(html)
 
-        pdfkit.from_file(f'''{now_date}_일일점검리포트.html''', f'''../{now_date}_일일점검리포트.pdf''', configuration=config, options=options)
+        pdfkit.from_file(f'''./etc/{now_date}_일일점검리포트.html''', f'''./pdf/{now_date}_일일점검리포트.pdf''', configuration=config, options=options)
 
         # '항목별 비정상 추세'
     def generate_plot(self, df, key):
@@ -1334,7 +1334,7 @@ class PdfGenerator():
         plt.legend(fontsize=8, loc='upper right')
         plt.xticks(xnp, xaxis[-7:], fontsize=7, rotation=45)
         plt.yticks(fontsize=7)
-        plt.savefig(str('res/' + key + '_trend.png'), dpi=100, bbox_inches='tight', pad_inches=0.01)
+        plt.savefig(str('./img/' + key + '_trend.png'), dpi=100, bbox_inches='tight', pad_inches=0.01)
         plt.show()
 
     # '그룹별 장비 비정상 현황', '비정상 항목 현황'
@@ -1345,6 +1345,15 @@ class PdfGenerator():
         y_label = []
         for i in self.plots:
             y_label.append(df[i].sum())
+        y_name = ['' for i in range(len(self.plots))]
+
+        for i in range(len(self.plots)):
+            if 'cpu' in self.plots[i]:
+                y_name[i] = 'CPU 사용률'
+            elif 'fan' in self.plots[i]:
+                y_name[i] = '팬 상태'
+            elif 'port' in self.plots[i]:
+                y_name[i] = '포트상태'
 
         ax.barh(y_tick, y_label, align='center',
                 color=['#1bc0e1', '#9CCC3D', '#FF3333', '#FF9933', '#363b47'])
@@ -1360,7 +1369,8 @@ class PdfGenerator():
         ax.spines['right'].set_visible(False)
         ax.spines['top'].set_visible(False)
         plt.xticks(fontsize=7)
-        plt.savefig(str('res/' + key + '_alert.png'), dpi=100, bbox_inches='tight', pad_inches=0.01)
+        plt.yticks(y_tick, y_name, fontsize=7)
+        plt.savefig(str('./img/' + key + '_alert.png'), dpi=100, bbox_inches='tight', pad_inches=0.01)
         plt.show()
 
     # '비정상 장비 추세'
@@ -1394,7 +1404,7 @@ class PdfGenerator():
         plt.bar(x_tick, x_values, width=0.25, color='#1bc0e1')
         plt.xticks(x_tick, x_name, fontsize=7)
         plt.yticks(fontsize=7)
-        plt.savefig(str('res/total_hist.png'), dpi=100, bbox_inches='tight', pad_inches=0.01)
+        plt.savefig(str('./img/total_hist.png'), dpi=100, bbox_inches='tight', pad_inches=0.01)
         plt.show()
 
 

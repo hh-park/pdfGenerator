@@ -92,9 +92,9 @@ class TestHandler:
                     <body>
                         <h1>일일 점검 리포트</h1>
                         <h2>1.진단 결과</h2>
-                        <img src='res/inspection.png' width="250">
-                        <img src='res/inspection.png' width="250">
-                        <img src='res/inspection.png' width="250">
+                        <img src='img/inspection.png' width="250">
+                        <img src='img/inspection.png' width="250">
+                        <img src='img/inspection.png' width="250">
                         <h2>2. to-do list</h2>
                         <br>
                         <h2>3.일주일 내 비정상 발생 건수</h2>
@@ -210,9 +210,9 @@ class TestHandler:
 
         # BODY
         self.write_title(pdf, u'1. 형성 점검 결과')
-        pdf.image('res/inspection.png', 5, 35, 70, 60)
-        pdf.image('res/inspection.png', 70, 35, 70, 60)
-        pdf.image('res/inspection.png', 140, 35, 70, 60)
+        pdf.image('img/inspection.png', 5, 35, 70, 60)
+        pdf.image('img/inspection.png', 70, 35, 70, 60)
+        pdf.image('img/inspection.png', 140, 35, 70, 60)
         pdf.ln(65)
 
         self.write_title(pdf, u'2. 자동 점검 결과')
