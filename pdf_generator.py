@@ -2,7 +2,7 @@
 # -*- coding: utf8 -*-
 
 from datetime import datetime
-
+from collections import OrderedDict
 import numpy as np
 import pandas as pd
 import matplotlib.pyplot as plt
@@ -31,24 +31,28 @@ class PdfGenerator():
         self.web = web
         self.opt = self.web['opt']
         self.plots = []
+        self.data = {}
         plt.rcParams["font.family"] = 'KT font'
 
     def run(self):
 
-        ''' 1. matplotlib 위치 찾기
-            2. mpl-data/fonts/ttf에 ttf 폰트 설치
-            3. cache directory 찾아서 fontlist-v330.json 파일 삭제
-            4. font family 이름 알아내서 rcParams 설정
+        '''
+        1. matplotlib 위치 찾기
+        2. mpl-data/fonts/ttf에 ttf 폰트 설치
+        3. cache directory 찾아서 fontlist-v330.json 파일 삭제
+        4. font family 이름 알아내서 rcParams 설정
 
-        # print('설정위치:', mpl.matplotlib_fname())
-        # print(mpl.get_cachedir())
-
-        # font_list = fm.findSystemFonts(fontpaths=None, fontext='ttf')
-        # print(font_list)
-        # f = [f.name for f in fm.fontManager.ttflist if 'KT' in f.name]
-        # print(f)
+        font_list = fm.findSystemFonts(fontpaths=None, fontext='ttf')
+        f = [f.name for f in fm.fontManager.ttflist if 'KT' in f.name]
         '''
 
+        with open('./pdf_data_sample.json', encoding='UTF-8') as json_file:
+            self.data = json.load(json_file)
+
+        result = self.data['data']
+        self.generate_report(result)
+
+        # with dummy data
         example = {
             "inspection": [
                 {
@@ -255,13 +259,12 @@ class PdfGenerator():
                 }
             ]
         }
-
+        '''
         df_list = []
         for i in range(len(example['inspection'])):
             df_list.append(example['inspection'][i]['inspection_data'])
         df = pd.DataFrame(df_list)
-
-        # imageList = ['grp_alert', 'total_alert', 'total_hist', 'cpu_trend', 'fan_trend', 'port_trend']
+        imageList = ['grp_alert', 'total_alert', 'total_hist', 'cpu_trend', 'fan_trend', 'port_trend']
         for f in df_list[0]:
             if 'port' in f:
                 self.plots.append(f)
@@ -274,25 +277,17 @@ class PdfGenerator():
         for key in ['grp', 'total']:
             self.horizontal_bar(df, key)
 
-        self.vertical_bar(df)
+        # self.vertical_bar(df)
+        self.generate_trend(df)
 
-        return self.generate_html()
+        return self.generate_report()
+        '''
 
-    def generate_html(self):
+    def generate_report(self, result):
 
-        building_name = self.opt.get('building_name')
-        abnormal = self.opt.get('abnormal')
-        ap = self.opt.get('ap')
-
-        now = datetime.datetime.now()
-        now_time = now.strftime('%Y-%m-%d %H:%M:%S')
-        now_date = now.strftime('%Y%m%d')
-        html = f'''
-        <!DOCTYPE html>
-    <html>
-    <head>
-        <meta charset="utf-8">
-        <style type="text/css">
+        # html component
+        style = f'''
+                <style type="text/css">
             /* KT font */
             @font-face {{
                 font-family: "KT";
@@ -318,7 +313,7 @@ class PdfGenerator():
                     url("../font/KTfontBold.eot"),
                     url("../font/KTfontBold.eot?#iefix") format('embedded-opentype');
             }}
-    
+
             /* common */
             @page {{
                 margin: 0;
@@ -492,15 +487,6 @@ class PdfGenerator():
                 color: #3A404D;
                 padding: 0 10px 10px;
             }}
-            section .condition {{
-                font-weight: 600;
-                line-height: 1.2rem;
-                padding: 10px;
-                background: #f1f1f1;
-                border-top: 3px double #ccc;
-                border-bottom: 3px double #ccc;
-                margin: 0 0 20px;
-            }}
             article {{
                 width: 100%;
                 height: 100%;
@@ -664,8 +650,13 @@ class PdfGenerator():
                 color: #333;
                 overflow: hidden;
             }}
+            .chart_view.c4 .chart_wrap {{
+                float: none;
+                display: block;
+                width: 100%;
+            }}
             .chart_view.c4 .chart {{
-                
+                height: 190px;
             }}
             .chart_view.c5 .chart {{
                 height: 190px;
@@ -683,59 +674,63 @@ class PdfGenerator():
             .chart_wrap .chart {{
                 border-radius: 0;
             }}
-            .progress {{
-                justify-content: flex-start;
-                align-items: center;
-                width: calc(100% - 10px);
-                height: 4px;
-                border-radius: 20px;
-                margin: 10px 5px 20px;
-                background: #ccc;
+            .info_box {{
+                flex-direction: column;
+                margin: 0 0 40px;
+                padding: 0 0 40px;
+                border-bottom: 1px dashed #ccc;
             }}
-            .progress_bar {{
-                justify-content: flex-end;
-                align-items: center;
-                width: 100%;
-                height: 4px;
-                border-radius: 20px;
-                background: #FF3333;
+            .info_box:last-child {{
+                margin: 0;
+                padding: 0;
+                border: none;
             }}
-            .progress_bar::before {{
-                content: '';
-                position: relative;
-                top: -4px;
-                display: inline-block;
-                width: 10px;
-                height: 10px;
-                border-radius: 20px;
-                background: #FF3333;
+            .info_box table + table {{
+                margin: 30px 0 0;
             }}
-            .progress span {{
-                position: absolute;
-                right: 5px;
-                bottom: -20px;
-                align-self: flex-end;
-                color: #3A404D;
-                font-weight: 600;
-                font-size: 10pt;
-            }}
-            .progress span::after {{
-                display: inline-block;
-                align-items: center;
-                content: '%';
-                font-size: 7pt;
-                margin: 0 0 0 1px;
+            .list_box + .list_box {{
+                margin: 30px 0 0;
             }}
             .notice {{
-                border: 1px dashed #ccc;
-                padding: 15px;
-                margin: 10px 0 0;
-                border-radius: 0 10px 10px 10px;
+                margin: 5px 0;
+                text-align: left;
+            }}
+            .notice ul {{
+                position: relative;
+                display: inline-block;
+                clear: both;
+                padding: 10px;
+                border-radius: 10px 10px 0 0;
+                background: #3A404D;
+                z-index: 5;
+            }}
+            .notice ul li {{
+                float: left;
+                height: 23px;
+                display: inline-block;
+                font-size: 12pt;
+                font-weight: 600;
+                vertical-align: middle;
+                margin: 0 15px 0 0;
+                color: #fff;
+            }}
+            .notice ul li span {{
+                display: inline-block;
+                font-size: 8.5pt;
+                padding: 3px 10px;
+                background: rgba(255, 255, 255, 0.2);
+                color: #ddd;
+                border-radius: 5px;
+                margin: 0 10px 0 0;
+                vertical-align: middle;
             }}
             .notice dl {{
                 flex-direction: column;
                 width: 100%;
                 height: 100%;
+                padding: 15px;
+                border: 1px dashed #3A404D;
+                margin: -8px 0 0;
             }}
             .notice dl dt,
             .notice dl dd {{
@@ -745,6 +740,7 @@ class PdfGenerator():
                 font-size: 10pt;
                 font-weight: 600;
                 color: #3A404D;
+                margin: 0 0 10px;
             }}
             .notice dl dt::before {{
                 content: url("../images/ico_notice.png");
@@ -764,547 +760,672 @@ class PdfGenerator():
                 font-size: 12pt;
                 margin: 0 5px 0 0;
             }}
-            .info_box {{
-                flex-direction: column;
-                margin: 0 0 40px;
-                padding: 0 0 40px;
-                border-bottom: 1px dashed #ccc;
-            }}
-            .info_box:last-child {{
-                margin: 0;
-                padding: 0;
-                border: none;
-            }}
             .preview {{
-                margin: 0 0 20px;
+                display: inline-block;
+                width: 100%;
+                height: 170px;
+                margin: 0 0 10px;
+                clear: both;
+            }}
+            .preview ul {{
+                position: relative;
+                display: inline-block;
+                width: 25%;
+                float: left;
             }}
             .preview ul li {{
+                position: relative;
                 display: inline-block;
-                width: 30%;
-                height: 85px;
-                border-radius: 10px;
-                background: #3A404D;
-                color: #fff;
-                vertical-align: top;
+                width: 100%;
+                height: 80px;
+                border-radius: 5px;
             }}
-            .preview ul li + li {{
-                margin: 0 0 0 0.5%;
+            .preview ul li.green {{
+                background: #e6f7f1;
             }}
-            .preview ul li p {{
-                display: inline-block;
-                margin: 0 0 10px;
-                color: #ddd;
+            .preview ul li.green h2,
+            .preview ul li.green span {{
+                color: #29cc8c;
+            }}
+            .preview ul li.green::after {{
+                position: absolute;
+                right: 15px;
+                top: 15px;
+                content: '';
+                background: url("../images/ico_info_g.png") no-repeat;
+                width: 18px;
+                height: 18px;
+            }}
+            .preview ul li.blue {{
+                background: #eff2fc;
+            }}
+            .preview ul li.blue h2,
+            .preview ul li.blue span {{
+                color: #3d2eec;
+            }}
+            .preview ul li.blue::after {{
+                position: absolute;
+                right: 15px;
+                top: 15px;
+                content: '';
+                background: url("../images/ico_info_b.png") no-repeat;
+                width: 18px;
+                height: 18px;
             }}
             .preview ul li span {{
+                position: absolute;
+                width: 100%;
+                bottom: 10px;
+                text-align: center;
+                font-size: 10pt;
+            }}
+            .preview ul li h2 {{
+                text-align: center;
                 font-size: 15pt;
                 font-weight: 600;
             }}
-            .preview ul li.date span {{
-                font-size: 13pt;
+            .preview ul li + li {{
+                margin: 5px 0 0;
+            }}
+            .preview .condition {{
+                width: 74%;
+                height: 170px;
+                float: right;
+                font-weight: 600;
+                padding: 10px;
+                background: #f9f9f9;
+                border-top: 3px double #ddd;
+                border-bottom: 3px double #ddd;
+            }}
+            .preview .condition h3 {{
+                margin: 0 0 20px;
+                padding: 0;
+            }}
+            .preview .condition p {{
+                font-style: 10pt;
+                line-height: 1.2rem;
+                text-align: left;
+            }}
+            .none::before,
+            .none::after {{
+                display: none;
+            }}
+            .confirm_ok {{
+                background: #f9f9f9;
+                color: #3A404D;
+                font-size: 11pt;
+                font-weight: 600;
+                padding: 50px 0!important;
+            }}
+            .confirm_ok strong {{
+                color: #1bc0e1;
             }}
         </style>
-    </head>
-    <body>
-        <div class="content">
-            <header>
-                <h1>자동 점검 리포트</h1>
-                <h2>(점검명)</h2>
-                <div class="box">
-                    <p>점검일 : {now_time}</p>
-                </div>
-                <div class="summary">
-                    <div class="box">
-                        <h3>자동 점검 결과</h3>
-                        <table width="100%" cellpadding="0" cellspacing="0">
-                            <colgroup>
-                                <col style="width: 33.33%" />
-                                <col style="width: 33.33%" />
-                                <col style="width: 33.33%" />
-                            </colgroup>
-                            <thead>
-                                <tr>
-                                    <th>Building</th>
-                                    <th>Switch</th>
-                                    <th>AP</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <tr>
-                                    <td>{building_name}</td>
-                                    <td>비정상 {abnormal}대</td>
-                                    <td>비정상 {ap}대</td>
-                                </tr>
-                                <tr>
-                                    <td>빌딩 B</td>
-                                    <td>비정상 2대</td>
-                                    <td>비정상 2대</td>
-                                </tr>
-                            </tbody>
-                        </table>
-                    </div>
-                    <div class="box">
-                        <h3>형상 점검 결과</h3>
-                        <table width="100%" cellpadding="0" cellspacing="0">
-                            <colgroup>
-                                <col style="width: 33.33%" />
-                                <col style="width: 33.33%" />
-                                <col style="width: 33.33%" />
-                            </colgroup>
-                            <thead>
-                                <tr>
-                                    <th>Building</th>
-                                    <th>Switch</th>
-                                    <th>AP</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <tr>
-                                    <td>{building_name}</td>
-                                    <td>+ 1대</td>
-                                    <td>0</td>
-                                </tr>
-                                <tr>
-                                    <td>빌딩 B</td>
-                                    <td>+ 1대</td>
-                                    <td>0</td>
-                                </tr>
-                            </tbody>
-                        </table>
-                    </div>
-                </div>
-            </header>
-            <section>
-                <h1>빌딩 A</h1>
-                <article class="graph">
-                    <h2><i>01</i>진단결과</h2>
-                    <div class="chart_box">
-                        <div class="chart_view c1">
-                            <h3>비정상장비</h3>
-                            <ul>
-                                <!-- 증가할 경우 class="up" / 감소할 경우 class="down" 추가 -->
-                                <li class="up">
-                                    <span>1</span>어제
-                                </li>
-                                <!-- 3자리까지 표현 -->
-                                <li class="total">
-                                    <p>
-                                        <b>장비수</b>
-                                        <span>153</span>
-                                    </p>
-                                </li>
-                                <li class="down">
-                                    <span>5</span>1주전
-                                </li>
-                            </ul>
-                        </div>
-                        <div class="chart_view c2">
-                            <h3>그룹별 장비 비정상 현황</h3>
-                            <div class="chart">
-                                <img src="../img/grp_alert.png" alt="grp_alert">
-                            </div>
-                        </div>
-                        <div class="chart_view c3">
-                            <h3>비정상 항목 현황</h3>
-                            <div class="chart">
-                                <img src="../img/total_alert.png" alt="total_alert">
-                            </div>
-                        </div>
-                    </div>
-                    <div class="chart_box">
-                        <div class="chart_view c4">
-                            <h3>비정상 장비 추세</h3>
-                            <ul>
-                                <li class="average">
-                                    <span>2</span>
-                                    <p>일주일 간 평균</p>
-                                </li>
-                                <!-- 증가할 경우 class="up" / 감소할 경우 class="down" 추가 -->
-                                <li class="up">
-                                    <span>1</span>
-                                    <p>어제 대비</p>
-                                </li>
-                            </ul>
-                            <div class="chart">
-                                <img src="../img/total_hist.png" alt="total_hist">
-                            </div>
-                        </div>
-                        <div class="chart_view c5">
-                            <h3>항목별 비정상 추세</h3>
-                            <div class="chart_wrap_box">
-                                <div class="chart_wrap">
-                                    <h4>CPU 사용률</h4>
-                                    <div class="chart">
-                                        <img src="../img/cpu_trend.png" alt="cpu_trend">
-                                    </div>
-                                </div>
-                                <div class="chart_wrap">
-                                    <h4>팬상태</h4>
-                                    <div class="chart">
-                                        <img src="../img/fan_trend.png" alt="port_trend">
-                                    </div>
-                                </div>
-                                <div class="chart_wrap">
-                                    <h4>포트 상태</h4>
-                                    <div class="chart">
-                                        <img src="../img/port_trend.png" alt="port_trend">
-                                    </div>
-                                </div>
-                            <div>
-                        </div>
-                    </div>
-                </article>
-                <article>
-                    <h2><i>02</i>To-Do List</h2>
-                    <table width="100%" cellpadding="0" cellspacing="0">
-                        <colgroup>
-                            <col style="width: 25%" />
-                            <col style="width: 25%" />
-                            <col style="width: 25%" />
-                            <col style="width: 25%" />
-                        </colgroup>
-                        <thead>
-                            <tr>
-                                <th>그룹명</th>
-                                <th>장비</th>
-                                <th>점검항목</th>
-                                <th>비정상률</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr>
-                                <td>1F통신실</td>
-                                <td>V6848XG</td>
-                                <td>CPU 사용량</td>
-                                <td>
-                                    <div class="progress">
-                                        <div class="progress_bar" style="width:56%;"></div>
-                                        <span>56</span>
-                                    </div>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>1F통신실</td>
-                                <td>V6848XG</td>
-                                <td>CPU 사용량</td>
-                                <td>
-                                    <div class="progress">
-                                        <div class="progress_bar" style="width:70%;"></div>
-                                        <span>70</span>
-                                    </div>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>1F통신실</td>
-                                <td>V6848XG</td>
-                                <td>CPU 사용량</td>
-                                <!-- 100% 이상의 값은 width="100%" 고정 / span 안에 수치만 변동 -->
-                                <td>
-                                    <div class="progress">
-                                        <div class="progress_bar" style="width:100%;"></div>
-                                        <span>108</span>
-                                    </div>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>1F통신실</td>
-                                <td>V6848XG</td>
-                                <td>CPU 사용량</td>
-                                <td>
-                                    <div class="progress">
-                                        <div class="progress_bar" style="width:5%;"></div>
-                                        <span>5</span>
-                                    </div>
-                                </td>
-                            </tr>
-                        </tbody>
-                    </table>
-                    <div class="notice">
-                        <dl>
-                            <dt>조치사항</dt>
-                            <dd>CPU 사용률 조회 (Show CPU) 후 장비 리부팅</dd>
-                            <dd>조치사항 2</dd>
-                            <dd>조치사항 3</dd>
-                        </dl>
-                    </div>
-                </article>
-                <article>
-                    <h2><i>03</i>일주일 내 비정상 발생 건수</h2>
-                    <table width="100%" cellpadding="0" cellspacing="0">
-                        <colgroup>
-                            <col style="width: 20%" />
-                            <col style="width: 17%" />
-                            <col style="width: 8%" />
-                            <col style="width: 8%" />
-                            <col style="width: 8%" />
-                            <col style="width: 8%" />
-                            <col style="width: 8%" />
-                            <col style="width: 8%" />
-                            <col style="width: 15%" />
-                        </colgroup>
-                        <thead>
-                            <tr>
-                                <th>장비명</th>
-                                <th>점검항목</th>
-                                <th>D-6</th>
-                                <th>D-5</th>
-                                <th>D-4</th>
-                                <th>D-3</th>
-                                <th>D-2</th>
-                                <th>D-1</th>
-                                <th>{now_time}</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr>
-                                <td>V6848XG</td>
-                                <td>CPU 부하</td>
-                                <td>1</td>
-                                <td>0</td>
-                                <td>0</td>
-                                <td>3</td>
-                                <td>3</td>
-                                <td>3</td>
-                                <td>3</td>
-                            </tr>
-                            <tr>
-                                <td>V6848XG</td>
-                                <td>포트 점검</td>
-                                <td>1</td>
-                                <td>0</td>
-                                <td>0</td>
-                                <td>3</td>
-                                <td>3</td>
-                                <td>3</td>
-                                <td>3</td>
-                            </tr>
-                            <tr>
-                                <td>E5624R</td>
-                                <td>전원</td>
-                                <td>1</td>
-                                <td>0</td>
-                                <td>0</td>
-                                <td>3</td>
-                                <td>3</td>
-                                <td>3</td>
-                                <td>3</td>
-                            </tr>
-                            <tr>
-                                <td>E5624R</td>
-                                <td>포트다운</td>
-                                <td>1</td>
-                                <td>0</td>
-                                <td>0</td>
-                                <td>3</td>
-                                <td>3</td>
-                                <td>3</td>
-                                <td>3</td>
-                            </tr>
-                            <tr>
-                                <td>U9500H</td>
-                                <td>메모리 점검</td>
-                                <td>1</td>
-                                <td>0</td>
-                                <td>0</td>
-                                <td>3</td>
-                                <td>3</td>
-                                <td>3</td>
-                                <td>3</td>
-                            </tr>
-                        </tbody>
-                    </table>
-                </article>
-                <article>
-                    <h2><i>04</i>상세정보</h2>
-                    <div class="info_box">
-                        <div class="preview">
-                            <ul>
-                                <li class="date">
-                                    <p>점검일시</p>
-                                    <span>{now_time}</span>
-                                </li>
-                                <li>
-                                    <p>장비</p>
-                                    <span>V6848XG</span>
-                                </li>
-                                <li>
-                                    <p>점검항목</p>
-                                    <span>CPU 사용량</span>
-                                </li>
-                            </ul>
-                        </div>
-                        <h3>실행조건</h3> 
-                        <div class="condition">MEM_USAGE ＜＝ 10</div>
-                        <h3>실행결과</h3> 
-                        <table width="100%" cellpadding="0" cellspacing="0">
-                            <colgroup>
-                                <col style="width: 10%" />
-                                <col style="width: 8%" />
-                                <col style="width: 10%" />
-                                <col style="width: 15%" />
-                                <col style="width: 12%" />
-                                <col style="width: 15%" />
-                                <col style="width: 10%" />
-                                <col style="width: 10%" />
-                                <col style="width: 10%" />
-                            </colgroup>
-                            <thead>
-                                <tr>
-                                    <th>NAME</th>
-                                    <th>STATUS</th>
-                                    <th>MODEL</th>
-                                    <th>ID</th>
-                                    <th>IPADDR</th>
-                                    <th>MAC</th>
-                                    <th>MEM_USAGE</th>
-                                    <th>CPU_USAGE</th>
-                                    <th>SSID</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <tr>
-                                    <td>defGsp_112</td>
-                                    <td>RUN</td>
-                                    <td>AR-WF6-2541</td>
-                                    <td>1C:EC:72:01;8A:48</td>
-                                    <td>172.30.2.112</td>
-                                    <td>1C:EC:72:01;8A:48</td>
-                                    <td>26.68</td>
-                                    <td>2.18</td>
-                                    <td>-</td>
-                                </tr>
-                                <tr>
-                                    <td>defGsp_112</td>
-                                    <td>RUN</td>
-                                    <td>AR-WF6-2541</td>
-                                    <td>1C:EC:72:01;8A:48</td>
-                                    <td>172.30.2.112</td>
-                                    <td>1C:EC:72:01;8A:48</td>
-                                    <td>26.68</td>
-                                    <td>2.18</td>
-                                    <td>-</td>
-                                </tr>                         
-                            </tbody>
-                        </table>
-                    </div>
-                    <div class="info_box">
-                        <div class="preview">
-                            <ul>
-                                <li class="date">
-                                    <p>점검일시</p>
-                                    <span>{now_time}</span>
-                                </li>
-                                <li>
-                                    <p>장비</p>
-                                    <span>V6848XG</span>
-                                </li>
-                                <li>
-                                    <p>점검항목</p>
-                                    <span>CPU 사용량</span>
-                                </li>
-                            </ul>
-                        </div>
-                        <h3>실행조건</h3> 
-                        <div class="condition">MEM_USAGE ＜＝ 10</div>
-                        <h3>실행결과</h3> 
-                        <table width="100%" cellpadding="0" cellspacing="0">
-                            <colgroup>
-                                <col style="width: 10%" />
-                                <col style="width: 8%" />
-                                <col style="width: 10%" />
-                                <col style="width: 15%" />
-                                <col style="width: 12%" />
-                                <col style="width: 15%" />
-                                <col style="width: 10%" />
-                                <col style="width: 10%" />
-                                <col style="width: 10%" />
-                            </colgroup>
-                            <thead>
-                                <tr>
-                                    <th>NAME</th>
-                                    <th>STATUS</th>
-                                    <th>MODEL</th>
-                                    <th>ID</th>
-                                    <th>IPADDR</th>
-                                    <th>MAC</th>
-                                    <th>MEM_USAGE</th>
-                                    <th>CPU_USAGE</th>
-                                    <th>SSID</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <tr>
-                                    <td>defGsp_112</td>
-                                    <td>RUN</td>
-                                    <td>AR-WF6-2541</td>
-                                    <td>1C:EC:72:01;8A:48</td>
-                                    <td>172.30.2.112</td>
-                                    <td>1C:EC:72:01;8A:48</td>
-                                    <td>26.68</td>
-                                    <td>2.18</td>
-                                    <td>-</td>
-                                </tr>
-                                <tr>
-                                    <td>defGsp_112</td>
-                                    <td>RUN</td>
-                                    <td>AR-WF6-2541</td>
-                                    <td>1C:EC:72:01;8A:48</td>
-                                    <td>172.30.2.112</td>
-                                    <td>1C:EC:72:01;8A:48</td>
-                                    <td>26.68</td>
-                                    <td>2.18</td>
-                                    <td>-</td>
-                                </tr>                         
-                                <tr>
-                                    <td>defGsp_112</td>
-                                    <td>RUN</td>
-                                    <td>AR-WF6-2541</td>
-                                    <td>1C:EC:72:01;8A:48</td>
-                                    <td>172.30.2.112</td>
-                                    <td>1C:EC:72:01;8A:48</td>
-                                    <td>26.68</td>
-                                    <td>2.18</td>
-                                    <td>-</td>
-                                </tr>                         
-                                <tr>
-                                    <td>defGsp_112</td>
-                                    <td>RUN</td>
-                                    <td>AR-WF6-2541</td>
-                                    <td>1C:EC:72:01;8A:48</td>
-                                    <td>172.30.2.112</td>
-                                    <td>1C:EC:72:01;8A:48</td>
-                                    <td>26.68</td>
-                                    <td>2.18</td>
-                                    <td>-</td>
-                                </tr>                         
-                                <tr>
-                                    <td>defGsp_112</td>
-                                    <td>RUN</td>
-                                    <td>AR-WF6-2541</td>
-                                    <td>1C:EC:72:01;8A:48</td>
-                                    <td>172.30.2.112</td>
-                                    <td>1C:EC:72:01;8A:48</td>
-                                    <td>26.68</td>
-                                    <td>2.18</td>
-                                    <td>-</td>
-                                </tr>                         
-                            </tbody>
-                        </table>
-                    </div>
-                </article>
-            </section>     
-        </div>
-    </body>
-    </html>
-
-        
         '''
 
+        inspect_name = result['workflowName']
+        inspect_date = result['runDate']
+
+        html_main = f'''
+                <!DOCTYPE html>
+                    <html>
+                    <head>
+                        <meta charset="utf-8">
+                        {style}
+                    </head>
+                    <body>
+                        <div class="content">
+                            <header>
+                                <h1>자동 점검 리포트</h1>
+                                <h2>({inspect_name})</h2>
+                                <div class="box">
+                                    <p>{inspect_date}</p>
+                                </div>
+                                <div class="summary">
+                                    <div class="box">
+                                        <h3 class="blue">자동 점검 결과</h3>
+                                        <table width="100%" cellpadding="0" cellspacing="0">
+                                            <colgroup>
+                                                <col style="width: 33.33%" />
+                                                <col style="width: 33.33%" />
+                                                <col style="width: 33.33%" />
+                                            </colgroup>
+                                            <thead>
+                                                <tr>
+                                                    <th>Group</th>
+                                                    <th>Switch</th>
+                                                    <th>AP</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <tr>
+                                                    <td>빌딩 A</td>
+                                                    <td>비정상 1대</td>
+                                                    <td>비정상 1대</td>
+                                                </tr>
+                                                <tr>
+                                                    <td>빌딩 B</td>
+                                                    <td>비정상 2대</td>
+                                                    <td>비정상 2대</td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                    <div class="box">
+                                        <h3 class="green">형상 점검 결과</h3>
+                                        <table width="100%" cellpadding="0" cellspacing="0">
+                                            <colgroup>
+                                                <col style="width: 33.33%" />
+                                                <col style="width: 33.33%" />
+                                                <col style="width: 33.33%" />
+                                            </colgroup>
+                                            <thead>
+                                                <tr>
+                                                    <th>Group</th>
+                                                    <th>Switch</th>
+                                                    <th>AP</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <tr>
+                                                    <td>빌딩 A</td>
+                                                    <td>+ 1대</td>
+                                                    <td>0</td>
+                                                </tr>
+                                                <tr>
+                                                    <td>빌딩 B</td>
+                                                    <td>+ 1대</td>
+                                                    <td>0</td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                            </header>
+        '''
+
+        ''' list로 html close
+                    </div>
+                </body>
+            </html>
+        '''
+
+        html_list = []
+        html_list.append(html_main)
+
+        for i, v in enumerate(result['reportData']):
+            grp_name = v['groupName']
+            total_device = v['deviceTotalCount'] # 그룹 전체 장비수
+            alert_device_cnt = 0
+            if not v['abnormalDeviceCount'] == None:
+                alert_device_cnt = v['abnormalDeviceCount']['currentAbnormalCount'] - v['abnormalDeviceCount']['beforeAbnormalCount']
+                                # 현재 비정상 장비수 - 하루 전 비정상 장비수
+
+            # 그룹별 장비 비정상 현황
+            alert_by_grp = pd.DataFrame(v['abnormalDeviceStatus'])
+            self.horizontal_bar(alert_by_grp, 'grp', i)
+            grp_alert = 'grp_alert'+ str(i)
+
+            # 비정상 항목 현황
+            alert_by_item = pd.DataFrame(v['abnormalItemStatus'])
+            self.horizontal_bar(alert_by_item, 'total', i)
+            total_alert = 'total_alert' + str(i)
+            top_items = alert_by_item['name'].values[:3]
+
+            # 비정상 장비 추세
+            total_alert_trend = pd.DataFrame(v['abnormalDeviceTrend'])
+            if not len(total_alert_trend) == 0:
+                self.generate_trend(total_alert_trend, i)
+                total_trend = f'''<img src="../img/total_trend{str(i)}.png" alt="total_trend">'''
+            else:
+                total_trend = '<p>No data to display</p>'
+
+            # 항목별 비정상 추세
+            item_alert_trend = pd.DataFrame(v['abnormalItemTrend'])
+            first_name = top_items[0]
+            second_name = top_items[1]
+            third_name = top_items[2]
+            if not len(item_alert_trend) == 0:
+                for item in top_items:
+                    self.generate_item_trend(item_alert_trend, item, i)
+                first_trend = f'''<img src="../img/{first_name}_trend{str(i)}.png" alt="{first_name}_trend">'''
+                second_trend = f'''<img src="../img/{second_name}_trend{str(i)}.png" alt="{second_name}_trend">'''
+                third_trend = f'''<img src="../img/{third_name}_trend{str(i)}.png" alt="{third_name}_trend">'''
+
+            else:
+                first_trend = '<p>No data to display</p>'
+                second_trend = '<p>No data to display</p>'
+                third_trend = '<p>No data to display</p>'
+
+            section = f'''
+                <section>
+                        <h1>{grp_name}</h1>
+                        <article class="graph">
+                            <h2><i>01</i>진단결과</h2>
+                            <div class="chart_box">
+                                <div class="chart_view c1">
+                                    <h3>비정상장비</h3>
+                                    <ul>
+                                        <li class="up">
+                                            <span>{alert_device_cnt}</span>어제
+                                        </li>
+                                        <li class="total">
+                                            <p>
+                                                <b>장비수</b>
+                                                <span>{total_device}</span>
+                                            </p>
+                                        </li>
+                                    </ul>
+                                </div>
+                                <div class="chart_view c2">
+                                    <h3>그룹별 장비 비정상 현황</h3>
+                                    <div class="chart">
+                                        <img src="../img/{grp_alert}.png" alt="grp_alert">
+                                    </div>
+                                </div>
+                                <div class="chart_view c3">
+                                    <h3>비정상 항목 현황</h3>
+                                    <div class="chart">
+                                        <img src="../img/{total_alert}.png" alt="total_alert">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="chart_box">
+                                <div class="chart_view c4">
+                                    <h3>비정상 장비 추세</h3>
+                                    <div class="chart_wrap">
+                                        <h4 class="none">&nbsp;</h4>
+                                        <div class="chart">
+                                            {total_trend}
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="chart_view c5">
+                                    <h3>항목별 비정상 추세</h3>
+                                    <div class="chart_wrap_box">
+                                        <div class="chart_wrap">
+                                            <h4>{first_name} 상태</h4>
+                                            <div class="chart">
+                                                {first_trend}
+                                            </div>
+                                        </div>
+                                        <div class="chart_wrap">
+                                            <h4>{second_name} 상태</h4>
+                                            <div class="chart">
+                                                {second_trend}
+                                            </div>
+                                        </div>
+                                        <div class="chart_wrap">
+                                            <h4>{third_name} 상태</h4>
+                                            <div class="chart">
+                                                {third_trend}
+                                            </div>
+                                        </div>
+                                    <div>
+                                </div>
+                            </div>
+                        </article>
+                        <article>
+                            <h2><i>02</i>To-Do List</h2>                  
+                            <div class="list_box">
+                                <div class="notice">
+                                    <ul>
+                                        <li><span>그룹명</span>1F통신실</li>
+                                        <li><span>장비명</span>V6848XG</li>
+                                        <li><span>점검항목</span>CPU 사용량</li>
+                                    </ul>
+                                    <dl>
+                                        <dt>조치사항</dt>
+                                        <dd>CPU 사용률 조회 (Show CPU) 후 장비 리부팅</dd>
+                                        <dd>조치사항 2</dd>
+                                        <dd>조치사항 3</dd>
+                                    </dl>
+                                </div>
+                            </div>
+                            <div class="list_box">
+                                <div class="notice">
+                                    <ul>
+                                        <li><span>그룹명</span>1F통신실</li>
+                                        <li><span>장비명</span>V6848XG</li>
+                                        <li><span>점검항목</span>CPU 사용량</li>
+                                    </ul>
+                                    <dl>
+                                        <dt>조치사항</dt>
+                                        <dd>CPU 사용률 조회 (Show CPU) 후 장비 리부팅</dd>
+                                        <dd>조치사항 2</dd>
+                                        <dd>조치사항 3</dd>
+                                    </dl>
+                                </div>
+                            </div>
+                            <div class="list_box">
+                                <div class="notice">
+                                    <ul>
+                                        <li><span>그룹명</span>1F통신실</li>
+                                        <li><span>장비명</span>V6848XG</li>
+                                        <li><span>점검항목</span>CPU 사용량</li>
+                                    </ul>
+                                    <dl>
+                                        <dt>조치사항</dt>
+                                        <dd>CPU 사용률 조회 (Show CPU) 후 장비 리부팅</dd>
+                                        <dd>조치사항 2</dd>
+                                        <dd>조치사항 3</dd>
+                                    </dl>
+                                </div>
+                            </div>
+                        </article>
+                        <article>
+                            <h2><i>03</i>일주일 내 비정상 발생 건수</h2>
+                            <table width="100%" cellpadding="0" cellspacing="0">
+                                <colgroup>
+                                    <col style="width: 20%" />
+                                    <col style="width: 17%" />
+                                    <col style="width: 8%" />
+                                    <col style="width: 8%" />
+                                    <col style="width: 8%" />
+                                    <col style="width: 8%" />
+                                    <col style="width: 8%" />
+                                    <col style="width: 8%" />
+                                    <col style="width: 15%" />
+                                </colgroup>
+                                <thead>
+                                    <tr>
+                                        <th>장비명</th>
+                                        <th>점검항목</th>
+                                        <th>D-6</th>
+                                        <th>D-5</th>
+                                        <th>D-4</th>
+                                        <th>D-3</th>
+                                        <th>D-2</th>
+                                        <th>D-1</th>
+                                        <th>2021-09-27</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>V6848XG</td>
+                                        <td>CPU 부하</td>
+                                        <td>1</td>
+                                        <td>0</td>
+                                        <td>0</td>
+                                        <td>3</td>
+                                        <td>3</td>
+                                        <td>3</td>
+                                        <td>3</td>
+                                    </tr>
+                                    <tr>
+                                        <td>V6848XG</td>
+                                        <td>포트 점검</td>
+                                        <td>1</td>
+                                        <td>0</td>
+                                        <td>0</td>
+                                        <td>3</td>
+                                        <td>3</td>
+                                        <td>3</td>
+                                        <td>3</td>
+                                    </tr>
+                                    <tr>
+                                        <td>E5624R</td>
+                                        <td>전원</td>
+                                        <td>1</td>
+                                        <td>0</td>
+                                        <td>0</td>
+                                        <td>3</td>
+                                        <td>3</td>
+                                        <td>3</td>
+                                        <td>3</td>
+                                    </tr>
+                                    <tr>
+                                        <td>E5624R</td>
+                                        <td>포트다운</td>
+                                        <td>1</td>
+                                        <td>0</td>
+                                        <td>0</td>
+                                        <td>3</td>
+                                        <td>3</td>
+                                        <td>3</td>
+                                        <td>3</td>
+                                    </tr>
+                                    <tr>
+                                        <td>U9500H</td>
+                                        <td>메모리 점검</td>
+                                        <td>1</td>
+                                        <td>0</td>
+                                        <td>0</td>
+                                        <td>3</td>
+                                        <td>3</td>
+                                        <td>3</td>
+                                        <td>3</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </article>
+                        <article>
+                            <h2><i>04</i>장비별 상세정보</h2>
+                            <div class="info_box">
+                                <div class="preview">
+                                    <ul>
+                                        <li class="blue">
+                                            <h2>V6848XG</h1>
+                                            <span>장비명</span>
+                                        </li>
+                                        <li class="green">
+                                            <h2>CPU 사용량</h2>
+                                            <span>점검항목</span>
+                                        </li>
+                                    </ul>
+                                    <div class="condition">
+                                        <h3>실행조건</h3> 
+                                        <p>MEM_USAGE ＜＝ 10</p>
+                                    </div>
+                                </div>
+                                <h3>실행결과</h3> 
+                                <table width="100%" cellpadding="0" cellspacing="0">
+                                    <colgroup>
+                                        <col style="width: 10%" />
+                                        <col style="width: 8%" />
+                                        <col style="width: 10%" />
+                                        <col style="width: 15%" />
+                                        <col style="width: 12%" />
+                                        <col style="width: 15%" />
+                                        <col style="width: 10%" />
+                                        <col style="width: 10%" />
+                                        <col style="width: 10%" />
+                                    </colgroup>
+                                    <thead>
+                                        <tr>
+                                            <th>NAME</th>
+                                            <th>STATUS</th>
+                                            <th>MODEL</th>
+                                            <th>ID</th>
+                                            <th>IPADDR</th>
+                                            <th>MAC</th>
+                                            <th>MEM_USAGE</th>
+                                            <th>CPU_USAGE</th>
+                                            <th>SSID</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <td>defGsp_112</td>
+                                            <td>RUN</td>
+                                            <td>AR-WF6-2541</td>
+                                            <td>1C:EC:72:01;8A:48</td>
+                                            <td>172.30.2.112</td>
+                                            <td>1C:EC:72:01;8A:48</td>
+                                            <td>26.68</td>
+                                            <td>2.18</td>
+                                            <td>-</td>
+                                        </tr>
+                                        <tr>
+                                            <td>defGsp_112</td>
+                                            <td>RUN</td>
+                                            <td>AR-WF6-2541</td>
+                                            <td>1C:EC:72:01;8A:48</td>
+                                            <td>172.30.2.112</td>
+                                            <td>1C:EC:72:01;8A:48</td>
+                                            <td>26.68</td>
+                                            <td>2.18</td>
+                                            <td>-</td>
+                                        </tr>                         
+                                    </tbody>
+                                </table>
+                            </div>
+                            <div class="info_box">
+                                <div class="preview">
+                                    <ul>
+                                        <li class="blue">
+                                            <h2>V6848XG</h1>
+                                            <span>장비명</span>
+                                        </li>
+                                        <li class="green">
+                                            <h2>CPU 사용량</h2>
+                                            <span>점검항목</span>
+                                        </li>
+                                    </ul>
+                                    <div class="condition">
+                                        <h3>실행조건</h3> 
+                                        <p>MEM_USAGE ＜＝ 10</p>
+                                    </div>
+                                </div>
+                                <h3>실행결과</h3> 
+                                <table width="100%" cellpadding="0" cellspacing="0">
+                                    <thead>
+                                        <tr>
+                                            <th>NAME</th>
+                                            <th>STATUS</th>
+                                            <th>MODEL</th>
+                                            <th>ID</th>
+                                            <th>IPADDR</th>
+                                            <th>MAC</th>
+                                            <th>MEM_USAGE</th>
+                                            <th>CPU_USAGE</th>
+                                            <th>SSID</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <td>defGsp_112</td>
+                                            <td>RUN</td>
+                                            <td>AR-WF6-2541</td>
+                                            <td>1C:EC:72:01;8A:48</td>
+                                            <td>172.30.2.112</td>
+                                            <td>1C:EC:72:01;8A:48</td>
+                                            <td>26.68</td>
+                                            <td>2.18</td>
+                                            <td>-</td>
+                                        </tr>
+                                        <tr>
+                                            <td>defGsp_112</td>
+                                            <td>RUN</td>
+                                            <td>AR-WF6-2541</td>
+                                            <td>1C:EC:72:01;8A:48</td>
+                                            <td>172.30.2.112</td>
+                                            <td>1C:EC:72:01;8A:48</td>
+                                            <td>26.68</td>
+                                            <td>2.18</td>
+                                            <td>-</td>
+                                        </tr>                         
+                                        <tr>
+                                            <td>defGsp_112</td>
+                                            <td>RUN</td>
+                                            <td>AR-WF6-2541</td>
+                                            <td>1C:EC:72:01;8A:48</td>
+                                            <td>172.30.2.112</td>
+                                            <td>1C:EC:72:01;8A:48</td>
+                                            <td>26.68</td>
+                                            <td>2.18</td>
+                                            <td>-</td>
+                                        </tr>                         
+                                        <tr>
+                                            <td>defGsp_112</td>
+                                            <td>RUN</td>
+                                            <td>AR-WF6-2541</td>
+                                            <td>1C:EC:72:01;8A:48</td>
+                                            <td>172.30.2.112</td>
+                                            <td>1C:EC:72:01;8A:48</td>
+                                            <td>26.68</td>
+                                            <td>2.18</td>
+                                            <td>-</td>
+                                        </tr>                         
+                                        <tr>
+                                            <td>defGsp_112</td>
+                                            <td>RUN</td>
+                                            <td>AR-WF6-2541</td>
+                                            <td>1C:EC:72:01;8A:48</td>
+                                            <td>172.30.2.112</td>
+                                            <td>1C:EC:72:01;8A:48</td>
+                                            <td>26.68</td>
+                                            <td>2.18</td>
+                                            <td>-</td>
+                                        </tr>                         
+                                    </tbody>
+                                </table>
+                                <table width="100%" cellpadding="0" cellspacing="0">
+                                    <thead>
+                                        <tr>
+                                            <th>NAME</th>
+                                            <th>STATUS</th>
+                                            <th>MODEL</th>
+                                            <th>ID</th>
+                                            <th>IPADDR</th>
+                                            <th>MAC</th>
+                                            <th>MEM_USAGE</th>
+                                            <th>CPU_USAGE</th>
+                                            <th>SSID</th>
+                                            <th>test</th>
+                                            <th>test2</th>
+                                            <th>test3</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <td>-</td>
+                                            <td>-</td>
+                                            <td>AR-WF6-2541 AR-WF6-2541 AR-WF6-2541 AR-WF6-2541 AR-WF6-2541</td>
+                                            <td>-</td>
+                                            <td>-</td>
+                                            <td>-</td>
+                                            <td>-</td>
+                                            <td>-</td>
+                                            <td>-</td>
+                                            <td>-</td>
+                                            <td>-</td>
+                                            <td>-</td>
+                                        </tr>
+                                        <tr>
+                                            <td>-</td>
+                                            <td>-</td>
+                                            <td>AR-WF6-2541</td>
+                                            <td>-</td>
+                                            <td>-</td>
+                                            <td>-</td>
+                                            <td>-</td>
+                                            <td>-</td>
+                                            <td>-</td>
+                                            <td>-</td>
+                                            <td>-</td>
+                                            <td>-</td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </article>
+                    </section>
+        '''
+
+            html_list.append(section)
+
+        html_list.append('<div> </body> </html>')
+        html = ' '.join(html_list)
+
+        now = datetime.datetime.now()
+        now_date = now.strftime('%Y%m%d')
         with open(f'''./etc/{now_date}_일일점검리포트.html''', 'w', encoding='UTF-8') as f:
             f.write(html)
 
         pdfkit.from_file(f'''./etc/{now_date}_일일점검리포트.html''', f'''./pdf/{now_date}_일일점검리포트.pdf''', configuration=config, options=options)
 
-        # '항목별 비정상 추세'
+    # '항목별 비정상 추세'
     def generate_plot(self, df, key):
 
         fig, ax = plt.subplots(figsize=(2.25, 1.75))
@@ -1321,9 +1442,6 @@ class PdfGenerator():
             xaxis.append(datetime.datetime.strftime(a, '%m-%d'))
         xnp = np.arange(len(dates))
 
-        # todo x축 눈금 간격 설정(2-3일 간격으로 표시)
-        # ax.xaxis.set_major_locator(ticker.MultipleLocator(3))
-
         # y축 범례
         ax.set_ylabel('비정상\n 장비수', rotation=0, fontsize=8)
         ax.yaxis.set_label_coords(-0.15, 0.98)  # ylabel loc
@@ -1337,76 +1455,91 @@ class PdfGenerator():
         plt.savefig(str('./img/' + key + '_trend.png'), dpi=100, bbox_inches='tight', pad_inches=0.01)
         plt.show()
 
+    # 비정상 장비 추세
+    def generate_trend(self, df, index):
+
+        fig, ax = plt.subplots(figsize=(2.25, 1.75))
+        x = df['groupDate']
+        x_tick = np.arange(len(x))
+        x_dates = self.date_formatter(x)
+        y_value = df['abnormalCount']
+        ax.plot(x_dates, y_value, label=u'최근 일주일', color="#1bc0e1")
+
+        # style
+        ax.set_ylabel('비정상\n 장비수', rotation=0, fontsize=8)
+        ax.yaxis.set_label_coords(-0.15, 0.98)  # ylabel loc
+        ax.spines['right'].set_visible(False)
+        ax.spines['top'].set_visible(False)
+
+        plt.legend(fontsize=8, loc='upper right')
+        plt.xticks(x_tick, x_dates, fontsize=7, rotation=15)
+        plt.yticks(fontsize=7)
+        plt.savefig(str('./img/total_trend' + str(index) + '.png'), dpi=100, bbox_inches='tight', pad_inches=0.01)
+        plt.show()
+
+    # 항목별 비정상 추세
+    def generate_item_trend(self, df, key, index):
+
+        fig, ax = plt.subplots(figsize=(2.25, 1.75))
+        x = df['groupDate']
+        x_tick = np.arange(len(x))
+        x_dates = self.date_formatter(x)
+        y_values = []
+        for i in df['list']:
+            for j in i:
+                if j['name'] == key:
+                    y_values.append(j['abnormalCount'])
+
+        ax.plot(x_dates, y_values, label=u'최근 일주일', color="#1bc0e1")
+
+        # style
+        ax.set_ylabel('비정상\n 장비수', rotation=0, fontsize=8)
+        ax.yaxis.set_label_coords(-0.15, 0.98)  # ylabel loc
+        ax.spines['right'].set_visible(False)
+        ax.spines['top'].set_visible(False)
+
+        plt.legend(fontsize=8, loc='upper right')
+        plt.xticks(x_tick, x_dates, fontsize=7, rotation=15)
+        plt.yticks(fontsize=7)
+        plt.savefig(str('./img/' + key + '_trend' + str(index) + '.png'), dpi=100, bbox_inches='tight', pad_inches=0.01)
+        plt.show()
+
     # '그룹별 장비 비정상 현황', '비정상 항목 현황'
-    def horizontal_bar(self, df, key):
+    def horizontal_bar(self, df, key, index):
 
         fig, ax = plt.subplots(figsize=(3.2, 1.6))
-        y_tick = np.arange(len(self.plots))
-        y_label = []
-        for i in self.plots:
-            y_label.append(df[i].sum())
-        y_name = ['' for i in range(len(self.plots))]
-
-        for i in range(len(self.plots)):
-            if 'cpu' in self.plots[i]:
-                y_name[i] = 'CPU 사용률'
-            elif 'fan' in self.plots[i]:
-                y_name[i] = '팬 상태'
-            elif 'port' in self.plots[i]:
-                y_name[i] = '포트상태'
-
-        ax.barh(y_tick, y_label, align='center',
+        y_tick = np.arange(len(df['name']))
+        y_label = df['name']
+        value = df['abnormalCount']
+        ax.barh(y_tick, value, align='center',
                 color=['#1bc0e1', '#9CCC3D', '#FF3333', '#FF9933', '#363b47'])
-        ax.set_yticks(y_tick)
-        ax.set_yticklabels(y_label, fontsize=8)
 
         # 범례
         ax.set_ylabel('항목', rotation=0, fontsize=8)
         ax.yaxis.set_label_coords(-0.1, 1)
         ax.set_xlabel('비정상 수', fontsize=8)
-        ax.xaxis.set_label_coords(1, -0.05)
+        ax.xaxis.set_label_coords(1.1, -0.05)
 
         ax.spines['right'].set_visible(False)
         ax.spines['top'].set_visible(False)
         plt.xticks(fontsize=7)
-        plt.yticks(y_tick, y_name, fontsize=7)
-        plt.savefig(str('./img/' + key + '_alert.png'), dpi=100, bbox_inches='tight', pad_inches=0.01)
+
+        if 0 in value.values:
+            plt.xticks(range(0,10,2))
+
+        plt.yticks(y_tick, y_label, fontsize=7) # y축 구성
+        plt.savefig(str('./img/' + key + '_alert' + str(index) +'.png'), dpi=100, bbox_inches='tight', pad_inches=0.01)
         plt.show()
 
-    # '비정상 장비 추세'
-    def vertical_bar(self, df):
+    def date_formatter(self, date):
 
-        fig, ax = plt.subplots(figsize=(2, 1.6))
-        x_label = self.plots
-        x_tick = np.arange(len(x_label))
-        x_name = ['' for i in range(len(x_label))]
+        result = []
+        date_list = list(np.array(date.tolist()))
+        for i in date_list:
+            a = datetime.datetime.strptime(i, '%Y-%m-%d %H:%M:%S.%f')
+            result.append(datetime.datetime.strftime(a, '%m-%d %H:%M'))
 
-        for i in range(len(x_label)):
-            if 'cpu' in x_label[i]:
-                x_name[i] = 'CPU 사용률'
-            elif 'fan' in x_label[i]:
-                x_name[i] = '팬 상태'
-            elif 'port' in x_label[i]:
-                x_name[i] = '포트상태'
-
-        x_values = []
-        for i in x_label:
-            x_values.append(df[i].sum())
-
-
-        # y축 범례
-        ax.set_ylabel('장비수', rotation=0, fontsize=8)
-        ax.yaxis.set_label_coords(-0.15, 0.95)
-
-        ax.spines['right'].set_visible(False)
-        ax.spines['top'].set_visible(False)
-
-        plt.bar(x_tick, x_values, width=0.25, color='#1bc0e1')
-        plt.xticks(x_tick, x_name, fontsize=7)
-        plt.yticks(fontsize=7)
-        plt.savefig(str('./img/total_hist.png'), dpi=100, bbox_inches='tight', pad_inches=0.01)
-        plt.show()
-
+        return result
 
 if __name__ == "__main__":
     # JSON EXAMPLE
