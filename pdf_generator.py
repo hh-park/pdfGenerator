@@ -524,6 +524,17 @@ class PdfGenerator():
             .week_data_table table th:nth-child(2) {{
                 width: 17%;
             }}
+            .week_data_table table thead {{
+                display: none;
+            }}
+            .week_data_table table tr:nth-child(1) td {{
+                border: none;
+                border-bottom: 2px solid #333;
+                border-top: 1px solid #333;
+                background: #ffffff;
+                text-align: center;
+                font-weight: 600;
+            }}
             .preview {{
                 display: inline-block;
                 width: 100%;
@@ -630,83 +641,45 @@ class PdfGenerator():
         inspect_name = result['workflowName']
         inspect_date = result['runDate']
         inspect_date_short = datetime.datetime.strptime(inspect_date, '%Y-%m-%d %H:%M:%S').strftime('%Y-%m-%d')
+        group = []
+        type_cnt1 = []
+        type_cnt2 = []
+        for i in result['reportData']:
+            group.append(i['groupName'])
+            for j in i['autoCheckResult']:
+                if j['deviceType'] == 'Switch':
+                    type_cnt1.append('비정상 ' + str(j['abnormalCount']) + '대')
+                else:
+                    type_cnt2.append('비정상 ' + str(j['abnormalCount']) + '대')
+        summary_df = pd.DataFrame({'Group': group, 'Switch': type_cnt1, 'AP': type_cnt2})
+        summary_table = summary_df.to_html(index=False)
 
         html_main = f'''
-                <!DOCTYPE html>
-                    <html>
-                    <head>
-                        <meta charset="utf-8">
-                        {style}
-                    </head>
-                    <body>
-                        <div class="content">
-                            <header>
-                                <h1>자동 점검 리포트</h1>
-                                <h2>({inspect_name})</h2>
+            <!DOCTYPE html>
+                <html>
+                <head>
+                    <meta charset="utf-8">
+                    {style}
+                </head>
+                <body>
+                    <div class="content">
+                        <header>
+                            <h1>자동 점검 리포트</h1>
+                            <h2>({inspect_name})</h2>
+                            <div class="box">
+                                <p>{inspect_date}</p>
+                            </div>
+                            <div class="summary">
                                 <div class="box">
-                                    <p>{inspect_date}</p>
+                                    <h3 class="blue">자동 점검 결과</h3>
+                                    {summary_table}
                                 </div>
-                                <div class="summary">
-                                    <div class="box">
-                                        <h3 class="blue">자동 점검 결과</h3>
-                                        <table width="100%" cellpadding="0" cellspacing="0">
-                                            <colgroup>
-                                                <col style="width: 33.33%" />
-                                                <col style="width: 33.33%" />
-                                                <col style="width: 33.33%" />
-                                            </colgroup>
-                                            <thead>
-                                                <tr>
-                                                    <th>Group</th>
-                                                    <th>Switch</th>
-                                                    <th>AP</th>
-                                                </tr>
-                                            </thead>
-                                            <tbody>
-                                                <tr>
-                                                    <td>빌딩 A</td>
-                                                    <td>비정상 1대</td>
-                                                    <td>비정상 1대</td>
-                                                </tr>
-                                                <tr>
-                                                    <td>빌딩 B</td>
-                                                    <td>비정상 2대</td>
-                                                    <td>비정상 2대</td>
-                                                </tr>
-                                            </tbody>
-                                        </table>
-                                    </div>
-                                    <div class="box">
-                                        <h3 class="green">형상 점검 결과</h3>
-                                        <table width="100%" cellpadding="0" cellspacing="0">
-                                            <colgroup>
-                                                <col style="width: 33.33%" />
-                                                <col style="width: 33.33%" />
-                                                <col style="width: 33.33%" />
-                                            </colgroup>
-                                            <thead>
-                                                <tr>
-                                                    <th>Group</th>
-                                                    <th>Switch</th>
-                                                    <th>AP</th>
-                                                </tr>
-                                            </thead>
-                                            <tbody>
-                                                <tr>
-                                                    <td>빌딩 A</td>
-                                                    <td>+ 1대</td>
-                                                    <td>0</td>
-                                                </tr>
-                                                <tr>
-                                                    <td>빌딩 B</td>
-                                                    <td>+ 1대</td>
-                                                    <td>0</td>
-                                                </tr>
-                                            </tbody>
-                                        </table>
-                                    </div>
+                                <div class="box">
+                                    <h3 class="green">형상 점검 결과</h3>
+                                    {summary_table}
                                 </div>
-                            </header>
+                            </div>
+                        </header>
         '''
 
         html_list = []
@@ -715,9 +688,10 @@ class PdfGenerator():
         for i, v in enumerate(result['reportData']):
             grp_name = v['groupName']
             total_device = v['deviceTotalCount']  # 그룹 전체 장비수
+            ab_device_cnt = v['abnormalDeviceCount']
             alert_device_cnt = 0
-            if not v['abnormalDeviceCount'] == None:
-                alert_device_cnt = v['abnormalDeviceCount']['currentAbnormalCount'] - v['abnormalDeviceCount']['beforeAbnormalCount']
+            if not ab_device_cnt == None:
+                alert_device_cnt = ab_device_cnt['currentAbnormalCount'] - ab_device_cnt['beforeAbnormalCount']
                 # 현재 비정상 장비수 - 하루 전 비정상 장비수
 
             # 그룹별 장비 비정상 현황
@@ -784,14 +758,17 @@ class PdfGenerator():
 
                 todo_list = ' '.join(todos)
 
+            # 일주일 내 비정상 발생 건수
             if not len(v['abnormalWeek']) == 0:
                 week = pd.DataFrame(v['abnormalWeek'])
-                week = week.rename(columns={'deviceName': '장비명', 'workitemName': '점검항목', 'd6AbnormalCount': 'D-6',
-                                            'd5AbnormalCount': 'D-5', 'd4AbnormalCount': 'D-4',
-                                            'd3AbnormalCount': 'D-3', 'd2AbnormalCount': 'D-2',
-                                            'd1AbnormalCount': 'D-1', 'd0AbnormalCount': 'D-0'})
-                week_total_table = week.to_html(index=False)
+                week2 = pd.DataFrame(
+                    columns=['deviceName', 'workitemName', 'd6AbnormalCount', 'd5AbnormalCount', 'd4AbnormalCount',
+                             'd3AbnormalCount', 'd2AbnormalCount', 'd1AbnormalCount', 'd0AbnormalCount'])
+                week2.loc[0] = ['장비명', '점검항목', 'D-6', 'D-5', 'D-4', 'D-3', 'D-2', 'D-1', inspect_date_short]
+                week2 = week2.append(week)
+                week_total_table = week2.to_html(index=False)
 
+            # 장비별 상세정보
             device_details = []
             if not len(v['runResult']) == 0:
                 for r in v['runResult']:
@@ -816,7 +793,7 @@ class PdfGenerator():
                                 </ul>
                                 <div class="condition">
                                     <h3>실행조건</h3> 
-                                    <p>{work_condition}</p>
+                                    <p>work_condition</p>
                                 </div>
                             </div>
                             <h3>실행결과</h3> 
@@ -829,85 +806,85 @@ class PdfGenerator():
 
             section = f'''
                 <section>
-                        <h1>{grp_name}</h1>
-                        <article class="graph">
-                            <h2><i>01</i>진단결과</h2>
-                            <div class="chart_box">
-                                <div class="chart_view c1">
-                                    <h3>비정상장비</h3>
-                                    <ul>
-                                        <li class="up">
-                                            <span>{alert_device_cnt}</span>어제
-                                        </li>
-                                        <li class="total">
-                                            <p>
-                                                <b>장비수</b>
-                                                <span>{total_device}</span>
-                                            </p>
-                                        </li>
-                                    </ul>
+                    <h1>{grp_name}</h1>
+                    <article class="graph">
+                        <h2><i>01</i>진단결과</h2>
+                        <div class="chart_box">
+                            <div class="chart_view c1">
+                                <h3>비정상장비</h3>
+                                <ul>
+                                    <li class="up">
+                                        <span>{alert_device_cnt}</span>어제
+                                    </li>
+                                    <li class="total">
+                                        <p>
+                                            <b>장비수</b>
+                                            <span>{total_device}</span>
+                                        </p>
+                                    </li>
+                                </ul>
+                            </div>
+                            <div class="chart_view c2">
+                                <h3>그룹별 장비 비정상 현황</h3>
+                                <div class="chart">
+                                    <img src="../img/{grp_alert}.png" alt="grp_alert">
                                 </div>
-                                <div class="chart_view c2">
-                                    <h3>그룹별 장비 비정상 현황</h3>
-                                    <div class="chart">
-                                        <img src="../img/{grp_alert}.png" alt="grp_alert">
-                                    </div>
+                            </div>
+                            <div class="chart_view c3">
+                                <h3>비정상 항목 현황</h3>
+                                <div class="chart">
+                                    <img src="../img/{total_alert}.png" alt="total_alert">
                                 </div>
-                                <div class="chart_view c3">
-                                    <h3>비정상 항목 현황</h3>
+                            </div>
+                        </div>
+                        <div class="chart_box">
+                            <div class="chart_view c4">
+                                <h3>비정상 장비 추세</h3>
+                                <div class="chart_wrap">
+                                    <h4 class="none">&nbsp;</h4>
                                     <div class="chart">
-                                        <img src="../img/{total_alert}.png" alt="total_alert">
+                                        {total_trend}
                                     </div>
                                 </div>
                             </div>
-                            <div class="chart_box">
-                                <div class="chart_view c4">
-                                    <h3>비정상 장비 추세</h3>
+                            <div class="chart_view c5">
+                                <h3>항목별 비정상 추세</h3>
+                                <div class="chart_wrap_box">
                                     <div class="chart_wrap">
-                                        <h4 class="none">&nbsp;</h4>
+                                        <h4>{first_name} 상태</h4>
                                         <div class="chart">
-                                            {total_trend}
+                                            {first_trend}
                                         </div>
                                     </div>
-                                </div>
-                                <div class="chart_view c5">
-                                    <h3>항목별 비정상 추세</h3>
-                                    <div class="chart_wrap_box">
-                                        <div class="chart_wrap">
-                                            <h4>{first_name} 상태</h4>
-                                            <div class="chart">
-                                                {first_trend}
-                                            </div>
+                                    <div class="chart_wrap">
+                                        <h4>{second_name} 상태</h4>
+                                        <div class="chart">
+                                            {second_trend}
                                         </div>
-                                        <div class="chart_wrap">
-                                            <h4>{second_name} 상태</h4>
-                                            <div class="chart">
-                                                {second_trend}
-                                            </div>
+                                    </div>
+                                    <div class="chart_wrap">
+                                        <h4>{third_name} 상태</h4>
+                                        <div class="chart">
+                                            {third_trend}
                                         </div>
-                                        <div class="chart_wrap">
-                                            <h4>{third_name} 상태</h4>
-                                            <div class="chart">
-                                                {third_trend}
-                                            </div>
-                                        </div>
-                                    <div>
-                                </div>
+                                    </div>
+                                <div>
                             </div>
-                        </article>
-                        <article>
-                            <h2><i>02</i>To-Do List</h2>                  
-                            {todo_list}
-                        </article>
-                        <article class="week_data_table">
-                            <h2><i>03</i>일주일 내 비정상 발생 건수</h2>
-                            {week_total_table}
-                        </article>
-                        <article>
-                            <h2><i>04</i>장비별 상세정보</h2>
-                            {device_detail_list}
-                        </article>
-                    </section>
+                        </div>
+                    </article>
+                    <article>
+                        <h2><i>02</i>To-Do List</h2>                  
+                        {todo_list}
+                    </article>
+                    <article class="week_data_table">
+                        <h2><i>03</i>일주일 내 비정상 발생 건수</h2>
+                        {week_total_table}
+                    </article>
+                    <article>
+                        <h2><i>04</i>장비별 상세정보</h2>
+                        {device_detail_list}
+                    </article>
+                </section>
         '''
 
             html_list.append(section)
