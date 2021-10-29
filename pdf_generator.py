@@ -955,6 +955,7 @@ class PdfGenerator():
 
         for i, v in enumerate(result['reportData']):
             grp_name = v['groupName']
+            print(grp_name)
             total_device = v['deviceTotalCount'] # 그룹 전체 장비수
             alert_device_cnt = 0
             if not v['abnormalDeviceCount'] == None:
@@ -996,6 +997,35 @@ class PdfGenerator():
                 first_trend = '<p>No data to display</p>'
                 second_trend = '<p>No data to display</p>'
                 third_trend = '<p>No data to display</p>'
+
+            # todoList
+            todo_df = v['toDoList']
+            todos = []
+            if not len(todo_df) == 0:
+                for t in todo_df:
+                    todo_grp = t['groupName']
+                    todo_device = t['deviceName']
+                    todo_item = t['workitemName']
+                    todo_detail = t['workscriptGuide']
+
+                    todo_notice = f'''
+                            <div class="list_box">
+                                <div class="notice">
+                                    <ul>
+                                        <li><span>그룹명</span>{todo_grp}</li>
+                                        <li><span>장비명</span>{todo_device}</li>
+                                        <li><span>점검항목</span>{todo_item}</li>
+                                    </ul>
+                                    <dl>
+                                        <dt>조치사항</dt>
+                                        <dd>{todo_detail}</dd>
+                                    </dl>
+                                </div>
+                            </div>
+                    '''
+                    todos.append(todo_notice)
+
+                todo_list = ' '.join(todos)
 
             section = f'''
                 <section>
@@ -1067,51 +1097,7 @@ class PdfGenerator():
                         </article>
                         <article>
                             <h2><i>02</i>To-Do List</h2>                  
-                            <div class="list_box">
-                                <div class="notice">
-                                    <ul>
-                                        <li><span>그룹명</span>1F통신실</li>
-                                        <li><span>장비명</span>V6848XG</li>
-                                        <li><span>점검항목</span>CPU 사용량</li>
-                                    </ul>
-                                    <dl>
-                                        <dt>조치사항</dt>
-                                        <dd>CPU 사용률 조회 (Show CPU) 후 장비 리부팅</dd>
-                                        <dd>조치사항 2</dd>
-                                        <dd>조치사항 3</dd>
-                                    </dl>
-                                </div>
-                            </div>
-                            <div class="list_box">
-                                <div class="notice">
-                                    <ul>
-                                        <li><span>그룹명</span>1F통신실</li>
-                                        <li><span>장비명</span>V6848XG</li>
-                                        <li><span>점검항목</span>CPU 사용량</li>
-                                    </ul>
-                                    <dl>
-                                        <dt>조치사항</dt>
-                                        <dd>CPU 사용률 조회 (Show CPU) 후 장비 리부팅</dd>
-                                        <dd>조치사항 2</dd>
-                                        <dd>조치사항 3</dd>
-                                    </dl>
-                                </div>
-                            </div>
-                            <div class="list_box">
-                                <div class="notice">
-                                    <ul>
-                                        <li><span>그룹명</span>1F통신실</li>
-                                        <li><span>장비명</span>V6848XG</li>
-                                        <li><span>점검항목</span>CPU 사용량</li>
-                                    </ul>
-                                    <dl>
-                                        <dt>조치사항</dt>
-                                        <dd>CPU 사용률 조회 (Show CPU) 후 장비 리부팅</dd>
-                                        <dd>조치사항 2</dd>
-                                        <dd>조치사항 3</dd>
-                                    </dl>
-                                </div>
-                            </div>
+                            {todo_list}
                         </article>
                         <article>
                             <h2><i>03</i>일주일 내 비정상 발생 건수</h2>
