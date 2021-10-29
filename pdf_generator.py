@@ -34,255 +34,6 @@ class PdfGenerator():
         self.data = {}
         plt.rcParams["font.family"] = 'KT font'
 
-    def run(self):
-
-        '''
-        1. matplotlib 위치 찾기
-        2. mpl-data/fonts/ttf에 ttf 폰트 설치
-        3. cache directory 찾아서 fontlist-v330.json 파일 삭제
-        4. font family 이름 알아내서 rcParams 설정
-
-        font_list = fm.findSystemFonts(fontpaths=None, fontext='ttf')
-        f = [f.name for f in fm.fontManager.ttflist if 'KT' in f.name]
-        '''
-
-        with open('./pdf_data_sample.json', encoding='UTF-8') as json_file:
-            self.data = json.load(json_file)
-
-        result = self.data['data']
-        self.generate_report(result)
-
-        # with dummy data
-        example = {
-            "inspection": [
-                {
-                    "category": "building",
-                    "buildingID": "b001",
-                    "inspection_data":
-                        {
-                            "date": "2020-12-31 14:58:27.089000",
-                            "id": "1002",
-                            "fan": 1,
-                            "port": 4,
-                            "cpu": 7,
-                            "port2": 2
-                        }
-                },
-                {
-                    "category": "building",
-                    "buildingID": "b001",
-                    "inspection_data":
-                        {
-                            "date": "2021-01-01 14:58:27.089000",
-                            "id": "1007",
-                            "fan": 2,
-                            "port": 5,
-                            "cpu": 5,
-                            "port2": 2
-                        }
-
-                },
-                {
-                    "category": "building",
-                    "buildingID": "b001",
-                    "inspection_data":
-                        {
-                            "date": "2021-01-02 14:58:27.089000",
-                            "id": "1004",
-                            "fan": 2,
-                            "port": 0,
-                            "cpu": 0,
-                            "port2": 2
-                        }
-                },
-                {
-                    "category": "building",
-                    "buildingID": "b001",
-                    "inspection_data":
-                        {
-                            "date": "2021-01-03 14:58:27.089000",
-                            "id": "1006",
-                            "fan": 5,
-                            "port": 6,
-                            "cpu": 2,
-                            "port2": 1
-                        }
-
-                },
-                {
-                    "category": "building",
-                    "buildingID": "b001",
-                    "inspection_data":
-                        {
-                            "date": "2021-01-04 14:58:27.089000",
-                            "id": "1009",
-                            "fan": 4,
-                            "port": 3,
-                            "cpu": 4,
-                            "port2": 1
-                        }
-                },
-                {
-                    "category": "building",
-                    "buildingID": "b001",
-                    "inspection_data":
-                        {
-                            "date": "2021-01-05 14:58:27.089000",
-                            "id": "1002",
-                            "fan": 10,
-                            "port": 2,
-                            "cpu": 3,
-                            "port2": 1
-                        }
-                },
-                {
-                    "category": "building",
-                    "buildingID": "b001",
-                    "inspection_data":
-                        {
-                            "date": "2021-01-06 14:58:27.089000",
-                            "id": "1007",
-                            "fan": 8,
-                            "port": 4,
-                            "cpu": 0,
-                            "port2": 3
-                        }
-
-                },
-                {
-                    "category": "building",
-                    "buildingID": "b001",
-                    "inspection_data":
-                        {
-                            "date": "2021-01-07 14:58:27.089000",
-                            "id": "1004",
-                            "fan": 3,
-                            "port": 2,
-                            "cpu": 3,
-                            "port2": 1
-                        }
-                },
-                {
-                    "category": "building",
-                    "buildingID": "b001",
-                    "inspection_data":
-                        {
-                            "date": "2021-01-08 14:58:27.089000",
-                            "id": "1006",
-                            "fan": 7,
-                            "port": 4,
-                            "cpu": 0,
-                            "port2": 3
-                        }
-
-                },
-                {
-                    "category": "building",
-                    "buildingID": "b001",
-                    "inspection_data":
-                        {
-                            "date": "2021-01-09 14:58:27.089000",
-                            "id": "1009",
-                            "fan": 1,
-                            "port": 2,
-                            "cpu": 3,
-                            "port2": 1
-                        }
-                },
-                {
-                    "category": "building",
-                    "buildingID": "b001",
-                    "inspection_data":
-                        {
-                            "date": "2021-01-10 14:58:27.089000",
-                            "id": "1011",
-                            "fan": 4,
-                            "port": 4,
-                            "cpu": 9,
-                            "port2": 3
-                        }
-
-                },
-                {
-                    "category": "building",
-                    "buildingID": "b001",
-                    "inspection_data":
-                        {
-                            "date": "2021-01-11 14:58:27.089000",
-                            "id": "1012",
-                            "fan": 3,
-                            "port": 2,
-                            "cpu": 3,
-                            "port2": 1
-                        }
-                },
-                {
-                    "category": "building",
-                    "buildingID": "b001",
-                    "inspection_data":
-                        {
-                            "date": "2021-01-12 14:58:27.089000",
-                            "id": "1013",
-                            "fan": 7,
-                            "port": 4,
-                            "cpu": 0,
-                            "port2": 3
-                        }
-
-                },
-                {
-                    "category": "building",
-                    "buildingID": "b001",
-                    "inspection_data":
-                        {
-                            "date": "2021-01-13 14:58:27.089000",
-                            "id": "1014",
-                            "fan": 1,
-                            "port": 2,
-                            "cpu": 3,
-                            "port2": 1
-                        }
-                },
-                {
-                    "category": "building",
-                    "buildingID": "b001",
-                    "inspection_data":
-                        {
-                            "date": "2021-01-14 14:58:27.089000",
-                            "id": "1015",
-                            "fan": 4,
-                            "port": 4,
-                            "cpu": 9,
-                            "port2": 3
-                        }
-
-                }
-            ]
-        }
-        '''
-        df_list = []
-        for i in range(len(example['inspection'])):
-            df_list.append(example['inspection'][i]['inspection_data'])
-        df = pd.DataFrame(df_list)
-        imageList = ['grp_alert', 'total_alert', 'total_hist', 'cpu_trend', 'fan_trend', 'port_trend']
-        for f in df_list[0]:
-            if 'port' in f:
-                self.plots.append(f)
-            elif f in ['cpu', 'fan']:
-                self.plots.append(f)
-
-        for key in self.plots:
-            self.generate_plot(df, key)
-
-        for key in ['grp', 'total']:
-            self.horizontal_bar(df, key)
-
-        # self.vertical_bar(df)
-        self.generate_trend(df)
-
-        return self.generate_report()
-        '''
-
     def generate_report(self, result):
 
         # html component
@@ -404,14 +155,21 @@ class PdfGenerator():
                 opacity: 0.5;
                 background: #EEFF00;
             }}
+            .summary table th {{
+                width: 33.33%;
+            }}
             table {{
                 width: 100%;
                 table-layout: fixed;
+                border: none;
+                border-spacing: 0;
+                border-collapse: none;
             }}
             table th,
             table td {{
                 padding: 10px 0;
                 text-align: center;
+                border: none;
             }}
             table th {{
                 border-bottom: 2px solid #333;
@@ -760,6 +518,12 @@ class PdfGenerator():
                 font-size: 12pt;
                 margin: 0 5px 0 0;
             }}
+            .week_data_table table th:nth-child(1) {{
+                width: 20%;
+            }}
+            .week_data_table table th:nth-child(2) {{
+                width: 17%;
+            }}
             .preview {{
                 display: inline-block;
                 width: 100%;
@@ -865,6 +629,7 @@ class PdfGenerator():
 
         inspect_name = result['workflowName']
         inspect_date = result['runDate']
+        inspect_date_short = datetime.datetime.strptime(inspect_date, '%Y-%m-%d %H:%M:%S').strftime('%Y-%m-%d')
 
         html_main = f'''
                 <!DOCTYPE html>
@@ -944,28 +709,21 @@ class PdfGenerator():
                             </header>
         '''
 
-        ''' list로 html close
-                    </div>
-                </body>
-            </html>
-        '''
-
         html_list = []
         html_list.append(html_main)
 
         for i, v in enumerate(result['reportData']):
             grp_name = v['groupName']
-            print(grp_name)
-            total_device = v['deviceTotalCount'] # 그룹 전체 장비수
+            total_device = v['deviceTotalCount']  # 그룹 전체 장비수
             alert_device_cnt = 0
             if not v['abnormalDeviceCount'] == None:
                 alert_device_cnt = v['abnormalDeviceCount']['currentAbnormalCount'] - v['abnormalDeviceCount']['beforeAbnormalCount']
-                                # 현재 비정상 장비수 - 하루 전 비정상 장비수
+                # 현재 비정상 장비수 - 하루 전 비정상 장비수
 
             # 그룹별 장비 비정상 현황
             alert_by_grp = pd.DataFrame(v['abnormalDeviceStatus'])
             self.horizontal_bar(alert_by_grp, 'grp', i)
-            grp_alert = 'grp_alert'+ str(i)
+            grp_alert = 'grp_alert' + str(i)
 
             # 비정상 항목 현황
             alert_by_item = pd.DataFrame(v['abnormalItemStatus'])
@@ -999,33 +757,75 @@ class PdfGenerator():
                 third_trend = '<p>No data to display</p>'
 
             # todoList
-            todo_df = v['toDoList']
             todos = []
-            if not len(todo_df) == 0:
-                for t in todo_df:
+            if not len(v['toDoList']) == 0:
+                for t in v['toDoList']:
                     todo_grp = t['groupName']
                     todo_device = t['deviceName']
                     todo_item = t['workitemName']
                     todo_detail = t['workscriptGuide']
 
                     todo_notice = f'''
-                            <div class="list_box">
-                                <div class="notice">
-                                    <ul>
-                                        <li><span>그룹명</span>{todo_grp}</li>
-                                        <li><span>장비명</span>{todo_device}</li>
-                                        <li><span>점검항목</span>{todo_item}</li>
-                                    </ul>
-                                    <dl>
-                                        <dt>조치사항</dt>
-                                        <dd>{todo_detail}</dd>
-                                    </dl>
-                                </div>
+                        <div class="list_box">
+                            <div class="notice">
+                                <ul>
+                                    <li><span>그룹명</span>{todo_grp}</li>
+                                    <li><span>장비명</span>{todo_device}</li>
+                                    <li><span>점검항목</span>{todo_item}</li>
+                                </ul>
+                                <dl>
+                                    <dt>조치사항</dt>
+                                    <dd>{todo_detail}</dd>
+                                </dl>
                             </div>
+                        </div>
                     '''
                     todos.append(todo_notice)
 
                 todo_list = ' '.join(todos)
+
+            if not len(v['abnormalWeek']) == 0:
+                week = pd.DataFrame(v['abnormalWeek'])
+                week = week.rename(columns={'deviceName': '장비명', 'workitemName': '점검항목', 'd6AbnormalCount': 'D-6',
+                                            'd5AbnormalCount': 'D-5', 'd4AbnormalCount': 'D-4',
+                                            'd3AbnormalCount': 'D-3', 'd2AbnormalCount': 'D-2',
+                                            'd1AbnormalCount': 'D-1', 'd0AbnormalCount': 'D-0'})
+                week_total_table = week.to_html(index=False)
+
+            device_details = []
+            if not len(v['runResult']) == 0:
+                for r in v['runResult']:
+                    device_name = r['deviceName']
+                    work_item_name = r['workitemName']
+                    work_condition = r['dataJson']
+                    work_result = pd.read_json(r['keyJson'])
+                    work_table = work_result.to_html(index=False)
+
+                    item_detail = f'''
+                        <div class="info_box">
+                            <div class="preview">
+                                <ul>
+                                    <li class="blue">
+                                        <h2>{device_name}</h1>
+                                        <span>장비명</span>
+                                    </li>
+                                    <li class="green">
+                                        <h2>{work_item_name}</h2>
+                                        <span>점검항목</span>
+                                    </li>
+                                </ul>
+                                <div class="condition">
+                                    <h3>실행조건</h3> 
+                                    <p>{work_condition}</p>
+                                </div>
+                            </div>
+                            <h3>실행결과</h3> 
+                            {work_table}
+                        </div>
+                    '''
+                    device_details.append(item_detail)
+
+                device_detail_list = ' '.join(device_details)
 
             section = f'''
                 <section>
@@ -1099,302 +899,13 @@ class PdfGenerator():
                             <h2><i>02</i>To-Do List</h2>                  
                             {todo_list}
                         </article>
-                        <article>
+                        <article class="week_data_table">
                             <h2><i>03</i>일주일 내 비정상 발생 건수</h2>
-                            <table width="100%" cellpadding="0" cellspacing="0">
-                                <colgroup>
-                                    <col style="width: 20%" />
-                                    <col style="width: 17%" />
-                                    <col style="width: 8%" />
-                                    <col style="width: 8%" />
-                                    <col style="width: 8%" />
-                                    <col style="width: 8%" />
-                                    <col style="width: 8%" />
-                                    <col style="width: 8%" />
-                                    <col style="width: 15%" />
-                                </colgroup>
-                                <thead>
-                                    <tr>
-                                        <th>장비명</th>
-                                        <th>점검항목</th>
-                                        <th>D-6</th>
-                                        <th>D-5</th>
-                                        <th>D-4</th>
-                                        <th>D-3</th>
-                                        <th>D-2</th>
-                                        <th>D-1</th>
-                                        <th>2021-09-27</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    <tr>
-                                        <td>V6848XG</td>
-                                        <td>CPU 부하</td>
-                                        <td>1</td>
-                                        <td>0</td>
-                                        <td>0</td>
-                                        <td>3</td>
-                                        <td>3</td>
-                                        <td>3</td>
-                                        <td>3</td>
-                                    </tr>
-                                    <tr>
-                                        <td>V6848XG</td>
-                                        <td>포트 점검</td>
-                                        <td>1</td>
-                                        <td>0</td>
-                                        <td>0</td>
-                                        <td>3</td>
-                                        <td>3</td>
-                                        <td>3</td>
-                                        <td>3</td>
-                                    </tr>
-                                    <tr>
-                                        <td>E5624R</td>
-                                        <td>전원</td>
-                                        <td>1</td>
-                                        <td>0</td>
-                                        <td>0</td>
-                                        <td>3</td>
-                                        <td>3</td>
-                                        <td>3</td>
-                                        <td>3</td>
-                                    </tr>
-                                    <tr>
-                                        <td>E5624R</td>
-                                        <td>포트다운</td>
-                                        <td>1</td>
-                                        <td>0</td>
-                                        <td>0</td>
-                                        <td>3</td>
-                                        <td>3</td>
-                                        <td>3</td>
-                                        <td>3</td>
-                                    </tr>
-                                    <tr>
-                                        <td>U9500H</td>
-                                        <td>메모리 점검</td>
-                                        <td>1</td>
-                                        <td>0</td>
-                                        <td>0</td>
-                                        <td>3</td>
-                                        <td>3</td>
-                                        <td>3</td>
-                                        <td>3</td>
-                                    </tr>
-                                </tbody>
-                            </table>
+                            {week_total_table}
                         </article>
                         <article>
                             <h2><i>04</i>장비별 상세정보</h2>
-                            <div class="info_box">
-                                <div class="preview">
-                                    <ul>
-                                        <li class="blue">
-                                            <h2>V6848XG</h1>
-                                            <span>장비명</span>
-                                        </li>
-                                        <li class="green">
-                                            <h2>CPU 사용량</h2>
-                                            <span>점검항목</span>
-                                        </li>
-                                    </ul>
-                                    <div class="condition">
-                                        <h3>실행조건</h3> 
-                                        <p>MEM_USAGE ＜＝ 10</p>
-                                    </div>
-                                </div>
-                                <h3>실행결과</h3> 
-                                <table width="100%" cellpadding="0" cellspacing="0">
-                                    <colgroup>
-                                        <col style="width: 10%" />
-                                        <col style="width: 8%" />
-                                        <col style="width: 10%" />
-                                        <col style="width: 15%" />
-                                        <col style="width: 12%" />
-                                        <col style="width: 15%" />
-                                        <col style="width: 10%" />
-                                        <col style="width: 10%" />
-                                        <col style="width: 10%" />
-                                    </colgroup>
-                                    <thead>
-                                        <tr>
-                                            <th>NAME</th>
-                                            <th>STATUS</th>
-                                            <th>MODEL</th>
-                                            <th>ID</th>
-                                            <th>IPADDR</th>
-                                            <th>MAC</th>
-                                            <th>MEM_USAGE</th>
-                                            <th>CPU_USAGE</th>
-                                            <th>SSID</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                        <tr>
-                                            <td>defGsp_112</td>
-                                            <td>RUN</td>
-                                            <td>AR-WF6-2541</td>
-                                            <td>1C:EC:72:01;8A:48</td>
-                                            <td>172.30.2.112</td>
-                                            <td>1C:EC:72:01;8A:48</td>
-                                            <td>26.68</td>
-                                            <td>2.18</td>
-                                            <td>-</td>
-                                        </tr>
-                                        <tr>
-                                            <td>defGsp_112</td>
-                                            <td>RUN</td>
-                                            <td>AR-WF6-2541</td>
-                                            <td>1C:EC:72:01;8A:48</td>
-                                            <td>172.30.2.112</td>
-                                            <td>1C:EC:72:01;8A:48</td>
-                                            <td>26.68</td>
-                                            <td>2.18</td>
-                                            <td>-</td>
-                                        </tr>                         
-                                    </tbody>
-                                </table>
-                            </div>
-                            <div class="info_box">
-                                <div class="preview">
-                                    <ul>
-                                        <li class="blue">
-                                            <h2>V6848XG</h1>
-                                            <span>장비명</span>
-                                        </li>
-                                        <li class="green">
-                                            <h2>CPU 사용량</h2>
-                                            <span>점검항목</span>
-                                        </li>
-                                    </ul>
-                                    <div class="condition">
-                                        <h3>실행조건</h3> 
-                                        <p>MEM_USAGE ＜＝ 10</p>
-                                    </div>
-                                </div>
-                                <h3>실행결과</h3> 
-                                <table width="100%" cellpadding="0" cellspacing="0">
-                                    <thead>
-                                        <tr>
-                                            <th>NAME</th>
-                                            <th>STATUS</th>
-                                            <th>MODEL</th>
-                                            <th>ID</th>
-                                            <th>IPADDR</th>
-                                            <th>MAC</th>
-                                            <th>MEM_USAGE</th>
-                                            <th>CPU_USAGE</th>
-                                            <th>SSID</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                        <tr>
-                                            <td>defGsp_112</td>
-                                            <td>RUN</td>
-                                            <td>AR-WF6-2541</td>
-                                            <td>1C:EC:72:01;8A:48</td>
-                                            <td>172.30.2.112</td>
-                                            <td>1C:EC:72:01;8A:48</td>
-                                            <td>26.68</td>
-                                            <td>2.18</td>
-                                            <td>-</td>
-                                        </tr>
-                                        <tr>
-                                            <td>defGsp_112</td>
-                                            <td>RUN</td>
-                                            <td>AR-WF6-2541</td>
-                                            <td>1C:EC:72:01;8A:48</td>
-                                            <td>172.30.2.112</td>
-                                            <td>1C:EC:72:01;8A:48</td>
-                                            <td>26.68</td>
-                                            <td>2.18</td>
-                                            <td>-</td>
-                                        </tr>                         
-                                        <tr>
-                                            <td>defGsp_112</td>
-                                            <td>RUN</td>
-                                            <td>AR-WF6-2541</td>
-                                            <td>1C:EC:72:01;8A:48</td>
-                                            <td>172.30.2.112</td>
-                                            <td>1C:EC:72:01;8A:48</td>
-                                            <td>26.68</td>
-                                            <td>2.18</td>
-                                            <td>-</td>
-                                        </tr>                         
-                                        <tr>
-                                            <td>defGsp_112</td>
-                                            <td>RUN</td>
-                                            <td>AR-WF6-2541</td>
-                                            <td>1C:EC:72:01;8A:48</td>
-                                            <td>172.30.2.112</td>
-                                            <td>1C:EC:72:01;8A:48</td>
-                                            <td>26.68</td>
-                                            <td>2.18</td>
-                                            <td>-</td>
-                                        </tr>                         
-                                        <tr>
-                                            <td>defGsp_112</td>
-                                            <td>RUN</td>
-                                            <td>AR-WF6-2541</td>
-                                            <td>1C:EC:72:01;8A:48</td>
-                                            <td>172.30.2.112</td>
-                                            <td>1C:EC:72:01;8A:48</td>
-                                            <td>26.68</td>
-                                            <td>2.18</td>
-                                            <td>-</td>
-                                        </tr>                         
-                                    </tbody>
-                                </table>
-                                <table width="100%" cellpadding="0" cellspacing="0">
-                                    <thead>
-                                        <tr>
-                                            <th>NAME</th>
-                                            <th>STATUS</th>
-                                            <th>MODEL</th>
-                                            <th>ID</th>
-                                            <th>IPADDR</th>
-                                            <th>MAC</th>
-                                            <th>MEM_USAGE</th>
-                                            <th>CPU_USAGE</th>
-                                            <th>SSID</th>
-                                            <th>test</th>
-                                            <th>test2</th>
-                                            <th>test3</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                        <tr>
-                                            <td>-</td>
-                                            <td>-</td>
-                                            <td>AR-WF6-2541 AR-WF6-2541 AR-WF6-2541 AR-WF6-2541 AR-WF6-2541</td>
-                                            <td>-</td>
-                                            <td>-</td>
-                                            <td>-</td>
-                                            <td>-</td>
-                                            <td>-</td>
-                                            <td>-</td>
-                                            <td>-</td>
-                                            <td>-</td>
-                                            <td>-</td>
-                                        </tr>
-                                        <tr>
-                                            <td>-</td>
-                                            <td>-</td>
-                                            <td>AR-WF6-2541</td>
-                                            <td>-</td>
-                                            <td>-</td>
-                                            <td>-</td>
-                                            <td>-</td>
-                                            <td>-</td>
-                                            <td>-</td>
-                                            <td>-</td>
-                                            <td>-</td>
-                                            <td>-</td>
-                                        </tr>
-                                    </tbody>
-                                </table>
-                            </div>
+                            {device_detail_list}
                         </article>
                     </section>
         '''
@@ -1409,7 +920,8 @@ class PdfGenerator():
         with open(f'''./etc/{now_date}_일일점검리포트.html''', 'w', encoding='UTF-8') as f:
             f.write(html)
 
-        pdfkit.from_file(f'''./etc/{now_date}_일일점검리포트.html''', f'''./pdf/{now_date}_일일점검리포트.pdf''', configuration=config, options=options)
+        pdfkit.from_file(f'''./etc/{now_date}_일일점검리포트.html''', f'''./pdf/{now_date}_일일점검리포트.pdf''',
+                         configuration=config, options=options)
 
     # '항목별 비정상 추세'
     def generate_plot(self, df, key):
@@ -1461,7 +973,7 @@ class PdfGenerator():
         plt.xticks(x_tick, x_dates, fontsize=7, rotation=15)
         plt.yticks(fontsize=7)
         plt.savefig(str('./img/total_trend' + str(index) + '.png'), dpi=100, bbox_inches='tight', pad_inches=0.01)
-        plt.show()
+        # plt.show()
 
     # 항목별 비정상 추세
     def generate_item_trend(self, df, key, index):
@@ -1488,7 +1000,7 @@ class PdfGenerator():
         plt.xticks(x_tick, x_dates, fontsize=7, rotation=15)
         plt.yticks(fontsize=7)
         plt.savefig(str('./img/' + key + '_trend' + str(index) + '.png'), dpi=100, bbox_inches='tight', pad_inches=0.01)
-        plt.show()
+        # plt.show()
 
     # '그룹별 장비 비정상 현황', '비정상 항목 현황'
     def horizontal_bar(self, df, key, index):
@@ -1511,11 +1023,11 @@ class PdfGenerator():
         plt.xticks(fontsize=7)
 
         if 0 in value.values:
-            plt.xticks(range(0,10,2))
+            plt.xticks(range(0, 10, 2))
 
-        plt.yticks(y_tick, y_label, fontsize=7) # y축 구성
-        plt.savefig(str('./img/' + key + '_alert' + str(index) +'.png'), dpi=100, bbox_inches='tight', pad_inches=0.01)
-        plt.show()
+        plt.yticks(y_tick, y_label, fontsize=7)  # y축 구성
+        plt.savefig(str('./img/' + key + '_alert' + str(index) + '.png'), dpi=100, bbox_inches='tight', pad_inches=0.01)
+        # plt.show()
 
     def date_formatter(self, date):
 
@@ -1526,6 +1038,25 @@ class PdfGenerator():
             result.append(datetime.datetime.strftime(a, '%m-%d %H:%M'))
 
         return result
+
+    def run(self):
+
+        '''
+        1. matplotlib 위치 찾기
+        2. mpl-data/fonts/ttf에 ttf 폰트 설치
+        3. cache directory 찾아서 fontlist-v330.json 파일 삭제
+        4. font family 이름 알아내서 rcParams 설정
+
+        font_list = fm.findSystemFonts(fontpaths=None, fontext='ttf')
+        f = [f.name for f in fm.fontManager.ttflist if 'KT' in f.name]
+        '''
+
+        with open('./pdf_data_sample.json', encoding='UTF-8') as json_file:
+            self.data = json.load(json_file)
+
+        result = self.data['data']
+        self.generate_report(result)
+
 
 if __name__ == "__main__":
     # JSON EXAMPLE
