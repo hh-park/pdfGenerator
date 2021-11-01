@@ -27,9 +27,7 @@ options = {
 
 class PdfGenerator():
 
-    def __init__(self, web):
-        self.web = web
-        self.opt = self.web['opt']
+    def __init__(self):
         self.plots = []
         self.data = {}
         plt.rcParams["font.family"] = 'KT font'
@@ -715,20 +713,22 @@ class PdfGenerator():
 
             # 항목별 비정상 추세
             item_alert_trend = pd.DataFrame(v['abnormalItemTrend'])
-            first_name = top_items[0]
-            second_name = top_items[1]
-            third_name = top_items[2]
+            chart_box_list = []
             if not len(item_alert_trend) == 0:
                 for item in top_items:
                     self.generate_item_trend(item_alert_trend, item, i)
-                first_trend = f'''<img src="../img/{first_name}_trend{str(i)}.png" alt="{first_name}_trend">'''
-                second_trend = f'''<img src="../img/{second_name}_trend{str(i)}.png" alt="{second_name}_trend">'''
-                third_trend = f'''<img src="../img/{third_name}_trend{str(i)}.png" alt="{third_name}_trend">'''
 
-            else:
-                first_trend = '<p>No data to display</p>'
-                second_trend = '<p>No data to display</p>'
-                third_trend = '<p>No data to display</p>'
+                    chart_box = f'''
+                        <div class="chart_wrap">
+                            <h4>{item} 상태</h4>
+                            <div class="chart">
+                                <img src="../img/{item}_trend{str(i)}.png" alt="{item}_trend">
+                            </div>
+                        </div>  
+                    '''
+                    chart_box_list.append(chart_box)
+
+                chart_wrap_box = ' '.join(chart_box_list)
 
             # todoList
             todos = []
@@ -774,8 +774,8 @@ class PdfGenerator():
                 for r in v['runResult']:
                     device_name = r['deviceName']
                     work_item_name = r['workitemName']
-                    work_condition = r['dataJson']
-                    work_result = pd.read_json(r['keyJson'])
+                    work_condition = r['dataJson'] # todo 임성준 차장
+                    work_result = pd.read_json(r['dataJson'])
                     work_table = work_result.to_html(index=False)
 
                     item_detail = f'''
@@ -850,24 +850,7 @@ class PdfGenerator():
                             <div class="chart_view c5">
                                 <h3>항목별 비정상 추세</h3>
                                 <div class="chart_wrap_box">
-                                    <div class="chart_wrap">
-                                        <h4>{first_name} 상태</h4>
-                                        <div class="chart">
-                                            {first_trend}
-                                        </div>
-                                    </div>
-                                    <div class="chart_wrap">
-                                        <h4>{second_name} 상태</h4>
-                                        <div class="chart">
-                                            {second_trend}
-                                        </div>
-                                    </div>
-                                    <div class="chart_wrap">
-                                        <h4>{third_name} 상태</h4>
-                                        <div class="chart">
-                                            {third_trend}
-                                        </div>
-                                    </div>
+                                    {chart_wrap_box}
                                 <div>
                             </div>
                         </div>
@@ -1011,7 +994,7 @@ class PdfGenerator():
         result = []
         date_list = list(np.array(date.tolist()))
         for i in date_list:
-            a = datetime.datetime.strptime(i, '%Y-%m-%d %H:%M:%S.%f')
+            a = datetime.datetime.strptime(i, '%Y-%m-%d %H:%M:%S')
             result.append(datetime.datetime.strftime(a, '%m-%d %H:%M'))
 
         return result
@@ -1036,16 +1019,6 @@ class PdfGenerator():
 
 
 if __name__ == "__main__":
-    # JSON EXAMPLE
-    web = {
-        'opt': {
-            'building_name': 'Building A',
-            'abnormal': 1,
-            'ap': 1,
-            'inspection_date': '',
 
-        }
-    }
-
-    test = PdfGenerator(web)
+    test = PdfGenerator()
     test.run()

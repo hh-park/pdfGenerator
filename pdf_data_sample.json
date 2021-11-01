@@ -1,0 +1,146 @@
+{
+   "resultCode":200,
+   "resultMessage":"SUCCESS",
+   "data":{
+      "workflowName":"flow04",
+      "runDate":"2021-10-29 17:26:08",
+      "reportData":[
+         {
+            "groupName":"TB",
+            "deviceTotalCount":5,
+            "autoCheckResult":[
+               {
+                  "deviceType":"AP",
+                  "abnormalCount":0
+               },
+               {
+                  "deviceType":"Switch",
+                  "abnormalCount":1
+               }
+            ],
+            "abnormalDeviceCount":{
+               "currentAbnormalCount":1,
+               "beforeAbnormalCount":0
+            },
+            "abnormalDeviceStatus":[
+               {
+                  "name":"다산TB",
+                  "deviceCount":3,
+                  "abnormalCount":1
+               },
+               {
+                  "name":"TB",
+                  "deviceCount":2,
+                  "abnormalCount":0
+               }
+            ],
+            "abnormalItemStatus":[
+               {
+                  "name":"cpu",
+                  "deviceCount":1,
+                  "abnormalCount":1
+               }
+            ],
+            "abnormalDeviceTrend":[
+               {
+                  "groupDate":"2021-10-29 17:25:49",
+                  "abnormalCount":1
+               },
+               {
+                  "groupDate":"2021-10-29 17:21:01",
+                  "abnormalCount":1
+               },
+               {
+                  "groupDate":"2021-10-29 17:16:28",
+                  "abnormalCount":1
+               },
+               {
+                  "groupDate":"2021-10-29 17:01:45",
+                  "abnormalCount":1
+               },
+               {
+                  "groupDate":"2021-10-29 17:00:26",
+                  "abnormalCount":1
+               }
+            ],
+            "abnormalItemTrend":[
+               {
+                  "groupDate":"2021-10-29 17:25:49",
+                  "list":[
+                     {
+                        "name":"cpu",
+                        "abnormalCount":1
+                     }
+                  ]
+               },
+               {
+                  "groupDate":"2021-10-29 17:21:01",
+                  "list":[
+                     {
+                        "name":"cpu",
+                        "abnormalCount":1
+                     }
+                  ]
+               },
+               {
+                  "groupDate":"2021-10-29 17:16:28",
+                  "list":[
+                     {
+                        "name":"cpu",
+                        "abnormalCount":1
+                     }
+                  ]
+               },
+               {
+                  "groupDate":"2021-10-29 17:01:45",
+                  "list":[
+                     {
+                        "name":"cpu",
+                        "abnormalCount":1
+                     }
+                  ]
+               },
+               {
+                  "groupDate":"2021-10-29 17:00:26",
+                  "list":[
+                     {
+                        "name":"cpu",
+                        "abnormalCount":1
+                     }
+                  ]
+               }
+            ],
+            "toDoList":[
+               {
+                  "groupName":"다산TB",
+                  "deviceName":"V6848XG_L3#2",
+                  "workitemName":"cpu",
+                  "workscriptGuide":"None"
+               }
+            ],
+            "abnormalWeek":[
+               {
+                  "deviceName":"V6848XG_L3#2",
+                  "workitemName":"cpu",
+                  "d6AbnormalCount":0,
+                  "d5AbnormalCount":0,
+                  "d4AbnormalCount":0,
+                  "d3AbnormalCount":0,
+                  "d2AbnormalCount":1,
+                  "d1AbnormalCount":19,
+                  "d0AbnormalCount":13
+               }
+            ],
+            "runResult":[
+               {
+                  "deviceName":"V6848XG_L3#2",
+                  "workitemName":"cpu",
+                  "reportFilter":"{\"filter\": {\"join\": \"AND\", \"list\": [{\"join\": \"AND\", \"text\": \"\", \"group\": [{\"turn\": \"\", \"type\": \"number\", \"value\": \"6\", \"column\": \"USAGE_5SEC\", \"target\": \"\", \"operator\": \"\", \"condition\": \"lt\"}]}]}, \"report\": {\"turn\": \"\", \"type\": \"S\", \"target\": \"\", \"compare\": \"QUERY\", \"condition\": \"\"}}",
+                  "keyJson":"[{\"name\": \"USAGE_5SEC\", \"type\": \"number\", \"unit\": \"%\", \"level\": \"0\", \"parent\": \"ROOT\", \"default\": \"\"}, {\"name\": \"USAGE_1MIN\", \"type\": \"number\", \"unit\": \"%\", \"level\": \"0\", \"parent\": \"ROOT\", \"default\": \"\"}, {\"name\": \"USAGE_5MIN\", \"type\": \"number\", \"unit\": \"%\", \"level\": \"0\", \"parent\": \"ROOT\", \"default\": \"\"}, {\"name\": \"USAGE_10MIN\", \"type\": \"number\", \"unit\": \"%\", \"level\": \"0\", \"parent\": \"ROOT\", \"default\": \"\"}, {\"name\": \"FILTER_RESULT\", \"type\": \"select\", \"unit\": \"\", \"level\": \"0\", \"parent\": \"ROOT\"}]",
+                  "dataJson":"[{\"USAGE_5SEC\": \"7.27\", \"USAGE_1MIN\": \"6.80\", \"USAGE_5MIN\": \"-\", \"USAGE_10MIN\": \"6.81\", \"FILTER_RESULT\": \"NOK\"}]"
+               }
+            ]
+         }
+      ]
+   }
+}
