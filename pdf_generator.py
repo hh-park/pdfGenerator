@@ -903,15 +903,18 @@ class PdfGenerator():
 
         # style
         ax.set_ylabel('비정상\n 장비수', rotation=0, fontsize=8)
-        ax.yaxis.set_label_coords(-0.15, 0.98)  # ylabel loc
+        ax.yaxis.set_label_coords(-0.15, 1.05)  # ylabel loc
         ax.spines['right'].set_visible(False)
         ax.spines['top'].set_visible(False)
 
         # plt.legend(fontsize=8, loc='upper right')
-        plt.xticks(x_tick, x_ticks, fontsize=6, rotation=45)
-        plt.yticks(fontsize=7)
+        if len(x_dates) < 7:
+            plt.xticks(x_tick, x_dates, fontsize=7, rotation=30)
+            plt.yticks(range(0, 10, 2), fontsize=7)
+        else:
+            plt.xticks(x_tick, x_ticks, fontsize=7, rotation=30)
+            plt.yticks(fontsize=7)
         plt.savefig(str('./img/total_trend' + str(index) + '.png'), dpi=100, bbox_inches='tight', pad_inches=0.01)
-        # plt.show()
 
     # 항목별 비정상 추세
     def generate_item_trend(self, df, key, index):
@@ -920,6 +923,12 @@ class PdfGenerator():
         x = df['groupDate']
         x_tick = np.arange(len(x))
         x_dates = self.date_formatter(x)
+        x_ticks = []
+        for i, v in enumerate(x_dates):
+            if i % 2 == 1:
+                x_ticks.append('')
+            else:
+                x_ticks.append(v)
         y_values = []
         for i in df['list']:
             for j in i:
@@ -933,13 +942,18 @@ class PdfGenerator():
 
         # style
         ax.set_ylabel('비정상\n 장비수', rotation=0, fontsize=8)
-        ax.yaxis.set_label_coords(-0.15, 0.98)  # ylabel loc
+        ax.yaxis.set_label_coords(-0.15, 1.05)  # ylabel loc
         ax.spines['right'].set_visible(False)
         ax.spines['top'].set_visible(False)
 
         # plt.legend(fontsize=8, loc='upper right')
-        plt.xticks(x_tick, x_dates, fontsize=7, rotation=45)
-        plt.yticks(fontsize=7)
+        # 눈금 값(ticks), 눈금 레이블(ticklabels)
+        if len(x_dates) < 7:
+            plt.xticks(x_tick, x_dates, fontsize=7, rotation=30)
+            plt.yticks(range(0, 8, 2), fontsize=7)
+        else:
+            plt.xticks(x_tick, x_ticks, fontsize=7, rotation=30)
+            plt.yticks(fontsize=7)
         chart = str('./img/' + key + '_trend' + str(index) + '.png')
         plt.savefig(chart, dpi=100, bbox_inches='tight', pad_inches=0.01)
 
@@ -961,7 +975,8 @@ class PdfGenerator():
         elif key =='grp':
             ax.set_ylabel('그룹', rotation=0, fontsize=8)
         ax.yaxis.set_label_coords(-0.1, 1)
-        ax.xaxis.set_label_coords(-0.15, -0.05)
+        ax.set_xlabel('비정상 수', fontsize=8)
+        ax.xaxis.set_label_coords(-0.1, 0)
 
         ax.spines['right'].set_visible(False)
         ax.spines['top'].set_visible(False)
