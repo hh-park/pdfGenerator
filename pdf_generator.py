@@ -450,6 +450,8 @@ class PdfGenerator():
             .notice {{
                 margin: 5px 0;
                 text-align: left;
+                display: inline-block;
+                width: 100%;
             }}
             .notice ul {{
                 position: relative;
@@ -526,6 +528,17 @@ class PdfGenerator():
                 display: none;
             }}
             .week_data_table table tr:nth-child(1) td {{
+                border: none;
+                border-bottom: 2px solid #333;
+                border-top: 1px solid #333;
+                background: #ffffff;
+                text-align: center;
+                font-weight: 600;
+            }}
+            .item_detail_table table thead {{
+                display: none;
+            }}
+            .item_detail_table table tr:nth-child(1) td {{
                 border: none;
                 border-bottom: 2px solid #333;
                 border-top: 1px solid #333;
@@ -776,9 +789,12 @@ class PdfGenerator():
                 for r in v['runResult']:
                     device_name = r['deviceName']
                     work_item_name = r['workitemName']
-                    work_condition = r['dataJson'] # todo 임성준 차장
+                    work_condition = r['dataJson']  # todo 임성준 차장
                     work_result = pd.read_json(r['dataJson'])
-                    work_table = work_result.to_html(index=False)
+                    new_work_result = pd.DataFrame(columns=work_result.columns.tolist())
+                    new_work_result.loc[0] = work_result.columns.tolist()
+                    new_work_result = new_work_result.append(work_result)
+                    work_table = new_work_result.to_html(index=False)
 
                     item_detail = f'''
                         <div class="info_box">
@@ -865,7 +881,7 @@ class PdfGenerator():
                         <h2><i>03</i>일주일 내 비정상 발생 건수</h2>
                         {week_total_table}
                     </article>
-                    <article>
+                    <article class="item_detail_table">
                         <h2><i>04</i>장비별 상세정보</h2>
                         {device_detail_list}
                     </article>
@@ -972,7 +988,7 @@ class PdfGenerator():
         # 범례
         if key == 'total':
             ax.set_ylabel('항목', rotation=0, fontsize=8)
-        elif key =='grp':
+        elif key == 'grp':
             ax.set_ylabel('그룹', rotation=0, fontsize=8)
         ax.yaxis.set_label_coords(-0.1, 1)
         ax.set_xlabel('비정상 수', fontsize=8)
@@ -1020,6 +1036,5 @@ class PdfGenerator():
 
 
 if __name__ == "__main__":
-
     test = PdfGenerator()
     test.run()
