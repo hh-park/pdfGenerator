@@ -11,7 +11,7 @@ import matplotlib.font_manager as fm
 import os
 import pdfkit
 import json
-import datetime
+from datetime import datetime
 
 config = pdfkit.configuration(wkhtmltopdf='c:\\Program Files\\wkhtmltopdf\\bin\\wkhtmltopdf.exe')
 options = {
@@ -293,7 +293,7 @@ class PdfGenerator():
             }}
             .c4,
             .c5 {{
-                height: 280px;
+                height: 300px;
             }}
             .c4 {{
                 margin: 0 1% 0 0; 
@@ -412,10 +412,10 @@ class PdfGenerator():
                 width: 100%;
             }}
             .chart_view.c4 .chart {{
-                height: 190px;
+                height: 215px;
             }}
             .chart_view.c5 .chart {{
-                height: 190px;
+                height: 215px;
             }}
             .chart_wrap_box {{
                 clear: both;
@@ -638,7 +638,7 @@ class PdfGenerator():
 
         inspect_name = result['workflowName']
         inspect_date = result['runDate']
-        inspect_date_short = datetime.datetime.strptime(inspect_date, '%Y-%m-%d %H:%M:%S').strftime('%Y-%m-%d')
+        inspect_date_short = datetime.strptime(inspect_date, '%Y-%m-%d %H:%M:%S').strftime('%Y-%m-%d')
         group = []
         type_cnt1 = []
         type_cnt2 = []
@@ -714,24 +714,25 @@ class PdfGenerator():
             # 항목별 비정상 추세
             item_alert_trend = pd.DataFrame(v['abnormalItemTrend'])
             chart_box_list = []
+            chart_wrap_box = ''
             if not len(item_alert_trend) == 0:
                 for item in top_items:
-                    self.generate_item_trend(item_alert_trend, item, i)
+                    box = self.generate_item_trend(item_alert_trend, item, i)
 
                     chart_box = f'''
                         <div class="chart_wrap">
                             <h4>{item} 상태</h4>
                             <div class="chart">
-                                <img src="../img/{item}_trend{str(i)}.png" alt="{item}_trend">
+                                {box}
                             </div>
                         </div>  
                     '''
                     chart_box_list.append(chart_box)
-
                 chart_wrap_box = ' '.join(chart_box_list)
 
             # todoList
             todos = []
+            todo_list = ''
             if not len(v['toDoList']) == 0:
                 for t in v['toDoList']:
                     todo_grp = t['groupName']
@@ -755,10 +756,10 @@ class PdfGenerator():
                         </div>
                     '''
                     todos.append(todo_notice)
-
                 todo_list = ' '.join(todos)
 
             # 일주일 내 비정상 발생 건수
+            week_total_table = ''
             if not len(v['abnormalWeek']) == 0:
                 week = pd.DataFrame(v['abnormalWeek'])
                 week2 = pd.DataFrame(
@@ -770,6 +771,7 @@ class PdfGenerator():
 
             # 장비별 상세정보
             device_details = []
+            device_detail_list = ''
             if not len(v['runResult']) == 0:
                 for r in v['runResult']:
                     device_name = r['deviceName']
@@ -875,7 +877,7 @@ class PdfGenerator():
         html_list.append('<div> </body> </html>')
         html = ' '.join(html_list)
 
-        now = datetime.datetime.now()
+        now = datetime.now()
         now_date = now.strftime('%Y%m%d')
         with open(f'''./etc/{now_date}_일일점검리포트.html''', 'w', encoding='UTF-8') as f:
             f.write(html)
@@ -883,45 +885,21 @@ class PdfGenerator():
         pdfkit.from_file(f'''./etc/{now_date}_일일점검리포트.html''', f'''./pdf/{now_date}_일일점검리포트.pdf''',
                          configuration=config, options=options)
 
-    # '항목별 비정상 추세'
-    def generate_plot(self, df, key):
-
-        fig, ax = plt.subplots(figsize=(2.25, 1.75))
-        dates = df['date'].values[-7:]
-        ax.plot(dates, df[key].values[-7:], label=u'현재', color="#1bc0e1")
-        ax.plot(dates, df[key].values[-14:-7], label=u'1주전', color="#9CCC3D")
-        ax.plot(dates, df[key].values[-7:] - 1, label=u'1달전', color="#FF3333")
-
-        # simple date format: M-D
-        xaxis = []
-        xdate = list(np.array(df['date'].tolist()))
-        for i in xdate:
-            a = datetime.datetime.strptime(i, '%Y-%m-%d %H:%M:%S.%f')
-            xaxis.append(datetime.datetime.strftime(a, '%m-%d'))
-        xnp = np.arange(len(dates))
-
-        # y축 범례
-        ax.set_ylabel('비정상\n 장비수', rotation=0, fontsize=8)
-        ax.yaxis.set_label_coords(-0.15, 0.98)  # ylabel loc
-
-        ax.spines['right'].set_visible(False)
-        ax.spines['top'].set_visible(False)
-
-        plt.legend(fontsize=8, loc='upper right')
-        plt.xticks(xnp, xaxis[-7:], fontsize=7, rotation=45)
-        plt.yticks(fontsize=7)
-        plt.savefig(str('./img/' + key + '_trend.png'), dpi=100, bbox_inches='tight', pad_inches=0.01)
-        plt.show()
-
     # 비정상 장비 추세
     def generate_trend(self, df, index):
 
         fig, ax = plt.subplots(figsize=(2.25, 1.75))
-        x = df['groupDate']
-        x_tick = np.arange(len(x))
-        x_dates = self.date_formatter(x)
+        x_tick = np.arange(len(df['groupDate']))
+        x_dates = self.date_formatter(df['groupDate'])
+        x_ticks = []
+        for i, v in enumerate(x_dates):
+            if i % 2 == 1:
+                x_ticks.append('')
+            else:
+                x_ticks.append(v)
         y_value = df['abnormalCount']
-        ax.plot(x_dates, y_value, label=u'최근 일주일', color="#1bc0e1")
+        ax.plot(x_dates, y_value, color="#1bc0e1")
+        # ax.plot(x_dates, y_value, label=u'최근 일주일', color="#1bc0e1")
 
         # style
         ax.set_ylabel('비정상\n 장비수', rotation=0, fontsize=8)
@@ -929,8 +907,8 @@ class PdfGenerator():
         ax.spines['right'].set_visible(False)
         ax.spines['top'].set_visible(False)
 
-        plt.legend(fontsize=8, loc='upper right')
-        plt.xticks(x_tick, x_dates, fontsize=7, rotation=15)
+        # plt.legend(fontsize=8, loc='upper right')
+        plt.xticks(x_tick, x_ticks, fontsize=6, rotation=45)
         plt.yticks(fontsize=7)
         plt.savefig(str('./img/total_trend' + str(index) + '.png'), dpi=100, bbox_inches='tight', pad_inches=0.01)
         # plt.show()
@@ -948,7 +926,10 @@ class PdfGenerator():
                 if j['name'] == key:
                     y_values.append(j['abnormalCount'])
 
-        ax.plot(x_dates, y_values, label=u'최근 일주일', color="#1bc0e1")
+        if not len(x_tick) == len(y_values):
+            return 'No Chart'
+        ax.plot(x_dates, y_values, color="#1bc0e1")
+        # ax.plot(x_dates, y_values, label=u'최근 일주일', color="#1bc0e1")
 
         # style
         ax.set_ylabel('비정상\n 장비수', rotation=0, fontsize=8)
@@ -956,11 +937,13 @@ class PdfGenerator():
         ax.spines['right'].set_visible(False)
         ax.spines['top'].set_visible(False)
 
-        plt.legend(fontsize=8, loc='upper right')
-        plt.xticks(x_tick, x_dates, fontsize=7, rotation=15)
+        # plt.legend(fontsize=8, loc='upper right')
+        plt.xticks(x_tick, x_dates, fontsize=7, rotation=45)
         plt.yticks(fontsize=7)
-        plt.savefig(str('./img/' + key + '_trend' + str(index) + '.png'), dpi=100, bbox_inches='tight', pad_inches=0.01)
-        # plt.show()
+        chart = str('./img/' + key + '_trend' + str(index) + '.png')
+        plt.savefig(chart, dpi=100, bbox_inches='tight', pad_inches=0.01)
+
+        return f'<img src=".{chart}" alt="{key}_trend">'
 
     # '그룹별 장비 비정상 현황', '비정상 항목 현황'
     def horizontal_bar(self, df, key, index):
@@ -968,21 +951,23 @@ class PdfGenerator():
         fig, ax = plt.subplots(figsize=(3.2, 1.6))
         y_tick = np.arange(len(df['name']))
         y_label = df['name']
-        value = df['abnormalCount']
-        ax.barh(y_tick, value, align='center',
+        y_value = df['abnormalCount']
+        ax.barh(y_tick, y_value, align='center',
                 color=['#1bc0e1', '#9CCC3D', '#FF3333', '#FF9933', '#363b47'])
 
         # 범례
-        ax.set_ylabel('항목', rotation=0, fontsize=8)
+        if key == 'total':
+            ax.set_ylabel('항목', rotation=0, fontsize=8)
+        elif key =='grp':
+            ax.set_ylabel('그룹', rotation=0, fontsize=8)
         ax.yaxis.set_label_coords(-0.1, 1)
-        ax.set_xlabel('비정상 수', fontsize=8)
-        ax.xaxis.set_label_coords(1.1, -0.05)
+        ax.xaxis.set_label_coords(-0.15, -0.05)
 
         ax.spines['right'].set_visible(False)
         ax.spines['top'].set_visible(False)
         plt.xticks(fontsize=7)
 
-        if 0 in value.values:
+        if 0 in y_value.values:
             plt.xticks(range(0, 10, 2))
 
         plt.yticks(y_tick, y_label, fontsize=7)  # y축 구성
@@ -993,9 +978,10 @@ class PdfGenerator():
 
         result = []
         date_list = list(np.array(date.tolist()))
+        date_list.sort(key=lambda date: datetime.strptime(date, '%Y-%m-%d %H:%M:%S'))
         for i in date_list:
-            a = datetime.datetime.strptime(i, '%Y-%m-%d %H:%M:%S')
-            result.append(datetime.datetime.strftime(a, '%m-%d %H:%M'))
+            a = datetime.strptime(i, '%Y-%m-%d %H:%M:%S')
+            result.append(datetime.strftime(a, '%m-%d %H:%M'))
 
         return result
 
