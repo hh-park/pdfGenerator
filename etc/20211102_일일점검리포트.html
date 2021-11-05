@@ -1,0 +1,4288 @@
+
+            <!DOCTYPE html>
+                <html>
+                <head>
+                    <meta charset="utf-8">
+                    
+                <style type="text/css">
+            /* KT font */
+            @font-face {
+                font-family: "KT";
+                font-style: normal;
+                font-weight: 400;
+                src: url("../font/KTfontLight.woff") format('woff'),
+                    url("../font/KTfontLight.eot"),
+                    url("../font/KTfontLight.eot?#iefix") format('embedded-opentype');
+            }
+            @font-face {
+                font-family: "KT";
+                font-style: normal;
+                font-weight: 500;
+                src: url("../font/KTfontMedium.woff") format('woff'),
+                    url("../font/KTfontMedium.eot"),
+                    url("../font/KTfontMedium.eot?#iefix") format('embedded-opentype');
+            }
+            @font-face {
+                font-family: "KT";
+                font-style: normal;
+                font-weight: 600;
+                src: url("../font/KTfontBold.woff") format('woff'),
+                    url("../font/KTfontBold.eot"),
+                    url("../font/KTfontBold.eot?#iefix") format('embedded-opentype');
+            }
+
+            /* common */
+            @page {
+                margin: 10mm;
+                width: 210mm;
+                height: 297mm;
+            }
+            html,
+            body {
+                margin: 0;
+                padding: 0;
+                outline: none;
+            } 
+            body {
+                width: 1000px;
+                position: relative;
+                left: calc(50% - 500px);
+            }
+            h1, h2, h3, h4, p, div, section, article, header, span, ul, li, dl, dt, dd {
+                position: relative;
+                display: block;
+                text-align: center;
+                margin: 0;
+                padding: 0;
+                outline: none;
+                box-sizing: border-box;
+            }
+            h1, h2, h3, h4, span, li, dt, dd {
+                white-space: pre-line;
+                word-break: keep-all;
+            }
+            .content { 
+                font-size: 9pt;
+                line-height: 1.5;
+                font-family: "KT";
+                background: #fff; 
+                color: #000;
+                width: 100%;
+            }
+            header {
+                padding: 40px 0 40px; 
+                border-bottom: 3px double #ccc;
+                margin: 0 0 40px;
+            }
+            h1 {
+                font-size: 18pt;
+            }
+            h2 {
+                font-size: 15pt;
+            }
+            h3 {
+                font-size: 12pt;
+            }
+            header .box {
+                text-align: right;
+            }
+            header .box p {
+                display: inline-block;
+                padding: 5px 20px;
+                background: #3A404D;
+                color: #fff;
+                border-radius: 20px;
+                font-weight: 600;
+            }
+            header .summary {
+                width: 100%;
+            }
+            header .summary .box {
+                display: inline-block;
+                width: 48.9%;
+            }
+            header .summary .box + .box {
+                margin: 0 0 0 1%;
+            }
+            header .summary h3 {
+                text-align: left;
+                z-index: 2;
+                margin: 0 0 15px;
+                color: #3A404D;
+            }
+            header .summary h3:after {
+                content: '';
+                position: absolute;
+                left: 0;
+                bottom: 0;
+                width: 95px;
+                height: 10px;
+                z-index: -1;
+                opacity: 0.5;
+                background: #EEFF00;
+            }
+            .summary table th {
+                width: 33.33%;
+            }
+            table {
+                width: 100%;
+                table-layout: fixed;
+                border: none;
+                border-spacing: 0;
+                border-collapse: none;
+            }
+            table th,
+            table td {
+                padding: 10px 0;
+                text-align: center;
+                border: none;
+            }
+            table th {
+                border-bottom: 2px solid #333;
+                border-top: 1px solid #333;
+            }
+            table td {
+                background: #f1f1f1;
+                border-bottom: 1px solid #fff;
+            }
+            table td + td {
+                border-left: 1px solid #fff;
+            }
+            section {
+                padding: 0 10px;
+            }
+            section h1 {
+                font-size: 15pt;
+                color: #3A404D;
+                text-align: left;
+                margin: 0 0 5px;
+            }
+            section h1::before {
+                content: '';
+                position: relative;
+                display: inline-block;
+                top: 7px;
+                background: url("../images/ico_building.png") no-repeat;
+                margin: 0 10px 0 0;
+                width: 25px;;
+                height: 25px;
+            }
+            section h2 {
+                text-align: left;
+                font-size: 12pt;
+                color: #3A404D;
+            }
+            section h2 i {
+                display: inline-block;
+                font-size: 20pt;
+                font-weight: 400;
+                color: #ccc;
+                margin: 0 10px 0 0; 
+                letter-spacing: -2px;
+            }
+            section h3 {
+                text-align: left;
+                font-size: 10.5pt;
+                color: #3A404D;
+                padding: 0 10px 20px;
+            }
+            section h3::before {
+                content: '';
+                display: inline-block;
+                width: 5px;
+                height: 5px;
+                border-radius: 10px;
+                background: #3A404D;
+                margin: -4px 5px 0 0; 
+            }
+            section h4::before {
+                content: '[';
+                display: inline-block;
+                margin: 0 5px 0 0;
+            }
+            section h4::after {
+                content: ']';
+                display: inline-block;
+                margin: 0 0 0 5px;
+            }
+            section h4 {
+                text-align: left;
+                font-size: 10.5pt;
+                color: #3A404D;
+                padding: 0 10px 10px;
+            }
+            article {
+                width: 100%;
+                height: 100%;
+                margin: 0 0 40px;
+            }
+            .graph {
+                height: 550px;
+            }
+            .chart_box {
+                clear: both;
+            }
+            .chart_view {
+                display: inline-block;
+                float: left;
+                border: 1px solid #3A404D;
+                border-radius: 10px;
+                padding: 10px 0 0;
+                overflow: hidden;
+            }
+            .chart_view ul {
+                height: 125px;
+            }
+            .chart_view.c1 ul {
+                top: 0px;
+            }
+            .chart_view ul li {
+                float: left;
+            }
+            .c1,
+            .c2 {
+                margin: 0 1% 10px 0; 
+            }
+            .c1,
+            .c2,
+            .c3 {
+                height: 215px;
+            }
+            .c1,
+            .c4 {
+                width: 25%;
+            }
+            .c2,
+            .c3 {
+                width: 36%;
+            }
+            .c3 {
+                margin: 0 0 10px 0; 
+            }
+            .c4,
+            .c5 {
+                height: 300px;
+            }
+            .c4 {
+                margin: 0 1% 0 0; 
+            }
+            .c5 {
+                width: 73.2%;
+            }
+            .chart_box ul,
+            .chart_wrap,
+            .preview ul {
+                width: 100%;
+            }
+            .chart_view ul li {
+                display: inline-block;
+                vertical-align: middle;
+                width: 32.5%;
+                font-size: 10pt;
+                font-weight: 600;
+                color: #666;
+            }
+            .chart_view ul li span {
+                font-size: 20pt;
+                font-weight: 600;
+            }
+            .chart_view ul li.up,
+            .chart_view ul li.down {
+                top: 20px;
+            }
+            .chart_view ul li.up span {
+                color: #FF3333;
+            }
+            .chart_view ul li.up span::before {
+                content: '';
+                position: relative;
+                top: 3px;
+                display: inline-block;
+                width: 13px;
+                height: 20px;
+                background: url("../images/ico_up.png") no-repeat;
+                margin: 0 5px 0 0;
+            } 
+            .chart_view ul li.down span {
+                color: #1bc0e1;
+            }
+            .chart_view ul li.down span::before {
+                content: '';
+                position: relative;
+                top: 3px;
+                display: inline-block;
+                width: 13px;
+                height: 20px;
+                background: url("../images/ico_down.png") no-repeat;
+                margin: 0 5px 0 0;
+            } 
+            .chart_view ul li.total {
+                width: 35%;
+            }
+            .chart_view ul li.total p {
+                position: relative;
+                left: calc(50% - 45px);
+                width: 90px;
+                height: 90px;
+                border-radius: 100px;
+                background: #FF3333;
+            }
+            .chart_view ul li.total span {
+                position: relative;
+                top: -18px;
+                color: #fff;
+                font-size: 24pt;
+            }
+            .chart_view ul li.total b {
+                position: relative;
+                bottom: -45px;
+                font-size: 8pt;
+                color: #fff;
+                z-index: 5;
+            }
+            .chart_view.c4 ul {
+                height: 55px;
+                background: #f7f7f7;
+                margin: 0 0 10px;
+            }
+            .chart_view.c4 ul li {
+                position: relative;
+                top: 5px;
+                width: 49%;
+                height: 40px;
+            }
+            .chart_view.c4 ul li + li {
+                border-left: 1px dashed #999;
+            }
+            .chart_view.c4 ul li span {
+                font-size: 15pt;
+                position: relative;
+                top: -20px;
+                display: inline-block;
+                width: 100%;
+            }
+            .chart_view.c4 ul li span::after {
+                content: '대';
+            }
+            .chart_view.c4 ul li p {
+                position: relative;
+                top: -24px;
+            }
+            .chart_view .chart {
+                height: 155px;
+                border-radius: 0 0 10px 10px;
+                color: #333;
+                overflow: hidden;
+            }
+            .chart_view.c4 .chart_wrap {
+                float: none;
+                display: block;
+                width: 100%;
+            }
+            .chart_view.c4 .chart {
+                height: 215px;
+            }
+            .chart_view.c5 .chart {
+                height: 215px;
+            }
+            .chart_wrap_box {
+                clear: both;
+            }
+            .chart_wrap {
+                display: inline-block;
+                float: left;
+                width: 33%;
+                height: 215px;
+                border-radius: 0;
+            }
+            .chart_wrap .chart {
+                border-radius: 0;
+            }
+            .info_box {
+                flex-direction: column;
+                margin: 0 0 40px;
+                padding: 0 0 40px;
+                border-bottom: 1px dashed #ccc;
+            }
+            .info_box:last-child {
+                margin: 0;
+                padding: 0;
+                border: none;
+            }
+            .info_box table + table {
+                margin: 30px 0 0;
+            }
+            .list_box + .list_box {
+                margin: 30px 0 0;
+            }
+            .notice {
+                margin: 5px 0;
+                text-align: left;
+                display: inline-block;
+                width: 100%;
+            }
+            .notice ul {
+                position: relative;
+                display: inline-block;
+                clear: both;
+                padding: 10px;
+                border-radius: 10px 10px 0 0;
+                background: #3A404D;
+                z-index: 5;
+            }
+            .notice ul li {
+                float: left;
+                height: 23px;
+                display: inline-block;
+                font-size: 12pt;
+                font-weight: 600;
+                vertical-align: middle;
+                margin: 0 15px 0 0;
+                color: #fff;
+            }
+            .notice ul li span {
+                display: inline-block;
+                font-size: 8.5pt;
+                padding: 3px 10px;
+                background: rgba(255, 255, 255, 0.2);
+                color: #ddd;
+                border-radius: 5px;
+                margin: 0 10px 0 0;
+                vertical-align: middle;
+            }
+            .notice dl {
+                flex-direction: column;
+                width: 100%;
+                height: 100%;
+                padding: 15px;
+                border: 1px dashed #3A404D;
+                margin: -8px 0 0;
+            }
+            .notice dl dt,
+            .notice dl dd {
+                text-align: left;
+            }
+            .notice dl dt {
+                font-size: 10pt;
+                font-weight: 600;
+                color: #3A404D;
+                margin: 0 0 10px;
+            }
+            .notice dl dt::before {
+                content: url("../images/ico_notice.png");
+                margin: 0 5px 0 0;
+            }
+            .notice dl dd {
+                width: 100%;
+                color: #3A404D;
+                align-items: center;
+                margin: 0 10px;
+            }
+            .notice dl dd::before {
+                align-self: flex-start;
+                content: '-';
+                font-weight: 600;
+                color: #3A404D;
+                font-size: 12pt;
+                margin: 0 5px 0 0;
+            }
+            .week_data_table table th:nth-child(1) {
+                width: 20%;
+            }
+            .week_data_table table th:nth-child(2) {
+                width: 17%;
+            }
+            .week_data_table table thead {
+                display: none;
+            }
+            .week_data_table table tr:nth-child(1) td {
+                border: none;
+                border-bottom: 2px solid #333;
+                border-top: 1px solid #333;
+                background: #ffffff;
+                text-align: center;
+                font-weight: 600;
+            }
+            .item_detail_table table thead {
+                display: none;
+            }
+            .item_detail_table table tr:nth-child(1) td {
+                border: none;
+                border-bottom: 2px solid #333;
+                border-top: 1px solid #333;
+                background: #ffffff;
+                text-align: center;
+                font-weight: 600;
+            }
+            .preview {
+                display: inline-block;
+                width: 100%;
+                height: 170px;
+                margin: 0 0 10px;
+                clear: both;
+            }
+            .preview ul {
+                position: relative;
+                display: inline-block;
+                width: 25%;
+                float: left;
+            }
+            .preview ul li {
+                position: relative;
+                display: inline-block;
+                width: 100%;
+                height: 80px;
+                border-radius: 5px;
+            }
+            .preview ul li.green {
+                background: #e6f7f1;
+            }
+            .preview ul li.green h2,
+            .preview ul li.green span {
+                color: #29cc8c;
+            }
+            .preview ul li.green::after {
+                position: absolute;
+                right: 15px;
+                top: 15px;
+                content: '';
+                background: url("../images/ico_info_g.png") no-repeat;
+                width: 18px;
+                height: 18px;
+            }
+            .preview ul li.blue {
+                background: #eff2fc;
+            }
+            .preview ul li.blue h2,
+            .preview ul li.blue span {
+                color: #3d2eec;
+            }
+            .preview ul li.blue::after {
+                position: absolute;
+                right: 15px;
+                top: 15px;
+                content: '';
+                background: url("../images/ico_info_b.png") no-repeat;
+                width: 18px;
+                height: 18px;
+            }
+            .preview ul li span {
+                position: absolute;
+                width: 100%;
+                bottom: 10px;
+                text-align: center;
+                font-size: 10pt;
+            }
+            .preview ul li h2 {
+                text-align: center;
+                font-size: 15pt;
+                font-weight: 600;
+            }
+            .preview ul li + li {
+                margin: 5px 0 0;
+            }
+            .preview .condition {
+                width: 74%;
+                height: 170px;
+                float: right;
+                font-weight: 600;
+                padding: 10px;
+                background: #f9f9f9;
+                border-top: 3px double #ddd;
+                border-bottom: 3px double #ddd;
+            }
+            .preview .condition h3 {
+                margin: 0 0 20px;
+                padding: 0;
+            }
+            .preview .condition p {
+                font-style: 10pt;
+                line-height: 1.2rem;
+                text-align: left;
+            }
+            .none::before,
+            .none::after {
+                display: none;
+            }
+            .confirm_ok {
+                background: #f9f9f9;
+                color: #3A404D;
+                font-size: 11pt;
+                font-weight: 600;
+                padding: 50px 0!important;
+            }
+            .confirm_ok strong {
+                color: #1bc0e1;
+            }
+        </style>
+        
+                </head>
+                <body>
+                    <div class="content">
+                        <header>
+                            <h1>자동 점검 리포트</h1>
+                            <h2>(다산네트워크)</h2>
+                            <div class="box">
+                                <p>2021-11-02 11:31:38</p>
+                            </div>
+                            <div class="summary">
+                                <div class="box">
+                                    <h3 class="blue">자동 점검 결과</h3>
+                                    <table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th>Group</th>
+      <th>Switch</th>
+      <th>AP</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>TB</td>
+      <td>비정상 1대</td>
+      <td>비정상 0대</td>
+    </tr>
+  </tbody>
+</table>
+                                </div>
+                                <div class="box">
+                                    <h3 class="green">형상 점검 결과</h3>
+                                    <table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th>Group</th>
+      <th>Switch</th>
+      <th>AP</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>TB</td>
+      <td>비정상 1대</td>
+      <td>비정상 0대</td>
+    </tr>
+  </tbody>
+</table>
+                                </div>
+                            </div>
+                        </header>
+         
+                <section>
+                    <h1>TB</h1>
+                    <article class="graph">
+                        <h2><i>01</i>진단결과</h2>
+                        <div class="chart_box">
+                            <div class="chart_view c1">
+                                <h3>비정상장비</h3>
+                                <ul>
+                                    <li class="up">
+                                        <span>1</span>어제
+                                    </li>
+                                    <li class="total">
+                                        <p>
+                                            <b>장비수</b>
+                                            <span>5</span>
+                                        </p>
+                                    </li>
+                                </ul>
+                            </div>
+                            <div class="chart_view c2">
+                                <h3>그룹별 장비 비정상 현황</h3>
+                                <div class="chart">
+                                    <img src="../img/grp_alert0.png" alt="grp_alert">
+                                </div>
+                            </div>
+                            <div class="chart_view c3">
+                                <h3>비정상 항목 현황</h3>
+                                <div class="chart">
+                                    <img src="../img/total_alert0.png" alt="total_alert">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="chart_box">
+                            <div class="chart_view c4">
+                                <h3>비정상 장비 추세</h3>
+                                <div class="chart_wrap">
+                                    <h4 class="none">&nbsp;</h4>
+                                    <div class="chart">
+                                        <img src="../img/total_trend0.png" alt="total_trend">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="chart_view c5">
+                                <h3>항목별 비정상 추세</h3>
+                                <div class="chart_wrap_box">
+                                    
+                        <div class="chart_wrap">
+                            <h4>process 상태</h4>
+                            <div class="chart">
+                                <img src="../img/process_trend0.png" alt="process_trend">
+                            </div>
+                        </div>  
+                     
+                        <div class="chart_wrap">
+                            <h4>cpu 상태</h4>
+                            <div class="chart">
+                                <img src="../img/cpu_trend0.png" alt="cpu_trend">
+                            </div>
+                        </div>  
+                     
+                        <div class="chart_wrap">
+                            <h4>power 상태</h4>
+                            <div class="chart">
+                                <img src="../img/power_trend0.png" alt="power_trend">
+                            </div>
+                        </div>  
+                    
+                                <div>
+                            </div>
+                        </div>
+                    </article>
+                    <article>
+                        <h2><i>02</i>To-Do List</h2>                  
+                        
+                        <div class="list_box">
+                            <div class="notice">
+                                <ul>
+                                    <li><span>그룹명</span>다산TB</li>
+                                    <li><span>장비명</span>V6848XG_L3#2</li>
+                                    <li><span>점검항목</span>cpu</li>
+                                </ul>
+                                <dl>
+                                    <dt>조치사항</dt>
+                                    <dd>비정상 process restart 또는 Loop여부 확인</dd>
+                                </dl>
+                            </div>
+                        </div>
+                     
+                        <div class="list_box">
+                            <div class="notice">
+                                <ul>
+                                    <li><span>그룹명</span>다산TB</li>
+                                    <li><span>장비명</span>V6848XG_L3#2</li>
+                                    <li><span>점검항목</span>cpu</li>
+                                </ul>
+                                <dl>
+                                    <dt>조치사항</dt>
+                                    <dd>비정상 process restart 또는 Loop여부 확인</dd>
+                                </dl>
+                            </div>
+                        </div>
+                     
+                        <div class="list_box">
+                            <div class="notice">
+                                <ul>
+                                    <li><span>그룹명</span>다산TB</li>
+                                    <li><span>장비명</span>V6848XG_L3#2</li>
+                                    <li><span>점검항목</span>cpu</li>
+                                </ul>
+                                <dl>
+                                    <dt>조치사항</dt>
+                                    <dd>비정상 process restart 또는 Loop여부 확인</dd>
+                                </dl>
+                            </div>
+                        </div>
+                     
+                        <div class="list_box">
+                            <div class="notice">
+                                <ul>
+                                    <li><span>그룹명</span>다산TB</li>
+                                    <li><span>장비명</span>V6848XG_L3#2</li>
+                                    <li><span>점검항목</span>cpu</li>
+                                </ul>
+                                <dl>
+                                    <dt>조치사항</dt>
+                                    <dd>비정상 process restart 또는 Loop여부 확인</dd>
+                                </dl>
+                            </div>
+                        </div>
+                     
+                        <div class="list_box">
+                            <div class="notice">
+                                <ul>
+                                    <li><span>그룹명</span>다산TB</li>
+                                    <li><span>장비명</span>V6848XG_L3#2</li>
+                                    <li><span>점검항목</span>cpu</li>
+                                </ul>
+                                <dl>
+                                    <dt>조치사항</dt>
+                                    <dd>비정상 process restart 또는 Loop여부 확인</dd>
+                                </dl>
+                            </div>
+                        </div>
+                     
+                        <div class="list_box">
+                            <div class="notice">
+                                <ul>
+                                    <li><span>그룹명</span>다산TB</li>
+                                    <li><span>장비명</span>V6848XG_L3#2</li>
+                                    <li><span>점검항목</span>cpu</li>
+                                </ul>
+                                <dl>
+                                    <dt>조치사항</dt>
+                                    <dd>비정상 process restart 또는 Loop여부 확인</dd>
+                                </dl>
+                            </div>
+                        </div>
+                     
+                        <div class="list_box">
+                            <div class="notice">
+                                <ul>
+                                    <li><span>그룹명</span>다산TB</li>
+                                    <li><span>장비명</span>V6848XG_L3#2</li>
+                                    <li><span>점검항목</span>cpu</li>
+                                </ul>
+                                <dl>
+                                    <dt>조치사항</dt>
+                                    <dd>비정상 process restart 또는 Loop여부 확인</dd>
+                                </dl>
+                            </div>
+                        </div>
+                     
+                        <div class="list_box">
+                            <div class="notice">
+                                <ul>
+                                    <li><span>그룹명</span>다산TB</li>
+                                    <li><span>장비명</span>V6848XG_L3#2</li>
+                                    <li><span>점검항목</span>cpu</li>
+                                </ul>
+                                <dl>
+                                    <dt>조치사항</dt>
+                                    <dd>비정상 process restart 또는 Loop여부 확인</dd>
+                                </dl>
+                            </div>
+                        </div>
+                     
+                        <div class="list_box">
+                            <div class="notice">
+                                <ul>
+                                    <li><span>그룹명</span>다산TB</li>
+                                    <li><span>장비명</span>V6848XG_L3#2</li>
+                                    <li><span>점검항목</span>cpu</li>
+                                </ul>
+                                <dl>
+                                    <dt>조치사항</dt>
+                                    <dd>비정상 process restart 또는 Loop여부 확인</dd>
+                                </dl>
+                            </div>
+                        </div>
+                     
+                        <div class="list_box">
+                            <div class="notice">
+                                <ul>
+                                    <li><span>그룹명</span>다산TB</li>
+                                    <li><span>장비명</span>V6848XG_L3#2</li>
+                                    <li><span>점검항목</span>cpu</li>
+                                </ul>
+                                <dl>
+                                    <dt>조치사항</dt>
+                                    <dd>비정상 process restart 또는 Loop여부 확인</dd>
+                                </dl>
+                            </div>
+                        </div>
+                     
+                        <div class="list_box">
+                            <div class="notice">
+                                <ul>
+                                    <li><span>그룹명</span>다산TB</li>
+                                    <li><span>장비명</span>V6848XG_L3#2</li>
+                                    <li><span>점검항목</span>cpu</li>
+                                </ul>
+                                <dl>
+                                    <dt>조치사항</dt>
+                                    <dd>비정상 process restart 또는 Loop여부 확인</dd>
+                                </dl>
+                            </div>
+                        </div>
+                     
+                        <div class="list_box">
+                            <div class="notice">
+                                <ul>
+                                    <li><span>그룹명</span>다산TB</li>
+                                    <li><span>장비명</span>V6848XG_L3#2</li>
+                                    <li><span>점검항목</span>cpu</li>
+                                </ul>
+                                <dl>
+                                    <dt>조치사항</dt>
+                                    <dd>비정상 process restart 또는 Loop여부 확인</dd>
+                                </dl>
+                            </div>
+                        </div>
+                     
+                        <div class="list_box">
+                            <div class="notice">
+                                <ul>
+                                    <li><span>그룹명</span>다산TB</li>
+                                    <li><span>장비명</span>V6848XG_L3#2</li>
+                                    <li><span>점검항목</span>cpu</li>
+                                </ul>
+                                <dl>
+                                    <dt>조치사항</dt>
+                                    <dd>비정상 process restart 또는 Loop여부 확인</dd>
+                                </dl>
+                            </div>
+                        </div>
+                     
+                        <div class="list_box">
+                            <div class="notice">
+                                <ul>
+                                    <li><span>그룹명</span>다산TB</li>
+                                    <li><span>장비명</span>V6848XG_L3#2</li>
+                                    <li><span>점검항목</span>cpu</li>
+                                </ul>
+                                <dl>
+                                    <dt>조치사항</dt>
+                                    <dd>비정상 process restart 또는 Loop여부 확인</dd>
+                                </dl>
+                            </div>
+                        </div>
+                     
+                        <div class="list_box">
+                            <div class="notice">
+                                <ul>
+                                    <li><span>그룹명</span>다산TB</li>
+                                    <li><span>장비명</span>V6848XG_L3#2</li>
+                                    <li><span>점검항목</span>cpu</li>
+                                </ul>
+                                <dl>
+                                    <dt>조치사항</dt>
+                                    <dd>비정상 process restart 또는 Loop여부 확인</dd>
+                                </dl>
+                            </div>
+                        </div>
+                     
+                        <div class="list_box">
+                            <div class="notice">
+                                <ul>
+                                    <li><span>그룹명</span>다산TB</li>
+                                    <li><span>장비명</span>V6848XG_L3#2</li>
+                                    <li><span>점검항목</span>cpu</li>
+                                </ul>
+                                <dl>
+                                    <dt>조치사항</dt>
+                                    <dd>비정상 process restart 또는 Loop여부 확인</dd>
+                                </dl>
+                            </div>
+                        </div>
+                     
+                        <div class="list_box">
+                            <div class="notice">
+                                <ul>
+                                    <li><span>그룹명</span>다산TB</li>
+                                    <li><span>장비명</span>V6848XG_L3#2</li>
+                                    <li><span>점검항목</span>cpu</li>
+                                </ul>
+                                <dl>
+                                    <dt>조치사항</dt>
+                                    <dd>비정상 process restart 또는 Loop여부 확인</dd>
+                                </dl>
+                            </div>
+                        </div>
+                     
+                        <div class="list_box">
+                            <div class="notice">
+                                <ul>
+                                    <li><span>그룹명</span>다산TB</li>
+                                    <li><span>장비명</span>V6848XG_L3#2</li>
+                                    <li><span>점검항목</span>cpu</li>
+                                </ul>
+                                <dl>
+                                    <dt>조치사항</dt>
+                                    <dd>비정상 process restart 또는 Loop여부 확인</dd>
+                                </dl>
+                            </div>
+                        </div>
+                     
+                        <div class="list_box">
+                            <div class="notice">
+                                <ul>
+                                    <li><span>그룹명</span>다산TB</li>
+                                    <li><span>장비명</span>V6848XG_L3#2</li>
+                                    <li><span>점검항목</span>cpu</li>
+                                </ul>
+                                <dl>
+                                    <dt>조치사항</dt>
+                                    <dd>비정상 process restart 또는 Loop여부 확인</dd>
+                                </dl>
+                            </div>
+                        </div>
+                     
+                        <div class="list_box">
+                            <div class="notice">
+                                <ul>
+                                    <li><span>그룹명</span>다산TB</li>
+                                    <li><span>장비명</span>V6848XG_L3#2</li>
+                                    <li><span>점검항목</span>cpu</li>
+                                </ul>
+                                <dl>
+                                    <dt>조치사항</dt>
+                                    <dd>비정상 process restart 또는 Loop여부 확인</dd>
+                                </dl>
+                            </div>
+                        </div>
+                     
+                        <div class="list_box">
+                            <div class="notice">
+                                <ul>
+                                    <li><span>그룹명</span>다산TB</li>
+                                    <li><span>장비명</span>V6848XG_L3#2</li>
+                                    <li><span>점검항목</span>fan</li>
+                                </ul>
+                                <dl>
+                                    <dt>조치사항</dt>
+                                    <dd>None</dd>
+                                </dl>
+                            </div>
+                        </div>
+                     
+                        <div class="list_box">
+                            <div class="notice">
+                                <ul>
+                                    <li><span>그룹명</span>다산TB</li>
+                                    <li><span>장비명</span>V6848XG_L3#2</li>
+                                    <li><span>점검항목</span>fan</li>
+                                </ul>
+                                <dl>
+                                    <dt>조치사항</dt>
+                                    <dd>None</dd>
+                                </dl>
+                            </div>
+                        </div>
+                     
+                        <div class="list_box">
+                            <div class="notice">
+                                <ul>
+                                    <li><span>그룹명</span>다산TB</li>
+                                    <li><span>장비명</span>V6848XG_L3#2</li>
+                                    <li><span>점검항목</span>fan</li>
+                                </ul>
+                                <dl>
+                                    <dt>조치사항</dt>
+                                    <dd>None</dd>
+                                </dl>
+                            </div>
+                        </div>
+                     
+                        <div class="list_box">
+                            <div class="notice">
+                                <ul>
+                                    <li><span>그룹명</span>다산TB</li>
+                                    <li><span>장비명</span>V6848XG_L3#2</li>
+                                    <li><span>점검항목</span>fan</li>
+                                </ul>
+                                <dl>
+                                    <dt>조치사항</dt>
+                                    <dd>None</dd>
+                                </dl>
+                            </div>
+                        </div>
+                     
+                        <div class="list_box">
+                            <div class="notice">
+                                <ul>
+                                    <li><span>그룹명</span>다산TB</li>
+                                    <li><span>장비명</span>V6848XG_L3#2</li>
+                                    <li><span>점검항목</span>fan</li>
+                                </ul>
+                                <dl>
+                                    <dt>조치사항</dt>
+                                    <dd>None</dd>
+                                </dl>
+                            </div>
+                        </div>
+                     
+                        <div class="list_box">
+                            <div class="notice">
+                                <ul>
+                                    <li><span>그룹명</span>다산TB</li>
+                                    <li><span>장비명</span>V6848XG_L3#2</li>
+                                    <li><span>점검항목</span>fan</li>
+                                </ul>
+                                <dl>
+                                    <dt>조치사항</dt>
+                                    <dd>None</dd>
+                                </dl>
+                            </div>
+                        </div>
+                     
+                        <div class="list_box">
+                            <div class="notice">
+                                <ul>
+                                    <li><span>그룹명</span>다산TB</li>
+                                    <li><span>장비명</span>V6848XG_L3#2</li>
+                                    <li><span>점검항목</span>fan</li>
+                                </ul>
+                                <dl>
+                                    <dt>조치사항</dt>
+                                    <dd>None</dd>
+                                </dl>
+                            </div>
+                        </div>
+                     
+                        <div class="list_box">
+                            <div class="notice">
+                                <ul>
+                                    <li><span>그룹명</span>다산TB</li>
+                                    <li><span>장비명</span>V6848XG_L3#2</li>
+                                    <li><span>점검항목</span>fan</li>
+                                </ul>
+                                <dl>
+                                    <dt>조치사항</dt>
+                                    <dd>None</dd>
+                                </dl>
+                            </div>
+                        </div>
+                     
+                        <div class="list_box">
+                            <div class="notice">
+                                <ul>
+                                    <li><span>그룹명</span>다산TB</li>
+                                    <li><span>장비명</span>V6848XG_L3#2</li>
+                                    <li><span>점검항목</span>fan</li>
+                                </ul>
+                                <dl>
+                                    <dt>조치사항</dt>
+                                    <dd>None</dd>
+                                </dl>
+                            </div>
+                        </div>
+                     
+                        <div class="list_box">
+                            <div class="notice">
+                                <ul>
+                                    <li><span>그룹명</span>다산TB</li>
+                                    <li><span>장비명</span>V6848XG_L3#2</li>
+                                    <li><span>점검항목</span>fan</li>
+                                </ul>
+                                <dl>
+                                    <dt>조치사항</dt>
+                                    <dd>None</dd>
+                                </dl>
+                            </div>
+                        </div>
+                     
+                        <div class="list_box">
+                            <div class="notice">
+                                <ul>
+                                    <li><span>그룹명</span>다산TB</li>
+                                    <li><span>장비명</span>V6848XG_L3#2</li>
+                                    <li><span>점검항목</span>fan</li>
+                                </ul>
+                                <dl>
+                                    <dt>조치사항</dt>
+                                    <dd>None</dd>
+                                </dl>
+                            </div>
+                        </div>
+                     
+                        <div class="list_box">
+                            <div class="notice">
+                                <ul>
+                                    <li><span>그룹명</span>다산TB</li>
+                                    <li><span>장비명</span>V6848XG_L3#2</li>
+                                    <li><span>점검항목</span>fan</li>
+                                </ul>
+                                <dl>
+                                    <dt>조치사항</dt>
+                                    <dd>None</dd>
+                                </dl>
+                            </div>
+                        </div>
+                     
+                        <div class="list_box">
+                            <div class="notice">
+                                <ul>
+                                    <li><span>그룹명</span>다산TB</li>
+                                    <li><span>장비명</span>V6848XG_L3#2</li>
+                                    <li><span>점검항목</span>power</li>
+                                </ul>
+                                <dl>
+                                    <dt>조치사항</dt>
+                                    <dd>None</dd>
+                                </dl>
+                            </div>
+                        </div>
+                     
+                        <div class="list_box">
+                            <div class="notice">
+                                <ul>
+                                    <li><span>그룹명</span>다산TB</li>
+                                    <li><span>장비명</span>V6848XG_L3#2</li>
+                                    <li><span>점검항목</span>power</li>
+                                </ul>
+                                <dl>
+                                    <dt>조치사항</dt>
+                                    <dd>None</dd>
+                                </dl>
+                            </div>
+                        </div>
+                     
+                        <div class="list_box">
+                            <div class="notice">
+                                <ul>
+                                    <li><span>그룹명</span>다산TB</li>
+                                    <li><span>장비명</span>V6848XG_L3#2</li>
+                                    <li><span>점검항목</span>power</li>
+                                </ul>
+                                <dl>
+                                    <dt>조치사항</dt>
+                                    <dd>None</dd>
+                                </dl>
+                            </div>
+                        </div>
+                     
+                        <div class="list_box">
+                            <div class="notice">
+                                <ul>
+                                    <li><span>그룹명</span>다산TB</li>
+                                    <li><span>장비명</span>V6848XG_L3#2</li>
+                                    <li><span>점검항목</span>power</li>
+                                </ul>
+                                <dl>
+                                    <dt>조치사항</dt>
+                                    <dd>None</dd>
+                                </dl>
+                            </div>
+                        </div>
+                     
+                        <div class="list_box">
+                            <div class="notice">
+                                <ul>
+                                    <li><span>그룹명</span>다산TB</li>
+                                    <li><span>장비명</span>V6848XG_L3#2</li>
+                                    <li><span>점검항목</span>power</li>
+                                </ul>
+                                <dl>
+                                    <dt>조치사항</dt>
+                                    <dd>None</dd>
+                                </dl>
+                            </div>
+                        </div>
+                     
+                        <div class="list_box">
+                            <div class="notice">
+                                <ul>
+                                    <li><span>그룹명</span>다산TB</li>
+                                    <li><span>장비명</span>V6848XG_L3#2</li>
+                                    <li><span>점검항목</span>power</li>
+                                </ul>
+                                <dl>
+                                    <dt>조치사항</dt>
+                                    <dd>None</dd>
+                                </dl>
+                            </div>
+                        </div>
+                     
+                        <div class="list_box">
+                            <div class="notice">
+                                <ul>
+                                    <li><span>그룹명</span>다산TB</li>
+                                    <li><span>장비명</span>V6848XG_L3#2</li>
+                                    <li><span>점검항목</span>power</li>
+                                </ul>
+                                <dl>
+                                    <dt>조치사항</dt>
+                                    <dd>None</dd>
+                                </dl>
+                            </div>
+                        </div>
+                     
+                        <div class="list_box">
+                            <div class="notice">
+                                <ul>
+                                    <li><span>그룹명</span>다산TB</li>
+                                    <li><span>장비명</span>V6848XG_L3#2</li>
+                                    <li><span>점검항목</span>power</li>
+                                </ul>
+                                <dl>
+                                    <dt>조치사항</dt>
+                                    <dd>None</dd>
+                                </dl>
+                            </div>
+                        </div>
+                     
+                        <div class="list_box">
+                            <div class="notice">
+                                <ul>
+                                    <li><span>그룹명</span>다산TB</li>
+                                    <li><span>장비명</span>V6848XG_L3#2</li>
+                                    <li><span>점검항목</span>power</li>
+                                </ul>
+                                <dl>
+                                    <dt>조치사항</dt>
+                                    <dd>None</dd>
+                                </dl>
+                            </div>
+                        </div>
+                     
+                        <div class="list_box">
+                            <div class="notice">
+                                <ul>
+                                    <li><span>그룹명</span>다산TB</li>
+                                    <li><span>장비명</span>V6848XG_L3#2</li>
+                                    <li><span>점검항목</span>power</li>
+                                </ul>
+                                <dl>
+                                    <dt>조치사항</dt>
+                                    <dd>None</dd>
+                                </dl>
+                            </div>
+                        </div>
+                     
+                        <div class="list_box">
+                            <div class="notice">
+                                <ul>
+                                    <li><span>그룹명</span>다산TB</li>
+                                    <li><span>장비명</span>V6848XG_L3#2</li>
+                                    <li><span>점검항목</span>power</li>
+                                </ul>
+                                <dl>
+                                    <dt>조치사항</dt>
+                                    <dd>None</dd>
+                                </dl>
+                            </div>
+                        </div>
+                     
+                        <div class="list_box">
+                            <div class="notice">
+                                <ul>
+                                    <li><span>그룹명</span>다산TB</li>
+                                    <li><span>장비명</span>V6848XG_L3#2</li>
+                                    <li><span>점검항목</span>power</li>
+                                </ul>
+                                <dl>
+                                    <dt>조치사항</dt>
+                                    <dd>None</dd>
+                                </dl>
+                            </div>
+                        </div>
+                     
+                        <div class="list_box">
+                            <div class="notice">
+                                <ul>
+                                    <li><span>그룹명</span>다산TB</li>
+                                    <li><span>장비명</span>V6848XG_L3#2</li>
+                                    <li><span>점검항목</span>power</li>
+                                </ul>
+                                <dl>
+                                    <dt>조치사항</dt>
+                                    <dd>None</dd>
+                                </dl>
+                            </div>
+                        </div>
+                     
+                        <div class="list_box">
+                            <div class="notice">
+                                <ul>
+                                    <li><span>그룹명</span>다산TB</li>
+                                    <li><span>장비명</span>V6848XG_L3#2</li>
+                                    <li><span>점검항목</span>power</li>
+                                </ul>
+                                <dl>
+                                    <dt>조치사항</dt>
+                                    <dd>None</dd>
+                                </dl>
+                            </div>
+                        </div>
+                     
+                        <div class="list_box">
+                            <div class="notice">
+                                <ul>
+                                    <li><span>그룹명</span>다산TB</li>
+                                    <li><span>장비명</span>V6848XG_L3#2</li>
+                                    <li><span>점검항목</span>power</li>
+                                </ul>
+                                <dl>
+                                    <dt>조치사항</dt>
+                                    <dd>None</dd>
+                                </dl>
+                            </div>
+                        </div>
+                     
+                        <div class="list_box">
+                            <div class="notice">
+                                <ul>
+                                    <li><span>그룹명</span>다산TB</li>
+                                    <li><span>장비명</span>V6848XG_L3#2</li>
+                                    <li><span>점검항목</span>process</li>
+                                </ul>
+                                <dl>
+                                    <dt>조치사항</dt>
+                                    <dd>비정상 process restart 또는 제조사 문의</dd>
+                                </dl>
+                            </div>
+                        </div>
+                     
+                        <div class="list_box">
+                            <div class="notice">
+                                <ul>
+                                    <li><span>그룹명</span>다산TB</li>
+                                    <li><span>장비명</span>V6848XG_L3#2</li>
+                                    <li><span>점검항목</span>process</li>
+                                </ul>
+                                <dl>
+                                    <dt>조치사항</dt>
+                                    <dd>비정상 process restart 또는 제조사 문의</dd>
+                                </dl>
+                            </div>
+                        </div>
+                     
+                        <div class="list_box">
+                            <div class="notice">
+                                <ul>
+                                    <li><span>그룹명</span>다산TB</li>
+                                    <li><span>장비명</span>V6848XG_L3#2</li>
+                                    <li><span>점검항목</span>process</li>
+                                </ul>
+                                <dl>
+                                    <dt>조치사항</dt>
+                                    <dd>비정상 process restart 또는 제조사 문의</dd>
+                                </dl>
+                            </div>
+                        </div>
+                     
+                        <div class="list_box">
+                            <div class="notice">
+                                <ul>
+                                    <li><span>그룹명</span>다산TB</li>
+                                    <li><span>장비명</span>V6848XG_L3#2</li>
+                                    <li><span>점검항목</span>process</li>
+                                </ul>
+                                <dl>
+                                    <dt>조치사항</dt>
+                                    <dd>비정상 process restart 또는 제조사 문의</dd>
+                                </dl>
+                            </div>
+                        </div>
+                     
+                        <div class="list_box">
+                            <div class="notice">
+                                <ul>
+                                    <li><span>그룹명</span>다산TB</li>
+                                    <li><span>장비명</span>V6848XG_L3#2</li>
+                                    <li><span>점검항목</span>process</li>
+                                </ul>
+                                <dl>
+                                    <dt>조치사항</dt>
+                                    <dd>비정상 process restart 또는 제조사 문의</dd>
+                                </dl>
+                            </div>
+                        </div>
+                     
+                        <div class="list_box">
+                            <div class="notice">
+                                <ul>
+                                    <li><span>그룹명</span>다산TB</li>
+                                    <li><span>장비명</span>V6848XG_L3#2</li>
+                                    <li><span>점검항목</span>process</li>
+                                </ul>
+                                <dl>
+                                    <dt>조치사항</dt>
+                                    <dd>비정상 process restart 또는 제조사 문의</dd>
+                                </dl>
+                            </div>
+                        </div>
+                     
+                        <div class="list_box">
+                            <div class="notice">
+                                <ul>
+                                    <li><span>그룹명</span>다산TB</li>
+                                    <li><span>장비명</span>V6848XG_L3#2</li>
+                                    <li><span>점검항목</span>process</li>
+                                </ul>
+                                <dl>
+                                    <dt>조치사항</dt>
+                                    <dd>비정상 process restart 또는 제조사 문의</dd>
+                                </dl>
+                            </div>
+                        </div>
+                     
+                        <div class="list_box">
+                            <div class="notice">
+                                <ul>
+                                    <li><span>그룹명</span>다산TB</li>
+                                    <li><span>장비명</span>V6848XG_L3#2</li>
+                                    <li><span>점검항목</span>process</li>
+                                </ul>
+                                <dl>
+                                    <dt>조치사항</dt>
+                                    <dd>비정상 process restart 또는 제조사 문의</dd>
+                                </dl>
+                            </div>
+                        </div>
+                     
+                        <div class="list_box">
+                            <div class="notice">
+                                <ul>
+                                    <li><span>그룹명</span>다산TB</li>
+                                    <li><span>장비명</span>V6848XG_L3#2</li>
+                                    <li><span>점검항목</span>process</li>
+                                </ul>
+                                <dl>
+                                    <dt>조치사항</dt>
+                                    <dd>비정상 process restart 또는 제조사 문의</dd>
+                                </dl>
+                            </div>
+                        </div>
+                     
+                        <div class="list_box">
+                            <div class="notice">
+                                <ul>
+                                    <li><span>그룹명</span>다산TB</li>
+                                    <li><span>장비명</span>V6848XG_L3#2</li>
+                                    <li><span>점검항목</span>process</li>
+                                </ul>
+                                <dl>
+                                    <dt>조치사항</dt>
+                                    <dd>비정상 process restart 또는 제조사 문의</dd>
+                                </dl>
+                            </div>
+                        </div>
+                     
+                        <div class="list_box">
+                            <div class="notice">
+                                <ul>
+                                    <li><span>그룹명</span>다산TB</li>
+                                    <li><span>장비명</span>V6848XG_L3#2</li>
+                                    <li><span>점검항목</span>process</li>
+                                </ul>
+                                <dl>
+                                    <dt>조치사항</dt>
+                                    <dd>비정상 process restart 또는 제조사 문의</dd>
+                                </dl>
+                            </div>
+                        </div>
+                     
+                        <div class="list_box">
+                            <div class="notice">
+                                <ul>
+                                    <li><span>그룹명</span>다산TB</li>
+                                    <li><span>장비명</span>V6848XG_L3#2</li>
+                                    <li><span>점검항목</span>process</li>
+                                </ul>
+                                <dl>
+                                    <dt>조치사항</dt>
+                                    <dd>비정상 process restart 또는 제조사 문의</dd>
+                                </dl>
+                            </div>
+                        </div>
+                     
+                        <div class="list_box">
+                            <div class="notice">
+                                <ul>
+                                    <li><span>그룹명</span>다산TB</li>
+                                    <li><span>장비명</span>V6848XG_L3#2</li>
+                                    <li><span>점검항목</span>process</li>
+                                </ul>
+                                <dl>
+                                    <dt>조치사항</dt>
+                                    <dd>비정상 process restart 또는 제조사 문의</dd>
+                                </dl>
+                            </div>
+                        </div>
+                     
+                        <div class="list_box">
+                            <div class="notice">
+                                <ul>
+                                    <li><span>그룹명</span>다산TB</li>
+                                    <li><span>장비명</span>V6848XG_L3#2</li>
+                                    <li><span>점검항목</span>process</li>
+                                </ul>
+                                <dl>
+                                    <dt>조치사항</dt>
+                                    <dd>비정상 process restart 또는 제조사 문의</dd>
+                                </dl>
+                            </div>
+                        </div>
+                     
+                        <div class="list_box">
+                            <div class="notice">
+                                <ul>
+                                    <li><span>그룹명</span>다산TB</li>
+                                    <li><span>장비명</span>V6848XG_L3#2</li>
+                                    <li><span>점검항목</span>process</li>
+                                </ul>
+                                <dl>
+                                    <dt>조치사항</dt>
+                                    <dd>비정상 process restart 또는 제조사 문의</dd>
+                                </dl>
+                            </div>
+                        </div>
+                     
+                        <div class="list_box">
+                            <div class="notice">
+                                <ul>
+                                    <li><span>그룹명</span>다산TB</li>
+                                    <li><span>장비명</span>V6848XG_L3#2</li>
+                                    <li><span>점검항목</span>process</li>
+                                </ul>
+                                <dl>
+                                    <dt>조치사항</dt>
+                                    <dd>비정상 process restart 또는 제조사 문의</dd>
+                                </dl>
+                            </div>
+                        </div>
+                     
+                        <div class="list_box">
+                            <div class="notice">
+                                <ul>
+                                    <li><span>그룹명</span>다산TB</li>
+                                    <li><span>장비명</span>V6848XG_L3#2</li>
+                                    <li><span>점검항목</span>process</li>
+                                </ul>
+                                <dl>
+                                    <dt>조치사항</dt>
+                                    <dd>비정상 process restart 또는 제조사 문의</dd>
+                                </dl>
+                            </div>
+                        </div>
+                     
+                        <div class="list_box">
+                            <div class="notice">
+                                <ul>
+                                    <li><span>그룹명</span>다산TB</li>
+                                    <li><span>장비명</span>V6848XG_L3#2</li>
+                                    <li><span>점검항목</span>process</li>
+                                </ul>
+                                <dl>
+                                    <dt>조치사항</dt>
+                                    <dd>비정상 process restart 또는 제조사 문의</dd>
+                                </dl>
+                            </div>
+                        </div>
+                     
+                        <div class="list_box">
+                            <div class="notice">
+                                <ul>
+                                    <li><span>그룹명</span>다산TB</li>
+                                    <li><span>장비명</span>V6848XG_L3#2</li>
+                                    <li><span>점검항목</span>process</li>
+                                </ul>
+                                <dl>
+                                    <dt>조치사항</dt>
+                                    <dd>비정상 process restart 또는 제조사 문의</dd>
+                                </dl>
+                            </div>
+                        </div>
+                     
+                        <div class="list_box">
+                            <div class="notice">
+                                <ul>
+                                    <li><span>그룹명</span>다산TB</li>
+                                    <li><span>장비명</span>V6848XG_L3#2</li>
+                                    <li><span>점검항목</span>process</li>
+                                </ul>
+                                <dl>
+                                    <dt>조치사항</dt>
+                                    <dd>비정상 process restart 또는 제조사 문의</dd>
+                                </dl>
+                            </div>
+                        </div>
+                     
+                        <div class="list_box">
+                            <div class="notice">
+                                <ul>
+                                    <li><span>그룹명</span>다산TB</li>
+                                    <li><span>장비명</span>V6848XG_L3#2</li>
+                                    <li><span>점검항목</span>temperature</li>
+                                </ul>
+                                <dl>
+                                    <dt>조치사항</dt>
+                                    <dd>None</dd>
+                                </dl>
+                            </div>
+                        </div>
+                     
+                        <div class="list_box">
+                            <div class="notice">
+                                <ul>
+                                    <li><span>그룹명</span>다산TB</li>
+                                    <li><span>장비명</span>V6848XG_L3#2</li>
+                                    <li><span>점검항목</span>temperature</li>
+                                </ul>
+                                <dl>
+                                    <dt>조치사항</dt>
+                                    <dd>None</dd>
+                                </dl>
+                            </div>
+                        </div>
+                     
+                        <div class="list_box">
+                            <div class="notice">
+                                <ul>
+                                    <li><span>그룹명</span>다산TB</li>
+                                    <li><span>장비명</span>V6848XG_L3#2</li>
+                                    <li><span>점검항목</span>temperature</li>
+                                </ul>
+                                <dl>
+                                    <dt>조치사항</dt>
+                                    <dd>None</dd>
+                                </dl>
+                            </div>
+                        </div>
+                     
+                        <div class="list_box">
+                            <div class="notice">
+                                <ul>
+                                    <li><span>그룹명</span>다산TB</li>
+                                    <li><span>장비명</span>V6848XG_L3#2</li>
+                                    <li><span>점검항목</span>temperature</li>
+                                </ul>
+                                <dl>
+                                    <dt>조치사항</dt>
+                                    <dd>None</dd>
+                                </dl>
+                            </div>
+                        </div>
+                     
+                        <div class="list_box">
+                            <div class="notice">
+                                <ul>
+                                    <li><span>그룹명</span>다산TB</li>
+                                    <li><span>장비명</span>V6848XG_L3#2</li>
+                                    <li><span>점검항목</span>temperature</li>
+                                </ul>
+                                <dl>
+                                    <dt>조치사항</dt>
+                                    <dd>None</dd>
+                                </dl>
+                            </div>
+                        </div>
+                    
+                    </article>
+                    <article class="week_data_table">
+                        <h2><i>03</i>일주일 내 비정상 발생 건수</h2>
+                        <table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th>deviceName</th>
+      <th>workitemName</th>
+      <th>d6AbnormalCount</th>
+      <th>d5AbnormalCount</th>
+      <th>d4AbnormalCount</th>
+      <th>d3AbnormalCount</th>
+      <th>d2AbnormalCount</th>
+      <th>d1AbnormalCount</th>
+      <th>d0AbnormalCount</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>장비명</td>
+      <td>점검항목</td>
+      <td>D-6</td>
+      <td>D-5</td>
+      <td>D-4</td>
+      <td>D-3</td>
+      <td>D-2</td>
+      <td>D-1</td>
+      <td>2021-11-02</td>
+    </tr>
+    <tr>
+      <td>V2908GB_GES#1</td>
+      <td>cpu</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+    </tr>
+    <tr>
+      <td>V6848XG_L3#2</td>
+      <td>cpu</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>1</td>
+      <td>4</td>
+    </tr>
+    <tr>
+      <td>V6848XG_L3#2</td>
+      <td>fan</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>3</td>
+    </tr>
+    <tr>
+      <td>V6848XG_L3#2</td>
+      <td>memory</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+    </tr>
+    <tr>
+      <td>V6848XG_L3#2</td>
+      <td>power</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>3</td>
+    </tr>
+    <tr>
+      <td>V6848XG_L3#2</td>
+      <td>process</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>4</td>
+    </tr>
+    <tr>
+      <td>V6848XG_L3#2</td>
+      <td>temperature</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>1</td>
+      <td>1</td>
+    </tr>
+  </tbody>
+</table>
+                    </article>
+                    <article class="item_detail_table">
+                        <h2><i>04</i>장비별 상세정보</h2>
+                        
+                        <div class="info_box">
+                            <div class="preview">
+                                <ul>
+                                    <li class="blue">
+                                        <h2>V6848XG_L3#2</h1>
+                                        <span>장비명</span>
+                                    </li>
+                                    <li class="green">
+                                        <h2>cpu</h2>
+                                        <span>점검항목</span>
+                                    </li>
+                                </ul>
+                                <div class="condition">
+                                    <h3>실행조건</h3> 
+                                    <p>work_condition</p>
+                                </div>
+                            </div>
+                            <h3>실행결과</h3> 
+                            <table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th>USAGE_5SEC</th>
+      <th>USAGE_1MIN</th>
+      <th>USAGE_5MIN</th>
+      <th>USAGE_10MIN</th>
+      <th>FILTER_RESULT</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>USAGE_5SEC</td>
+      <td>USAGE_1MIN</td>
+      <td>USAGE_5MIN</td>
+      <td>USAGE_10MIN</td>
+      <td>FILTER_RESULT</td>
+    </tr>
+    <tr>
+      <td>6.13</td>
+      <td>6.61</td>
+      <td>-</td>
+      <td>6.44</td>
+      <td>NOK</td>
+    </tr>
+  </tbody>
+</table>
+                        </div>
+                     
+                        <div class="info_box">
+                            <div class="preview">
+                                <ul>
+                                    <li class="blue">
+                                        <h2>V6848XG_L3#2</h1>
+                                        <span>장비명</span>
+                                    </li>
+                                    <li class="green">
+                                        <h2>cpu</h2>
+                                        <span>점검항목</span>
+                                    </li>
+                                </ul>
+                                <div class="condition">
+                                    <h3>실행조건</h3> 
+                                    <p>work_condition</p>
+                                </div>
+                            </div>
+                            <h3>실행결과</h3> 
+                            <table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th>USAGE_5SEC</th>
+      <th>USAGE_1MIN</th>
+      <th>USAGE_5MIN</th>
+      <th>USAGE_10MIN</th>
+      <th>FILTER_RESULT</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>USAGE_5SEC</td>
+      <td>USAGE_1MIN</td>
+      <td>USAGE_5MIN</td>
+      <td>USAGE_10MIN</td>
+      <td>FILTER_RESULT</td>
+    </tr>
+    <tr>
+      <td>6.13</td>
+      <td>6.61</td>
+      <td>-</td>
+      <td>6.44</td>
+      <td>NOK</td>
+    </tr>
+  </tbody>
+</table>
+                        </div>
+                     
+                        <div class="info_box">
+                            <div class="preview">
+                                <ul>
+                                    <li class="blue">
+                                        <h2>V6848XG_L3#2</h1>
+                                        <span>장비명</span>
+                                    </li>
+                                    <li class="green">
+                                        <h2>cpu</h2>
+                                        <span>점검항목</span>
+                                    </li>
+                                </ul>
+                                <div class="condition">
+                                    <h3>실행조건</h3> 
+                                    <p>work_condition</p>
+                                </div>
+                            </div>
+                            <h3>실행결과</h3> 
+                            <table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th>USAGE_5SEC</th>
+      <th>USAGE_1MIN</th>
+      <th>USAGE_5MIN</th>
+      <th>USAGE_10MIN</th>
+      <th>FILTER_RESULT</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>USAGE_5SEC</td>
+      <td>USAGE_1MIN</td>
+      <td>USAGE_5MIN</td>
+      <td>USAGE_10MIN</td>
+      <td>FILTER_RESULT</td>
+    </tr>
+    <tr>
+      <td>6.13</td>
+      <td>6.61</td>
+      <td>-</td>
+      <td>6.44</td>
+      <td>NOK</td>
+    </tr>
+  </tbody>
+</table>
+                        </div>
+                     
+                        <div class="info_box">
+                            <div class="preview">
+                                <ul>
+                                    <li class="blue">
+                                        <h2>V6848XG_L3#2</h1>
+                                        <span>장비명</span>
+                                    </li>
+                                    <li class="green">
+                                        <h2>cpu</h2>
+                                        <span>점검항목</span>
+                                    </li>
+                                </ul>
+                                <div class="condition">
+                                    <h3>실행조건</h3> 
+                                    <p>work_condition</p>
+                                </div>
+                            </div>
+                            <h3>실행결과</h3> 
+                            <table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th>USAGE_5SEC</th>
+      <th>USAGE_1MIN</th>
+      <th>USAGE_5MIN</th>
+      <th>USAGE_10MIN</th>
+      <th>FILTER_RESULT</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>USAGE_5SEC</td>
+      <td>USAGE_1MIN</td>
+      <td>USAGE_5MIN</td>
+      <td>USAGE_10MIN</td>
+      <td>FILTER_RESULT</td>
+    </tr>
+    <tr>
+      <td>6.13</td>
+      <td>6.61</td>
+      <td>-</td>
+      <td>6.44</td>
+      <td>NOK</td>
+    </tr>
+  </tbody>
+</table>
+                        </div>
+                     
+                        <div class="info_box">
+                            <div class="preview">
+                                <ul>
+                                    <li class="blue">
+                                        <h2>V6848XG_L3#2</h1>
+                                        <span>장비명</span>
+                                    </li>
+                                    <li class="green">
+                                        <h2>fan</h2>
+                                        <span>점검항목</span>
+                                    </li>
+                                </ul>
+                                <div class="condition">
+                                    <h3>실행조건</h3> 
+                                    <p>work_condition</p>
+                                </div>
+                            </div>
+                            <h3>실행결과</h3> 
+                            <table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th>FAN_ID</th>
+      <th>FAN_STATUS</th>
+      <th>FILTER_RESULT</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>FAN_ID</td>
+      <td>FAN_STATUS</td>
+      <td>FILTER_RESULT</td>
+    </tr>
+    <tr>
+      <td>A-1</td>
+      <td>RUN</td>
+      <td>NOK</td>
+    </tr>
+    <tr>
+      <td>A-2</td>
+      <td>RUN</td>
+      <td>NOK</td>
+    </tr>
+    <tr>
+      <td>B-1</td>
+      <td>RUN</td>
+      <td>NOK</td>
+    </tr>
+    <tr>
+      <td>B-2</td>
+      <td>RUN</td>
+      <td>NOK</td>
+    </tr>
+  </tbody>
+</table>
+                        </div>
+                     
+                        <div class="info_box">
+                            <div class="preview">
+                                <ul>
+                                    <li class="blue">
+                                        <h2>V6848XG_L3#2</h1>
+                                        <span>장비명</span>
+                                    </li>
+                                    <li class="green">
+                                        <h2>fan</h2>
+                                        <span>점검항목</span>
+                                    </li>
+                                </ul>
+                                <div class="condition">
+                                    <h3>실행조건</h3> 
+                                    <p>work_condition</p>
+                                </div>
+                            </div>
+                            <h3>실행결과</h3> 
+                            <table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th>FAN_ID</th>
+      <th>FAN_STATUS</th>
+      <th>FILTER_RESULT</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>FAN_ID</td>
+      <td>FAN_STATUS</td>
+      <td>FILTER_RESULT</td>
+    </tr>
+    <tr>
+      <td>A-1</td>
+      <td>RUN</td>
+      <td>NOK</td>
+    </tr>
+    <tr>
+      <td>A-2</td>
+      <td>RUN</td>
+      <td>NOK</td>
+    </tr>
+    <tr>
+      <td>B-1</td>
+      <td>RUN</td>
+      <td>NOK</td>
+    </tr>
+    <tr>
+      <td>B-2</td>
+      <td>RUN</td>
+      <td>NOK</td>
+    </tr>
+  </tbody>
+</table>
+                        </div>
+                     
+                        <div class="info_box">
+                            <div class="preview">
+                                <ul>
+                                    <li class="blue">
+                                        <h2>V6848XG_L3#2</h1>
+                                        <span>장비명</span>
+                                    </li>
+                                    <li class="green">
+                                        <h2>fan</h2>
+                                        <span>점검항목</span>
+                                    </li>
+                                </ul>
+                                <div class="condition">
+                                    <h3>실행조건</h3> 
+                                    <p>work_condition</p>
+                                </div>
+                            </div>
+                            <h3>실행결과</h3> 
+                            <table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th>FAN_ID</th>
+      <th>FAN_STATUS</th>
+      <th>FILTER_RESULT</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>FAN_ID</td>
+      <td>FAN_STATUS</td>
+      <td>FILTER_RESULT</td>
+    </tr>
+    <tr>
+      <td>A-1</td>
+      <td>RUN</td>
+      <td>NOK</td>
+    </tr>
+    <tr>
+      <td>A-2</td>
+      <td>RUN</td>
+      <td>NOK</td>
+    </tr>
+    <tr>
+      <td>B-1</td>
+      <td>RUN</td>
+      <td>NOK</td>
+    </tr>
+    <tr>
+      <td>B-2</td>
+      <td>RUN</td>
+      <td>NOK</td>
+    </tr>
+  </tbody>
+</table>
+                        </div>
+                     
+                        <div class="info_box">
+                            <div class="preview">
+                                <ul>
+                                    <li class="blue">
+                                        <h2>V6848XG_L3#2</h1>
+                                        <span>장비명</span>
+                                    </li>
+                                    <li class="green">
+                                        <h2>power</h2>
+                                        <span>점검항목</span>
+                                    </li>
+                                </ul>
+                                <div class="condition">
+                                    <h3>실행조건</h3> 
+                                    <p>work_condition</p>
+                                </div>
+                            </div>
+                            <h3>실행결과</h3> 
+                            <table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th>POWER_ID</th>
+      <th>POWER_STATUS</th>
+      <th>FILTER_RESULT</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>POWER_ID</td>
+      <td>POWER_STATUS</td>
+      <td>FILTER_RESULT</td>
+    </tr>
+    <tr>
+      <td>Power A</td>
+      <td>Fault</td>
+      <td>NOK</td>
+    </tr>
+    <tr>
+      <td>Power B</td>
+      <td>OK</td>
+      <td>NOK</td>
+    </tr>
+  </tbody>
+</table>
+                        </div>
+                     
+                        <div class="info_box">
+                            <div class="preview">
+                                <ul>
+                                    <li class="blue">
+                                        <h2>V6848XG_L3#2</h1>
+                                        <span>장비명</span>
+                                    </li>
+                                    <li class="green">
+                                        <h2>power</h2>
+                                        <span>점검항목</span>
+                                    </li>
+                                </ul>
+                                <div class="condition">
+                                    <h3>실행조건</h3> 
+                                    <p>work_condition</p>
+                                </div>
+                            </div>
+                            <h3>실행결과</h3> 
+                            <table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th>POWER_ID</th>
+      <th>POWER_STATUS</th>
+      <th>FILTER_RESULT</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>POWER_ID</td>
+      <td>POWER_STATUS</td>
+      <td>FILTER_RESULT</td>
+    </tr>
+    <tr>
+      <td>Power A</td>
+      <td>Fault</td>
+      <td>NOK</td>
+    </tr>
+    <tr>
+      <td>Power B</td>
+      <td>OK</td>
+      <td>NOK</td>
+    </tr>
+  </tbody>
+</table>
+                        </div>
+                     
+                        <div class="info_box">
+                            <div class="preview">
+                                <ul>
+                                    <li class="blue">
+                                        <h2>V6848XG_L3#2</h1>
+                                        <span>장비명</span>
+                                    </li>
+                                    <li class="green">
+                                        <h2>power</h2>
+                                        <span>점검항목</span>
+                                    </li>
+                                </ul>
+                                <div class="condition">
+                                    <h3>실행조건</h3> 
+                                    <p>work_condition</p>
+                                </div>
+                            </div>
+                            <h3>실행결과</h3> 
+                            <table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th>POWER_ID</th>
+      <th>POWER_STATUS</th>
+      <th>FILTER_RESULT</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>POWER_ID</td>
+      <td>POWER_STATUS</td>
+      <td>FILTER_RESULT</td>
+    </tr>
+    <tr>
+      <td>Power A</td>
+      <td>Fault</td>
+      <td>NOK</td>
+    </tr>
+    <tr>
+      <td>Power B</td>
+      <td>OK</td>
+      <td>NOK</td>
+    </tr>
+  </tbody>
+</table>
+                        </div>
+                     
+                        <div class="info_box">
+                            <div class="preview">
+                                <ul>
+                                    <li class="blue">
+                                        <h2>V6848XG_L3#2</h1>
+                                        <span>장비명</span>
+                                    </li>
+                                    <li class="green">
+                                        <h2>process</h2>
+                                        <span>점검항목</span>
+                                    </li>
+                                </ul>
+                                <div class="condition">
+                                    <h3>실행조건</h3> 
+                                    <p>work_condition</p>
+                                </div>
+                            </div>
+                            <h3>실행결과</h3> 
+                            <table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th>PID</th>
+      <th>CPU_USAGE</th>
+      <th>MEM_USAGE</th>
+      <th>PROCESS</th>
+      <th>FILTER_RESULT</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>PID</td>
+      <td>CPU_USAGE</td>
+      <td>MEM_USAGE</td>
+      <td>PROCESS</td>
+      <td>FILTER_RESULT</td>
+    </tr>
+    <tr>
+      <td>1</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>init [3]</td>
+      <td>OK</td>
+    </tr>
+    <tr>
+      <td>2</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>[kthreadd]</td>
+      <td>OK</td>
+    </tr>
+    <tr>
+      <td>3</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>[ksoftirqd/0]</td>
+      <td>OK</td>
+    </tr>
+    <tr>
+      <td>4</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>[watchdog/0]</td>
+      <td>OK</td>
+    </tr>
+    <tr>
+      <td>5</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>[events/0]</td>
+      <td>OK</td>
+    </tr>
+    <tr>
+      <td>6</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>[khelper]</td>
+      <td>OK</td>
+    </tr>
+    <tr>
+      <td>7</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>[async/mgr]</td>
+      <td>OK</td>
+    </tr>
+    <tr>
+      <td>8</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>[sync_supers]</td>
+      <td>OK</td>
+    </tr>
+    <tr>
+      <td>9</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>[bdi-default]</td>
+      <td>OK</td>
+    </tr>
+    <tr>
+      <td>10</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>[kblockd/0]</td>
+      <td>OK</td>
+    </tr>
+    <tr>
+      <td>11</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>[khungtaskd]</td>
+      <td>OK</td>
+    </tr>
+    <tr>
+      <td>12</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>[kswapd0]</td>
+      <td>OK</td>
+    </tr>
+    <tr>
+      <td>13</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>[aio/0]</td>
+      <td>OK</td>
+    </tr>
+    <tr>
+      <td>14</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>[crypto/0]</td>
+      <td>OK</td>
+    </tr>
+    <tr>
+      <td>21</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>[kwatchdogd]</td>
+      <td>OK</td>
+    </tr>
+    <tr>
+      <td>37</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>[jffs2_gcd_mtd0]</td>
+      <td>OK</td>
+    </tr>
+    <tr>
+      <td>41</td>
+      <td>0.3</td>
+      <td>0.0</td>
+      <td>[socdmadesc.0]</td>
+      <td>OK</td>
+    </tr>
+    <tr>
+      <td>42</td>
+      <td>2.9</td>
+      <td>0.0</td>
+      <td>[bcmCNTR.0]</td>
+      <td>NOK</td>
+    </tr>
+    <tr>
+      <td>43</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>[bcmTX]</td>
+      <td>OK</td>
+    </tr>
+    <tr>
+      <td>44</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>[bcmXGS3AsyncTX]</td>
+      <td>OK</td>
+    </tr>
+    <tr>
+      <td>45</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>[bcmRX]</td>
+      <td>OK</td>
+    </tr>
+    <tr>
+      <td>46</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>[bcm-shell]</td>
+      <td>OK</td>
+    </tr>
+    <tr>
+      <td>47</td>
+      <td>1.5</td>
+      <td>0.0</td>
+      <td>[bcmLINK.0]</td>
+      <td>NOK</td>
+    </tr>
+    <tr>
+      <td>48</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>[bcmDPC]</td>
+      <td>OK</td>
+    </tr>
+    <tr>
+      <td>49</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>[swal_portload_t]</td>
+      <td>OK</td>
+    </tr>
+    <tr>
+      <td>50</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>[_l3_mgr_fib_gc]</td>
+      <td>OK</td>
+    </tr>
+    <tr>
+      <td>51</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>[_l3_mgr_fib6_gc]</td>
+      <td>OK</td>
+    </tr>
+    <tr>
+      <td>52</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>[bcmhal_pause_mo]</td>
+      <td>OK</td>
+    </tr>
+    <tr>
+      <td>102</td>
+      <td>0.0</td>
+      <td>0.8</td>
+      <td>/usr/sbin/swchd</td>
+      <td>OK</td>
+    </tr>
+    <tr>
+      <td>104</td>
+      <td>0.0</td>
+      <td>0.1</td>
+      <td>/usr/sbin/nsm</td>
+      <td>OK</td>
+    </tr>
+    <tr>
+      <td>106</td>
+      <td>0.0</td>
+      <td>0.2</td>
+      <td>/usr/sbin/snmpd</td>
+      <td>OK</td>
+    </tr>
+    <tr>
+      <td>108</td>
+      <td>0.0</td>
+      <td>0.1</td>
+      <td>/usr/sbin/ospfd</td>
+      <td>OK</td>
+    </tr>
+    <tr>
+      <td>110</td>
+      <td>0.0</td>
+      <td>0.1</td>
+      <td>/usr/sbin/ospf6d</td>
+      <td>OK</td>
+    </tr>
+    <tr>
+      <td>112</td>
+      <td>0.0</td>
+      <td>0.1</td>
+      <td>/usr/sbin/bgpd</td>
+      <td>OK</td>
+    </tr>
+    <tr>
+      <td>114</td>
+      <td>0.0</td>
+      <td>0.1</td>
+      <td>/usr/sbin/pimd</td>
+      <td>OK</td>
+    </tr>
+    <tr>
+      <td>116</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>/usr/sbin/vrrpd</td>
+      <td>OK</td>
+    </tr>
+    <tr>
+      <td>118</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>/usr/sbin/vrrp6d</td>
+      <td>OK</td>
+    </tr>
+    <tr>
+      <td>120</td>
+      <td>0.0</td>
+      <td>0.1</td>
+      <td>/usr/sbin/dhcpd</td>
+      <td>OK</td>
+    </tr>
+    <tr>
+      <td>122</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>/usr/sbin/dhcp6d</td>
+      <td>OK</td>
+    </tr>
+    <tr>
+      <td>126</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>/usr/sbin/sflowd</td>
+      <td>OK</td>
+    </tr>
+    <tr>
+      <td>128</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>/usr/sbin/eapd</td>
+      <td>OK</td>
+    </tr>
+    <tr>
+      <td>130</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>/usr/sbin/hwmond</td>
+      <td>OK</td>
+    </tr>
+    <tr>
+      <td>132</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>/usr/sbin/sfpmond</td>
+      <td>OK</td>
+    </tr>
+    <tr>
+      <td>134</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>/usr/sbin/oamd</td>
+      <td>OK</td>
+    </tr>
+    <tr>
+      <td>137</td>
+      <td>0.0</td>
+      <td>0.2</td>
+      <td>/usr/sbin/imi -d</td>
+      <td>OK</td>
+    </tr>
+    <tr>
+      <td>139</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>/usr/sbin/mimid -</td>
+      <td>OK</td>
+    </tr>
+    <tr>
+      <td>144</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>klogd -c 1</td>
+      <td>OK</td>
+    </tr>
+    <tr>
+      <td>147</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>/usr/sbin/sshd</td>
+      <td>OK</td>
+    </tr>
+    <tr>
+      <td>148</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>init</td>
+      <td>OK</td>
+    </tr>
+    <tr>
+      <td>156</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>syslogd -m 0</td>
+      <td>OK</td>
+    </tr>
+    <tr>
+      <td>163</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>/usr/sbin/inetd</td>
+      <td>OK</td>
+    </tr>
+    <tr>
+      <td>164</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>-sh</td>
+      <td>OK</td>
+    </tr>
+    <tr>
+      <td>170</td>
+      <td>0.0</td>
+      <td>0.2</td>
+      <td>/usr/sbin/vtysh</td>
+      <td>OK</td>
+    </tr>
+    <tr>
+      <td>15563</td>
+      <td>0.0</td>
+      <td>0.2</td>
+      <td>/usr/sbin/vtysh</td>
+      <td>OK</td>
+    </tr>
+    <tr>
+      <td>26797</td>
+      <td>0.1</td>
+      <td>0.0</td>
+      <td>sshd: admin@pts/1</td>
+      <td>OK</td>
+    </tr>
+    <tr>
+      <td>26802</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>-sh</td>
+      <td>OK</td>
+    </tr>
+    <tr>
+      <td>26808</td>
+      <td>25.0</td>
+      <td>0.2</td>
+      <td>/usr/sbin/vtysh</td>
+      <td>NOK</td>
+    </tr>
+    <tr>
+      <td>26813</td>
+      <td>0.0</td>
+      <td>0.2</td>
+      <td>/usr/sbin/vtysh</td>
+      <td>OK</td>
+    </tr>
+    <tr>
+      <td>26814</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>ps aux</td>
+      <td>OK</td>
+    </tr>
+  </tbody>
+</table>
+                        </div>
+                     
+                        <div class="info_box">
+                            <div class="preview">
+                                <ul>
+                                    <li class="blue">
+                                        <h2>V6848XG_L3#2</h1>
+                                        <span>장비명</span>
+                                    </li>
+                                    <li class="green">
+                                        <h2>process</h2>
+                                        <span>점검항목</span>
+                                    </li>
+                                </ul>
+                                <div class="condition">
+                                    <h3>실행조건</h3> 
+                                    <p>work_condition</p>
+                                </div>
+                            </div>
+                            <h3>실행결과</h3> 
+                            <table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th>PID</th>
+      <th>CPU_USAGE</th>
+      <th>MEM_USAGE</th>
+      <th>PROCESS</th>
+      <th>FILTER_RESULT</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>PID</td>
+      <td>CPU_USAGE</td>
+      <td>MEM_USAGE</td>
+      <td>PROCESS</td>
+      <td>FILTER_RESULT</td>
+    </tr>
+    <tr>
+      <td>1</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>init [3]</td>
+      <td>OK</td>
+    </tr>
+    <tr>
+      <td>2</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>[kthreadd]</td>
+      <td>OK</td>
+    </tr>
+    <tr>
+      <td>3</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>[ksoftirqd/0]</td>
+      <td>OK</td>
+    </tr>
+    <tr>
+      <td>4</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>[watchdog/0]</td>
+      <td>OK</td>
+    </tr>
+    <tr>
+      <td>5</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>[events/0]</td>
+      <td>OK</td>
+    </tr>
+    <tr>
+      <td>6</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>[khelper]</td>
+      <td>OK</td>
+    </tr>
+    <tr>
+      <td>7</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>[async/mgr]</td>
+      <td>OK</td>
+    </tr>
+    <tr>
+      <td>8</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>[sync_supers]</td>
+      <td>OK</td>
+    </tr>
+    <tr>
+      <td>9</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>[bdi-default]</td>
+      <td>OK</td>
+    </tr>
+    <tr>
+      <td>10</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>[kblockd/0]</td>
+      <td>OK</td>
+    </tr>
+    <tr>
+      <td>11</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>[khungtaskd]</td>
+      <td>OK</td>
+    </tr>
+    <tr>
+      <td>12</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>[kswapd0]</td>
+      <td>OK</td>
+    </tr>
+    <tr>
+      <td>13</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>[aio/0]</td>
+      <td>OK</td>
+    </tr>
+    <tr>
+      <td>14</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>[crypto/0]</td>
+      <td>OK</td>
+    </tr>
+    <tr>
+      <td>21</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>[kwatchdogd]</td>
+      <td>OK</td>
+    </tr>
+    <tr>
+      <td>37</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>[jffs2_gcd_mtd0]</td>
+      <td>OK</td>
+    </tr>
+    <tr>
+      <td>41</td>
+      <td>0.3</td>
+      <td>0.0</td>
+      <td>[socdmadesc.0]</td>
+      <td>OK</td>
+    </tr>
+    <tr>
+      <td>42</td>
+      <td>2.9</td>
+      <td>0.0</td>
+      <td>[bcmCNTR.0]</td>
+      <td>NOK</td>
+    </tr>
+    <tr>
+      <td>43</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>[bcmTX]</td>
+      <td>OK</td>
+    </tr>
+    <tr>
+      <td>44</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>[bcmXGS3AsyncTX]</td>
+      <td>OK</td>
+    </tr>
+    <tr>
+      <td>45</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>[bcmRX]</td>
+      <td>OK</td>
+    </tr>
+    <tr>
+      <td>46</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>[bcm-shell]</td>
+      <td>OK</td>
+    </tr>
+    <tr>
+      <td>47</td>
+      <td>1.5</td>
+      <td>0.0</td>
+      <td>[bcmLINK.0]</td>
+      <td>NOK</td>
+    </tr>
+    <tr>
+      <td>48</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>[bcmDPC]</td>
+      <td>OK</td>
+    </tr>
+    <tr>
+      <td>49</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>[swal_portload_t]</td>
+      <td>OK</td>
+    </tr>
+    <tr>
+      <td>50</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>[_l3_mgr_fib_gc]</td>
+      <td>OK</td>
+    </tr>
+    <tr>
+      <td>51</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>[_l3_mgr_fib6_gc]</td>
+      <td>OK</td>
+    </tr>
+    <tr>
+      <td>52</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>[bcmhal_pause_mo]</td>
+      <td>OK</td>
+    </tr>
+    <tr>
+      <td>102</td>
+      <td>0.0</td>
+      <td>0.8</td>
+      <td>/usr/sbin/swchd</td>
+      <td>OK</td>
+    </tr>
+    <tr>
+      <td>104</td>
+      <td>0.0</td>
+      <td>0.1</td>
+      <td>/usr/sbin/nsm</td>
+      <td>OK</td>
+    </tr>
+    <tr>
+      <td>106</td>
+      <td>0.0</td>
+      <td>0.2</td>
+      <td>/usr/sbin/snmpd</td>
+      <td>OK</td>
+    </tr>
+    <tr>
+      <td>108</td>
+      <td>0.0</td>
+      <td>0.1</td>
+      <td>/usr/sbin/ospfd</td>
+      <td>OK</td>
+    </tr>
+    <tr>
+      <td>110</td>
+      <td>0.0</td>
+      <td>0.1</td>
+      <td>/usr/sbin/ospf6d</td>
+      <td>OK</td>
+    </tr>
+    <tr>
+      <td>112</td>
+      <td>0.0</td>
+      <td>0.1</td>
+      <td>/usr/sbin/bgpd</td>
+      <td>OK</td>
+    </tr>
+    <tr>
+      <td>114</td>
+      <td>0.0</td>
+      <td>0.1</td>
+      <td>/usr/sbin/pimd</td>
+      <td>OK</td>
+    </tr>
+    <tr>
+      <td>116</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>/usr/sbin/vrrpd</td>
+      <td>OK</td>
+    </tr>
+    <tr>
+      <td>118</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>/usr/sbin/vrrp6d</td>
+      <td>OK</td>
+    </tr>
+    <tr>
+      <td>120</td>
+      <td>0.0</td>
+      <td>0.1</td>
+      <td>/usr/sbin/dhcpd</td>
+      <td>OK</td>
+    </tr>
+    <tr>
+      <td>122</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>/usr/sbin/dhcp6d</td>
+      <td>OK</td>
+    </tr>
+    <tr>
+      <td>126</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>/usr/sbin/sflowd</td>
+      <td>OK</td>
+    </tr>
+    <tr>
+      <td>128</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>/usr/sbin/eapd</td>
+      <td>OK</td>
+    </tr>
+    <tr>
+      <td>130</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>/usr/sbin/hwmond</td>
+      <td>OK</td>
+    </tr>
+    <tr>
+      <td>132</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>/usr/sbin/sfpmond</td>
+      <td>OK</td>
+    </tr>
+    <tr>
+      <td>134</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>/usr/sbin/oamd</td>
+      <td>OK</td>
+    </tr>
+    <tr>
+      <td>137</td>
+      <td>0.0</td>
+      <td>0.2</td>
+      <td>/usr/sbin/imi -d</td>
+      <td>OK</td>
+    </tr>
+    <tr>
+      <td>139</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>/usr/sbin/mimid -</td>
+      <td>OK</td>
+    </tr>
+    <tr>
+      <td>144</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>klogd -c 1</td>
+      <td>OK</td>
+    </tr>
+    <tr>
+      <td>147</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>/usr/sbin/sshd</td>
+      <td>OK</td>
+    </tr>
+    <tr>
+      <td>148</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>init</td>
+      <td>OK</td>
+    </tr>
+    <tr>
+      <td>156</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>syslogd -m 0</td>
+      <td>OK</td>
+    </tr>
+    <tr>
+      <td>163</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>/usr/sbin/inetd</td>
+      <td>OK</td>
+    </tr>
+    <tr>
+      <td>164</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>-sh</td>
+      <td>OK</td>
+    </tr>
+    <tr>
+      <td>170</td>
+      <td>0.0</td>
+      <td>0.2</td>
+      <td>/usr/sbin/vtysh</td>
+      <td>OK</td>
+    </tr>
+    <tr>
+      <td>15563</td>
+      <td>0.0</td>
+      <td>0.2</td>
+      <td>/usr/sbin/vtysh</td>
+      <td>OK</td>
+    </tr>
+    <tr>
+      <td>26797</td>
+      <td>0.1</td>
+      <td>0.0</td>
+      <td>sshd: admin@pts/1</td>
+      <td>OK</td>
+    </tr>
+    <tr>
+      <td>26802</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>-sh</td>
+      <td>OK</td>
+    </tr>
+    <tr>
+      <td>26808</td>
+      <td>25.0</td>
+      <td>0.2</td>
+      <td>/usr/sbin/vtysh</td>
+      <td>NOK</td>
+    </tr>
+    <tr>
+      <td>26813</td>
+      <td>0.0</td>
+      <td>0.2</td>
+      <td>/usr/sbin/vtysh</td>
+      <td>OK</td>
+    </tr>
+    <tr>
+      <td>26814</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>ps aux</td>
+      <td>OK</td>
+    </tr>
+  </tbody>
+</table>
+                        </div>
+                     
+                        <div class="info_box">
+                            <div class="preview">
+                                <ul>
+                                    <li class="blue">
+                                        <h2>V6848XG_L3#2</h1>
+                                        <span>장비명</span>
+                                    </li>
+                                    <li class="green">
+                                        <h2>process</h2>
+                                        <span>점검항목</span>
+                                    </li>
+                                </ul>
+                                <div class="condition">
+                                    <h3>실행조건</h3> 
+                                    <p>work_condition</p>
+                                </div>
+                            </div>
+                            <h3>실행결과</h3> 
+                            <table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th>PID</th>
+      <th>CPU_USAGE</th>
+      <th>MEM_USAGE</th>
+      <th>PROCESS</th>
+      <th>FILTER_RESULT</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>PID</td>
+      <td>CPU_USAGE</td>
+      <td>MEM_USAGE</td>
+      <td>PROCESS</td>
+      <td>FILTER_RESULT</td>
+    </tr>
+    <tr>
+      <td>1</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>init [3]</td>
+      <td>OK</td>
+    </tr>
+    <tr>
+      <td>2</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>[kthreadd]</td>
+      <td>OK</td>
+    </tr>
+    <tr>
+      <td>3</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>[ksoftirqd/0]</td>
+      <td>OK</td>
+    </tr>
+    <tr>
+      <td>4</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>[watchdog/0]</td>
+      <td>OK</td>
+    </tr>
+    <tr>
+      <td>5</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>[events/0]</td>
+      <td>OK</td>
+    </tr>
+    <tr>
+      <td>6</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>[khelper]</td>
+      <td>OK</td>
+    </tr>
+    <tr>
+      <td>7</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>[async/mgr]</td>
+      <td>OK</td>
+    </tr>
+    <tr>
+      <td>8</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>[sync_supers]</td>
+      <td>OK</td>
+    </tr>
+    <tr>
+      <td>9</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>[bdi-default]</td>
+      <td>OK</td>
+    </tr>
+    <tr>
+      <td>10</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>[kblockd/0]</td>
+      <td>OK</td>
+    </tr>
+    <tr>
+      <td>11</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>[khungtaskd]</td>
+      <td>OK</td>
+    </tr>
+    <tr>
+      <td>12</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>[kswapd0]</td>
+      <td>OK</td>
+    </tr>
+    <tr>
+      <td>13</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>[aio/0]</td>
+      <td>OK</td>
+    </tr>
+    <tr>
+      <td>14</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>[crypto/0]</td>
+      <td>OK</td>
+    </tr>
+    <tr>
+      <td>21</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>[kwatchdogd]</td>
+      <td>OK</td>
+    </tr>
+    <tr>
+      <td>37</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>[jffs2_gcd_mtd0]</td>
+      <td>OK</td>
+    </tr>
+    <tr>
+      <td>41</td>
+      <td>0.3</td>
+      <td>0.0</td>
+      <td>[socdmadesc.0]</td>
+      <td>OK</td>
+    </tr>
+    <tr>
+      <td>42</td>
+      <td>2.9</td>
+      <td>0.0</td>
+      <td>[bcmCNTR.0]</td>
+      <td>NOK</td>
+    </tr>
+    <tr>
+      <td>43</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>[bcmTX]</td>
+      <td>OK</td>
+    </tr>
+    <tr>
+      <td>44</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>[bcmXGS3AsyncTX]</td>
+      <td>OK</td>
+    </tr>
+    <tr>
+      <td>45</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>[bcmRX]</td>
+      <td>OK</td>
+    </tr>
+    <tr>
+      <td>46</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>[bcm-shell]</td>
+      <td>OK</td>
+    </tr>
+    <tr>
+      <td>47</td>
+      <td>1.5</td>
+      <td>0.0</td>
+      <td>[bcmLINK.0]</td>
+      <td>NOK</td>
+    </tr>
+    <tr>
+      <td>48</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>[bcmDPC]</td>
+      <td>OK</td>
+    </tr>
+    <tr>
+      <td>49</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>[swal_portload_t]</td>
+      <td>OK</td>
+    </tr>
+    <tr>
+      <td>50</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>[_l3_mgr_fib_gc]</td>
+      <td>OK</td>
+    </tr>
+    <tr>
+      <td>51</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>[_l3_mgr_fib6_gc]</td>
+      <td>OK</td>
+    </tr>
+    <tr>
+      <td>52</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>[bcmhal_pause_mo]</td>
+      <td>OK</td>
+    </tr>
+    <tr>
+      <td>102</td>
+      <td>0.0</td>
+      <td>0.8</td>
+      <td>/usr/sbin/swchd</td>
+      <td>OK</td>
+    </tr>
+    <tr>
+      <td>104</td>
+      <td>0.0</td>
+      <td>0.1</td>
+      <td>/usr/sbin/nsm</td>
+      <td>OK</td>
+    </tr>
+    <tr>
+      <td>106</td>
+      <td>0.0</td>
+      <td>0.2</td>
+      <td>/usr/sbin/snmpd</td>
+      <td>OK</td>
+    </tr>
+    <tr>
+      <td>108</td>
+      <td>0.0</td>
+      <td>0.1</td>
+      <td>/usr/sbin/ospfd</td>
+      <td>OK</td>
+    </tr>
+    <tr>
+      <td>110</td>
+      <td>0.0</td>
+      <td>0.1</td>
+      <td>/usr/sbin/ospf6d</td>
+      <td>OK</td>
+    </tr>
+    <tr>
+      <td>112</td>
+      <td>0.0</td>
+      <td>0.1</td>
+      <td>/usr/sbin/bgpd</td>
+      <td>OK</td>
+    </tr>
+    <tr>
+      <td>114</td>
+      <td>0.0</td>
+      <td>0.1</td>
+      <td>/usr/sbin/pimd</td>
+      <td>OK</td>
+    </tr>
+    <tr>
+      <td>116</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>/usr/sbin/vrrpd</td>
+      <td>OK</td>
+    </tr>
+    <tr>
+      <td>118</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>/usr/sbin/vrrp6d</td>
+      <td>OK</td>
+    </tr>
+    <tr>
+      <td>120</td>
+      <td>0.0</td>
+      <td>0.1</td>
+      <td>/usr/sbin/dhcpd</td>
+      <td>OK</td>
+    </tr>
+    <tr>
+      <td>122</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>/usr/sbin/dhcp6d</td>
+      <td>OK</td>
+    </tr>
+    <tr>
+      <td>126</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>/usr/sbin/sflowd</td>
+      <td>OK</td>
+    </tr>
+    <tr>
+      <td>128</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>/usr/sbin/eapd</td>
+      <td>OK</td>
+    </tr>
+    <tr>
+      <td>130</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>/usr/sbin/hwmond</td>
+      <td>OK</td>
+    </tr>
+    <tr>
+      <td>132</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>/usr/sbin/sfpmond</td>
+      <td>OK</td>
+    </tr>
+    <tr>
+      <td>134</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>/usr/sbin/oamd</td>
+      <td>OK</td>
+    </tr>
+    <tr>
+      <td>137</td>
+      <td>0.0</td>
+      <td>0.2</td>
+      <td>/usr/sbin/imi -d</td>
+      <td>OK</td>
+    </tr>
+    <tr>
+      <td>139</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>/usr/sbin/mimid -</td>
+      <td>OK</td>
+    </tr>
+    <tr>
+      <td>144</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>klogd -c 1</td>
+      <td>OK</td>
+    </tr>
+    <tr>
+      <td>147</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>/usr/sbin/sshd</td>
+      <td>OK</td>
+    </tr>
+    <tr>
+      <td>148</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>init</td>
+      <td>OK</td>
+    </tr>
+    <tr>
+      <td>156</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>syslogd -m 0</td>
+      <td>OK</td>
+    </tr>
+    <tr>
+      <td>163</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>/usr/sbin/inetd</td>
+      <td>OK</td>
+    </tr>
+    <tr>
+      <td>164</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>-sh</td>
+      <td>OK</td>
+    </tr>
+    <tr>
+      <td>170</td>
+      <td>0.0</td>
+      <td>0.2</td>
+      <td>/usr/sbin/vtysh</td>
+      <td>OK</td>
+    </tr>
+    <tr>
+      <td>15563</td>
+      <td>0.0</td>
+      <td>0.2</td>
+      <td>/usr/sbin/vtysh</td>
+      <td>OK</td>
+    </tr>
+    <tr>
+      <td>26797</td>
+      <td>0.1</td>
+      <td>0.0</td>
+      <td>sshd: admin@pts/1</td>
+      <td>OK</td>
+    </tr>
+    <tr>
+      <td>26802</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>-sh</td>
+      <td>OK</td>
+    </tr>
+    <tr>
+      <td>26808</td>
+      <td>25.0</td>
+      <td>0.2</td>
+      <td>/usr/sbin/vtysh</td>
+      <td>NOK</td>
+    </tr>
+    <tr>
+      <td>26813</td>
+      <td>0.0</td>
+      <td>0.2</td>
+      <td>/usr/sbin/vtysh</td>
+      <td>OK</td>
+    </tr>
+    <tr>
+      <td>26814</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>ps aux</td>
+      <td>OK</td>
+    </tr>
+  </tbody>
+</table>
+                        </div>
+                     
+                        <div class="info_box">
+                            <div class="preview">
+                                <ul>
+                                    <li class="blue">
+                                        <h2>V6848XG_L3#2</h1>
+                                        <span>장비명</span>
+                                    </li>
+                                    <li class="green">
+                                        <h2>process</h2>
+                                        <span>점검항목</span>
+                                    </li>
+                                </ul>
+                                <div class="condition">
+                                    <h3>실행조건</h3> 
+                                    <p>work_condition</p>
+                                </div>
+                            </div>
+                            <h3>실행결과</h3> 
+                            <table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th>PID</th>
+      <th>CPU_USAGE</th>
+      <th>MEM_USAGE</th>
+      <th>PROCESS</th>
+      <th>FILTER_RESULT</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>PID</td>
+      <td>CPU_USAGE</td>
+      <td>MEM_USAGE</td>
+      <td>PROCESS</td>
+      <td>FILTER_RESULT</td>
+    </tr>
+    <tr>
+      <td>1</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>init [3]</td>
+      <td>OK</td>
+    </tr>
+    <tr>
+      <td>2</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>[kthreadd]</td>
+      <td>OK</td>
+    </tr>
+    <tr>
+      <td>3</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>[ksoftirqd/0]</td>
+      <td>OK</td>
+    </tr>
+    <tr>
+      <td>4</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>[watchdog/0]</td>
+      <td>OK</td>
+    </tr>
+    <tr>
+      <td>5</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>[events/0]</td>
+      <td>OK</td>
+    </tr>
+    <tr>
+      <td>6</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>[khelper]</td>
+      <td>OK</td>
+    </tr>
+    <tr>
+      <td>7</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>[async/mgr]</td>
+      <td>OK</td>
+    </tr>
+    <tr>
+      <td>8</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>[sync_supers]</td>
+      <td>OK</td>
+    </tr>
+    <tr>
+      <td>9</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>[bdi-default]</td>
+      <td>OK</td>
+    </tr>
+    <tr>
+      <td>10</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>[kblockd/0]</td>
+      <td>OK</td>
+    </tr>
+    <tr>
+      <td>11</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>[khungtaskd]</td>
+      <td>OK</td>
+    </tr>
+    <tr>
+      <td>12</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>[kswapd0]</td>
+      <td>OK</td>
+    </tr>
+    <tr>
+      <td>13</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>[aio/0]</td>
+      <td>OK</td>
+    </tr>
+    <tr>
+      <td>14</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>[crypto/0]</td>
+      <td>OK</td>
+    </tr>
+    <tr>
+      <td>21</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>[kwatchdogd]</td>
+      <td>OK</td>
+    </tr>
+    <tr>
+      <td>37</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>[jffs2_gcd_mtd0]</td>
+      <td>OK</td>
+    </tr>
+    <tr>
+      <td>41</td>
+      <td>0.3</td>
+      <td>0.0</td>
+      <td>[socdmadesc.0]</td>
+      <td>OK</td>
+    </tr>
+    <tr>
+      <td>42</td>
+      <td>2.9</td>
+      <td>0.0</td>
+      <td>[bcmCNTR.0]</td>
+      <td>NOK</td>
+    </tr>
+    <tr>
+      <td>43</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>[bcmTX]</td>
+      <td>OK</td>
+    </tr>
+    <tr>
+      <td>44</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>[bcmXGS3AsyncTX]</td>
+      <td>OK</td>
+    </tr>
+    <tr>
+      <td>45</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>[bcmRX]</td>
+      <td>OK</td>
+    </tr>
+    <tr>
+      <td>46</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>[bcm-shell]</td>
+      <td>OK</td>
+    </tr>
+    <tr>
+      <td>47</td>
+      <td>1.5</td>
+      <td>0.0</td>
+      <td>[bcmLINK.0]</td>
+      <td>NOK</td>
+    </tr>
+    <tr>
+      <td>48</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>[bcmDPC]</td>
+      <td>OK</td>
+    </tr>
+    <tr>
+      <td>49</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>[swal_portload_t]</td>
+      <td>OK</td>
+    </tr>
+    <tr>
+      <td>50</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>[_l3_mgr_fib_gc]</td>
+      <td>OK</td>
+    </tr>
+    <tr>
+      <td>51</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>[_l3_mgr_fib6_gc]</td>
+      <td>OK</td>
+    </tr>
+    <tr>
+      <td>52</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>[bcmhal_pause_mo]</td>
+      <td>OK</td>
+    </tr>
+    <tr>
+      <td>102</td>
+      <td>0.0</td>
+      <td>0.8</td>
+      <td>/usr/sbin/swchd</td>
+      <td>OK</td>
+    </tr>
+    <tr>
+      <td>104</td>
+      <td>0.0</td>
+      <td>0.1</td>
+      <td>/usr/sbin/nsm</td>
+      <td>OK</td>
+    </tr>
+    <tr>
+      <td>106</td>
+      <td>0.0</td>
+      <td>0.2</td>
+      <td>/usr/sbin/snmpd</td>
+      <td>OK</td>
+    </tr>
+    <tr>
+      <td>108</td>
+      <td>0.0</td>
+      <td>0.1</td>
+      <td>/usr/sbin/ospfd</td>
+      <td>OK</td>
+    </tr>
+    <tr>
+      <td>110</td>
+      <td>0.0</td>
+      <td>0.1</td>
+      <td>/usr/sbin/ospf6d</td>
+      <td>OK</td>
+    </tr>
+    <tr>
+      <td>112</td>
+      <td>0.0</td>
+      <td>0.1</td>
+      <td>/usr/sbin/bgpd</td>
+      <td>OK</td>
+    </tr>
+    <tr>
+      <td>114</td>
+      <td>0.0</td>
+      <td>0.1</td>
+      <td>/usr/sbin/pimd</td>
+      <td>OK</td>
+    </tr>
+    <tr>
+      <td>116</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>/usr/sbin/vrrpd</td>
+      <td>OK</td>
+    </tr>
+    <tr>
+      <td>118</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>/usr/sbin/vrrp6d</td>
+      <td>OK</td>
+    </tr>
+    <tr>
+      <td>120</td>
+      <td>0.0</td>
+      <td>0.1</td>
+      <td>/usr/sbin/dhcpd</td>
+      <td>OK</td>
+    </tr>
+    <tr>
+      <td>122</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>/usr/sbin/dhcp6d</td>
+      <td>OK</td>
+    </tr>
+    <tr>
+      <td>126</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>/usr/sbin/sflowd</td>
+      <td>OK</td>
+    </tr>
+    <tr>
+      <td>128</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>/usr/sbin/eapd</td>
+      <td>OK</td>
+    </tr>
+    <tr>
+      <td>130</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>/usr/sbin/hwmond</td>
+      <td>OK</td>
+    </tr>
+    <tr>
+      <td>132</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>/usr/sbin/sfpmond</td>
+      <td>OK</td>
+    </tr>
+    <tr>
+      <td>134</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>/usr/sbin/oamd</td>
+      <td>OK</td>
+    </tr>
+    <tr>
+      <td>137</td>
+      <td>0.0</td>
+      <td>0.2</td>
+      <td>/usr/sbin/imi -d</td>
+      <td>OK</td>
+    </tr>
+    <tr>
+      <td>139</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>/usr/sbin/mimid -</td>
+      <td>OK</td>
+    </tr>
+    <tr>
+      <td>144</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>klogd -c 1</td>
+      <td>OK</td>
+    </tr>
+    <tr>
+      <td>147</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>/usr/sbin/sshd</td>
+      <td>OK</td>
+    </tr>
+    <tr>
+      <td>148</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>init</td>
+      <td>OK</td>
+    </tr>
+    <tr>
+      <td>156</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>syslogd -m 0</td>
+      <td>OK</td>
+    </tr>
+    <tr>
+      <td>163</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>/usr/sbin/inetd</td>
+      <td>OK</td>
+    </tr>
+    <tr>
+      <td>164</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>-sh</td>
+      <td>OK</td>
+    </tr>
+    <tr>
+      <td>170</td>
+      <td>0.0</td>
+      <td>0.2</td>
+      <td>/usr/sbin/vtysh</td>
+      <td>OK</td>
+    </tr>
+    <tr>
+      <td>15563</td>
+      <td>0.0</td>
+      <td>0.2</td>
+      <td>/usr/sbin/vtysh</td>
+      <td>OK</td>
+    </tr>
+    <tr>
+      <td>26797</td>
+      <td>0.1</td>
+      <td>0.0</td>
+      <td>sshd: admin@pts/1</td>
+      <td>OK</td>
+    </tr>
+    <tr>
+      <td>26802</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>-sh</td>
+      <td>OK</td>
+    </tr>
+    <tr>
+      <td>26808</td>
+      <td>25.0</td>
+      <td>0.2</td>
+      <td>/usr/sbin/vtysh</td>
+      <td>NOK</td>
+    </tr>
+    <tr>
+      <td>26813</td>
+      <td>0.0</td>
+      <td>0.2</td>
+      <td>/usr/sbin/vtysh</td>
+      <td>OK</td>
+    </tr>
+    <tr>
+      <td>26814</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>ps aux</td>
+      <td>OK</td>
+    </tr>
+  </tbody>
+</table>
+                        </div>
+                     
+                        <div class="info_box">
+                            <div class="preview">
+                                <ul>
+                                    <li class="blue">
+                                        <h2>V6848XG_L3#2</h1>
+                                        <span>장비명</span>
+                                    </li>
+                                    <li class="green">
+                                        <h2>temperature</h2>
+                                        <span>점검항목</span>
+                                    </li>
+                                </ul>
+                                <div class="condition">
+                                    <h3>실행조건</h3> 
+                                    <p>work_condition</p>
+                                </div>
+                            </div>
+                            <h3>실행결과</h3> 
+                            <table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th>SLOT</th>
+      <th>TEMP</th>
+      <th>TEMP_STATUS</th>
+      <th>FILTER_RESULT</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>SLOT</td>
+      <td>TEMP</td>
+      <td>TEMP_STATUS</td>
+      <td>FILTER_RESULT</td>
+    </tr>
+    <tr>
+      <td>Temperature 01</td>
+      <td>29</td>
+      <td>OK</td>
+      <td>NOK</td>
+    </tr>
+    <tr>
+      <td>Temperature 02</td>
+      <td>31</td>
+      <td>OK</td>
+      <td>NOK</td>
+    </tr>
+    <tr>
+      <td>Temperature 03</td>
+      <td>31</td>
+      <td>OK</td>
+      <td>NOK</td>
+    </tr>
+    <tr>
+      <td>Temperature 04</td>
+      <td>35</td>
+      <td>OK</td>
+      <td>NOK</td>
+    </tr>
+    <tr>
+      <td>Temperature 05</td>
+      <td>44</td>
+      <td>OK</td>
+      <td>NOK</td>
+    </tr>
+    <tr>
+      <td>Temperature 06</td>
+      <td>45</td>
+      <td>OK</td>
+      <td>NOK</td>
+    </tr>
+    <tr>
+      <td>Temperature 07</td>
+      <td>45</td>
+      <td>OK</td>
+      <td>NOK</td>
+    </tr>
+    <tr>
+      <td>Temperature 08</td>
+      <td>43</td>
+      <td>OK</td>
+      <td>NOK</td>
+    </tr>
+    <tr>
+      <td>Temperature 09</td>
+      <td>44</td>
+      <td>OK</td>
+      <td>NOK</td>
+    </tr>
+    <tr>
+      <td>Temperature 10</td>
+      <td>44</td>
+      <td>OK</td>
+      <td>NOK</td>
+    </tr>
+    <tr>
+      <td>Temperature 11</td>
+      <td>43</td>
+      <td>OK</td>
+      <td>NOK</td>
+    </tr>
+    <tr>
+      <td>Temperature 12</td>
+      <td>43</td>
+      <td>OK</td>
+      <td>NOK</td>
+    </tr>
+    <tr>
+      <td>Temperature 13</td>
+      <td>43</td>
+      <td>OK</td>
+      <td>NOK</td>
+    </tr>
+  </tbody>
+</table>
+                        </div>
+                    
+                    </article>
+                </section>
+         <div> </body> </html>

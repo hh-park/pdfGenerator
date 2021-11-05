@@ -1,14 +1,9 @@
 #!/usr/bin/env python
 # -*- coding: utf8 -*-
 
-from datetime import datetime
-from collections import OrderedDict
 import numpy as np
 import pandas as pd
 import matplotlib.pyplot as plt
-import matplotlib.ticker as ticker
-import matplotlib.font_manager as fm
-import os
 import pdfkit
 import json
 from datetime import datetime
@@ -23,7 +18,6 @@ options = {
     'encoding': "UTF-8",
     'no-outline': None
 }
-
 
 class PdfGenerator():
 
