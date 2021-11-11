@@ -19,7 +19,6 @@ options = {
     'no-outline': None
 }
 
-
 class PdfGenerator():
 
     def __init__(self):
@@ -742,6 +741,7 @@ class PdfGenerator():
             }}
         </style>
         '''
+
         style = f'''
                 <style type="text/css">
             /* KT font */
@@ -1142,7 +1142,7 @@ class PdfGenerator():
                 min-height: 70px;
             }}
             .notice dl dd p {{
-              top: 5px;
+              top: -10px;
               display: inline-block;
               font-size: 9pt;
               line-height: 1.5rem;
@@ -1157,6 +1157,92 @@ class PdfGenerator():
                 color: #3A404D;
                 font-size: 12pt;
                 margin: 0 5px 0 0;
+            }}
+            .preview {{
+                display: inline-block;
+                width: 100%;
+                min-height: 170px;
+                margin: 0 0 10px;
+                clear: both;
+            }}
+            .preview ul {{
+                position: relative;
+                display: inline-block;
+                width: 25%;
+                float: left;
+            }}
+            .preview ul li {{
+                position: relative;
+                display: inline-block;
+                width: 100%;
+                height: 80px;
+                border-radius: 5px;
+            }}
+            .preview ul li.green {{
+                background: #e6f7f1;
+            }}
+            .preview ul li.green h2,
+            .preview ul li.green span {{
+                color: #29cc8c;
+            }}
+            .preview ul li.green::after {{
+                position: absolute;
+                right: 15px;
+                top: 15px;
+                content: '';
+                background: url("../images/ico_info_g.png") no-repeat;
+                width: 18px;
+                height: 18px;
+            }}
+            .preview ul li.blue {{
+                background: #eff2fc;
+            }}
+            .preview ul li.blue h2,
+            .preview ul li.blue span {{
+                color: #3d2eec;
+            }}
+            .preview ul li.blue::after {{
+                position: absolute;
+                right: 15px;
+                top: 15px;
+                content: '';
+                background: url("../images/ico_info_b.png") no-repeat;
+                width: 18px;
+                height: 18px;
+            }}
+            .preview ul li span {{
+                position: absolute;
+                width: 100%;
+                bottom: 10px;
+                text-align: center;
+                font-size: 10pt;
+            }}
+            .preview ul li h2 {{
+                text-align: center;
+                font-size: 15pt;
+                font-weight: 600;
+            }}
+            .preview ul li + li {{
+                margin: 5px 0 0;
+            }}
+            .preview .condition {{
+                width: 74%;
+                min-height: 170px;
+                float: right;
+                font-weight: 600;
+                padding: 10px;
+                background: #f9f9f9;
+                border-top: 3px double #ddd;
+                border-bottom: 3px double #ddd;
+            }}
+            .preview .condition h3 {{
+                margin: 0 0 20px;
+                padding: 0;
+            }}
+            .preview .condition p {{
+                font-style: 10pt;
+                line-height: 1.2rem;
+                text-align: left;
             }}
             .none::before,
             .none::after {{
@@ -1173,7 +1259,7 @@ class PdfGenerator():
                 color: #1bc0e1;
             }}
             header .summary h1 {{
-                padding: 40px 0;
+                margin: 80px 0;
                 font-size: 22pt;
                 text-align: center;
             }}
@@ -1190,7 +1276,7 @@ class PdfGenerator():
             header .summary .box h1 {{
                 text-align: left;
                 font-size: 13.5pt;
-                padding: 0 0 10px;
+                margin: 0 0 10px;
                 color: #3A404D;
                 clear: both;
             }}
@@ -1209,13 +1295,12 @@ class PdfGenerator():
                 position: relative;
                 display: inline-block;
                 top: 6px;
-                background: url("../images/ico_topology.png") no-repeat;
+                background: url("../images/ico_report2.png") no-repeat;
                 margin: 0 10px 0 0;
                 width: 21px;;
                 height: 21px;
             }}
-            header .summary .box h1 span,
-            .subtitle p {{
+            header .summary .box h1 span {{
                 display: inline-block;
                 padding: 3px 15px;
                 background: #3A404D;
@@ -1277,7 +1362,8 @@ class PdfGenerator():
             }}
             table td {{
                 background: #f1f1f1;
-                border: 1px solid #fff;
+                border-bottom: 1px solid #fff;
+                border-left: 1px solid #fff;
             }}
             table thead {{	
                 display: none;	
@@ -1291,32 +1377,50 @@ class PdfGenerator():
                 font-weight: 600;	
             }}
             .subtitle {{
-                padding: 0 0 40px;
+                padding: 70px 0;
             }}
             .subtitle h1 {{
-                font-size: 18pt;
+                font-size: 16pt;
                 text-align: center;
             }}
             .subtitle h1::before {{
-                display: none;
+                content: "[";
+                margin: 0 5px 0 0;
+                color: #999;
+                background: none;
+                width: auto;
+                height: auto;
+                top: 0;
             }}
-            section,
-            header {{
-                page-break-inside: avoid;
-                page-break-after: auto;
+            .subtitle h1::after {{
+                content: "]";
+                margin: 0 0 0 5px;
+                color: #999;
             }}
-            .info_box {{
-                page-break-before: auto;
-            }}
-            table td {{
-                height: 5mm;
-            }}
-            table tr {{
-                page-break-inside: avoid;
-                page-break-after: auto;
+            @media print {{
+                section,
+                header {{
+                    page-break-inside: avoid;
+                    page-break-after: auto;
+                }}
+                .info_box {{
+                    page-break-before: auto;
+                }}
+                header .summary .box {{
+                    border: none;
+                    padding: 0;
+                }}
+                table td {{
+                    height: 5mm;
+                }}
+                table tr {{
+                    page-break-inside: avoid;
+                    page-break-after: auto;
+                }}
             }}
         </style>
-'''
+
+        '''
 
         inspect_date = result['runDate']
         inspect_date_short = datetime.strptime(inspect_date, '%Y-%m-%d %H:%M:%S').strftime('%Y-%m-%d')
@@ -1327,7 +1431,7 @@ class PdfGenerator():
             columns=['groupName', 'deviceType', 'nochangeCount', 'createCount', 'updateCount', 'deleteCount'])
         summary_by_grp.loc[0] = ['그룹명', '장비종류', '추가', '제거', '변경', '변동없음']
         summary_by_eq = pd.DataFrame(
-            columns=['rootName', 'deviceName', 'checkState', 'ip', 'standardCheck', 'nn'])
+            columns=['rootName', 'deviceName', 'checkState', 'ip', 'standardCheck', 'deviceName'])
         summary_by_eq.loc[0] = ['그룹명', '장비명', '상태', 'IP', '모델명', '제조사']
         summary_autochk = pd.DataFrame(columns=['Group', 'Switch', 'AP'])
         summary_autochk.loc[0] = ['Group', 'Switch', 'AP']
@@ -1405,7 +1509,7 @@ class PdfGenerator():
             if not len(alert_by_grp) == 0:
                 self.horizontal_bar(alert_by_grp, 'grp', i)
                 # grp_alert = 'grp_alert' + str(i)
-                grp_alert = f'''<img src="../img/grp_alert{str(i)}.png" alt="grp_alert">'''
+                grp_alert =  f'''<img src="../img/grp_alert{str(i)}.png" alt="grp_alert">'''
 
             # 비정상 항목 현황
             total_alert = ''
@@ -1463,7 +1567,7 @@ class PdfGenerator():
                                 </ul>
                                 <dl>
                                     <dt>조치사항</dt>
-                                    <dd><p>{todo_detail}</p></dd>
+                                    <dd>{todo_detail}</dd>
                                 </dl>
                             </div>
                         </div>
@@ -1498,19 +1602,21 @@ class PdfGenerator():
 
                     item_detail = f'''
                         <div class="info_box">
-                            <div class="list_box">
-                                  <div class="notice">
-                                      <ul>
-                                          <li><span>장비명</span>{device_name}</li>
-                                          <li><span>점검항목</span>{work_item_name}</li>
-                                      </ul>
-                                      <dl>
-                                          <dt>실행조건</dt>
-                                          <dd>
-                                              <p>work_condition</p>
-                                          </dd>
-                                      </dl>
-                                  </div>
+                            <div class="preview">
+                                <ul>
+                                    <li class="blue">
+                                        <h2>{device_name}</h1>
+                                        <span>장비명</span>
+                                    </li>
+                                    <li class="green">
+                                        <h2>{work_item_name}</h2>
+                                        <span>점검항목</span>
+                                    </li>
+                                </ul>
+                                <div class="condition">
+                                    <h3>실행조건</h3> 
+                                    <p>work_condition</p>
+                                </div>
                             </div>
                             <h3>실행결과</h3> 
                             {work_table}
@@ -1546,13 +1652,13 @@ class PdfGenerator():
                             <div class="chart_view c2">
                                 <h3>그룹별 장비 비정상 현황</h3>
                                 <div class="chart">
-                                {grp_alert}
+                                    <img src="../img/{grp_alert}.png" alt="grp_alert">
                                 </div>
                             </div>
                             <div class="chart_view c3">
                                 <h3>비정상 항목 현황</h3>
                                 <div class="chart">
-                                {total_alert}
+                                    <img src="../img/{total_alert}.png" alt="total_alert">
                                 </div>
                             </div>
                         </div>
@@ -1729,7 +1835,7 @@ class PdfGenerator():
         f = [f.name for f in fm.fontManager.ttflist if 'KT' in f.name]
         '''
 
-        with open('./pdf_data_sample.json', encoding='UTF-8') as json_file:
+        with open('./data_json_1.json', encoding='UTF-8') as json_file:
             self.data = json.load(json_file)
 
         result = self.data['data']
