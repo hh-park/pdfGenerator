@@ -619,6 +619,7 @@ class PdfGenerator():
 
         try:
 
+            inspect_name = result['workflowName']
             inspect_date = result['runDate']
             inspect_date_short = datetime.strptime(inspect_date, '%Y-%m-%d %H:%M:%S').strftime('%Y-%m-%d')
             group = []
@@ -710,6 +711,10 @@ class PdfGenerator():
             html_list.append(html_main)
 
             for i, v in enumerate(result['reportData']):
+
+                if int(v['deviceTotalCount']) == 0:
+                    continue
+
                 if 'autoCheckResult' in v:
                     grp_name = v['groupName']
                     total_device = v['deviceTotalCount']  # 그룹 전체 장비수
@@ -908,11 +913,13 @@ class PdfGenerator():
 
             now = datetime.now()
             now_date = now.strftime('%Y%m%d')
-            with open(f'''./etc/{now_date}_일일점검리포트.html''', 'w', encoding='UTF-8') as f:
+            # with open(f'''./etc/{now_date}_일일점검리포트.html''', 'w', encoding='UTF-8') as f:
+            with open(f'''./etc/{now_date}_{inspect_name}.html''', 'w', encoding='UTF-8') as f:
+
                 f.write(html)
 
-            pdfkit.from_file(f'''./etc/{now_date}_일일점검리포트.html''', f'''./pdf/{now_date}_일일점검리포트.pdf''',
-                             configuration=config, options=options)
+            # pdfkit.from_file(f'''./etc/{now_date}_일일점검리포트.html''', f'''./pdf/{now_date}_일일점검리포트.pdf''', configuration=config, options=options)
+            pdfkit.from_file(f'''./etc/{now_date}_{inspect_name}.html''', f'''./pdf/{now_date}_{inspect_name}.pdf''', configuration=config, options=options)
 
         except Exception as e:
             return {
