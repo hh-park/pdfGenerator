@@ -624,7 +624,8 @@ class PdfGenerator():
             group = []
             type_cnt1 = []
             type_cnt2 = []
-
+            statCheck = ''
+            sumCheck = ''
             summary_by_grp = pd.DataFrame(
                 columns=['groupName', 'deviceType', 'nochangeCount', 'createCount', 'updateCount', 'deleteCount'])
             summary_by_grp.loc[0] = ['그룹명', '장비종류', '추가', '제거', '변경', '변동없음']
@@ -639,22 +640,46 @@ class PdfGenerator():
 
                     group.append(v['groupName'])
                     # 형상 점검 결과
-                    if not len(v['groupCheckResult']) == 0:
-                        grp_df = pd.DataFrame(v['groupCheckResult'])
-                        grpName = [group[i], group[i]]
-                        grp_df.insert(0, "groupName", grpName, True)
-                        summary_by_grp = summary_by_grp.append(grp_df)
+                    if 'groupCheckResult' in v and 'deviceCheckResult' in v:
+                        if not len(v['groupCheckResult']) == 0:
+                            grp_df = pd.DataFrame(v['groupCheckResult'])
+                            grpName = [group[i], group[i]]
+                            grp_df.insert(0, "groupName", grpName, True)
+                            summary_by_grp = summary_by_grp.append(grp_df)
 
-                    if not len(v['deviceCheckResult']) == 0:
-                        device_df = pd.DataFrame(v['deviceCheckResult'])
-                        summary_by_eq = summary_by_eq.append(device_df)
+                        if not len(v['deviceCheckResult']) == 0:
+                            device_df = pd.DataFrame(v['deviceCheckResult'])
+                            summary_by_eq = summary_by_eq.append(device_df)
+
+                        grpCheck_table = summary_by_grp.to_html(index=False, classes='summary_table')
+                        eqCheck_table = summary_by_eq.to_html(index=False, classes='eq_table')
+                        statCheck = f'''
+                            <div class="box">
+                                <h1 class="ty2">형상 점검 결과<span>{inspect_date}</span></h1>
+                                {grpCheck_table}
+                                <h2>장비 현황</h2>
+                                {eqCheck_table}
+                            </div>
+                        '''
 
                     # 자동 점검 결과
-                    for j in v['autoCheckResult']:
-                        if j['deviceType'] == 'Switch':
-                            type_cnt1.append('비정상 ' + str(j['abnormalCount']) + '대')
-                        else:
-                            type_cnt2.append('비정상 ' + str(j['abnormalCount']) + '대')
+                    if 'autoCheckResult' in v:
+                        for j in v['autoCheckResult']:
+                            if j['deviceType'] == 'Switch':
+                                type_cnt1.append('비정상 ' + str(j['abnormalCount']) + '대')
+                            else:
+                                type_cnt2.append('비정상 ' + str(j['abnormalCount']) + '대')
+
+                        summary_df = pd.DataFrame({'Group': group, 'Switch': type_cnt1, 'AP': type_cnt2})
+                        summary_autochk = summary_autochk.append(summary_df)
+
+                        summary_table = summary_autochk.to_html(index=False)
+                        sumCheck = f'''
+                            <div class="box">
+                                <h1>자동 점검 결과<span>{inspect_date}</span></h1>
+                                {summary_table}
+                            </div>
+                        '''
 
             else:
                 print('\'reportData\' is empty')
@@ -662,13 +687,6 @@ class PdfGenerator():
                     "msg": False,
                     "succ": True
                 }
-
-            summary_df = pd.DataFrame({'Group': group, 'Switch': type_cnt1, 'AP': type_cnt2})
-            summary_autochk = summary_autochk.append(summary_df)
-
-            summary_table = summary_autochk.to_html(index=False)
-            grpCheck_table = summary_by_grp.to_html(index=False, classes='summary_table')
-            eqCheck_table = summary_by_eq.to_html(index=False, classes='eq_table')
 
             html_main = f'''
                 <!DOCTYPE html>
@@ -682,16 +700,8 @@ class PdfGenerator():
                     <header>
                         <div class="summary">
                             <h1>자동 점검 리포트</h1>
-                            <div class="box">
-                                <h1 class="ty2">형상 점검 결과<span>{inspect_date}</span></h1>
-                                {grpCheck_table}
-                                <h2>장비 현황</h2>
-                                {eqCheck_table}
-                            </div>
-                            <div class="box">
-                                <h1>자동 점검 결과<span>{inspect_date}</span></h1>
-                                {summary_table}
-                            </div>
+                            {statCheck}
+                            {sumCheck}
                         </div>
                     </header>
             '''
@@ -700,203 +710,198 @@ class PdfGenerator():
             html_list.append(html_main)
 
             for i, v in enumerate(result['reportData']):
-                root_name = ''
-                if not len(v['deviceCheckResult']) == 0:
-                    root_name = v['deviceCheckResult'][0]['rootName']
-                grp_name = v['groupName']
-                total_device = v['deviceTotalCount']  # 그룹 전체 장비수
-                ab_device_cnt = v['abnormalDeviceCount']
-                alert_device_cnt = 0
-                if not ab_device_cnt == None:
-                    alert_device_cnt = ab_device_cnt['currentAbnormalCount'] - ab_device_cnt['beforeAbnormalCount']
-                    # 현재 비정상 장비수 - 하루 전 비정상 장비수
+                if 'autoCheckResult' in v:
+                    grp_name = v['groupName']
+                    total_device = v['deviceTotalCount']  # 그룹 전체 장비수
+                    ab_device_cnt = v['abnormalDeviceCount']
+                    alert_device_cnt = 0
+                    if not ab_device_cnt == None:
+                        alert_device_cnt = ab_device_cnt['currentAbnormalCount'] - ab_device_cnt['beforeAbnormalCount']
+                        # 현재 비정상 장비수 - 하루 전 비정상 장비수
 
-                # 그룹별 장비 비정상 현황
-                grp_alert = ''
-                alert_by_grp = pd.DataFrame(v['abnormalDeviceStatus'])
-                if not len(alert_by_grp) == 0:
-                    self.horizontal_bar(alert_by_grp, 'grp', i)
-                    grp_alert = f'''<img src="../img/grp_alert{str(i)}.png" alt="grp_alert{str(i)}">'''
+                    # 그룹별 장비 비정상 현황
+                    grp_alert = ''
+                    alert_by_grp = pd.DataFrame(v['abnormalDeviceStatus'])
+                    if not len(alert_by_grp) == 0:
+                        self.horizontal_bar(alert_by_grp, 'grp', i)
+                        grp_alert = f'''<img src="../img/grp_alert{str(i)}.png" alt="grp_alert{str(i)}">'''
 
-                # 비정상 항목 현황
-                total_alert = ''
-                alert_by_item = pd.DataFrame(v['abnormalItemStatus'])
-                if not len(alert_by_item) == 0:
-                    self.horizontal_bar(alert_by_item, 'total', i)
-                    total_alert = f'''<img src="../img/total_alert{str(i)}.png" alt="total_alert{str(i)}">'''
-                top_items = alert_by_item['name'].values[:3]
+                    # 비정상 항목 현황
+                    total_alert = ''
+                    alert_by_item = pd.DataFrame(v['abnormalItemStatus'])
+                    if not len(alert_by_item) == 0:
+                        self.horizontal_bar(alert_by_item, 'total', i)
+                        total_alert = f'''<img src="../img/total_alert{str(i)}.png" alt="total_alert{str(i)}">'''
+                    top_items = alert_by_item['name'].values[:3]
 
-                # 비정상 장비 추세
-                total_trend = ''
-                total_alert_trend = pd.DataFrame(v['abnormalDeviceTrend'])
-                if not len(total_alert_trend) == 0:
-                    self.generate_trend(total_alert_trend, i)
-                    total_trend = f'''<img src="../img/total_trend{str(i)}.png" alt="total_trend{str(i)}">'''
+                    # 비정상 장비 추세
+                    total_trend = ''
+                    total_alert_trend = pd.DataFrame(v['abnormalDeviceTrend'])
+                    if not len(total_alert_trend) == 0:
+                        self.generate_trend(total_alert_trend, i)
+                        total_trend = f'''<img src="../img/total_trend{str(i)}.png" alt="total_trend{str(i)}">'''
 
-                # 항목별 비정상 추세
-                item_alert_trend = pd.DataFrame(v['abnormalItemTrend'])
-                chart_box_list = []
-                chart_wrap_box = ''
-                if not len(item_alert_trend) == 0:
-                    for item in top_items:
-                        box = self.generate_item_trend(item_alert_trend, item, i)
+                    # 항목별 비정상 추세
+                    item_alert_trend = pd.DataFrame(v['abnormalItemTrend'])
+                    chart_box_list = []
+                    chart_wrap_box = ''
+                    if not len(item_alert_trend) == 0:
+                        for item in top_items:
+                            box = self.generate_item_trend(item_alert_trend, item, i)
 
-                        chart_box = f'''
-                            <div class="chart_wrap">
-                                <h4>{item} 상태</h4>
-                                <div class="chart">
-                                    {box}
-                                </div>
-                            </div>  
-                        '''
-                        chart_box_list.append(chart_box)
-                    chart_wrap_box = ' '.join(chart_box_list)
+                            chart_box = f'''
+                                <div class="chart_wrap">
+                                    <h4>{item} 상태</h4>
+                                    <div class="chart">
+                                        {box}
+                                    </div>
+                                </div>  
+                            '''
+                            chart_box_list.append(chart_box)
+                        chart_wrap_box = ' '.join(chart_box_list)
 
-                # todoList
-                todos = []
-                todo_list = ''
-                if not len(v['toDoList']) == 0:
-                    for t in v['toDoList']:
-                        todo_grp = t['groupName']
-                        todo_device = t['deviceName']
-                        todo_item = t['workitemName']
-                        todo_detail = t['workscriptGuide']
+                    # todoList
+                    todos = []
+                    todo_list = ''
+                    if not len(v['toDoList']) == 0:
+                        for t in v['toDoList']:
+                            todo_grp = t['groupName']
+                            todo_device = t['deviceName']
+                            todo_item = t['workitemName']
+                            todo_detail = t['workscriptGuide']
 
-                        todo_notice = f'''
-                            <div class="list_box">
-                                <div class="notice">
-                                    <ul>
-                                        <li><span>그룹명</span>{todo_grp}</li>
-                                        <li><span>장비명</span>{todo_device}</li>
-                                        <li><span>점검항목</span>{todo_item}</li>
-                                    </ul>
-                                    <dl>
-                                        <dt>조치사항</dt>
-                                        <dd><p>{todo_detail}</p></dd>
-                                    </dl>
-                                </div>
-                            </div>
-                        '''
-                        todos.append(todo_notice)
-                    todo_list = ' '.join(todos)
-
-                # 일주일 내 비정상 발생 건수
-                week_total_table = ''
-                if not len(v['abnormalWeek']) == 0:
-                    week = pd.DataFrame(v['abnormalWeek'])
-                    week2 = pd.DataFrame(
-                        columns=['deviceName', 'workitemName', 'd6AbnormalCount', 'd5AbnormalCount', 'd4AbnormalCount',
-                                 'd3AbnormalCount', 'd2AbnormalCount', 'd1AbnormalCount', 'd0AbnormalCount'])
-                    week2.loc[0] = ['장비명', '점검항목', 'D-6', 'D-5', 'D-4', 'D-3', 'D-2', 'D-1', inspect_date_short]
-                    week2 = week2.append(week)
-                    week_total_table = week2.to_html(index=False)
-
-                # 장비별 상세정보
-                device_details = []
-                device_detail_list = ''
-                if not len(v['runResult']) == 0:
-                    for r in v['runResult']:
-                        device_name = r['deviceName']
-                        work_item_name = r['workitemName']
-                        work_condition = r['dataJson']  # todo 임성준 차장
-                        work_result = pd.read_json(r['dataJson'])
-                        new_work_result = pd.DataFrame(columns=work_result.columns.tolist())
-                        new_work_result.loc[0] = work_result.columns.tolist()
-                        new_work_result = new_work_result.append(work_result)
-                        work_table = new_work_result.to_html(index=False)
-
-                        item_detail = f'''
-                            <div class="info_box">
+                            todo_notice = f'''
                                 <div class="list_box">
-                                      <div class="notice">
-                                          <ul>
-                                              <li><span>장비명</span>{device_name}</li>
-                                              <li><span>점검항목</span>{work_item_name}</li>
-                                          </ul>
-                                          <dl>
-                                              <dt>실행조건</dt>
-                                              <dd><p>work_condition</p></dd>
-                                          </dl>
-                                      </div>
-                                </div>
-                                <h3>실행결과</h3> 
-                                {work_table}
-                            </div>
-                        '''
-                        device_details.append(item_detail)
-
-                    device_detail_list = ' '.join(device_details)
-
-                section = f'''
-                    <section>
-                        <div class="subtitle">
-                            <h1>{root_name}</h1>
-                        </div>
-                        <h1>{grp_name}</h1>
-                        <article class="graph">
-                            <h2><i>01</i>진단결과</h2>
-                            <div class="chart_box">
-                                <div class="chart_view c1">
-                                    <h3>비정상장비</h3>
-                                    <ul>
-                                        <li class="up">
-                                            <span>{alert_device_cnt}</span>어제
-                                        </li>
-                                        <li class="total">
-                                            <p>
-                                                <b>장비수</b>
-                                                <span>{total_device}</span>
-                                            </p>
-                                        </li>
-                                    </ul>
-                                </div>
-                                <div class="chart_view c2">
-                                    <h3>그룹별 장비 비정상 현황</h3>
-                                    <div class="chart">
-                                    {grp_alert}
+                                    <div class="notice">
+                                        <ul>
+                                            <li><span>그룹명</span>{todo_grp}</li>
+                                            <li><span>장비명</span>{todo_device}</li>
+                                            <li><span>점검항목</span>{todo_item}</li>
+                                        </ul>
+                                        <dl>
+                                            <dt>조치사항</dt>
+                                            <dd><p>{todo_detail}</p></dd>
+                                        </dl>
                                     </div>
                                 </div>
-                                <div class="chart_view c3">
-                                    <h3>비정상 항목 현황</h3>
-                                    <div class="chart">
-                                    {total_alert}
+                            '''
+                            todos.append(todo_notice)
+                        todo_list = ' '.join(todos)
+
+                    # 일주일 내 비정상 발생 건수
+                    week_total_table = ''
+                    if not len(v['abnormalWeek']) == 0:
+                        week = pd.DataFrame(v['abnormalWeek'])
+                        week2 = pd.DataFrame(
+                            columns=['deviceName', 'workitemName', 'd6AbnormalCount', 'd5AbnormalCount', 'd4AbnormalCount',
+                                     'd3AbnormalCount', 'd2AbnormalCount', 'd1AbnormalCount', 'd0AbnormalCount'])
+                        week2.loc[0] = ['장비명', '점검항목', 'D-6', 'D-5', 'D-4', 'D-3', 'D-2', 'D-1', inspect_date_short]
+                        week2 = week2.append(week)
+                        week_total_table = week2.to_html(index=False)
+
+                    # 장비별 상세정보
+                    device_details = []
+                    device_detail_list = ''
+                    if not len(v['runResult']) == 0:
+                        for r in v['runResult']:
+                            device_name = r['deviceName']
+                            work_item_name = r['workitemName']
+                            work_condition = r['dataJson']  # todo 임성준 차장
+                            work_result = pd.read_json(r['dataJson'])
+                            new_work_result = pd.DataFrame(columns=work_result.columns.tolist())
+                            new_work_result.loc[0] = work_result.columns.tolist()
+                            new_work_result = new_work_result.append(work_result)
+                            work_table = new_work_result.to_html(index=False)
+
+                            item_detail = f'''
+                                <div class="info_box">
+                                    <div class="list_box">
+                                          <div class="notice">
+                                              <ul>
+                                                  <li><span>장비명</span>{device_name}</li>
+                                                  <li><span>점검항목</span>{work_item_name}</li>
+                                              </ul>
+                                              <dl>
+                                                  <dt>실행조건</dt>
+                                                  <dd><p>work_condition</p></dd>
+                                              </dl>
+                                          </div>
                                     </div>
+                                    <h3>실행결과</h3> 
+                                    {work_table}
                                 </div>
-                            </div>
-                            <div class="chart_box">
-                                <div class="chart_view c4">
-                                    <h3>비정상 장비 추세</h3>
-                                    <div class="chart_wrap">
-                                        <h4 class="none">&nbsp;</h4>
+                            '''
+                            device_details.append(item_detail)
+
+                        device_detail_list = ' '.join(device_details)
+
+                    section = f'''
+                        <section>
+                            <h1>{grp_name}</h1>
+                            <article class="graph">
+                                <h2><i>01</i>진단결과</h2>
+                                <div class="chart_box">
+                                    <div class="chart_view c1">
+                                        <h3>비정상장비</h3>
+                                        <ul>
+                                            <li class="up">
+                                                <span>{alert_device_cnt}</span>어제
+                                            </li>
+                                            <li class="total">
+                                                <p>
+                                                    <b>장비수</b>
+                                                    <span>{total_device}</span>
+                                                </p>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                    <div class="chart_view c2">
+                                        <h3>그룹별 장비 비정상 현황</h3>
                                         <div class="chart">
-                                        {total_trend}
+                                        {grp_alert}
+                                        </div>
+                                    </div>
+                                    <div class="chart_view c3">
+                                        <h3>비정상 항목 현황</h3>
+                                        <div class="chart">
+                                        {total_alert}
                                         </div>
                                     </div>
                                 </div>
-                                <div class="chart_view c5">
-                                    <h3>항목별 비정상 추세</h3>
-                                    <div class="chart_wrap_box">
-                                        {chart_wrap_box}
-                                    <div>
+                                <div class="chart_box">
+                                    <div class="chart_view c4">
+                                        <h3>비정상 장비 추세</h3>
+                                        <div class="chart_wrap">
+                                            <h4 class="none">&nbsp;</h4>
+                                            <div class="chart">
+                                            {total_trend}
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="chart_view c5">
+                                        <h3>항목별 비정상 추세</h3>
+                                        <div class="chart_wrap_box">
+                                            {chart_wrap_box}
+                                        <div>
+                                    </div>
                                 </div>
-                            </div>
-                        </article>
-                        <article>
-                            <h2><i>02</i>To-Do List</h2>                  
-                            {todo_list}
-                        </article>
-                        <article class="week_data_table">
-                            <h2><i>03</i>일주일 내 비정상 발생 건수</h2>
-                            {week_total_table}
-                        </article>
-                        <article class="item_detail_table">
-                            <h2><i>04</i>장비별 상세정보</h2>
-                            {device_detail_list}
-                        </article>
-                    </section>
-                '''
+                            </article>
+                            <article>
+                                <h2><i>02</i>To-Do List</h2>                  
+                                {todo_list}
+                            </article>
+                            <article class="week_data_table">
+                                <h2><i>03</i>일주일 내 비정상 발생 건수</h2>
+                                {week_total_table}
+                            </article>
+                            <article class="item_detail_table">
+                                <h2><i>04</i>장비별 상세정보</h2>
+                                {device_detail_list}
+                            </article>
+                        </section>
+                    '''
 
-                html_list.append(section)
+                    html_list.append(section)
 
             html_list.append('<div> </body> </html>')
             html = ' '.join(html_list)
@@ -1047,7 +1052,7 @@ class PdfGenerator():
         f = [f.name for f in fm.fontManager.ttflist if 'KT' in f.name]
         '''
 
-        with open('./pdf_data_sample.json', encoding='UTF-8') as json_file:
+        with open('./data_json_1.json', encoding='UTF-8') as json_file:
             self.data = json.load(json_file)
 
         result = self.data['data']
