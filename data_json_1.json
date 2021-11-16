@@ -1,1083 +1,889 @@
 {
-	"resultCode": 200,
-	"resultMessage": "SUCCESS",
-	"data": {
-		"workflowName": "test",
-		"runDate": "2021-10-20 09:50:01",
-		"reportData": [
-			{
-				"groupName": "TB",
-				"deviceTotalCount": 9,
-				"autoCheckResult": [
-					{
-						"deviceType": "AP",
-						"abnormalCount": 0
-					},
-					{
-						"deviceType": "Switch",
-						"abnormalCount": 5
-					}
-				],
-				"abnormalDeviceCount": {
-					"currentAbnormalCount": 5,
-					"beforeAbnormalCount": 0
-				},
-				"abnormalDeviceStatus": [
-					{
-						"name": "다산TB",
-						"deviceCount": 8,
-						"abnormalCount": 5
-					},
-					{
-						"name": "TB",
-						"deviceCount": 1,
-						"abnormalCount": 0
-					}
-				],
-				"abnormalItemStatus": [
-					{
-						"name": "cpu",
-						"deviceCount": 5,
-						"abnormalCount": 5
-					},
-					{
-						"name": "mem",
-						"deviceCount": 5,
-						"abnormalCount": 4
-					},
-					{
-						"name": "pow",
-						"deviceCount": 5,
-						"abnormalCount": 4
-					},
-					{
-						"name": "proc",
-						"deviceCount": 5,
-						"abnormalCount": 4
-					},
-					{
-						"name": "temp",
-						"deviceCount": 5,
-						"abnormalCount": 4
-					},
-					{
-						"name": "fan",
-						"deviceCount": 4,
-						"abnormalCount": 3
-					}
-				],
-				"abnormalDeviceTrend": [
-					{
-						"groupDate": "2021-10-20 09:50:01.0",
-						"abnormalCount": 5
-					},
-					{
-						"groupDate": "2021-10-20 09:45:03.0",
-						"abnormalCount": 5
-					},
-					{
-						"groupDate": "2021-10-20 09:40:01.0",
-						"abnormalCount": 5
-					},
-					{
-						"groupDate": "2021-10-20 09:35:02.0",
-						"abnormalCount": 5
-					},
-					{
-						"groupDate": "2021-10-20 09:30:01.0",
-						"abnormalCount": 5
-					}
-				],
-				"abnormalItemTrend": [
-					{
-						"groupDate": "2021-10-20 09:50:01.0",
-						"list": [
-							{
-								"name": "pow",
-								"abnormalCount": 4
-							},
-							{
-								"name": "cpu",
-								"abnormalCount": 5
-							},
-							{
-								"name": "proc",
-								"abnormalCount": 4
-							},
-							{
-								"name": "fan",
-								"abnormalCount": 3
-							},
-							{
-								"name": "temp",
-								"abnormalCount": 4
-							},
-							{
-								"name": "mem",
-								"abnormalCount": 4
-							}
-						]
-					},
-					{
-						"groupDate": "2021-10-20 09:45:03.0",
-						"list": [
-							{
-								"name": "cpu",
-								"abnormalCount": 5
-							},
-							{
-								"name": "proc",
-								"abnormalCount": 4
-							},
-							{
-								"name": "fan",
-								"abnormalCount": 3
-							},
-							{
-								"name": "temp",
-								"abnormalCount": 4
-							},
-							{
-								"name": "mem",
-								"abnormalCount": 4
-							},
-							{
-								"name": "pow",
-								"abnormalCount": 4
-							}
-						]
-					},
-					{
-						"groupDate": "2021-10-20 09:40:01.0",
-						"list": [
-							{
-								"name": "proc",
-								"abnormalCount": 4
-							},
-							{
-								"name": "fan",
-								"abnormalCount": 3
-							},
-							{
-								"name": "temp",
-								"abnormalCount": 4
-							},
-							{
-								"name": "mem",
-								"abnormalCount": 4
-							},
-							{
-								"name": "pow",
-								"abnormalCount": 4
-							},
-							{
-								"name": "cpu",
-								"abnormalCount": 5
-							}
-						]
-					},
-					{
-						"groupDate": "2021-10-20 09:35:02.0",
-						"list": [
-							{
-								"name": "proc",
-								"abnormalCount": 4
-							},
-							{
-								"name": "fan",
-								"abnormalCount": 3
-							},
-							{
-								"name": "temp",
-								"abnormalCount": 4
-							},
-							{
-								"name": "mem",
-								"abnormalCount": 4
-							},
-							{
-								"name": "pow",
-								"abnormalCount": 4
-							},
-							{
-								"name": "cpu",
-								"abnormalCount": 5
-							}
-						]
-					},
-					{
-						"groupDate": "2021-10-20 09:30:01.0",
-						"list": [
-							{
-								"name": "proc",
-								"abnormalCount": 4
-							},
-							{
-								"name": "fan",
-								"abnormalCount": 3
-							},
-							{
-								"name": "temp",
-								"abnormalCount": 4
-							},
-							{
-								"name": "mem",
-								"abnormalCount": 4
-							},
-							{
-								"name": "pow",
-								"abnormalCount": 4
-							},
-							{
-								"name": "cpu",
-								"abnormalCount": 5
-							}
-						]
-					}
-				],
-				"toDoList": [
-					{
-						"groupName": "다산TB",
-						"deviceName": "V2724GB_GES#2",
-						"workitemName": "cpu",
-						"workscriptGuide": "Empty Guied"
-					},
-					{
-						"groupName": "다산TB",
-						"deviceName": "V2724GB_GES#2",
-						"workitemName": "fan",
-						"workscriptGuide": "Empty Guied"
-					},
-					{
-						"groupName": "다산TB",
-						"deviceName": "V2724GB_GES#2",
-						"workitemName": "mem",
-						"workscriptGuide": "Empty Guied"
-					},
-					{
-						"groupName": "다산TB",
-						"deviceName": "V2724GB_GES#2",
-						"workitemName": "pow",
-						"workscriptGuide": "Empty Guied"
-					},
-					{
-						"groupName": "다산TB",
-						"deviceName": "V2724GB_GES#2",
-						"workitemName": "proc",
-						"workscriptGuide": "Empty Guied"
-					},
-					{
-						"groupName": "다산TB",
-						"deviceName": "V2724GB_GES#2",
-						"workitemName": "temp",
-						"workscriptGuide": "Empty Guied"
-					},
-					{
-						"groupName": "다산TB",
-						"deviceName": "V2724GC_GES#3",
-						"workitemName": "cpu",
-						"workscriptGuide": "Empty Guied"
-					},
-					{
-						"groupName": "다산TB",
-						"deviceName": "V2724GC_GES#3",
-						"workitemName": "fan",
-						"workscriptGuide": "Empty Guied"
-					},
-					{
-						"groupName": "다산TB",
-						"deviceName": "V2724GC_GES#3",
-						"workitemName": "mem",
-						"workscriptGuide": "Empty Guied"
-					},
-					{
-						"groupName": "다산TB",
-						"deviceName": "V2724GC_GES#3",
-						"workitemName": "pow",
-						"workscriptGuide": "Empty Guied"
-					},
-					{
-						"groupName": "다산TB",
-						"deviceName": "V2724GC_GES#3",
-						"workitemName": "proc",
-						"workscriptGuide": "Empty Guied"
-					},
-					{
-						"groupName": "다산TB",
-						"deviceName": "V2724GC_GES#3",
-						"workitemName": "temp",
-						"workscriptGuide": "Empty Guied"
-					},
-					{
-						"groupName": "다산TB",
-						"deviceName": "V2908GB_GES#1",
-						"workitemName": "cpu",
-						"workscriptGuide": "Empty Guied"
-					},
-					{
-						"groupName": "다산TB",
-						"deviceName": "V2908GB_GES#1",
-						"workitemName": "mem",
-						"workscriptGuide": "Empty Guied"
-					},
-					{
-						"groupName": "다산TB",
-						"deviceName": "V2908GB_GES#1",
-						"workitemName": "pow",
-						"workscriptGuide": "Empty Guied"
-					},
-					{
-						"groupName": "다산TB",
-						"deviceName": "V2908GB_GES#1",
-						"workitemName": "proc",
-						"workscriptGuide": "Empty Guied"
-					},
-					{
-						"groupName": "다산TB",
-						"deviceName": "V2908GB_GES#1",
-						"workitemName": "temp",
-						"workscriptGuide": "Empty Guied"
-					},
-					{
-						"groupName": "다산TB",
-						"deviceName": "V6848XG_L3#1",
-						"workitemName": "cpu",
-						"workscriptGuide": "Empty Guied"
-					},
-					{
-						"groupName": "다산TB",
-						"deviceName": "V6848XG_L3#1",
-						"workitemName": "fan",
-						"workscriptGuide": "Empty Guied"
-					},
-					{
-						"groupName": "다산TB",
-						"deviceName": "V6848XG_L3#1",
-						"workitemName": "mem",
-						"workscriptGuide": "Empty Guied"
-					},
-					{
-						"groupName": "다산TB",
-						"deviceName": "V6848XG_L3#1",
-						"workitemName": "pow",
-						"workscriptGuide": "Empty Guied"
-					},
-					{
-						"groupName": "다산TB",
-						"deviceName": "V6848XG_L3#1",
-						"workitemName": "proc",
-						"workscriptGuide": "Empty Guied"
-					},
-					{
-						"groupName": "다산TB",
-						"deviceName": "V6848XG_L3#1",
-						"workitemName": "temp",
-						"workscriptGuide": "Empty Guied"
-					},
-					{
-						"groupName": "다산TB",
-						"deviceName": "V6848XG_L3#2",
-						"workitemName": "cpu",
-						"workscriptGuide": "Empty Guied"
-					}
-				],
-				"abnormalWeek": [
-					{
-						"deviceName": "V2724GB_GES#2",
-						"workitemName": "cpu",
-						"d6AbnormalCount": "0",
-						"d5AbnormalCount": "0",
-						"d4AbnormalCount": "0",
-						"d3AbnormalCount": "0",
-						"d2AbnormalCount": "0",
-						"d1AbnormalCount": "36",
-						"d0AbnormalCount": "119"
-					},
-					{
-						"deviceName": "V2724GB_GES#2",
-						"workitemName": "fan",
-						"d6AbnormalCount": "0",
-						"d5AbnormalCount": "0",
-						"d4AbnormalCount": "0",
-						"d3AbnormalCount": "0",
-						"d2AbnormalCount": "0",
-						"d1AbnormalCount": "36",
-						"d0AbnormalCount": "119"
-					},
-					{
-						"deviceName": "V2724GB_GES#2",
-						"workitemName": "mem",
-						"d6AbnormalCount": "0",
-						"d5AbnormalCount": "0",
-						"d4AbnormalCount": "0",
-						"d3AbnormalCount": "0",
-						"d2AbnormalCount": "0",
-						"d1AbnormalCount": "36",
-						"d0AbnormalCount": "119"
-					},
-					{
-						"deviceName": "V2724GB_GES#2",
-						"workitemName": "pow",
-						"d6AbnormalCount": "0",
-						"d5AbnormalCount": "0",
-						"d4AbnormalCount": "0",
-						"d3AbnormalCount": "0",
-						"d2AbnormalCount": "0",
-						"d1AbnormalCount": "36",
-						"d0AbnormalCount": "119"
-					},
-					{
-						"deviceName": "V2724GB_GES#2",
-						"workitemName": "proc",
-						"d6AbnormalCount": "0",
-						"d5AbnormalCount": "0",
-						"d4AbnormalCount": "0",
-						"d3AbnormalCount": "0",
-						"d2AbnormalCount": "0",
-						"d1AbnormalCount": "36",
-						"d0AbnormalCount": "119"
-					},
-					{
-						"deviceName": "V2724GB_GES#2",
-						"workitemName": "temp",
-						"d6AbnormalCount": "0",
-						"d5AbnormalCount": "0",
-						"d4AbnormalCount": "0",
-						"d3AbnormalCount": "0",
-						"d2AbnormalCount": "0",
-						"d1AbnormalCount": "36",
-						"d0AbnormalCount": "119"
-					},
-					{
-						"deviceName": "V2724GC_GES#3",
-						"workitemName": "cpu",
-						"d6AbnormalCount": "0",
-						"d5AbnormalCount": "0",
-						"d4AbnormalCount": "0",
-						"d3AbnormalCount": "0",
-						"d2AbnormalCount": "0",
-						"d1AbnormalCount": "36",
-						"d0AbnormalCount": "119"
-					},
-					{
-						"deviceName": "V2724GC_GES#3",
-						"workitemName": "fan",
-						"d6AbnormalCount": "0",
-						"d5AbnormalCount": "0",
-						"d4AbnormalCount": "0",
-						"d3AbnormalCount": "0",
-						"d2AbnormalCount": "0",
-						"d1AbnormalCount": "36",
-						"d0AbnormalCount": "119"
-					},
-					{
-						"deviceName": "V2724GC_GES#3",
-						"workitemName": "mem",
-						"d6AbnormalCount": "0",
-						"d5AbnormalCount": "0",
-						"d4AbnormalCount": "0",
-						"d3AbnormalCount": "0",
-						"d2AbnormalCount": "0",
-						"d1AbnormalCount": "36",
-						"d0AbnormalCount": "119"
-					},
-					{
-						"deviceName": "V2724GC_GES#3",
-						"workitemName": "pow",
-						"d6AbnormalCount": "0",
-						"d5AbnormalCount": "0",
-						"d4AbnormalCount": "0",
-						"d3AbnormalCount": "0",
-						"d2AbnormalCount": "0",
-						"d1AbnormalCount": "36",
-						"d0AbnormalCount": "119"
-					},
-					{
-						"deviceName": "V2724GC_GES#3",
-						"workitemName": "proc",
-						"d6AbnormalCount": "0",
-						"d5AbnormalCount": "0",
-						"d4AbnormalCount": "0",
-						"d3AbnormalCount": "0",
-						"d2AbnormalCount": "0",
-						"d1AbnormalCount": "36",
-						"d0AbnormalCount": "119"
-					},
-					{
-						"deviceName": "V2724GC_GES#3",
-						"workitemName": "temp",
-						"d6AbnormalCount": "0",
-						"d5AbnormalCount": "0",
-						"d4AbnormalCount": "0",
-						"d3AbnormalCount": "0",
-						"d2AbnormalCount": "0",
-						"d1AbnormalCount": "36",
-						"d0AbnormalCount": "119"
-					},
-					{
-						"deviceName": "V2908GB_GES#1",
-						"workitemName": "cpu",
-						"d6AbnormalCount": "0",
-						"d5AbnormalCount": "0",
-						"d4AbnormalCount": "0",
-						"d3AbnormalCount": "0",
-						"d2AbnormalCount": "0",
-						"d1AbnormalCount": "36",
-						"d0AbnormalCount": "119"
-					},
-					{
-						"deviceName": "V2908GB_GES#1",
-						"workitemName": "mem",
-						"d6AbnormalCount": "0",
-						"d5AbnormalCount": "0",
-						"d4AbnormalCount": "0",
-						"d3AbnormalCount": "0",
-						"d2AbnormalCount": "0",
-						"d1AbnormalCount": "36",
-						"d0AbnormalCount": "119"
-					},
-					{
-						"deviceName": "V2908GB_GES#1",
-						"workitemName": "pow",
-						"d6AbnormalCount": "0",
-						"d5AbnormalCount": "0",
-						"d4AbnormalCount": "0",
-						"d3AbnormalCount": "0",
-						"d2AbnormalCount": "0",
-						"d1AbnormalCount": "36",
-						"d0AbnormalCount": "119"
-					},
-					{
-						"deviceName": "V2908GB_GES#1",
-						"workitemName": "proc",
-						"d6AbnormalCount": "0",
-						"d5AbnormalCount": "0",
-						"d4AbnormalCount": "0",
-						"d3AbnormalCount": "0",
-						"d2AbnormalCount": "0",
-						"d1AbnormalCount": "36",
-						"d0AbnormalCount": "119"
-					},
-					{
-						"deviceName": "V2908GB_GES#1",
-						"workitemName": "temp",
-						"d6AbnormalCount": "0",
-						"d5AbnormalCount": "0",
-						"d4AbnormalCount": "0",
-						"d3AbnormalCount": "0",
-						"d2AbnormalCount": "0",
-						"d1AbnormalCount": "36",
-						"d0AbnormalCount": "119"
-					},
-					{
-						"deviceName": "V6848XG_L3#1",
-						"workitemName": "cpu",
-						"d6AbnormalCount": "0",
-						"d5AbnormalCount": "0",
-						"d4AbnormalCount": "0",
-						"d3AbnormalCount": "0",
-						"d2AbnormalCount": "0",
-						"d1AbnormalCount": "36",
-						"d0AbnormalCount": "119"
-					},
-					{
-						"deviceName": "V6848XG_L3#1",
-						"workitemName": "fan",
-						"d6AbnormalCount": "0",
-						"d5AbnormalCount": "0",
-						"d4AbnormalCount": "0",
-						"d3AbnormalCount": "0",
-						"d2AbnormalCount": "0",
-						"d1AbnormalCount": "36",
-						"d0AbnormalCount": "119"
-					},
-					{
-						"deviceName": "V6848XG_L3#1",
-						"workitemName": "mem",
-						"d6AbnormalCount": "0",
-						"d5AbnormalCount": "0",
-						"d4AbnormalCount": "0",
-						"d3AbnormalCount": "0",
-						"d2AbnormalCount": "0",
-						"d1AbnormalCount": "36",
-						"d0AbnormalCount": "119"
-					},
-					{
-						"deviceName": "V6848XG_L3#1",
-						"workitemName": "pow",
-						"d6AbnormalCount": "0",
-						"d5AbnormalCount": "0",
-						"d4AbnormalCount": "0",
-						"d3AbnormalCount": "0",
-						"d2AbnormalCount": "0",
-						"d1AbnormalCount": "36",
-						"d0AbnormalCount": "119"
-					},
-					{
-						"deviceName": "V6848XG_L3#1",
-						"workitemName": "proc",
-						"d6AbnormalCount": "0",
-						"d5AbnormalCount": "0",
-						"d4AbnormalCount": "0",
-						"d3AbnormalCount": "0",
-						"d2AbnormalCount": "0",
-						"d1AbnormalCount": "36",
-						"d0AbnormalCount": "119"
-					},
-					{
-						"deviceName": "V6848XG_L3#1",
-						"workitemName": "temp",
-						"d6AbnormalCount": "0",
-						"d5AbnormalCount": "0",
-						"d4AbnormalCount": "0",
-						"d3AbnormalCount": "0",
-						"d2AbnormalCount": "0",
-						"d1AbnormalCount": "36",
-						"d0AbnormalCount": "119"
-					},
-					{
-						"deviceName": "V6848XG_L3#2",
-						"workitemName": "cpu",
-						"d6AbnormalCount": "0",
-						"d5AbnormalCount": "0",
-						"d4AbnormalCount": "0",
-						"d3AbnormalCount": "0",
-						"d2AbnormalCount": "0",
-						"d1AbnormalCount": "36",
-						"d0AbnormalCount": "119"
-					},
-					{
-						"deviceName": "V6848XG_L3#2",
-						"workitemName": "fan",
-						"d6AbnormalCount": "0",
-						"d5AbnormalCount": "0",
-						"d4AbnormalCount": "0",
-						"d3AbnormalCount": "0",
-						"d2AbnormalCount": "0",
-						"d1AbnormalCount": "0",
-						"d0AbnormalCount": "0"
-					},
-					{
-						"deviceName": "V6848XG_L3#2",
-						"workitemName": "mem",
-						"d6AbnormalCount": "0",
-						"d5AbnormalCount": "0",
-						"d4AbnormalCount": "0",
-						"d3AbnormalCount": "0",
-						"d2AbnormalCount": "0",
-						"d1AbnormalCount": "0",
-						"d0AbnormalCount": "0"
-					},
-					{
-						"deviceName": "V6848XG_L3#2",
-						"workitemName": "pow",
-						"d6AbnormalCount": "0",
-						"d5AbnormalCount": "0",
-						"d4AbnormalCount": "0",
-						"d3AbnormalCount": "0",
-						"d2AbnormalCount": "0",
-						"d1AbnormalCount": "0",
-						"d0AbnormalCount": "0"
-					},
-					{
-						"deviceName": "V6848XG_L3#2",
-						"workitemName": "proc",
-						"d6AbnormalCount": "0",
-						"d5AbnormalCount": "0",
-						"d4AbnormalCount": "0",
-						"d3AbnormalCount": "0",
-						"d2AbnormalCount": "0",
-						"d1AbnormalCount": "0",
-						"d0AbnormalCount": "0"
-					},
-					{
-						"deviceName": "V6848XG_L3#2",
-						"workitemName": "temp",
-						"d6AbnormalCount": "0",
-						"d5AbnormalCount": "0",
-						"d4AbnormalCount": "0",
-						"d3AbnormalCount": "0",
-						"d2AbnormalCount": "0",
-						"d1AbnormalCount": "0",
-						"d0AbnormalCount": "0"
-					}
-				],
-				"runResult": [
-					{
-						"deviceName": "V2724GB_GES#2",
-						"workitemName": "cpu",
-						"reportFilter": "{\"filter\": {\"join\": \"AND\", \"list\": [{\"join\": \"AND\", \"text\": \"\", \"group\": [{\"turn\": \"\", \"type\": \"number\", \"value\": \"6\", \"column\": \"USAGE_5SEC\", \"target\": \"\", \"operator\": \"\", \"condition\": \"lt\"}]}]}, \"report\": {\"turn\": \"\", \"type\": \"S\", \"target\": \"\", \"compare\": \"QUERY\", \"condition\": \"\"}}",
-						"keyJson": "[{\"name\": \"USAGE_5SEC\", \"type\": \"number\", \"unit\": \"%\", \"level\": \"0\", \"parent\": \"ROOT\", \"default\": \"\"}, {\"name\": \"USAGE_1MIN\", \"type\": \"number\", \"unit\": \"%\", \"level\": \"0\", \"parent\": \"ROOT\", \"default\": \"\"}, {\"name\": \"USAGE_5MIN\", \"type\": \"number\", \"unit\": \"%\", \"level\": \"0\", \"parent\": \"ROOT\", \"default\": \"\"}, {\"name\": \"USAGE_10MIN\", \"type\": \"number\", \"unit\": \"%\", \"level\": \"0\", \"parent\": \"ROOT\", \"default\": \"\"}]",
-						"dataJson": "[{\"USAGE_1MIN\": \"14.00\", \"USAGE_5MIN\": \"-\", \"USAGE_5SEC\": \"31.39\", \"USAGE_10MIN\": \"17.83\"}]"
-					},
-					{
-						"deviceName": "V2724GB_GES#2",
-						"workitemName": "fan",
-						"reportFilter": null,
-						"keyJson": "[{\"name\": \"FAN_ID\", \"type\": \"select\", \"unit\": \"\", \"level\": \"0\", \"parent\": \"ROOT\", \"default\": \"\"}, {\"name\": \"FAN_STATUS\", \"type\": \"select\", \"unit\": \"\", \"level\": \"0\", \"parent\": \"ROOT\", \"default\": \"\"}]",
-						"dataJson": "[]"
-					},
-					{
-						"deviceName": "V2724GB_GES#2",
-						"workitemName": "mem",
-						"reportFilter": "{\"filter\": {\"join\": \"AND\", \"list\": [{\"join\": \"AND\", \"text\": \"\", \"group\": [{\"turn\": \"\", \"type\": \"number\", \"value\": \"70\", \"column\": \"USAGE\", \"target\": \"\", \"operator\": \"\", \"condition\": \"lt\"}]}]}, \"report\": {\"turn\": \"\", \"type\": \"S\", \"target\": \"\", \"compare\": \"QUERY\", \"condition\": \"\"}}",
-						"keyJson": "[{\"name\": \"TOTAL\", \"type\": \"number\", \"unit\": \"KB\", \"level\": \"0\", \"parent\": \"ROOT\", \"default\": \"\"}, {\"name\": \"USED\", \"type\": \"number\", \"unit\": \"KB\", \"level\": \"0\", \"parent\": \"ROOT\", \"default\": \"\"}, {\"name\": \"FREE\", \"type\": \"number\", \"unit\": \"KB\", \"level\": \"0\", \"parent\": \"ROOT\", \"default\": \"\"}, {\"name\": \"USAGE\", \"type\": \"number\", \"unit\": \"%\", \"level\": \"0\", \"parent\": \"ROOT\", \"default\": \"\"}]",
-						"dataJson": "[{\"FREE\": \"116392\", \"USED\": \"103864\", \"TOTAL\": \"220256\", \"USAGE\": \"47.2\"}]"
-					},
-					{
-						"deviceName": "V2724GB_GES#2",
-						"workitemName": "pow",
-						"reportFilter": null,
-						"keyJson": "[{\"name\": \"POWER_ID\", \"type\": \"select\", \"unit\": \"\", \"level\": \"0\", \"parent\": \"ROOT\", \"default\": \"\"}, {\"name\": \"POWER_STATUS\", \"type\": \"select\", \"unit\": \"\", \"level\": \"0\", \"parent\": \"ROOT\", \"default\": \"\"}]",
-						"dataJson": "[]"
-					},
-					{
-						"deviceName": "V2724GB_GES#2",
-						"workitemName": "proc",
-						"reportFilter": null,
-						"keyJson": "[{\"name\": \"PID\", \"type\": \"select\", \"unit\": \"\", \"level\": \"0\", \"parent\": \"ROOT\", \"default\": \"\"}, {\"name\": \"CPU_USAGE\", \"type\": \"select\", \"unit\": \"%\", \"level\": \"0\", \"parent\": \"ROOT\", \"default\": \"\"}, {\"name\": \"MEM_USAGE\", \"type\": \"number\", \"unit\": \"%\", \"level\": \"0\", \"parent\": \"ROOT\", \"default\": \"\"}, {\"name\": \"PROCESS\", \"type\": \"number\", \"unit\": \"\", \"level\": \"0\", \"parent\": \"ROOT\", \"default\": \"\"}]",
-						"dataJson": "[{\"PID\": \"1\", \"PROCESS\": \"init [3]\", \"CPU_USAGE\": \"0.0\", \"MEM_USAGE\": \"0.2\"}, {\"PID\": \"2\", \"PROCESS\": \"[kthreadd]\", \"CPU_USAGE\": \"0.0\", \"MEM_USAGE\": \"0.0\"}, {\"PID\": \"3\", \"PROCESS\": \"[ksoftirqd/0]\", \"CPU_USAGE\": \"0.0\", \"MEM_USAGE\": \"0.0\"}, {\"PID\": \"4\", \"PROCESS\": \"[watchdog/0]\", \"CPU_USAGE\": \"0.0\", \"MEM_USAGE\": \"0.0\"}, {\"PID\": \"5\", \"PROCESS\": \"[events/0]\", \"CPU_USAGE\": \"0.0\", \"MEM_USAGE\": \"0.0\"}, {\"PID\": \"6\", \"PROCESS\": \"[khelper]\", \"CPU_USAGE\": \"0.0\", \"MEM_USAGE\": \"0.0\"}, {\"PID\": \"9\", \"PROCESS\": \"[async/mgr]\", \"CPU_USAGE\": \"0.0\", \"MEM_USAGE\": \"0.0\"}, {\"PID\": \"40\", \"PROCESS\": \"[sync_supers]\", \"CPU_USAGE\": \"0.0\", \"MEM_USAGE\": \"0.0\"}, {\"PID\": \"42\", \"PROCESS\": \"[bdi-default]\", \"CPU_USAGE\": \"0.0\", \"MEM_USAGE\": \"0.0\"}, {\"PID\": \"43\", \"PROCESS\": \"[kblockd/0]\", \"CPU_USAGE\": \"0.0\", \"MEM_USAGE\": \"0.0\"}, {\"PID\": \"89\", \"PROCESS\": \"[khungtaskd]\", \"CPU_USAGE\": \"0.0\", \"MEM_USAGE\": \"0.0\"}, {\"PID\": \"90\", \"PROCESS\": \"[kswapd0]\", \"CPU_USAGE\": \"0.0\", \"MEM_USAGE\": \"0.0\"}, {\"PID\": \"91\", \"PROCESS\": \"[aio/0]\", \"CPU_USAGE\": \"0.0\", \"MEM_USAGE\": \"0.0\"}, {\"PID\": \"611\", \"PROCESS\": \"[password-rec/0]\", \"CPU_USAGE\": \"0.0\", \"MEM_USAGE\": \"0.0\"}, {\"PID\": \"646\", \"PROCESS\": \"[mtdblockd]\", \"CPU_USAGE\": \"0.0\", \"MEM_USAGE\": \"0.0\"}, {\"PID\": \"679\", \"PROCESS\": \"[SwledMonPollTh\", \"CPU_USAGE\": \"5.8\", \"MEM_USAGE\": \"0.0\"}, {\"PID\": \"710\", \"PROCESS\": \"[bcmCNTR.0]\", \"CPU_USAGE\": \"0.4\", \"MEM_USAGE\": \"0.0\"}, {\"PID\": \"711\", \"PROCESS\": \"[bcmTX]\", \"CPU_USAGE\": \"0.0\", \"MEM_USAGE\": \"0.0\"}, {\"PID\": \"712\", \"PROCESS\": \"[bcmXGS3AsyncTX]\", \"CPU_USAGE\": \"0.0\", \"MEM_USAGE\": \"0.0\"}, {\"PID\": \"713\", \"PROCESS\": \"[bcmRX]\", \"CPU_USAGE\": \"0.0\", \"MEM_USAGE\": \"0.0\"}, {\"PID\": \"714\", \"PROCESS\": \"[bcm-shell]\", \"CPU_USAGE\": \"0.0\", \"MEM_USAGE\": \"0.0\"}, {\"PID\": \"716\", \"PROCESS\": \"[bcmDPC]\", \"CPU_USAGE\": \"0.0\", \"MEM_USAGE\": \"0.0\"}, {\"PID\": \"717\", \"PROCESS\": \"[swal_portload_t]\", \"CPU_USAGE\": \"0.0\", \"MEM_USAGE\": \"0.0\"}, {\"PID\": \"776\", \"PROCESS\": \"[jffs2_gcd_mtd0]\", \"CPU_USAGE\": \"0.0\", \"MEM_USAGE\": \"0.0\"}, {\"PID\": \"874\", \"PROCESS\": \"/usr/sbin/swchd\", \"CPU_USAGE\": \"1.7\", \"MEM_USAGE\": \"4.3\"}, {\"PID\": \"876\", \"PROCESS\": \"/usr/sbin/nsm\", \"CPU_USAGE\": \"0.0\", \"MEM_USAGE\": \"2.1\"}, {\"PID\": \"878\", \"PROCESS\": \"/usr/sbin/snmpd\", \"CPU_USAGE\": \"0.0\", \"MEM_USAGE\": \"2.6\"}, {\"PID\": \"880\", \"PROCESS\": \"/usr/sbin/dhcpd\", \"CPU_USAGE\": \"0.0\", \"MEM_USAGE\": \"1.6\"}, {\"PID\": \"882\", \"PROCESS\": \"/usr/sbin/dhcp6d\", \"CPU_USAGE\": \"0.0\", \"MEM_USAGE\": \"1.3\"}, {\"PID\": \"884\", \"PROCESS\": \"/usr/sbin/sflowd\", \"CPU_USAGE\": \"0.0\", \"MEM_USAGE\": \"1.2\"}, {\"PID\": \"886\", \"PROCESS\": \"/usr/sbin/eapd\", \"CPU_USAGE\": \"0.0\", \"MEM_USAGE\": \"1.2\"}, {\"PID\": \"890\", \"PROCESS\": \"/usr/sbin/sfpmond\", \"CPU_USAGE\": \"0.0\", \"MEM_USAGE\": \"1.2\"}, {\"PID\": \"892\", \"PROCESS\": \"/usr/sbin/swatch\", \"CPU_USAGE\": \"0.9\", \"MEM_USAGE\": \"1.2\"}, {\"PID\": \"893\", \"PROCESS\": \"/usr/sbin/swchd\", \"CPU_USAGE\": \"0.0\", \"MEM_USAGE\": \"4.3\"}, {\"PID\": \"894\", \"PROCESS\": \"/usr/sbin/swchd\", \"CPU_USAGE\": \"0.0\", \"MEM_USAGE\": \"4.3\"}, {\"PID\": \"897\", \"PROCESS\": \"/usr/sbin/swchd\", \"CPU_USAGE\": \"0.0\", \"MEM_USAGE\": \"4.3\"}, {\"PID\": \"900\", \"PROCESS\": \"/usr/sbin/imi -d\", \"CPU_USAGE\": \"0.0\", \"MEM_USAGE\": \"2.4\"}, {\"PID\": \"902\", \"PROCESS\": \"/usr/sbin/inetd\", \"CPU_USAGE\": \"0.0\", \"MEM_USAGE\": \"0.3\"}, {\"PID\": \"909\", \"PROCESS\": \"klogd -c 1\", \"CPU_USAGE\": \"0.0\", \"MEM_USAGE\": \"0.1\"}, {\"PID\": \"913\", \"PROCESS\": \"/usr/sbin/sshd\", \"CPU_USAGE\": \"0.0\", \"MEM_USAGE\": \"0.4\"}, {\"PID\": \"991\", \"PROCESS\": \"init\", \"CPU_USAGE\": \"0.0\", \"MEM_USAGE\": \"0.4\"}, {\"PID\": \"994\", \"PROCESS\": \"-sh\", \"CPU_USAGE\": \"0.0\", \"MEM_USAGE\": \"0.2\"}, {\"PID\": \"999\", \"PROCESS\": \"/usr/sbin/vtysh\", \"CPU_USAGE\": \"0.0\", \"MEM_USAGE\": \"3.1\"}, {\"PID\": \"4968\", \"PROCESS\": \"/sbin/syslogd -m\", \"CPU_USAGE\": \"0.0\", \"MEM_USAGE\": \"0.2\"}, {\"PID\": \"27494\", \"PROCESS\": \"init\", \"CPU_USAGE\": \"0.9\", \"MEM_USAGE\": \"0.4\"}, {\"PID\": \"27508\", \"PROCESS\": \"sshd: admin@pts/0\", \"CPU_USAGE\": \"3.7\", \"MEM_USAGE\": \"0.6\"}, {\"PID\": \"27514\", \"PROCESS\": \"init\", \"CPU_USAGE\": \"2.6\", \"MEM_USAGE\": \"0.4\"}, {\"PID\": \"27517\", \"PROCESS\": \"-sh\", \"CPU_USAGE\": \"0.3\", \"MEM_USAGE\": \"0.2\"}, {\"PID\": \"27522\", \"PROCESS\": \"/usr/sbin/vtysh\", \"CPU_USAGE\": \"53.0\", \"MEM_USAGE\": \"3.1\"}, {\"PID\": \"27525\", \"PROCESS\": \"/usr/sbin/vtysh\", \"CPU_USAGE\": \"0.0\", \"MEM_USAGE\": \"2.1\"}, {\"PID\": \"27526\", \"PROCESS\": \"ps aux\", \"CPU_USAGE\": \"0.0\", \"MEM_USAGE\": \"0.3\"}]"
-					},
-					{
-						"deviceName": "V2724GB_GES#2",
-						"workitemName": "temp",
-						"reportFilter": null,
-						"keyJson": "[{\"name\": \"SLOT\", \"type\": \"select\", \"unit\": \"\", \"level\": \"0\", \"parent\": \"ROOT\", \"default\": \"\"}, {\"name\": \"TEMP\", \"type\": \"number\", \"unit\": \"\", \"level\": \"0\", \"parent\": \"ROOT\", \"default\": \"\"}, {\"name\": \"TEMP_STATUS\", \"type\": \"select\", \"unit\": \"\", \"level\": \"0\", \"parent\": \"ROOT\", \"default\": \"\"}]",
-						"dataJson": "[{}]"
-					},
-					{
-						"deviceName": "V2724GC_GES#3",
-						"workitemName": "cpu",
-						"reportFilter": "{\"filter\": {\"join\": \"AND\", \"list\": [{\"join\": \"AND\", \"text\": \"\", \"group\": [{\"turn\": \"\", \"type\": \"number\", \"value\": \"6\", \"column\": \"USAGE_5SEC\", \"target\": \"\", \"operator\": \"\", \"condition\": \"lt\"}]}]}, \"report\": {\"turn\": \"\", \"type\": \"S\", \"target\": \"\", \"compare\": \"QUERY\", \"condition\": \"\"}}",
-						"keyJson": "[{\"name\": \"USAGE_5SEC\", \"type\": \"number\", \"unit\": \"%\", \"level\": \"0\", \"parent\": \"ROOT\", \"default\": \"\"}, {\"name\": \"USAGE_1MIN\", \"type\": \"number\", \"unit\": \"%\", \"level\": \"0\", \"parent\": \"ROOT\", \"default\": \"\"}, {\"name\": \"USAGE_5MIN\", \"type\": \"number\", \"unit\": \"%\", \"level\": \"0\", \"parent\": \"ROOT\", \"default\": \"\"}, {\"name\": \"USAGE_10MIN\", \"type\": \"number\", \"unit\": \"%\", \"level\": \"0\", \"parent\": \"ROOT\", \"default\": \"\"}]",
-						"dataJson": "[{\"USAGE_1MIN\": \"11.13\", \"USAGE_5MIN\": \"-\", \"USAGE_5SEC\": \"46.80\", \"USAGE_10MIN\": \"13.12\"}]"
-					},
-					{
-						"deviceName": "V2724GC_GES#3",
-						"workitemName": "fan",
-						"reportFilter": null,
-						"keyJson": "[{\"name\": \"FAN_ID\", \"type\": \"select\", \"unit\": \"\", \"level\": \"0\", \"parent\": \"ROOT\", \"default\": \"\"}, {\"name\": \"FAN_STATUS\", \"type\": \"select\", \"unit\": \"\", \"level\": \"0\", \"parent\": \"ROOT\", \"default\": \"\"}]",
-						"dataJson": "[]"
-					},
-					{
-						"deviceName": "V2724GC_GES#3",
-						"workitemName": "mem",
-						"reportFilter": "{\"filter\": {\"join\": \"AND\", \"list\": [{\"join\": \"AND\", \"text\": \"\", \"group\": [{\"turn\": \"\", \"type\": \"number\", \"value\": \"70\", \"column\": \"USAGE\", \"target\": \"\", \"operator\": \"\", \"condition\": \"lt\"}]}]}, \"report\": {\"turn\": \"\", \"type\": \"S\", \"target\": \"\", \"compare\": \"QUERY\", \"condition\": \"\"}}",
-						"keyJson": "[{\"name\": \"TOTAL\", \"type\": \"number\", \"unit\": \"KB\", \"level\": \"0\", \"parent\": \"ROOT\", \"default\": \"\"}, {\"name\": \"USED\", \"type\": \"number\", \"unit\": \"KB\", \"level\": \"0\", \"parent\": \"ROOT\", \"default\": \"\"}, {\"name\": \"FREE\", \"type\": \"number\", \"unit\": \"KB\", \"level\": \"0\", \"parent\": \"ROOT\", \"default\": \"\"}, {\"name\": \"USAGE\", \"type\": \"number\", \"unit\": \"%\", \"level\": \"0\", \"parent\": \"ROOT\", \"default\": \"\"}]",
-						"dataJson": "[{\"FREE\": \"127164\", \"USED\": \"93092\", \"TOTAL\": \"220256\", \"USAGE\": \"42.3\"}]"
-					},
-					{
-						"deviceName": "V2724GC_GES#3",
-						"workitemName": "pow",
-						"reportFilter": null,
-						"keyJson": "[{\"name\": \"POWER_ID\", \"type\": \"select\", \"unit\": \"\", \"level\": \"0\", \"parent\": \"ROOT\", \"default\": \"\"}, {\"name\": \"POWER_STATUS\", \"type\": \"select\", \"unit\": \"\", \"level\": \"0\", \"parent\": \"ROOT\", \"default\": \"\"}]",
-						"dataJson": "[]"
-					},
-					{
-						"deviceName": "V2724GC_GES#3",
-						"workitemName": "proc",
-						"reportFilter": null,
-						"keyJson": "[{\"name\": \"PID\", \"type\": \"select\", \"unit\": \"\", \"level\": \"0\", \"parent\": \"ROOT\", \"default\": \"\"}, {\"name\": \"CPU_USAGE\", \"type\": \"select\", \"unit\": \"%\", \"level\": \"0\", \"parent\": \"ROOT\", \"default\": \"\"}, {\"name\": \"MEM_USAGE\", \"type\": \"number\", \"unit\": \"%\", \"level\": \"0\", \"parent\": \"ROOT\", \"default\": \"\"}, {\"name\": \"PROCESS\", \"type\": \"number\", \"unit\": \"\", \"level\": \"0\", \"parent\": \"ROOT\", \"default\": \"\"}]",
-						"dataJson": "[{\"PID\": \"1\", \"PROCESS\": \"init [3]\", \"CPU_USAGE\": \"0.0\", \"MEM_USAGE\": \"0.2\"}, {\"PID\": \"2\", \"PROCESS\": \"[kthreadd]\", \"CPU_USAGE\": \"0.0\", \"MEM_USAGE\": \"0.0\"}, {\"PID\": \"3\", \"PROCESS\": \"[ksoftirqd/0]\", \"CPU_USAGE\": \"0.0\", \"MEM_USAGE\": \"0.0\"}, {\"PID\": \"4\", \"PROCESS\": \"[watchdog/0]\", \"CPU_USAGE\": \"0.0\", \"MEM_USAGE\": \"0.0\"}, {\"PID\": \"5\", \"PROCESS\": \"[events/0]\", \"CPU_USAGE\": \"0.0\", \"MEM_USAGE\": \"0.0\"}, {\"PID\": \"6\", \"PROCESS\": \"[khelper]\", \"CPU_USAGE\": \"0.0\", \"MEM_USAGE\": \"0.0\"}, {\"PID\": \"9\", \"PROCESS\": \"[async/mgr]\", \"CPU_USAGE\": \"0.0\", \"MEM_USAGE\": \"0.0\"}, {\"PID\": \"40\", \"PROCESS\": \"[sync_supers]\", \"CPU_USAGE\": \"0.0\", \"MEM_USAGE\": \"0.0\"}, {\"PID\": \"42\", \"PROCESS\": \"[bdi-default]\", \"CPU_USAGE\": \"0.0\", \"MEM_USAGE\": \"0.0\"}, {\"PID\": \"43\", \"PROCESS\": \"[kblockd/0]\", \"CPU_USAGE\": \"0.0\", \"MEM_USAGE\": \"0.0\"}, {\"PID\": \"88\", \"PROCESS\": \"[khungtaskd]\", \"CPU_USAGE\": \"0.0\", \"MEM_USAGE\": \"0.0\"}, {\"PID\": \"89\", \"PROCESS\": \"[kswapd0]\", \"CPU_USAGE\": \"0.0\", \"MEM_USAGE\": \"0.0\"}, {\"PID\": \"90\", \"PROCESS\": \"[aio/0]\", \"CPU_USAGE\": \"0.0\", \"MEM_USAGE\": \"0.0\"}, {\"PID\": \"610\", \"PROCESS\": \"[password-rec/0]\", \"CPU_USAGE\": \"0.0\", \"MEM_USAGE\": \"0.0\"}, {\"PID\": \"645\", \"PROCESS\": \"[mtdblockd]\", \"CPU_USAGE\": \"0.0\", \"MEM_USAGE\": \"0.0\"}, {\"PID\": \"701\", \"PROCESS\": \"[bcmCNTR.0]\", \"CPU_USAGE\": \"0.4\", \"MEM_USAGE\": \"0.0\"}, {\"PID\": \"702\", \"PROCESS\": \"[bcmTX]\", \"CPU_USAGE\": \"0.0\", \"MEM_USAGE\": \"0.0\"}, {\"PID\": \"703\", \"PROCESS\": \"[bcmXGS3AsyncTX]\", \"CPU_USAGE\": \"0.0\", \"MEM_USAGE\": \"0.0\"}, {\"PID\": \"704\", \"PROCESS\": \"[bcmRX]\", \"CPU_USAGE\": \"0.0\", \"MEM_USAGE\": \"0.0\"}, {\"PID\": \"705\", \"PROCESS\": \"[bcm-shell]\", \"CPU_USAGE\": \"0.0\", \"MEM_USAGE\": \"0.0\"}, {\"PID\": \"707\", \"PROCESS\": \"[bcmDPC]\", \"CPU_USAGE\": \"0.0\", \"MEM_USAGE\": \"0.0\"}, {\"PID\": \"708\", \"PROCESS\": \"[swal_portload_t]\", \"CPU_USAGE\": \"0.0\", \"MEM_USAGE\": \"0.0\"}, {\"PID\": \"767\", \"PROCESS\": \"[jffs2_gcd_mtd0]\", \"CPU_USAGE\": \"0.0\", \"MEM_USAGE\": \"0.0\"}, {\"PID\": \"864\", \"PROCESS\": \"/usr/sbin/swchd\", \"CPU_USAGE\": \"2.1\", \"MEM_USAGE\": \"4.2\"}, {\"PID\": \"866\", \"PROCESS\": \"/usr/sbin/nsm\", \"CPU_USAGE\": \"0.4\", \"MEM_USAGE\": \"2.1\"}, {\"PID\": \"868\", \"PROCESS\": \"/usr/sbin/snmpd\", \"CPU_USAGE\": \"0.0\", \"MEM_USAGE\": \"2.6\"}, {\"PID\": \"870\", \"PROCESS\": \"/usr/sbin/dhcpd\", \"CPU_USAGE\": \"0.0\", \"MEM_USAGE\": \"1.5\"}, {\"PID\": \"872\", \"PROCESS\": \"/usr/sbin/dhcp6d\", \"CPU_USAGE\": \"0.0\", \"MEM_USAGE\": \"1.3\"}, {\"PID\": \"874\", \"PROCESS\": \"/usr/sbin/sflowd\", \"CPU_USAGE\": \"0.0\", \"MEM_USAGE\": \"1.2\"}, {\"PID\": \"876\", \"PROCESS\": \"/usr/sbin/eapd\", \"CPU_USAGE\": \"0.0\", \"MEM_USAGE\": \"1.2\"}, {\"PID\": \"880\", \"PROCESS\": \"/usr/sbin/sfpmond\", \"CPU_USAGE\": \"0.0\", \"MEM_USAGE\": \"1.2\"}, {\"PID\": \"882\", \"PROCESS\": \"/usr/sbin/swatch\", \"CPU_USAGE\": \"0.9\", \"MEM_USAGE\": \"1.2\"}, {\"PID\": \"883\", \"PROCESS\": \"/usr/sbin/swchd\", \"CPU_USAGE\": \"0.0\", \"MEM_USAGE\": \"4.2\"}, {\"PID\": \"884\", \"PROCESS\": \"/usr/sbin/swchd\", \"CPU_USAGE\": \"0.0\", \"MEM_USAGE\": \"4.2\"}, {\"PID\": \"887\", \"PROCESS\": \"/usr/sbin/swchd\", \"CPU_USAGE\": \"0.0\", \"MEM_USAGE\": \"4.2\"}, {\"PID\": \"890\", \"PROCESS\": \"/usr/sbin/imi -d\", \"CPU_USAGE\": \"0.0\", \"MEM_USAGE\": \"2.4\"}, {\"PID\": \"892\", \"PROCESS\": \"/usr/sbin/inetd\", \"CPU_USAGE\": \"0.0\", \"MEM_USAGE\": \"0.3\"}, {\"PID\": \"899\", \"PROCESS\": \"klogd -c 1\", \"CPU_USAGE\": \"0.0\", \"MEM_USAGE\": \"0.1\"}, {\"PID\": \"900\", \"PROCESS\": \"init\", \"CPU_USAGE\": \"0.0\", \"MEM_USAGE\": \"0.4\"}, {\"PID\": \"903\", \"PROCESS\": \"/usr/sbin/sshd\", \"CPU_USAGE\": \"0.0\", \"MEM_USAGE\": \"0.4\"}, {\"PID\": \"917\", \"PROCESS\": \"-sh\", \"CPU_USAGE\": \"0.0\", \"MEM_USAGE\": \"0.2\"}, {\"PID\": \"922\", \"PROCESS\": \"/usr/sbin/vtysh\", \"CPU_USAGE\": \"0.0\", \"MEM_USAGE\": \"3.1\"}, {\"PID\": \"10813\", \"PROCESS\": \"sshd: admin@pts/0\", \"CPU_USAGE\": \"4.0\", \"MEM_USAGE\": \"0.6\"}, {\"PID\": \"10819\", \"PROCESS\": \"init\", \"CPU_USAGE\": \"2.6\", \"MEM_USAGE\": \"0.4\"}, {\"PID\": \"10822\", \"PROCESS\": \"-sh\", \"CPU_USAGE\": \"0.5\", \"MEM_USAGE\": \"0.2\"}, {\"PID\": \"10827\", \"PROCESS\": \"/usr/sbin/vtysh\", \"CPU_USAGE\": \"79.5\", \"MEM_USAGE\": \"3.1\"}, {\"PID\": \"10830\", \"PROCESS\": \"/usr/sbin/vtysh\", \"CPU_USAGE\": \"0.0\", \"MEM_USAGE\": \"2.1\"}, {\"PID\": \"10831\", \"PROCESS\": \"ps aux\", \"CPU_USAGE\": \"0.0\", \"MEM_USAGE\": \"0.3\"}, {\"PID\": \"22731\", \"PROCESS\": \"/sbin/syslogd -m\", \"CPU_USAGE\": \"0.0\", \"MEM_USAGE\": \"0.2\"}]"
-					},
-					{
-						"deviceName": "V2724GC_GES#3",
-						"workitemName": "temp",
-						"reportFilter": null,
-						"keyJson": "[{\"name\": \"SLOT\", \"type\": \"select\", \"unit\": \"\", \"level\": \"0\", \"parent\": \"ROOT\", \"default\": \"\"}, {\"name\": \"TEMP\", \"type\": \"number\", \"unit\": \"\", \"level\": \"0\", \"parent\": \"ROOT\", \"default\": \"\"}, {\"name\": \"TEMP_STATUS\", \"type\": \"select\", \"unit\": \"\", \"level\": \"0\", \"parent\": \"ROOT\", \"default\": \"\"}]",
-						"dataJson": "[{}]"
-					},
-					{
-						"deviceName": "V2908GB_GES#1",
-						"workitemName": "cpu",
-						"reportFilter": "{\"filter\": {\"join\": \"AND\", \"list\": [{\"join\": \"AND\", \"text\": \"\", \"group\": [{\"turn\": \"\", \"type\": \"number\", \"value\": \"6\", \"column\": \"USAGE_5SEC\", \"target\": \"\", \"operator\": \"\", \"condition\": \"lt\"}]}]}, \"report\": {\"turn\": \"\", \"type\": \"S\", \"target\": \"\", \"compare\": \"QUERY\", \"condition\": \"\"}}",
-						"keyJson": "[{\"name\": \"USAGE_5SEC\", \"type\": \"number\", \"unit\": \"%\", \"level\": \"0\", \"parent\": \"ROOT\", \"default\": \"\"}, {\"name\": \"USAGE_1MIN\", \"type\": \"number\", \"unit\": \"%\", \"level\": \"0\", \"parent\": \"ROOT\", \"default\": \"\"}, {\"name\": \"USAGE_5MIN\", \"type\": \"number\", \"unit\": \"%\", \"level\": \"0\", \"parent\": \"ROOT\", \"default\": \"\"}, {\"name\": \"USAGE_10MIN\", \"type\": \"number\", \"unit\": \"%\", \"level\": \"0\", \"parent\": \"ROOT\", \"default\": \"\"}]",
-						"dataJson": "[{\"USAGE_1MIN\": \"5.77\", \"USAGE_5MIN\": \"-\", \"USAGE_5SEC\": \"14.14\", \"USAGE_10MIN\": \"7.44\"}]"
-					},
-					{
-						"deviceName": "V2908GB_GES#1",
-						"workitemName": "mem",
-						"reportFilter": "{\"filter\": {\"join\": \"AND\", \"list\": [{\"join\": \"AND\", \"text\": \"\", \"group\": [{\"turn\": \"\", \"type\": \"number\", \"value\": \"70\", \"column\": \"USAGE\", \"target\": \"\", \"operator\": \"\", \"condition\": \"lt\"}]}]}, \"report\": {\"turn\": \"\", \"type\": \"S\", \"target\": \"\", \"compare\": \"QUERY\", \"condition\": \"\"}}",
-						"keyJson": "[{\"name\": \"TOTAL\", \"type\": \"number\", \"unit\": \"KB\", \"level\": \"0\", \"parent\": \"ROOT\", \"default\": \"\"}, {\"name\": \"USED\", \"type\": \"number\", \"unit\": \"KB\", \"level\": \"0\", \"parent\": \"ROOT\", \"default\": \"\"}, {\"name\": \"FREE\", \"type\": \"number\", \"unit\": \"KB\", \"level\": \"0\", \"parent\": \"ROOT\", \"default\": \"\"}, {\"name\": \"USAGE\", \"type\": \"number\", \"unit\": \"%\", \"level\": \"0\", \"parent\": \"ROOT\", \"default\": \"\"}]",
-						"dataJson": "[{\"FREE\": \"180704\", \"USED\": \"69424\", \"TOTAL\": \"250128\", \"USAGE\": \"27.8\"}]"
-					},
-					{
-						"deviceName": "V2908GB_GES#1",
-						"workitemName": "pow",
-						"reportFilter": null,
-						"keyJson": "[{\"name\": \"POWER_ID\", \"type\": \"select\", \"unit\": \"\", \"level\": \"0\", \"parent\": \"ROOT\", \"default\": \"\"}, {\"name\": \"POWER_STATUS\", \"type\": \"select\", \"unit\": \"\", \"level\": \"0\", \"parent\": \"ROOT\", \"default\": \"\"}]",
-						"dataJson": "[]"
-					},
-					{
-						"deviceName": "V2908GB_GES#1",
-						"workitemName": "proc",
-						"reportFilter": null,
-						"keyJson": "[{\"name\": \"PID\", \"type\": \"select\", \"unit\": \"\", \"level\": \"0\", \"parent\": \"ROOT\", \"default\": \"\"}, {\"name\": \"CPU_USAGE\", \"type\": \"select\", \"unit\": \"%\", \"level\": \"0\", \"parent\": \"ROOT\", \"default\": \"\"}, {\"name\": \"MEM_USAGE\", \"type\": \"number\", \"unit\": \"%\", \"level\": \"0\", \"parent\": \"ROOT\", \"default\": \"\"}, {\"name\": \"PROCESS\", \"type\": \"number\", \"unit\": \"\", \"level\": \"0\", \"parent\": \"ROOT\", \"default\": \"\"}]",
-						"dataJson": "[{\"PID\": \"1\", \"PROCESS\": \"init [3]\", \"CPU_USAGE\": \"0.0\", \"MEM_USAGE\": \"0.2\"}, {\"PID\": \"2\", \"PROCESS\": \"[kthreadd]\", \"CPU_USAGE\": \"0.0\", \"MEM_USAGE\": \"0.0\"}, {\"PID\": \"3\", \"PROCESS\": \"[ksoftirqd/0]\", \"CPU_USAGE\": \"0.0\", \"MEM_USAGE\": \"0.0\"}, {\"PID\": \"4\", \"PROCESS\": \"[watchdog/0]\", \"CPU_USAGE\": \"0.0\", \"MEM_USAGE\": \"0.0\"}, {\"PID\": \"5\", \"PROCESS\": \"[events/0]\", \"CPU_USAGE\": \"0.0\", \"MEM_USAGE\": \"0.0\"}, {\"PID\": \"6\", \"PROCESS\": \"[khelper]\", \"CPU_USAGE\": \"0.0\", \"MEM_USAGE\": \"0.0\"}, {\"PID\": \"7\", \"PROCESS\": \"[async/mgr]\", \"CPU_USAGE\": \"0.0\", \"MEM_USAGE\": \"0.0\"}, {\"PID\": \"8\", \"PROCESS\": \"[sync_supers]\", \"CPU_USAGE\": \"0.0\", \"MEM_USAGE\": \"0.0\"}, {\"PID\": \"9\", \"PROCESS\": \"[bdi-default]\", \"CPU_USAGE\": \"0.0\", \"MEM_USAGE\": \"0.0\"}, {\"PID\": \"10\", \"PROCESS\": \"[kblockd/0]\", \"CPU_USAGE\": \"0.0\", \"MEM_USAGE\": \"0.0\"}, {\"PID\": \"11\", \"PROCESS\": \"[khungtaskd]\", \"CPU_USAGE\": \"0.0\", \"MEM_USAGE\": \"0.0\"}, {\"PID\": \"12\", \"PROCESS\": \"[kswapd0]\", \"CPU_USAGE\": \"0.0\", \"MEM_USAGE\": \"0.0\"}, {\"PID\": \"13\", \"PROCESS\": \"[aio/0]\", \"CPU_USAGE\": \"0.0\", \"MEM_USAGE\": \"0.0\"}, {\"PID\": \"14\", \"PROCESS\": \"[password-rec/0]\", \"CPU_USAGE\": \"0.0\", \"MEM_USAGE\": \"0.0\"}, {\"PID\": \"15\", \"PROCESS\": \"[mtdblockd]\", \"CPU_USAGE\": \"0.0\", \"MEM_USAGE\": \"0.0\"}, {\"PID\": \"16\", \"PROCESS\": \"[kwatchdogd]\", \"CPU_USAGE\": \"0.0\", \"MEM_USAGE\": \"0.0\"}, {\"PID\": \"18\", \"PROCESS\": \"[GPIO_INTR_THREA]\", \"CPU_USAGE\": \"0.0\", \"MEM_USAGE\": \"0.0\"}, {\"PID\": \"19\", \"PROCESS\": \"[RTKFDB_refresh]\", \"CPU_USAGE\": \"0.0\", \"MEM_USAGE\": \"0.0\"}, {\"PID\": \"20\", \"PROCESS\": \"[swal_portload_t]\", \"CPU_USAGE\": \"0.0\", \"MEM_USAGE\": \"0.0\"}, {\"PID\": \"32\", \"PROCESS\": \"[jffs2_gcd_mtd0]\", \"CPU_USAGE\": \"0.0\", \"MEM_USAGE\": \"0.0\"}, {\"PID\": \"109\", \"PROCESS\": \"/usr/sbin/swchd\", \"CPU_USAGE\": \"0.0\", \"MEM_USAGE\": \"3.9\"}, {\"PID\": \"111\", \"PROCESS\": \"/usr/sbin/nsm\", \"CPU_USAGE\": \"0.0\", \"MEM_USAGE\": \"1.9\"}, {\"PID\": \"113\", \"PROCESS\": \"/usr/sbin/snmpd\", \"CPU_USAGE\": \"0.0\", \"MEM_USAGE\": \"2.3\"}, {\"PID\": \"115\", \"PROCESS\": \"/usr/sbin/dhcpd\", \"CPU_USAGE\": \"0.0\", \"MEM_USAGE\": \"1.4\"}, {\"PID\": \"117\", \"PROCESS\": \"/usr/sbin/dhcp6d\", \"CPU_USAGE\": \"0.0\", \"MEM_USAGE\": \"1.2\"}, {\"PID\": \"119\", \"PROCESS\": \"/usr/sbin/sflowd\", \"CPU_USAGE\": \"0.0\", \"MEM_USAGE\": \"1.1\"}, {\"PID\": \"121\", \"PROCESS\": \"/usr/sbin/eapd\", \"CPU_USAGE\": \"0.0\", \"MEM_USAGE\": \"1.1\"}, {\"PID\": \"123\", \"PROCESS\": \"/usr/sbin/sfpmond\", \"CPU_USAGE\": \"0.0\", \"MEM_USAGE\": \"1.1\"}, {\"PID\": \"127\", \"PROCESS\": \"/usr/sbin/swatchd\", \"CPU_USAGE\": \"0.3\", \"MEM_USAGE\": \"1.1\"}, {\"PID\": \"134\", \"PROCESS\": \"/usr/sbin/imi -d\", \"CPU_USAGE\": \"0.0\", \"MEM_USAGE\": \"2.1\"}, {\"PID\": \"138\", \"PROCESS\": \"klogd -c 1\", \"CPU_USAGE\": \"0.0\", \"MEM_USAGE\": \"0.1\"}, {\"PID\": \"141\", \"PROCESS\": \"/usr/sbin/mimid -\", \"CPU_USAGE\": \"0.2\", \"MEM_USAGE\": \"0.6\"}, {\"PID\": \"148\", \"PROCESS\": \"/usr/sbin/sshd\", \"CPU_USAGE\": \"0.0\", \"MEM_USAGE\": \"0.4\"}, {\"PID\": \"149\", \"PROCESS\": \"/bin/login --\", \"CPU_USAGE\": \"0.0\", \"MEM_USAGE\": \"0.3\"}, {\"PID\": \"152\", \"PROCESS\": \"/usr/sbin/inetd\", \"CPU_USAGE\": \"0.0\", \"MEM_USAGE\": \"0.2\"}, {\"PID\": \"163\", \"PROCESS\": \"/sbin/syslogd -m\", \"CPU_USAGE\": \"0.0\", \"MEM_USAGE\": \"0.3\"}, {\"PID\": \"1542\", \"PROCESS\": \"init\", \"CPU_USAGE\": \"0.3\", \"MEM_USAGE\": \"0.4\"}, {\"PID\": \"1545\", \"PROCESS\": \"[sh] <defunct>\", \"CPU_USAGE\": \"0.2\", \"MEM_USAGE\": \"0.0\"}, {\"PID\": \"1556\", \"PROCESS\": \"sshd: admin@pts/0\", \"CPU_USAGE\": \"3.0\", \"MEM_USAGE\": \"0.7\"}, {\"PID\": \"1562\", \"PROCESS\": \"init\", \"CPU_USAGE\": \"2.0\", \"MEM_USAGE\": \"0.4\"}, {\"PID\": \"1565\", \"PROCESS\": \"-sh\", \"CPU_USAGE\": \"0.5\", \"MEM_USAGE\": \"0.2\"}, {\"PID\": \"1570\", \"PROCESS\": \"/usr/sbin/vtysh\", \"CPU_USAGE\": \"42.0\", \"MEM_USAGE\": \"2.8\"}, {\"PID\": \"1573\", \"PROCESS\": \"/usr/sbin/vtysh\", \"CPU_USAGE\": \"0.0\", \"MEM_USAGE\": \"1.7\"}, {\"PID\": \"1574\", \"PROCESS\": \"ps aux\", \"CPU_USAGE\": \"0.0\", \"MEM_USAGE\": \"0.3\"}]"
-					},
-					{
-						"deviceName": "V2908GB_GES#1",
-						"workitemName": "temp",
-						"reportFilter": null,
-						"keyJson": "[{\"name\": \"SLOT\", \"type\": \"select\", \"unit\": \"\", \"level\": \"0\", \"parent\": \"ROOT\", \"default\": \"\"}, {\"name\": \"TEMP\", \"type\": \"number\", \"unit\": \"\", \"level\": \"0\", \"parent\": \"ROOT\", \"default\": \"\"}, {\"name\": \"TEMP_STATUS\", \"type\": \"select\", \"unit\": \"\", \"level\": \"0\", \"parent\": \"ROOT\", \"default\": \"\"}]",
-						"dataJson": "[{}]"
-					},
-					{
-						"deviceName": "V6848XG_L3#1",
-						"workitemName": "cpu",
-						"reportFilter": "{\"filter\": {\"join\": \"AND\", \"list\": [{\"join\": \"AND\", \"text\": \"\", \"group\": [{\"turn\": \"\", \"type\": \"number\", \"value\": \"6\", \"column\": \"USAGE_5SEC\", \"target\": \"\", \"operator\": \"\", \"condition\": \"lt\"}]}]}, \"report\": {\"turn\": \"\", \"type\": \"S\", \"target\": \"\", \"compare\": \"QUERY\", \"condition\": \"\"}}",
-						"keyJson": "[{\"name\": \"USAGE_5SEC\", \"type\": \"number\", \"unit\": \"%\", \"level\": \"0\", \"parent\": \"ROOT\", \"default\": \"\"}, {\"name\": \"USAGE_1MIN\", \"type\": \"number\", \"unit\": \"%\", \"level\": \"0\", \"parent\": \"ROOT\", \"default\": \"\"}, {\"name\": \"USAGE_5MIN\", \"type\": \"number\", \"unit\": \"%\", \"level\": \"0\", \"parent\": \"ROOT\", \"default\": \"\"}, {\"name\": \"USAGE_10MIN\", \"type\": \"number\", \"unit\": \"%\", \"level\": \"0\", \"parent\": \"ROOT\", \"default\": \"\"}]",
-						"dataJson": "[{\"USAGE_1MIN\": \"6.33\", \"USAGE_5MIN\": \"-\", \"USAGE_5SEC\": \"5.98\", \"USAGE_10MIN\": \"7.55\"}]"
-					},
-					{
-						"deviceName": "V6848XG_L3#1",
-						"workitemName": "fan",
-						"reportFilter": null,
-						"keyJson": "[{\"name\": \"FAN_ID\", \"type\": \"select\", \"unit\": \"\", \"level\": \"0\", \"parent\": \"ROOT\", \"default\": \"\"}, {\"name\": \"FAN_STATUS\", \"type\": \"select\", \"unit\": \"\", \"level\": \"0\", \"parent\": \"ROOT\", \"default\": \"\"}]",
-						"dataJson": "[{\"FAN_ID\": \"A-1\", \"FAN_STATUS\": \"RUN\"}, {\"FAN_ID\": \"A-2\", \"FAN_STATUS\": \"RUN\"}, {\"FAN_ID\": \"B-1\", \"FAN_STATUS\": \"RUN\"}, {\"FAN_ID\": \"B-2\", \"FAN_STATUS\": \"RUN\"}]"
-					},
-					{
-						"deviceName": "V6848XG_L3#1",
-						"workitemName": "mem",
-						"reportFilter": "{\"filter\": {\"join\": \"AND\", \"list\": [{\"join\": \"AND\", \"text\": \"\", \"group\": [{\"turn\": \"\", \"type\": \"number\", \"value\": \"70\", \"column\": \"USAGE\", \"target\": \"\", \"operator\": \"\", \"condition\": \"lt\"}]}]}, \"report\": {\"turn\": \"\", \"type\": \"S\", \"target\": \"\", \"compare\": \"QUERY\", \"condition\": \"\"}}",
-						"keyJson": "[{\"name\": \"TOTAL\", \"type\": \"number\", \"unit\": \"KB\", \"level\": \"0\", \"parent\": \"ROOT\", \"default\": \"\"}, {\"name\": \"USED\", \"type\": \"number\", \"unit\": \"KB\", \"level\": \"0\", \"parent\": \"ROOT\", \"default\": \"\"}, {\"name\": \"FREE\", \"type\": \"number\", \"unit\": \"KB\", \"level\": \"0\", \"parent\": \"ROOT\", \"default\": \"\"}, {\"name\": \"USAGE\", \"type\": \"number\", \"unit\": \"%\", \"level\": \"0\", \"parent\": \"ROOT\", \"default\": \"\"}]",
-						"dataJson": "[{\"FREE\": \"1837416\", \"USED\": \"199844\", \"TOTAL\": \"2037260\", \"USAGE\": \"9.8\"}]"
-					},
-					{
-						"deviceName": "V6848XG_L3#1",
-						"workitemName": "pow",
-						"reportFilter": null,
-						"keyJson": "[{\"name\": \"POWER_ID\", \"type\": \"select\", \"unit\": \"\", \"level\": \"0\", \"parent\": \"ROOT\", \"default\": \"\"}, {\"name\": \"POWER_STATUS\", \"type\": \"select\", \"unit\": \"\", \"level\": \"0\", \"parent\": \"ROOT\", \"default\": \"\"}]",
-						"dataJson": "[{\"POWER_ID\": \"Power A\", \"POWER_STATUS\": \"Fault\"}, {\"POWER_ID\": \"Power B\", \"POWER_STATUS\": \"OK\"}]"
-					},
-					{
-						"deviceName": "V6848XG_L3#1",
-						"workitemName": "proc",
-						"reportFilter": null,
-						"keyJson": "[{\"name\": \"PID\", \"type\": \"select\", \"unit\": \"\", \"level\": \"0\", \"parent\": \"ROOT\", \"default\": \"\"}, {\"name\": \"CPU_USAGE\", \"type\": \"select\", \"unit\": \"%\", \"level\": \"0\", \"parent\": \"ROOT\", \"default\": \"\"}, {\"name\": \"MEM_USAGE\", \"type\": \"number\", \"unit\": \"%\", \"level\": \"0\", \"parent\": \"ROOT\", \"default\": \"\"}, {\"name\": \"PROCESS\", \"type\": \"number\", \"unit\": \"\", \"level\": \"0\", \"parent\": \"ROOT\", \"default\": \"\"}]",
-						"dataJson": "[{\"PID\": \"1\", \"PROCESS\": \"init [3]\", \"CPU_USAGE\": \"0.0\", \"MEM_USAGE\": \"0.0\"}, {\"PID\": \"2\", \"PROCESS\": \"[kthreadd]\", \"CPU_USAGE\": \"0.0\", \"MEM_USAGE\": \"0.0\"}, {\"PID\": \"3\", \"PROCESS\": \"[ksoftirqd/0]\", \"CPU_USAGE\": \"0.0\", \"MEM_USAGE\": \"0.0\"}, {\"PID\": \"4\", \"PROCESS\": \"[watchdog/0]\", \"CPU_USAGE\": \"0.0\", \"MEM_USAGE\": \"0.0\"}, {\"PID\": \"5\", \"PROCESS\": \"[events/0]\", \"CPU_USAGE\": \"0.0\", \"MEM_USAGE\": \"0.0\"}, {\"PID\": \"6\", \"PROCESS\": \"[khelper]\", \"CPU_USAGE\": \"0.0\", \"MEM_USAGE\": \"0.0\"}, {\"PID\": \"7\", \"PROCESS\": \"[async/mgr]\", \"CPU_USAGE\": \"0.0\", \"MEM_USAGE\": \"0.0\"}, {\"PID\": \"8\", \"PROCESS\": \"[sync_supers]\", \"CPU_USAGE\": \"0.0\", \"MEM_USAGE\": \"0.0\"}, {\"PID\": \"9\", \"PROCESS\": \"[bdi-default]\", \"CPU_USAGE\": \"0.0\", \"MEM_USAGE\": \"0.0\"}, {\"PID\": \"10\", \"PROCESS\": \"[kblockd/0]\", \"CPU_USAGE\": \"0.0\", \"MEM_USAGE\": \"0.0\"}, {\"PID\": \"11\", \"PROCESS\": \"[khungtaskd]\", \"CPU_USAGE\": \"0.0\", \"MEM_USAGE\": \"0.0\"}, {\"PID\": \"12\", \"PROCESS\": \"[kswapd0]\", \"CPU_USAGE\": \"0.0\", \"MEM_USAGE\": \"0.0\"}, {\"PID\": \"13\", \"PROCESS\": \"[aio/0]\", \"CPU_USAGE\": \"0.0\", \"MEM_USAGE\": \"0.0\"}, {\"PID\": \"14\", \"PROCESS\": \"[crypto/0]\", \"CPU_USAGE\": \"0.0\", \"MEM_USAGE\": \"0.0\"}, {\"PID\": \"21\", \"PROCESS\": \"[kwatchdogd]\", \"CPU_USAGE\": \"0.0\", \"MEM_USAGE\": \"0.0\"}, {\"PID\": \"37\", \"PROCESS\": \"[jffs2_gcd_mtd0]\", \"CPU_USAGE\": \"0.0\", \"MEM_USAGE\": \"0.0\"}, {\"PID\": \"41\", \"PROCESS\": \"[socdmadesc.0]\", \"CPU_USAGE\": \"0.3\", \"MEM_USAGE\": \"0.0\"}, {\"PID\": \"42\", \"PROCESS\": \"[bcmCNTR.0]\", \"CPU_USAGE\": \"2.9\", \"MEM_USAGE\": \"0.0\"}, {\"PID\": \"43\", \"PROCESS\": \"[bcmTX]\", \"CPU_USAGE\": \"0.0\", \"MEM_USAGE\": \"0.0\"}, {\"PID\": \"44\", \"PROCESS\": \"[bcmXGS3AsyncTX]\", \"CPU_USAGE\": \"0.0\", \"MEM_USAGE\": \"0.0\"}, {\"PID\": \"45\", \"PROCESS\": \"[bcmRX]\", \"CPU_USAGE\": \"0.0\", \"MEM_USAGE\": \"0.0\"}, {\"PID\": \"46\", \"PROCESS\": \"[bcm-shell]\", \"CPU_USAGE\": \"0.0\", \"MEM_USAGE\": \"0.0\"}, {\"PID\": \"47\", \"PROCESS\": \"[bcmLINK.0]\", \"CPU_USAGE\": \"1.5\", \"MEM_USAGE\": \"0.0\"}, {\"PID\": \"48\", \"PROCESS\": \"[bcmDPC]\", \"CPU_USAGE\": \"0.0\", \"MEM_USAGE\": \"0.0\"}, {\"PID\": \"49\", \"PROCESS\": \"[swal_portload_t]\", \"CPU_USAGE\": \"0.0\", \"MEM_USAGE\": \"0.0\"}, {\"PID\": \"50\", \"PROCESS\": \"[_l3_mgr_fib_gc]\", \"CPU_USAGE\": \"0.0\", \"MEM_USAGE\": \"0.0\"}, {\"PID\": \"51\", \"PROCESS\": \"[_l3_mgr_fib6_gc]\", \"CPU_USAGE\": \"0.0\", \"MEM_USAGE\": \"0.0\"}, {\"PID\": \"52\", \"PROCESS\": \"[bcmhal_pause_mo]\", \"CPU_USAGE\": \"0.0\", \"MEM_USAGE\": \"0.0\"}, {\"PID\": \"102\", \"PROCESS\": \"/usr/sbin/swchd\", \"CPU_USAGE\": \"0.0\", \"MEM_USAGE\": \"0.3\"}, {\"PID\": \"104\", \"PROCESS\": \"/usr/sbin/nsm\", \"CPU_USAGE\": \"0.0\", \"MEM_USAGE\": \"0.1\"}, {\"PID\": \"106\", \"PROCESS\": \"/usr/sbin/snmpd\", \"CPU_USAGE\": \"0.0\", \"MEM_USAGE\": \"0.2\"}, {\"PID\": \"108\", \"PROCESS\": \"/usr/sbin/ospfd\", \"CPU_USAGE\": \"0.0\", \"MEM_USAGE\": \"0.1\"}, {\"PID\": \"110\", \"PROCESS\": \"/usr/sbin/ospf6d\", \"CPU_USAGE\": \"0.0\", \"MEM_USAGE\": \"0.1\"}, {\"PID\": \"112\", \"PROCESS\": \"/usr/sbin/bgpd\", \"CPU_USAGE\": \"0.0\", \"MEM_USAGE\": \"0.1\"}, {\"PID\": \"114\", \"PROCESS\": \"/usr/sbin/pimd\", \"CPU_USAGE\": \"0.0\", \"MEM_USAGE\": \"0.1\"}, {\"PID\": \"116\", \"PROCESS\": \"/usr/sbin/vrrpd\", \"CPU_USAGE\": \"0.0\", \"MEM_USAGE\": \"0.0\"}, {\"PID\": \"118\", \"PROCESS\": \"/usr/sbin/vrrp6d\", \"CPU_USAGE\": \"0.0\", \"MEM_USAGE\": \"0.0\"}, {\"PID\": \"120\", \"PROCESS\": \"/usr/sbin/dhcpd\", \"CPU_USAGE\": \"0.0\", \"MEM_USAGE\": \"0.1\"}, {\"PID\": \"122\", \"PROCESS\": \"/usr/sbin/dhcp6d\", \"CPU_USAGE\": \"0.0\", \"MEM_USAGE\": \"0.0\"}, {\"PID\": \"126\", \"PROCESS\": \"/usr/sbin/sflowd\", \"CPU_USAGE\": \"0.0\", \"MEM_USAGE\": \"0.0\"}, {\"PID\": \"128\", \"PROCESS\": \"/usr/sbin/eapd\", \"CPU_USAGE\": \"0.0\", \"MEM_USAGE\": \"0.0\"}, {\"PID\": \"130\", \"PROCESS\": \"/usr/sbin/hwmond\", \"CPU_USAGE\": \"0.0\", \"MEM_USAGE\": \"0.0\"}, {\"PID\": \"132\", \"PROCESS\": \"/usr/sbin/sfpmond\", \"CPU_USAGE\": \"0.0\", \"MEM_USAGE\": \"0.0\"}, {\"PID\": \"134\", \"PROCESS\": \"/usr/sbin/oamd\", \"CPU_USAGE\": \"0.0\", \"MEM_USAGE\": \"0.0\"}, {\"PID\": \"137\", \"PROCESS\": \"/usr/sbin/imi -d\", \"CPU_USAGE\": \"0.0\", \"MEM_USAGE\": \"0.2\"}, {\"PID\": \"139\", \"PROCESS\": \"/usr/sbin/mimid -\", \"CPU_USAGE\": \"0.0\", \"MEM_USAGE\": \"0.0\"}, {\"PID\": \"144\", \"PROCESS\": \"klogd -c 1\", \"CPU_USAGE\": \"0.0\", \"MEM_USAGE\": \"0.0\"}, {\"PID\": \"163\", \"PROCESS\": \"/usr/sbin/inetd\", \"CPU_USAGE\": \"0.0\", \"MEM_USAGE\": \"0.0\"}, {\"PID\": \"2604\", \"PROCESS\": \"sshd: admin@pts/1\", \"CPU_USAGE\": \"0.1\", \"MEM_USAGE\": \"0.0\"}, {\"PID\": \"2609\", \"PROCESS\": \"-sh\", \"CPU_USAGE\": \"0.0\", \"MEM_USAGE\": \"0.0\"}, {\"PID\": \"2615\", \"PROCESS\": \"/usr/sbin/vtysh\", \"CPU_USAGE\": \"50.0\", \"MEM_USAGE\": \"0.2\"}, {\"PID\": \"2616\", \"PROCESS\": \"/usr/sbin/vtysh\", \"CPU_USAGE\": \"0.0\", \"MEM_USAGE\": \"0.2\"}, {\"PID\": \"2617\", \"PROCESS\": \"ps aux\", \"CPU_USAGE\": \"0.0\", \"MEM_USAGE\": \"0.0\"}, {\"PID\": \"5434\", \"PROCESS\": \"init\", \"CPU_USAGE\": \"0.0\", \"MEM_USAGE\": \"0.0\"}, {\"PID\": \"6373\", \"PROCESS\": \"syslogd -m 0\", \"CPU_USAGE\": \"0.0\", \"MEM_USAGE\": \"0.0\"}, {\"PID\": \"7322\", \"PROCESS\": \"-sh\", \"CPU_USAGE\": \"0.0\", \"MEM_USAGE\": \"0.0\"}, {\"PID\": \"7328\", \"PROCESS\": \"/usr/sbin/vtysh\", \"CPU_USAGE\": \"0.0\", \"MEM_USAGE\": \"0.2\"}, {\"PID\": \"9619\", \"PROCESS\": \"/usr/sbin/sshd\", \"CPU_USAGE\": \"0.0\", \"MEM_USAGE\": \"0.0\"}, {\"PID\": \"27800\", \"PROCESS\": \"/usr/sbin/vtysh\", \"CPU_USAGE\": \"0.0\", \"MEM_USAGE\": \"0.2\"}]"
-					},
-					{
-						"deviceName": "V6848XG_L3#1",
-						"workitemName": "temp",
-						"reportFilter": null,
-						"keyJson": "[{\"name\": \"SLOT\", \"type\": \"select\", \"unit\": \"\", \"level\": \"0\", \"parent\": \"ROOT\", \"default\": \"\"}, {\"name\": \"TEMP\", \"type\": \"number\", \"unit\": \"\", \"level\": \"0\", \"parent\": \"ROOT\", \"default\": \"\"}, {\"name\": \"TEMP_STATUS\", \"type\": \"select\", \"unit\": \"\", \"level\": \"0\", \"parent\": \"ROOT\", \"default\": \"\"}]",
-						"dataJson": "[{\"SLOT\": \"Temperature 01\", \"TEMP\": \"29\", \"TEMP_STATUS\": \"OK\"}, {\"SLOT\": \"Temperature 02\", \"TEMP\": \"32\", \"TEMP_STATUS\": \"OK\"}, {\"SLOT\": \"Temperature 03\", \"TEMP\": \"31\", \"TEMP_STATUS\": \"OK\"}, {\"SLOT\": \"Temperature 04\", \"TEMP\": \"36\", \"TEMP_STATUS\": \"OK\"}, {\"SLOT\": \"Temperature 05\", \"TEMP\": \"43\", \"TEMP_STATUS\": \"OK\"}, {\"SLOT\": \"Temperature 06\", \"TEMP\": \"44\", \"TEMP_STATUS\": \"OK\"}, {\"SLOT\": \"Temperature 07\", \"TEMP\": \"44\", \"TEMP_STATUS\": \"OK\"}, {\"SLOT\": \"Temperature 08\", \"TEMP\": \"43\", \"TEMP_STATUS\": \"OK\"}, {\"SLOT\": \"Temperature 09\", \"TEMP\": \"44\", \"TEMP_STATUS\": \"OK\"}, {\"SLOT\": \"Temperature 10\", \"TEMP\": \"44\", \"TEMP_STATUS\": \"OK\"}, {\"SLOT\": \"Temperature 11\", \"TEMP\": \"43\", \"TEMP_STATUS\": \"OK\"}, {\"SLOT\": \"Temperature 12\", \"TEMP\": \"43\", \"TEMP_STATUS\": \"OK\"}, {\"SLOT\": \"Temperature 13\", \"TEMP\": \"44\", \"TEMP_STATUS\": \"OK\"}, {}]"
-					},
-					{
-						"deviceName": "V6848XG_L3#2",
-						"workitemName": "cpu",
-						"reportFilter": "{\"filter\": {\"join\": \"AND\", \"list\": [{\"join\": \"AND\", \"text\": \"\", \"group\": [{\"turn\": \"\", \"type\": \"number\", \"value\": \"6\", \"column\": \"USAGE_5SEC\", \"target\": \"\", \"operator\": \"\", \"condition\": \"lt\"}]}]}, \"report\": {\"turn\": \"\", \"type\": \"S\", \"target\": \"\", \"compare\": \"QUERY\", \"condition\": \"\"}}",
-						"keyJson": "[{\"name\": \"USAGE_5SEC\", \"type\": \"number\", \"unit\": \"%\", \"level\": \"0\", \"parent\": \"ROOT\", \"default\": \"\"}, {\"name\": \"USAGE_1MIN\", \"type\": \"number\", \"unit\": \"%\", \"level\": \"0\", \"parent\": \"ROOT\", \"default\": \"\"}, {\"name\": \"USAGE_5MIN\", \"type\": \"number\", \"unit\": \"%\", \"level\": \"0\", \"parent\": \"ROOT\", \"default\": \"\"}, {\"name\": \"USAGE_10MIN\", \"type\": \"number\", \"unit\": \"%\", \"level\": \"0\", \"parent\": \"ROOT\", \"default\": \"\"}, {\"name\": \"FILTER_RESULT\", \"type\": \"select\", \"unit\": \"\", \"level\": \"0\", \"parent\": \"ROOT\"}]",
-						"dataJson": "[{\"USAGE_1MIN\": \"7.19\", \"USAGE_5MIN\": \"-\", \"USAGE_5SEC\": \"8.63\", \"USAGE_10MIN\": \"8.94\", \"FILTER_RESULT\": \"NOK\"}]"
-					}
-				]
-			},
-			{
-				"groupName": "Sandbox",
-				"deviceTotalCount": 3,
-				"autoCheckResult": [
-					{
-						"deviceType": "AP",
-						"abnormalCount": 0
-					},
-					{
-						"deviceType": "Switch",
-						"abnormalCount": 0
-					}
-				],
-				"abnormalDeviceCount": null,
-				"abnormalDeviceStatus": [
-					{
-						"name": "Sandbox",
-						"deviceCount": 3,
-						"abnormalCount": 0
-					}
-				],
-				"abnormalItemStatus": [
-					{
-						"name": "cpu",
-						"deviceCount": 5,
-						"abnormalCount": 5
-					},
-					{
-						"name": "mem",
-						"deviceCount": 5,
-						"abnormalCount": 4
-					},
-					{
-						"name": "pow",
-						"deviceCount": 5,
-						"abnormalCount": 4
-					},
-					{
-						"name": "proc",
-						"deviceCount": 5,
-						"abnormalCount": 4
-					},
-					{
-						"name": "temp",
-						"deviceCount": 5,
-						"abnormalCount": 4
-					},
-					{
-						"name": "fan",
-						"deviceCount": 4,
-						"abnormalCount": 3
-					}
-				],
-				"abnormalDeviceTrend": [],
-				"abnormalItemTrend": [
-					{
-						"groupDate": "2021-10-20 09:50:01.0",
-						"list": [
-							{
-								"name": "proc",
-								"abnormalCount": 4
-							},
-							{
-								"name": "fan",
-								"abnormalCount": 3
-							},
-							{
-								"name": "temp",
-								"abnormalCount": 4
-							},
-							{
-								"name": "mem",
-								"abnormalCount": 4
-							},
-							{
-								"name": "pow",
-								"abnormalCount": 4
-							},
-							{
-								"name": "cpu",
-								"abnormalCount": 5
-							}
-						]
-					},
-					{
-						"groupDate": "2021-10-20 09:45:03.0",
-						"list": [
-							{
-								"name": "proc",
-								"abnormalCount": 4
-							},
-							{
-								"name": "fan",
-								"abnormalCount": 3
-							},
-							{
-								"name": "temp",
-								"abnormalCount": 4
-							},
-							{
-								"name": "mem",
-								"abnormalCount": 4
-							},
-							{
-								"name": "pow",
-								"abnormalCount": 4
-							},
-							{
-								"name": "cpu",
-								"abnormalCount": 5
-							}
-						]
-					},
-					{
-						"groupDate": "2021-10-20 09:40:01.0",
-						"list": [
-							{
-								"name": "fan",
-								"abnormalCount": 3
-							},
-							{
-								"name": "temp",
-								"abnormalCount": 4
-							},
-							{
-								"name": "mem",
-								"abnormalCount": 4
-							},
-							{
-								"name": "pow",
-								"abnormalCount": 4
-							},
-							{
-								"name": "cpu",
-								"abnormalCount": 5
-							},
-							{
-								"name": "proc",
-								"abnormalCount": 4
-							}
-						]
-					},
-					{
-						"groupDate": "2021-10-20 09:35:02.0",
-						"list": [
-							{
-								"name": "temp",
-								"abnormalCount": 4
-							},
-							{
-								"name": "mem",
-								"abnormalCount": 4
-							},
-							{
-								"name": "pow",
-								"abnormalCount": 4
-							},
-							{
-								"name": "cpu",
-								"abnormalCount": 5
-							},
-							{
-								"name": "proc",
-								"abnormalCount": 4
-							},
-							{
-								"name": "fan",
-								"abnormalCount": 3
-							}
-						]
-					},
-					{
-						"groupDate": "2021-10-20 09:30:01.0",
-						"list": [
-							{
-								"name": "temp",
-								"abnormalCount": 4
-							},
-							{
-								"name": "mem",
-								"abnormalCount": 4
-							},
-							{
-								"name": "pow",
-								"abnormalCount": 4
-							},
-							{
-								"name": "cpu",
-								"abnormalCount": 5
-							},
-							{
-								"name": "proc",
-								"abnormalCount": 4
-							},
-							{
-								"name": "fan",
-								"abnormalCount": 3
-							}
-						]
-					}
-				],
-				"toDoList": [],
-				"abnormalWeek": [],
-				"runResult": []
-			}
-		]
-	}
+  "resultCode": 200,
+  "resultMessage": "SUCCESS",
+  "data": {
+    "workflowName": "장비점검",
+    "runDate": "2021-11-12 17:53:24",
+    "reportData": [
+      {
+        "groupName": "테스트베드 > 테스트베드(다산)",
+        "groupCheckResult": [
+          {
+            "deviceType": "AP",
+            "nochangeCount": 0,
+            "createCount": 0,
+            "updateCount": 0,
+            "deleteCount": 0
+          },
+          {
+            "deviceType": "Switch",
+            "nochangeCount": 4,
+            "createCount": 0,
+            "updateCount": 1,
+            "deleteCount": 0
+          }
+        ],
+        "deviceCheckResult": [
+          {
+            "rootName": "테스트베드(다산)",
+            "deviceName": "V2908GB_GES#1",
+            "checkState": "변경",
+            "ip": "49.160.138.125",
+            "title": "V2908GB",
+            "vendor": "다산네트웍스"
+          }
+        ],
+        "deviceTotalCount": 5,
+        "autoCheckResult": [
+          {
+            "deviceType": "AP",
+            "abnormalCount": 0
+          },
+          {
+            "deviceType": "Switch",
+            "abnormalCount": 1
+          }
+        ],
+        "abnormalDeviceCount": {
+          "currentAbnormalCount": 1,
+          "beforeAbnormalCount": 0
+        },
+        "abnormalDeviceStatus": [
+          {
+            "name": "테스트베드(다산)",
+            "deviceCount": 5,
+            "abnormalCount": 1
+          }
+        ],
+        "abnormalItemStatus": [
+          {
+            "name": "memory",
+            "deviceCount": 1,
+            "abnormalCount": 1
+          },
+          {
+            "name": "temperature",
+            "deviceCount": 1,
+            "abnormalCount": 1
+          },
+          {
+            "name": "cpu",
+            "deviceCount": 1,
+            "abnormalCount": 0
+          },
+          {
+            "name": "fan",
+            "deviceCount": 1,
+            "abnormalCount": 0
+          },
+          {
+            "name": "power",
+            "deviceCount": 1,
+            "abnormalCount": 0
+          },
+          {
+            "name": "process",
+            "deviceCount": 1,
+            "abnormalCount": 0
+          }
+        ],
+        "abnormalDeviceTrend": [
+          {
+            "groupDate": "2021-11-12 17:49:28",
+            "abnormalCount": 1
+          },
+          {
+            "groupDate": "2021-11-12 17:43:18",
+            "abnormalCount": 1
+          },
+          {
+            "groupDate": "2021-11-12 17:18:30",
+            "abnormalCount": 1
+          },
+          {
+            "groupDate": "2021-11-12 17:08:32",
+            "abnormalCount": 1
+          },
+          {
+            "groupDate": "2021-11-12 16:45:50",
+            "abnormalCount": 1
+          },
+          {
+            "groupDate": "2021-11-12 13:21:15",
+            "abnormalCount": 1
+          },
+          {
+            "groupDate": "2021-11-12 11:55:27",
+            "abnormalCount": 1
+          },
+          {
+            "groupDate": "2021-11-12 11:46:58",
+            "abnormalCount": 1
+          },
+          {
+            "groupDate": "2021-11-12 00:46:52",
+            "abnormalCount": 1
+          },
+          {
+            "groupDate": "2021-11-12 00:43:34",
+            "abnormalCount": 1
+          }
+        ],
+        "abnormalItemTrend": [
+          {
+            "groupDate": "2021-11-12 17:49:28",
+            "list": [
+              {
+                "name": "memory",
+                "abnormalCount": 1
+              },
+              {
+                "name": "temperature",
+                "abnormalCount": 5
+              },
+              {
+                "name": "process",
+                "abnormalCount": 0
+              },
+              {
+                "name": "fan",
+                "abnormalCount": 0
+              },
+              {
+                "name": "power",
+                "abnormalCount": 0
+              },
+              {
+                "name": "cpu",
+                "abnormalCount": 0
+              }
+            ]
+          },
+          {
+            "groupDate": "2021-11-12 17:43:18",
+            "list": [
+              {
+                "name": "memory",
+                "abnormalCount": 1
+              },
+              {
+                "name": "temperature",
+                "abnormalCount": 1
+              },
+              {
+                "name": "process",
+                "abnormalCount": 0
+              },
+              {
+                "name": "fan",
+                "abnormalCount": 0
+              },
+              {
+                "name": "power",
+                "abnormalCount": 0
+              },
+              {
+                "name": "cpu",
+                "abnormalCount": 0
+              }
+            ]
+          },
+          {
+            "groupDate": "2021-11-12 17:18:30",
+            "list": [
+              {
+                "name": "memory",
+                "abnormalCount": 1
+              },
+              {
+                "name": "temperature",
+                "abnormalCount": 1
+              },
+              {
+                "name": "process",
+                "abnormalCount": 0
+              },
+              {
+                "name": "fan",
+                "abnormalCount": 0
+              },
+              {
+                "name": "power",
+                "abnormalCount": 0
+              },
+              {
+                "name": "cpu",
+                "abnormalCount": 0
+              }
+            ]
+          },
+          {
+            "groupDate": "2021-11-12 17:08:32",
+            "list": [
+              {
+                "name": "process",
+                "abnormalCount": 0
+              },
+              {
+                "name": "fan",
+                "abnormalCount": 0
+              },
+              {
+                "name": "power",
+                "abnormalCount": 0
+              },
+              {
+                "name": "cpu",
+                "abnormalCount": 0
+              },
+              {
+                "name": "memory",
+                "abnormalCount": 1
+              },
+              {
+                "name": "temperature",
+                "abnormalCount": 1
+              }
+            ]
+          },
+          {
+            "groupDate": "2021-11-12 16:45:50",
+            "list": [
+              {
+                "name": "process",
+                "abnormalCount": 0
+              },
+              {
+                "name": "fan",
+                "abnormalCount": 0
+              },
+              {
+                "name": "power",
+                "abnormalCount": 0
+              },
+              {
+                "name": "cpu",
+                "abnormalCount": 0
+              },
+              {
+                "name": "memory",
+                "abnormalCount": 1
+              },
+              {
+                "name": "temperature",
+                "abnormalCount": 1
+              }
+            ]
+          },
+          {
+            "groupDate": "2021-11-12 13:21:15",
+            "list": [
+              {
+                "name": "process",
+                "abnormalCount": 0
+              },
+              {
+                "name": "fan",
+                "abnormalCount": 0
+              },
+              {
+                "name": "power",
+                "abnormalCount": 0
+              },
+              {
+                "name": "cpu",
+                "abnormalCount": 0
+              },
+              {
+                "name": "temperature",
+                "abnormalCount": 1
+              },
+              {
+                "name": "memory",
+                "abnormalCount": 1
+              }
+            ]
+          },
+          {
+            "groupDate": "2021-11-12 11:55:27",
+            "list": [
+              {
+                "name": "process",
+                "abnormalCount": 0
+              },
+              {
+                "name": "fan",
+                "abnormalCount": 0
+              },
+              {
+                "name": "power",
+                "abnormalCount": 0
+              },
+              {
+                "name": "cpu",
+                "abnormalCount": 0
+              },
+              {
+                "name": "temperature",
+                "abnormalCount": 1
+              },
+              {
+                "name": "memory",
+                "abnormalCount": 1
+              }
+            ]
+          },
+          {
+            "groupDate": "2021-11-12 11:46:58",
+            "list": [
+              {
+                "name": "fan",
+                "abnormalCount": 0
+              },
+              {
+                "name": "power",
+                "abnormalCount": 0
+              },
+              {
+                "name": "cpu",
+                "abnormalCount": 1
+              },
+              {
+                "name": "temperature",
+                "abnormalCount": 1
+              },
+              {
+                "name": "memory",
+                "abnormalCount": 1
+              },
+              {
+                "name": "process",
+                "abnormalCount": 0
+              }
+            ]
+          },
+          {
+            "groupDate": "2021-11-12 00:46:52",
+            "list": [
+              {
+                "name": "fan",
+                "abnormalCount": 0
+              },
+              {
+                "name": "power",
+                "abnormalCount": 0
+              },
+              {
+                "name": "cpu",
+                "abnormalCount": 0
+              },
+              {
+                "name": "temperature",
+                "abnormalCount": 1
+              },
+              {
+                "name": "memory",
+                "abnormalCount": 1
+              },
+              {
+                "name": "process",
+                "abnormalCount": 0
+              }
+            ]
+          },
+          {
+            "groupDate": "2021-11-12 00:43:34",
+            "list": [
+              {
+                "name": "power",
+                "abnormalCount": 0
+              },
+              {
+                "name": "cpu",
+                "abnormalCount": 0
+              },
+              {
+                "name": "temperature",
+                "abnormalCount": 1
+              },
+              {
+                "name": "memory",
+                "abnormalCount": 1
+              },
+              {
+                "name": "process",
+                "abnormalCount": 0
+              },
+              {
+                "name": "fan",
+                "abnormalCount": 0
+              }
+            ]
+          }
+        ],
+        "toDoList": [
+          {
+            "groupName": "테스트베드(다산)",
+            "deviceName": "D2624GP_106",
+            "workitemName": "memory",
+            "workscriptGuide": "제조사 문의 필요1-제조사 문의 필요2-제조사 문의 필요3-제조사 문의 필요4-제조사 문의 필요5-제조사 문의 필요6-제조사 문의 필요7-제조사 문의 필요8-제조사 문의 필요9-제조사 문의 필요10"
+          },
+          {
+            "groupName": "테스트베드(다산)",
+            "deviceName": "D2624GP_106",
+            "workitemName": "temperature",
+            "workscriptGuide": null
+          }
+        ],
+        "abnormalWeek": [
+          {
+            "deviceName": "D2624GP_106",
+            "workitemName": "cpu",
+            "d6AbnormalCount": 0,
+            "d5AbnormalCount": 0,
+            "d4AbnormalCount": 0,
+            "d3AbnormalCount": 0,
+            "d2AbnormalCount": 0,
+            "d1AbnormalCount": 1,
+            "d0AbnormalCount": 1
+          },
+          {
+            "deviceName": "D2624GP_106",
+            "workitemName": "fan",
+            "d6AbnormalCount": 0,
+            "d5AbnormalCount": 0,
+            "d4AbnormalCount": 0,
+            "d3AbnormalCount": 0,
+            "d2AbnormalCount": 0,
+            "d1AbnormalCount": 0,
+            "d0AbnormalCount": 0
+          },
+          {
+            "deviceName": "D2624GP_106",
+            "workitemName": "memory",
+            "d6AbnormalCount": 0,
+            "d5AbnormalCount": 0,
+            "d4AbnormalCount": 0,
+            "d3AbnormalCount": 0,
+            "d2AbnormalCount": 0,
+            "d1AbnormalCount": 0,
+            "d0AbnormalCount": 10
+          },
+          {
+            "deviceName": "D2624GP_106",
+            "workitemName": "power",
+            "d6AbnormalCount": 0,
+            "d5AbnormalCount": 0,
+            "d4AbnormalCount": 0,
+            "d3AbnormalCount": 0,
+            "d2AbnormalCount": 0,
+            "d1AbnormalCount": 0,
+            "d0AbnormalCount": 0
+          },
+          {
+            "deviceName": "D2624GP_106",
+            "workitemName": "process",
+            "d6AbnormalCount": 0,
+            "d5AbnormalCount": 0,
+            "d4AbnormalCount": 0,
+            "d3AbnormalCount": 0,
+            "d2AbnormalCount": 0,
+            "d1AbnormalCount": 0,
+            "d0AbnormalCount": 0
+          },
+          {
+            "deviceName": "D2624GP_106",
+            "workitemName": "temperature",
+            "d6AbnormalCount": 0,
+            "d5AbnormalCount": 0,
+            "d4AbnormalCount": 0,
+            "d3AbnormalCount": 0,
+            "d2AbnormalCount": 0,
+            "d1AbnormalCount": 0,
+            "d0AbnormalCount": 10
+          }
+        ],
+        "runResult": [
+          {
+            "deviceName": "D2624GP_106",
+            "workitemName": "memory",
+            "reportFilter": "{\"filter\": {\"join\": \"AND\", \"list\": [{\"join\": \"AND\", \"text\": \"\", \"group\": [{\"turn\": \"\", \"type\": \"number\", \"value\": \"5\", \"column\": \"USED\", \"target\": \"\", \"operator\": \"\", \"condition\": \"lt\"}]}]}, \"report\": {\"turn\": \"\", \"type\": \"S\", \"target\": \"\", \"compare\": \"QUERY\", \"condition\": \"\"}}",
+            "keyJson": "[{\"name\": \"TOTAL\", \"type\": \"number\", \"unit\": \"KB\", \"level\": \"0\", \"parent\": \"ROOT\", \"default\": \"\"}, {\"name\": \"USED\", \"type\": \"number\", \"unit\": \"KB\", \"level\": \"0\", \"parent\": \"ROOT\", \"default\": \"\"}, {\"name\": \"FREE\", \"type\": \"number\", \"unit\": \"KB\", \"level\": \"0\", \"parent\": \"ROOT\", \"default\": \"\"}, {\"name\": \"USAGE\", \"type\": \"number\", \"unit\": \"%\", \"level\": \"0\", \"parent\": \"ROOT\", \"default\": \"\"}, {\"name\": \"FILTER_RESULT\", \"type\": \"select\", \"unit\": \"\", \"level\": \"0\", \"parent\": \"ROOT\"}]",
+            "dataJson": "[{\"TOTAL\": \"524288\", \"USED\": \"260308\", \"FREE\": \"263980\", \"USAGE\": \"49.6\", \"FILTER_RESULT\": \"NOK\"}]"
+          },
+          {
+            "deviceName": "D2624GP_106",
+            "workitemName": "temperature",
+            "reportFilter": "{\"filter\": {\"join\": \"AND\", \"list\": [{\"join\": \"AND\", \"text\": \"\", \"group\": [{\"turn\": \"\", \"type\": \"number\", \"value\": \"10\", \"column\": \"TEMP\", \"target\": \"\", \"operator\": \"\", \"condition\": \"lt\"}]}]}, \"report\": {\"turn\": \"\", \"type\": \"S\", \"target\": \"\", \"compare\": \"QUERY\", \"condition\": \"\"}}",
+            "keyJson": "[{\"name\": \"SLOT\", \"type\": \"select\", \"unit\": \"\", \"level\": \"0\", \"parent\": \"ROOT\", \"default\": \"\"}, {\"name\": \"TEMP\", \"type\": \"number\", \"unit\": \"\", \"level\": \"0\", \"parent\": \"ROOT\", \"default\": \"\"}, {\"name\": \"TEMP_STATUS\", \"type\": \"select\", \"unit\": \"\", \"level\": \"0\", \"parent\": \"ROOT\", \"default\": \"\"}, {\"name\": \"FILTER_RESULT\", \"type\": \"select\", \"unit\": \"\", \"level\": \"0\", \"parent\": \"ROOT\"}]",
+            "dataJson": "[{\"SLOT\": \"0\", \"TEMP\": \"42\", \"TEMP_STATUS\": \"ok\", \"FILTER_RESULT\": \"NOK\"}]"
+          }
+        ]
+      },
+      {
+        "groupName": "테스트베드 > 테스트베드(유비쿼스)",
+        "groupCheckResult": [
+          {
+            "deviceType": "AP",
+            "nochangeCount": 0,
+            "createCount": 0,
+            "updateCount": 0,
+            "deleteCount": 0
+          },
+          {
+            "deviceType": "Switch",
+            "nochangeCount": 0,
+            "createCount": 0,
+            "updateCount": 0,
+            "deleteCount": 0
+          }
+        ],
+        "deviceCheckResult": [],
+        "deviceTotalCount": 0,
+        "autoCheckResult": [
+          {
+            "deviceType": "AP",
+            "abnormalCount": 0
+          },
+          {
+            "deviceType": "Switch",
+            "abnormalCount": 0
+          }
+        ],
+        "abnormalDeviceCount": {
+          "currentAbnormalCount": 0,
+          "beforeAbnormalCount": 0
+        },
+        "abnormalDeviceStatus": [],
+        "abnormalItemStatus": [
+          {
+            "name": "memory",
+            "deviceCount": 1,
+            "abnormalCount": 1
+          },
+          {
+            "name": "temperature",
+            "deviceCount": 1,
+            "abnormalCount": 1
+          },
+          {
+            "name": "cpu",
+            "deviceCount": 1,
+            "abnormalCount": 0
+          },
+          {
+            "name": "fan",
+            "deviceCount": 1,
+            "abnormalCount": 0
+          },
+          {
+            "name": "power",
+            "deviceCount": 1,
+            "abnormalCount": 0
+          },
+          {
+            "name": "process",
+            "deviceCount": 1,
+            "abnormalCount": 0
+          }
+        ],
+        "abnormalDeviceTrend": [],
+        "abnormalItemTrend": [
+          {
+            "groupDate": "2021-11-12 17:49:28",
+            "list": [
+              {
+                "name": "memory",
+                "abnormalCount": 1
+              },
+              {
+                "name": "temperature",
+                "abnormalCount": 1
+              },
+              {
+                "name": "process",
+                "abnormalCount": 0
+              },
+              {
+                "name": "fan",
+                "abnormalCount": 0
+              },
+              {
+                "name": "power",
+                "abnormalCount": 0
+              },
+              {
+                "name": "cpu",
+                "abnormalCount": 0
+              }
+            ]
+          },
+          {
+            "groupDate": "2021-11-12 17:43:18",
+            "list": [
+              {
+                "name": "memory",
+                "abnormalCount": 1
+              },
+              {
+                "name": "temperature",
+                "abnormalCount": 1
+              },
+              {
+                "name": "process",
+                "abnormalCount": 0
+              },
+              {
+                "name": "fan",
+                "abnormalCount": 0
+              },
+              {
+                "name": "power",
+                "abnormalCount": 0
+              },
+              {
+                "name": "cpu",
+                "abnormalCount": 0
+              }
+            ]
+          },
+          {
+            "groupDate": "2021-11-12 17:18:30",
+            "list": [
+              {
+                "name": "memory",
+                "abnormalCount": 1
+              },
+              {
+                "name": "temperature",
+                "abnormalCount": 1
+              },
+              {
+                "name": "process",
+                "abnormalCount": 0
+              },
+              {
+                "name": "fan",
+                "abnormalCount": 0
+              },
+              {
+                "name": "power",
+                "abnormalCount": 0
+              },
+              {
+                "name": "cpu",
+                "abnormalCount": 0
+              }
+            ]
+          },
+          {
+            "groupDate": "2021-11-12 17:08:32",
+            "list": [
+              {
+                "name": "process",
+                "abnormalCount": 0
+              },
+              {
+                "name": "fan",
+                "abnormalCount": 0
+              },
+              {
+                "name": "power",
+                "abnormalCount": 0
+              },
+              {
+                "name": "cpu",
+                "abnormalCount": 0
+              },
+              {
+                "name": "memory",
+                "abnormalCount": 1
+              },
+              {
+                "name": "temperature",
+                "abnormalCount": 1
+              }
+            ]
+          },
+          {
+            "groupDate": "2021-11-12 16:45:50",
+            "list": [
+              {
+                "name": "process",
+                "abnormalCount": 0
+              },
+              {
+                "name": "fan",
+                "abnormalCount": 0
+              },
+              {
+                "name": "power",
+                "abnormalCount": 0
+              },
+              {
+                "name": "cpu",
+                "abnormalCount": 0
+              },
+              {
+                "name": "memory",
+                "abnormalCount": 1
+              },
+              {
+                "name": "temperature",
+                "abnormalCount": 1
+              }
+            ]
+          },
+          {
+            "groupDate": "2021-11-12 13:21:15",
+            "list": [
+              {
+                "name": "process",
+                "abnormalCount": 0
+              },
+              {
+                "name": "fan",
+                "abnormalCount": 0
+              },
+              {
+                "name": "power",
+                "abnormalCount": 0
+              },
+              {
+                "name": "cpu",
+                "abnormalCount": 0
+              },
+              {
+                "name": "temperature",
+                "abnormalCount": 1
+              },
+              {
+                "name": "memory",
+                "abnormalCount": 1
+              }
+            ]
+          },
+          {
+            "groupDate": "2021-11-12 11:55:27",
+            "list": [
+              {
+                "name": "process",
+                "abnormalCount": 0
+              },
+              {
+                "name": "fan",
+                "abnormalCount": 0
+              },
+              {
+                "name": "power",
+                "abnormalCount": 0
+              },
+              {
+                "name": "cpu",
+                "abnormalCount": 0
+              },
+              {
+                "name": "temperature",
+                "abnormalCount": 1
+              },
+              {
+                "name": "memory",
+                "abnormalCount": 1
+              }
+            ]
+          },
+          {
+            "groupDate": "2021-11-12 11:46:58",
+            "list": [
+              {
+                "name": "fan",
+                "abnormalCount": 0
+              },
+              {
+                "name": "power",
+                "abnormalCount": 0
+              },
+              {
+                "name": "cpu",
+                "abnormalCount": 1
+              },
+              {
+                "name": "temperature",
+                "abnormalCount": 1
+              },
+              {
+                "name": "memory",
+                "abnormalCount": 1
+              },
+              {
+                "name": "process",
+                "abnormalCount": 0
+              }
+            ]
+          },
+          {
+            "groupDate": "2021-11-12 00:46:52",
+            "list": [
+              {
+                "name": "fan",
+                "abnormalCount": 0
+              },
+              {
+                "name": "power",
+                "abnormalCount": 0
+              },
+              {
+                "name": "cpu",
+                "abnormalCount": 0
+              },
+              {
+                "name": "temperature",
+                "abnormalCount": 1
+              },
+              {
+                "name": "memory",
+                "abnormalCount": 1
+              },
+              {
+                "name": "process",
+                "abnormalCount": 0
+              }
+            ]
+          },
+          {
+            "groupDate": "2021-11-12 00:43:34",
+            "list": [
+              {
+                "name": "power",
+                "abnormalCount": 0
+              },
+              {
+                "name": "cpu",
+                "abnormalCount": 0
+              },
+              {
+                "name": "temperature",
+                "abnormalCount": 1
+              },
+              {
+                "name": "memory",
+                "abnormalCount": 1
+              },
+              {
+                "name": "process",
+                "abnormalCount": 0
+              },
+              {
+                "name": "fan",
+                "abnormalCount": 0
+              }
+            ]
+          }
+        ],
+        "toDoList": [],
+        "abnormalWeek": [],
+        "runResult": []
+      }
+    ]
+  }
 }
