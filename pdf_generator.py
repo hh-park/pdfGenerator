@@ -622,9 +622,12 @@ class PdfGenerator():
             inspect_name = result['workflowName']
             inspect_date = result['runDate']
             inspect_date_short = datetime.strptime(inspect_date, '%Y-%m-%d %H:%M:%S').strftime('%Y-%m-%d')
+
             group = []
-            type_cnt1 = []
-            type_cnt2 = []
+            switch_cnt = []
+            ap_cnt = []
+            apc_cnt = []
+
             statCheck = ''
             sumCheck = ''
             summary_by_grp = pd.DataFrame(
@@ -633,8 +636,6 @@ class PdfGenerator():
             summary_by_eq = pd.DataFrame(
                 columns=['rootName', 'deviceName', 'checkState', 'ip', 'title', 'vendor'])
             summary_by_eq.loc[0] = ['그룹명', '장비명', '상태', 'IP', '모델명', '제조사']
-            summary_autochk = pd.DataFrame(columns=['Group', 'Switch', 'AP'])
-            summary_autochk.loc[0] = ['Group', 'Switch', 'AP']
 
             if not len(result['reportData']) == 0:
                 for i, v in enumerate(result['reportData']):
@@ -644,7 +645,7 @@ class PdfGenerator():
                     if 'groupCheckResult' in v and 'deviceCheckResult' in v:
                         if not len(v['groupCheckResult']) == 0:
                             grp_df = pd.DataFrame(v['groupCheckResult'])
-                            grpName = [group[i], group[i]]
+                            grpName = [group[i] for num in v['groupCheckResult']]
                             grp_df.insert(0, "groupName", grpName, True)
                             summary_by_grp = summary_by_grp.append(grp_df)
 
@@ -665,13 +666,25 @@ class PdfGenerator():
 
                     # 자동 점검 결과
                     if 'autoCheckResult' in v:
-                        for j in v['autoCheckResult']:
-                            if j['deviceType'] == 'Switch':
-                                type_cnt1.append('비정상 ' + str(j['abnormalCount']) + '대')
-                            else:
-                                type_cnt2.append('비정상 ' + str(j['abnormalCount']) + '대')
+                        auto_result = {}
+                        auto_result['Group'] = group
+                        auto_result_col = ['Group']
 
-                        summary_df = pd.DataFrame({'Group': group, 'Switch': type_cnt1, 'AP': type_cnt2})
+                        for j in v['autoCheckResult']:
+                            auto_result_col.append(j['deviceType'])
+                            if j['deviceType'] == 'Switch':
+                                switch_cnt.append('비정상 ' + str(j['abnormalCount']) + '대')
+                                auto_result['Switch'] = switch_cnt
+                            elif j['deviceType'] == 'AP':
+                                ap_cnt.append('비정상 ' + str(j['abnormalCount']) + '대')
+                                auto_result['AP'] = ap_cnt
+                            else:
+                                apc_cnt.append('비정상 ' + str(j['abnormalCount']) + '대')
+                                auto_result['APC'] = apc_cnt
+
+                        summary_df = pd.DataFrame(auto_result)
+                        summary_autochk = pd.DataFrame(columns=auto_result_col)
+                        summary_autochk.loc[0] = auto_result_col
                         summary_autochk = summary_autochk.append(summary_df)
 
                         summary_table = summary_autochk.to_html(index=False)
@@ -922,6 +935,7 @@ class PdfGenerator():
             pdfkit.from_file(f'''./etc/{now_date}_{inspect_name}.html''', f'''./pdf/{now_date}_{inspect_name}.pdf''', configuration=config, options=options)
 
         except Exception as e:
+            print(e)
             return {
                 "error": e,
                 "msg": False,
@@ -1059,7 +1073,7 @@ class PdfGenerator():
         f = [f.name for f in fm.fontManager.ttflist if 'KT' in f.name]
         '''
 
-        with open('./data_json_1.json', encoding='UTF-8') as json_file:
+        with open('./pdf_data_sample.json', encoding='UTF-8') as json_file:
             self.data = json.load(json_file)
 
         result = self.data['data']
