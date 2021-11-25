@@ -8,6 +8,9 @@ import matplotlib.ticker as ticker
 import pdfkit
 import json
 from datetime import datetime
+import subprocess
+import paramiko
+import traceback
 
 config = pdfkit.configuration(wkhtmltopdf='c:\\Program Files\\wkhtmltopdf\\bin\\wkhtmltopdf.exe')
 options = {
@@ -20,8 +23,21 @@ options = {
     'no-outline': None
 }
 
+def exec_cmd(cmd, inputtext=None):
+    proc = subprocess.Popen(cmd,
+        stdin=subprocess.PIPE, \
+        stdout=subprocess.PIPE, \
+        stderr=subprocess.PIPE, \
+        shell=True, \
+        close_fds=True)
 
-class PdfGenerator():
+    (response, error) = proc.communicate(inputtext)
+    if error != '':
+        return False, error
+    else:
+        return True, response.strip()
+
+class PdfGenerator:
 
     def __init__(self):
         self.plots = []
@@ -33,589 +49,592 @@ class PdfGenerator():
         # html component
         style = f'''
                 <style type="text/css">
-                    /* KT font */
-                    @font-face {{
-                        font-family: "KT";
-                        font-style: normal;
-                        font-weight: 400;
-                        src: url("../font/KTfontLight.woff") format('woff'),
-                            url("../font/KTfontLight.eot"),
-                            url("../font/KTfontLight.eot?#iefix") format('embedded-opentype');
-                    }}
-                    @font-face {{
-                        font-family: "KT";
-                        font-style: normal;
-                        font-weight: 500;
-                        src: url("../font/KTfontMedium.woff") format('woff'),
-                            url("../font/KTfontMedium.eot"),
-                            url("../font/KTfontMedium.eot?#iefix") format('embedded-opentype');
-                    }}
-                    @font-face {{
-                        font-family: "KT";
-                        font-style: normal;
-                        font-weight: 600;
-                        src: url("../font/KTfontBold.woff") format('woff'),
-                            url("../font/KTfontBold.eot"),
-                            url("../font/KTfontBold.eot?#iefix") format('embedded-opentype');
-                    }}
+            /* KT font */
+            @font-face {{
+                font-family: "KT";
+                font-style: normal;
+                font-weight: 400;
+                src: url("../font/KTfontLight.woff") format('woff'),
+                    url("../font/KTfontLight.eot"),
+                    url("../font/KTfontLight.eot?#iefix") format('embedded-opentype');
+            }}
+            @font-face {{
+                font-family: "KT";
+                font-style: normal;
+                font-weight: 500;
+                src: url("../font/KTfontMedium.woff") format('woff'),
+                    url("../font/KTfontMedium.eot"),
+                    url("../font/KTfontMedium.eot?#iefix") format('embedded-opentype');
+            }}
+            @font-face {{
+                font-family: "KT";
+                font-style: normal;
+                font-weight: 600;
+                src: url("../font/KTfontBold.woff") format('woff'),
+                    url("../font/KTfontBold.eot"),
+                    url("../font/KTfontBold.eot?#iefix") format('embedded-opentype');
+            }}
 
-                    /* common */
-                    @page {{
-                        margin: 0;
-                    }}
-                    html,
-                    body {{
-                        margin: 0;
-                        padding: 0;
-                        outline: none;
-                    }} 
-                    body {{
-                        width: 1000px;
-                        position: relative;
-                        left: calc(50% - 500px);
-                    }}
-                    h1, h2, h3, h4, p, div, section, article, header, span, ul, li, dl, dt, dd {{
-                        position: relative;
-                        display: block;
-                        text-align: center;
-                        margin: 0;
-                        padding: 0;
-                        outline: none;
-                        box-sizing: border-box;
-                    }}
-                    h1, h2, h3, h4, span, li, dt, dd {{
-                        white-space: pre-line;
-                        word-break: keep-all;
-                    }}
-                    .content {{ 
-                        font-size: 9pt;
-                        line-height: 1.5;
-                        font-family: "KT";
-                        background: #fff; 
-                        color: #000;
-                        width: 100%;
-                    }}
-                    header {{
-                        margin: 40px 0; 
-                    }}
-                    h1 {{
-                        font-size: 18pt;
-                    }}
-                    h2 {{
-                        font-size: 15pt;
-                    }}
-                    h3 {{
-                        font-size: 12pt;
-                    }}
-                    section h1 {{
-                        font-size: 15pt;
-                        color: #3A404D;
-                        text-align: left;
-                        margin: 0 0 5px;
-                    }}
-                    section h1::before {{
-                        content: '';
-                        position: relative;
-                        display: inline-block;
-                        top: 7px;
-                        background: url("../images/ico_building.png") no-repeat;
-                        margin: 0 10px 0 0;
-                        width: 21px;;
-                        height: 21px;
-                    }}
-                    section h2 {{
-                        text-align: left;
-                        font-size: 12pt;
-                        color: #3A404D;
-                    }}
-                    section h2 i {{
-                        display: inline-block;
-                        font-size: 20pt;
-                        font-weight: 400;
-                        color: #ccc;
-                        margin: 0 10px 0 0; 
-                        letter-spacing: -2px;
-                    }}
-                    section h3 {{
-                        text-align: left;
-                        font-size: 10.5pt;
-                        color: #3A404D;
-                        padding: 0 10px 10px;
-                    }}
-                    section h3::before {{
-                        content: '';
-                        display: inline-block;
-                        width: 5px;
-                        height: 5px;
-                        border-radius: 10px;
-                        background: #3A404D;
-                        margin: -4px 5px 0 0; 
-                    }}
-                    section h4::before {{
-                        content: '[';
-                        display: inline-block;
-                        margin: 0 5px 0 0;
-                    }}
-                    section h4::after {{
-                        content: ']';
-                        display: inline-block;
-                        margin: 0 0 0 5px;
-                    }}
-                    section h4 {{
-                        text-align: left;
-                        font-size: 10.5pt;
-                        color: #3A404D;
-                        padding: 0 10px 10px;
-                    }}
-                    article {{
-                        width: 100%;
-                        height: 100%;
-                        margin: 0 0 40px;
-                    }}
-                    .graph {{
-                        height: 570px;
-                    }}
-                    .chart_box {{
-                        clear: both;
-                    }}
-                    .chart_view {{
-                        display: inline-block;
-                        float: left;
-                        border: 1px solid #3A404D;
-                        border-radius: 10px;
-                        padding: 10px 0 0;
-                        overflow: hidden;
-                    }}
-                    .chart_view ul {{
-                        height: 125px;
-                    }}
-                    .chart_view.c1 ul {{
-                        top: 0px;
-                    }}
-                    .chart_view ul li {{
-                        float: left;
-                    }}
-                    .c1,
-                    .c2 {{
-                        margin: 0 1% 10px 0; 
-                    }}
-                    .c1,
-                    .c2,
-                    .c3 {{
-                        height: 215px;
-                    }}
-                    .c1,
-                    .c4 {{
-                        width: 25%;
-                    }}
-                    .c2,
-                    .c3 {{
-                        width: 36%;
-                    }}
-                    .c3 {{
-                        margin: 0 0 10px 0; 
-                    }}
-                    .c4,
-                    .c5 {{
-                        height: 300px;
-                    }}
-                    .c4 {{
-                        margin: 0 1% 0 0; 
-                    }}
-                    .c5 {{
-                        width: 73.2%;
-                    }}
-                    .chart_box ul,
-                    .chart_wrap,
-                    .preview ul {{
-                        width: 100%;
-                    }}
-                    .chart_view ul li {{
-                        display: inline-block;
-                        vertical-align: middle;
-                        width: 32.5%;
-                        font-size: 10pt;
-                        font-weight: 600;
-                        color: #666;
-                    }}
-                    .chart_view ul li span {{
-                        font-size: 20pt;
-                        font-weight: 600;
-                    }}
-                    .chart_view ul li.up,
-                    .chart_view ul li.down {{
-                        top: 20px;
-                    }}
-                    .chart_view ul li.up span {{
-                        color: #FF3333;
-                    }}
-                    .chart_view ul li.up span::before {{
-                        content: '';
-                        position: relative;
-                        top: 3px;
-                        display: inline-block;
-                        width: 13px;
-                        height: 20px;
-                        background: url("../images/ico_up.png") no-repeat;
-                        margin: 0 5px 0 0;
-                    }} 
-                    .chart_view ul li.down span {{
-                        color: #1bc0e1;
-                    }}
-                    .chart_view ul li.down span::before {{
-                        content: '';
-                        position: relative;
-                        top: 3px;
-                        display: inline-block;
-                        width: 13px;
-                        height: 20px;
-                        background: url("../images/ico_down.png") no-repeat;
-                        margin: 0 5px 0 0;
-                    }} 
-                    .chart_view ul li.total {{
-                        width: 35%;
-                    }}
-                    .chart_view ul li.total p {{
-                        position: relative;
-                        left: calc(50% - 45px);
-                        width: 90px;
-                        height: 90px;
-                        border-radius: 100px;
-                        background: #FF3333;
-                    }}
-                    .chart_view ul li.total span {{
-                        position: relative;
-                        top: -18px;
-                        color: #fff;
-                        font-size: 24pt;
-                    }}
-                    .chart_view ul li.total b {{
-                        position: relative;
-                        bottom: -45px;
-                        font-size: 8pt;
-                        color: #fff;
-                        z-index: 5;
-                    }}
-                    .chart_view.c4 ul {{
-                        height: 55px;
-                        background: #f7f7f7;
-                        margin: 0 0 10px;
-                    }}
-                    .chart_view.c4 ul li {{
-                        position: relative;
-                        top: 5px;
-                        width: 49%;
-                        height: 40px;
-                    }}
-                    .chart_view.c4 ul li + li {{
-                        border-left: 1px dashed #999;
-                    }}
-                    .chart_view.c4 ul li span {{
-                        font-size: 15pt;
-                        position: relative;
-                        top: -20px;
-                        display: inline-block;
-                        width: 100%;
-                    }}
-                    .chart_view.c4 ul li span::after {{
-                        content: '대';
-                    }}
-                    .chart_view.c4 ul li p {{
-                        position: relative;
-                        top: -24px;
-                    }}
-                    .chart_view .chart {{
-                        height: 155px;
-                        border-radius: 0 0 10px 10px;
-                        color: #333;
-                        overflow: hidden;
-                    }}
-                    .chart_view.c4 .chart_wrap {{
-                        float: none;
-                        display: block;
-                        width: 100%;
-                    }}
-                    .chart_view.c4 .chart {{
-                        height: 215px;
-                    }}
-                    .chart_view.c5 .chart {{
-                        height: 215px;
-                    }}
-                    .chart_wrap_box {{
-                        clear: both;
-                    }}
-                    .chart_wrap {{
-                        display: inline-block;
-                        float: left;
-                        width: 33%;
-                        height: 215px;
-                        border-radius: 0;
-                    }}
-                    .chart_wrap .chart {{
-                        border-radius: 0;
-                    }}
-                    .info_box {{
-                        flex-direction: column;
-                        margin: 0 0 40px;
-                    }}
-                    .info_box:last-child {{
-                        margin: 0;
-                        padding: 0;
-                        border: none;
-                    }}
-                    .info_box table + table {{
-                        margin: 30px 0 0;
-                    }}
-                    .notice {{
-                        text-align: left;
-                        display: inline-block;	
-                        width: 100%;
-                    }}
-                    .notice ul {{
-                        position: relative;
-                        display: inline-block;
-                        clear: both;
-                        padding: 10px 40px;
-                        border-radius: 10px 10px 0 0;
-                        background: #3A404D;
-                        z-index: 5;
-                    }}
-                    .notice ul li {{
-                        float: left;
-                        height: 23px;
-                        display: inline-block;
-                        font-size: 12pt;
-                        font-weight: 600;
-                        vertical-align: middle;
-                        color: #fff;
-                    }}
-                    .notice ul li + li {{
-                      margin: 0 0 0 100px;
-                    }}
-                    .notice ul li span {{
-                        display: inline-block;
-                        font-size: 8.5pt;
-                        padding: 3px 10px;
-                        background: rgba(255, 255, 255, 0.2);
-                        color: #ddd;
-                        border-radius: 5px;
-                        margin: 0 10px 0 0;
-                        vertical-align: middle;
-                    }}
-                    .notice dl {{
-                        display: inline-block;
-                        width: 100%;
-                        height: 100%;
-                        padding: 15px;
-                        border: 1px solid #3A404D;
-                        margin: -8px 0 0;
-                        clear: both;
-                    }}
-                    .notice dl dt,
-                    .notice dl dd {{
-                      display: inline-block;
-                        text-align: left;
-                    }}
-                    .notice dl dt {{
-                        top: 10px;
-                        width: 20%;
-                        font-size: 10pt;
-                        font-weight: 600;
-                        color: #3A404D;
-                        float: left;
-                    }}
-                    .notice dl dt::after {{
-                        content: "";
-                        position: absolute;
-                        right: 0;
-                        display: inline-block;
-                        width: 1px;
-                        height: 50px;
-                        background: #ccc;
-                    }}
-                    .notice dl dd {{
-                        width: 75%;
-                        color: #3A404D;
-                        float: left;
-                        min-height: 70px;
-                    }}
-                    .notice dl dd p {{
-                      top: 5px;
-                      left: 20px;
-                      display: inline-block;
-                      font-size: 9pt;
-                      line-height: 1.5rem;
-                      margin-block-start: 0;
-                      margin-block-end: 0;
-                      text-align: left;
-                      color: #3A404D;
-                    }}
-                    .notice dl dd p::before {{
-                        content: '-';
-                        font-weight: 600;
-                        color: #3A404D;
-                        font-size: 12pt;
-                        margin: 0 5px 0 0;
-                    }}
-                    .none::before,
-                    .none::after {{
-                        display: none;
-                    }}
-                    .confirm_ok {{
-                        background: #f9f9f9;
-                        color: #3A404D;
-                        font-size: 11pt;
-                        font-weight: 600;
-                        padding: 50px 0!important;
-                    }}
-                    .confirm_ok strong {{
-                        color: #1bc0e1;
-                    }}
-                    header .summary h1 {{
-                        padding: 40px 0;
-                        font-size: 22pt;
-                        text-align: center;
-                    }}
-                    header .summary h1::before {{
-                        display: none;
-                    }}
-                    header .summary .box {{
-                        margin:  0 0 50px;
-                    }}
-                    header .summary .box + .box {{
-                        border-top: 1px dashed #999;
-                        padding-top: 40px;
-                    }}
-                    header .summary .box h1 {{
-                        text-align: left;
-                        font-size: 13.5pt;
-                        padding: 0 0 10px;
-                        color: #3A404D;
-                        clear: both;
-                    }}
-                    header .summary .box h1::before {{
-                        content: '';
-                        position: relative;
-                        display: inline-block;
-                        top: 6px;
-                        background: url("../images/ico_report.png") no-repeat;
-                        margin: 0 10px 0 0;
-                        width: 21px;;
-                        height: 21px;
-                    }}
-                    header .summary .box h1.ty2::before {{
-                        content: '';
-                        position: relative;
-                        display: inline-block;
-                        top: 6px;
-                        background: url("../images/ico_topology.png") no-repeat;
-                        margin: 0 10px 0 0;
-                        width: 21px;;
-                        height: 21px;
-                    }}
-                    header .summary .box h1 span,
-                    .subtitle p {{
-                        display: inline-block;
-                        padding: 3px 15px;
-                        background: #3A404D;
-                        color: #fff;
-                        border-radius: 20px;
-                        font-weight: 600;
-                        font-size: 9pt;
-                        float: right;
-                        margin: 3px 0 0;
-                    }}
-                    header .summary .box h2 {{
-                        font-size: 11.5pt;
-                        text-align: left;
-                        margin: 20px 0 10px;
-                    }}
-                    header .summary .box h2::before {{
-                        content: "";
-                        display: inline-block;
-                        width: 4px;
-                        height: 4px;
-                        background: #3A404D;
-                        border-radius: 4px;
-                        margin: 0 5px 0 0;
-                    }}
-                    .summary_table td:nth-child(1) {{
-                        width: 20%;
-                    }}
-                    .summary_table td:nth-child(2) {{
-                        width: 20%;
-                    }}
-                    .eq_table td:nth-child(1) {{
-                        width: 20%;
-                    }}
-                    .eq_table td:nth-child(2) {{
-                        width: 20%;
-                    }}
-                    .week_data_table td:nth-child(1) {{	
-                        width: 20%;	
-                    }}	
-                    .week_data_table td:nth-child(2) {{	
-                        width: 17%;	
-                    }}	
-                    table {{
-                        width: 100%;
-                        table-layout: fixed;
-                        border: none;
-                        border-color: #fff;
-                        border-spacing: 0;
-                        border-collapse: collapse;
-                    }}
-                    table th,
-                    table td {{
-                        padding: 10px 0;
-                        text-align: center;
-                    }}
-                    table th {{
-                        border-bottom: 2px solid #333;
-                        border-top: 1px solid #333;
-                    }}
-                    table td {{
-                        background: #f1f1f1;
-                        border: 1px solid #fff;
-                    }}
-                    table thead {{	
-                        display: none;	
-                    }}	
-                    table tr:nth-child(1) td {{	
-                        border: none;	
-                        border-bottom: 2px solid #333;	
-                        border-top: 1px solid #333;	
-                        background: #ffffff;	
-                        text-align: center;	
-                        font-weight: 600;	
-                    }}
-                    .subtitle {{
-                        padding: 0 0 40px;
-                    }}
-                    .subtitle h1 {{
-                        font-size: 18pt;
-                        text-align: center;
-                    }}
-                    .subtitle h1::before {{
-                        display: none;
-                    }}
-                    section,
-                    header {{
-                        page-break-inside: avoid;
-                        page-break-after: always;
-                    }}
-                    .info_box {{
-                        page-break-before: auto;
-                    }}
-                    table td {{
-                        height: 5mm;
-                    }}
-                    table tr {{
-                        page-break-inside: avoid;
-                        page-break-after: auto;
-                    }}
-                </style>
-        '''
+            /* common */
+            @page {{
+                margin: 0;
+            }}
+            html,
+            body {{
+                margin: 0;
+                padding: 0;
+                outline: none;
+            }}
+            body {{
+                width: 1000px;
+                position: relative;
+                left: calc(50% - 500px);
+            }}
+            h1, h2, h3, h4, p, div, section, article, header, span, ul, li, dl, dt, dd {{
+                position: relative;
+                display: block;
+                text-align: center;
+                margin: 0;
+                padding: 0;
+                outline: none;
+                box-sizing: border-box;
+            }}
+            h1, h2, h3, h4, span, li, dt, dd {{
+                white-space: pre-line;
+                word-break: keep-all;
+            }}
+            .content {{
+                font-size: 9pt;
+                line-height: 1.5;
+                font-family: "KT";
+                background: #fff;
+                color: #000;
+                width: 100%;
+            }}
+            header {{
+                margin: 40px 0;
+            }}
+            h1 {{
+                font-size: 18pt;
+            }}
+            h2 {{
+                font-size: 15pt;
+            }}
+            h3 {{
+                font-size: 12pt;
+            }}
+            section h1 {{
+                font-size: 15pt;
+                color: #3A404D;
+                text-align: left;
+                margin: 0 0 5px;
+            }}
+            section h1::before {{
+                content: '';
+                position: relative;
+                display: inline-block;
+                top: 7px;
+                background: url("../images/ico_building.png") no-repeat;
+                margin: 0 10px 0 0;
+                width: 21px;;
+                height: 21px;
+            }}
+            section h2 {{
+                text-align: left;
+                font-size: 12pt;
+                color: #3A404D;
+            }}
+            section h2 i {{
+                display: inline-block;
+                font-size: 20pt;
+                font-weight: 400;
+                color: #ccc;
+                margin: 0 10px 0 0;
+                letter-spacing: -2px;
+            }}
+            section h3 {{
+                text-align: left;
+                font-size: 10.5pt;
+                color: #3A404D;
+                padding: 0 10px 10px;
+            }}
+            section h3::before {{
+                content: '';
+                display: inline-block;
+                width: 5px;
+                height: 5px;
+                border-radius: 10px;
+                background: #3A404D;
+                margin: -4px 5px 0 0;
+            }}
+            section h4::before {{
+                content: '[';
+                display: inline-block;
+                margin: 0 5px 0 0;
+            }}
+            section h4::after {{
+                content: ']';
+                display: inline-block;
+                margin: 0 0 0 5px;
+            }}
+            section h4 {{
+                text-align: left;
+                font-size: 10.5pt;
+                color: #3A404D;
+                padding: 0 10px 10px;
+            }}
+            article {{
+                width: 100%;
+                height: 100%;
+                margin: 0 0 40px;
+            }}
+            .graph {{
+                height: 570px;
+            }}
+            .chart_box {{
+                clear: both;
+            }}
+            .chart_view {{
+                display: inline-block;
+                float: left;
+                border: 1px solid #3A404D;
+                border-radius: 10px;
+                padding: 10px 0 0;
+                overflow: hidden;
+            }}
+            .chart_view ul {{
+                height: 125px;
+            }}
+            .chart_view.c1 ul {{
+                top: 0px;
+            }}
+            .chart_view ul li {{
+                float: left;
+            }}
+            .c1,
+            .c2 {{
+                margin: 0 1% 10px 0;
+            }}
+            .c1,
+            .c2,
+            .c3 {{
+                height: 215px;
+            }}
+            .c1,
+            .c4 {{
+                width: 25%;
+            }}
+            .c2,
+            .c3 {{
+                width: 36%;
+            }}
+            .c3 {{
+                margin: 0 0 10px 0;
+            }}
+            .c4,
+            .c5 {{
+                height: 300px;
+            }}
+            .c4 {{
+                margin: 0 1% 0 0;
+            }}
+            .c5 {{
+                width: 73.2%;
+            }}
+            .chart_box ul,
+            .chart_wrap,
+            .preview ul {{
+                width: 100%;
+            }}
+            .chart_view ul li {{
+                display: inline-block;
+                vertical-align: middle;
+                width: 32.5%;
+                font-size: 10pt;
+                font-weight: 600;
+                color: #666;
+            }}
+            .chart_view ul li span {{
+                font-size: 20pt;
+                font-weight: 600;
+            }}
+            .chart_view ul li.up,
+            .chart_view ul li.down {{
+                top: 20px;
+            }}
+            .chart_view ul li.up span {{
+                color: #FF3333;
+            }}
+            .chart_view ul li.up span::before {{
+                content: '';
+                position: relative;
+                top: 3px;
+                display: inline-block;
+                width: 13px;
+                height: 20px;
+                background: url("../images/ico_up.png") no-repeat;
+                margin: 0 5px 0 0;
+            }}
+            .chart_view ul li.down span {{
+                color: #1bc0e1;
+            }}
+            .chart_view ul li.down span::before {{
+                content: '';
+                position: relative;
+                top: 3px;
+                display: inline-block;
+                width: 13px;
+                height: 20px;
+                background: url("../images/ico_down.png") no-repeat;
+                margin: 0 5px 0 0;
+            }}
+            .chart_view ul li.total {{
+                width: 35%;
+            }}
+            .chart_view ul li.total p {{
+                position: relative;
+                left: calc(50% - 45px);
+                width: 90px;
+                height: 90px;
+                border-radius: 100px;
+                background: #FF3333;
+            }}
+            .chart_view ul li.total span {{
+                position: relative;
+                top: -18px;
+                color: #fff;
+                font-size: 24pt;
+            }}
+            .chart_view ul li.total b {{
+                position: relative;
+                bottom: -45px;
+                font-size: 8pt;
+                color: #fff;
+                z-index: 5;
+            }}
+            .chart_view.c4 ul {{
+                height: 55px;
+                background: #f7f7f7;
+                margin: 0 0 10px;
+            }}
+            .chart_view.c4 ul li {{
+                position: relative;
+                top: 5px;
+                width: 49%;
+                height: 40px;
+            }}
+            .chart_view.c4 ul li + li {{
+                border-left: 1px dashed #999;
+            }}
+            .chart_view.c4 ul li span {{
+                font-size: 15pt;
+                position: relative;
+                top: -20px;
+                display: inline-block;
+                width: 100%;
+            }}
+            .chart_view.c4 ul li span::after {{
+                content: '대';
+            }}
+            .chart_view.c4 ul li p {{
+                position: relative;
+                top: -24px;
+            }}
+            .chart_view .chart {{
+                height: 155px;
+                border-radius: 0 0 10px 10px;
+                color: #333;
+                overflow: hidden;
+            }}
+            .chart_view.c4 .chart_wrap {{
+                float: none;
+                display: block;
+                width: 100%;
+            }}
+            .chart_view.c4 .chart {{
+                height: 215px;
+            }}
+            .chart_view.c5 .chart {{
+                height: 215px;
+            }}
+            .chart_wrap_box {{
+                clear: both;
+            }}
+            .chart_wrap {{
+                display: inline-block;
+                float: left;
+                width: 33%;
+                height: 215px;
+                border-radius: 0;
+            }}
+            .chart_wrap .chart {{
+                border-radius: 0;
+            }}
+            .info_box {{
+                flex-direction: column;
+                margin: 0 0 40px;
+            }}
+            .info_box:last-child {{
+                margin: 0;
+                padding: 0;
+                border: none;
+            }}
+            .info_box table + table {{
+                margin: 30px 0 0;
+            }}
+            .notice {{
+                text-align: left;
+                display: inline-block;
+                width: 100%;
+            }}
+            .notice ul {{
+                position: relative;
+                display: inline-block;
+                clear: both;
+                padding: 10px 40px;
+                border-radius: 10px 10px 0 0;
+                background: #3A404D;
+                z-index: 5;
+            }}
+            .notice ul li {{
+                float: left;
+                height: 23px;
+                display: inline-block;
+                font-size: 12pt;
+                font-weight: 600;
+                vertical-align: middle;
+                color: #fff;
+            }}
+            .notice ul li + li {{
+              margin: 0 0 0 100px;
+            }}
+            .notice ul li span {{
+                display: inline-block;
+                font-size: 8.5pt;
+                padding: 3px 10px;
+                background: rgba(255, 255, 255, 0.2);
+                color: #ddd;
+                border-radius: 5px;
+                margin: 0 10px 0 0;
+                vertical-align: middle;
+            }}
+            .notice dl {{
+                display: inline-block;
+                width: 100%;
+                height: 100%;
+                padding: 15px;
+                border: 1px solid #3A404D;
+                margin: -8px 0 0;
+                clear: both;
+            }}
+            .notice dl dt,
+            .notice dl dd {{
+              display: inline-block;
+                text-align: left;
+            }}
+            .notice dl dt {{
+                top: 10px;
+                width: 20%;
+                font-size: 10pt;
+                font-weight: 600;
+                color: #3A404D;
+                float: left;
+            }}
+            .notice dl dt::after {{
+                content: "";
+                position: absolute;
+                right: 0;
+                display: inline-block;
+                width: 1px;
+                height: 50px;
+                background: #ccc;
+            }}
+            .notice dl dd {{
+                width: 75%;
+                color: #3A404D;
+                float: left;
+                min-height: 70px;
+            }}
+            .notice dl dd p {{
+              top: 5px;
+              left: 20px;
+              display: inline-block;
+              font-size: 9pt;
+              line-height: 1.5rem;
+              margin-block-start: 0;
+              margin-block-end: 0;
+              text-align: left;
+              color: #3A404D;
+              width: 100%;
+              word-break: break-all;
+            }}
+            .notice dl dd p::before {{
+                content: '-';
+                font-weight: 600;
+                color: #3A404D;
+                font-size: 12pt;
+                margin: 0 5px 0 0;
+            }}
+            .none::before,
+            .none::after {{
+                display: none;
+            }}
+            .confirm_ok {{
+                background: #f9f9f9;
+                color: #3A404D;
+                font-size: 11pt;
+                font-weight: 600;
+                padding: 50px 0!important;
+            }}
+            .confirm_ok strong {{
+                color: #1bc0e1;
+            }}
+            header .summary h1 {{
+                padding: 40px 0;
+                font-size: 22pt;
+                text-align: center;
+            }}
+            header .summary h1::before {{
+                display: none;
+            }}
+            header .summary .box {{
+                margin:  0 0 50px;
+            }}
+            header .summary .box + .box {{
+                border-top: 1px dashed #999;
+                padding-top: 40px;
+            }}
+            header .summary .box h1 {{
+                text-align: left;
+                font-size: 13.5pt;
+                padding: 0 0 10px;
+                color: #3A404D;
+                clear: both;
+            }}
+            header .summary .box h1::before {{
+                content: '';
+                position: relative;
+                display: inline-block;
+                top: 6px;
+                background: url("../images/ico_report.png") no-repeat;
+                margin: 0 10px 0 0;
+                width: 21px;;
+                height: 21px;
+            }}
+            header .summary .box h1.ty2::before {{
+                content: '';
+                position: relative;
+                display: inline-block;
+                top: 6px;
+                background: url("../images/ico_topology.png") no-repeat;
+                margin: 0 10px 0 0;
+                width: 21px;;
+                height: 21px;
+            }}
+            header .summary .box h1 span,
+            .subtitle p {{
+                display: inline-block;
+                padding: 3px 15px;
+                background: #3A404D;
+                color: #fff;
+                border-radius: 20px;
+                font-weight: 600;
+                font-size: 9pt;
+                float: right;
+                margin: 3px 0 0;
+                width: 155px;
+            }}
+            header .summary .box h2 {{
+                font-size: 11.5pt;
+                text-align: left;
+                margin: 20px 0 10px;
+            }}
+            header .summary .box h2::before {{
+                content: "";
+                display: inline-block;
+                width: 4px;
+                height: 4px;
+                background: #3A404D;
+                border-radius: 4px;
+                margin: 0 5px 0 0;
+            }}
+            .summary_table td:nth-child(1) {{
+                width: 20%;
+            }}
+            .summary_table td:nth-child(2) {{
+                width: 20%;
+            }}
+            .eq_table td:nth-child(1) {{
+                width: 20%;
+            }}
+            .eq_table td:nth-child(2) {{
+                width: 20%;
+            }}
+            .week_data_table td:nth-child(1) {{
+                width: 20%;
+            }}
+            .week_data_table td:nth-child(2) {{
+                width: 17%;
+            }}
+            table {{
+                width: 100%;
+                table-layout: fixed;
+                border: none;
+                border-color: #fff;
+                border-spacing: 0;
+                border-collapse: collapse;
+            }}
+            table th,
+            table td {{
+                padding: 10px 0;
+                text-align: center;
+            }}
+            table th {{
+                border-bottom: 2px solid #333;
+                border-top: 1px solid #333;
+            }}
+            table td {{
+                background: #f1f1f1;
+                border: 1px solid #fff;
+            }}
+            table thead {{
+                display: none;
+            }}
+            table tr:nth-child(1) td {{
+                border: none;
+                border-bottom: 2px solid #333;
+                border-top: 1px solid #333;
+                background: #ffffff;
+                text-align: center;
+                font-weight: 600;
+            }}
+            .subtitle {{
+                padding: 0 0 40px;
+            }}
+            .subtitle h1 {{
+                font-size: 18pt;
+                text-align: center;
+            }}
+            .subtitle h1::before {{
+                display: none;
+            }}
+            section,
+            header {{
+                page-break-inside: avoid;
+                page-break-after: always;
+            }}
+            .info_box {{
+                page-break-before: auto;
+            }}
+            table td {{
+                height: 5mm;
+            }}
+            table tr {{
+                page-break-inside: avoid;
+                page-break-after: auto;
+            }}
+        </style>
+'''
 
         try:
 
@@ -632,10 +651,10 @@ class PdfGenerator():
             sumCheck = ''
             summary_by_grp = pd.DataFrame(
                 columns=['groupName', 'deviceType', 'nochangeCount', 'createCount', 'updateCount', 'deleteCount'])
-            summary_by_grp.loc[0] = ['그룹명', '장비종류', '추가', '제거', '변경', '변동없음']
+            summary_by_grp.loc[0] = [ '그룹명','장비종류','변동없음','추가','변경','제거' ]
             summary_by_eq = pd.DataFrame(
-                columns=['rootName', 'deviceName', 'checkState', 'ip', 'title', 'vendor'])
-            summary_by_eq.loc[0] = ['그룹명', '장비명', '상태', 'IP', '모델명', '제조사']
+                columns=[ 'rootName','deviceName','checkState','ip','title','vendor' ])
+            summary_by_eq.loc[0] = [ '그룹명','장비명','상태','IP','모델명','제조사' ]
 
             if not len(result['reportData']) == 0:
                 for i, v in enumerate(result['reportData']):
@@ -822,14 +841,17 @@ class PdfGenerator():
                     device_detail_list = ''
                     if not len(v['runResult']) == 0:
                         for r in v['runResult']:
+                            work_table = ''
                             device_name = r['deviceName']
                             work_item_name = r['workitemName']
                             work_condition = r['dataJson']  # todo 임성준 차장
-                            work_result = pd.read_json(r['dataJson'])
-                            new_work_result = pd.DataFrame(columns=work_result.columns.tolist())
-                            new_work_result.loc[0] = work_result.columns.tolist()
-                            new_work_result = new_work_result.append(work_result)
-                            work_table = new_work_result.to_html(index=False)
+                            print(f'dataJson={work_condition}')
+                            if len(r['dataJson']) != 0:
+                                work_result = pd.read_json(json.dumps(r['dataJson']))
+                                new_work_result = pd.DataFrame(columns=work_result.columns.tolist())
+                                new_work_result.loc[0] = work_result.columns.tolist()
+                                new_work_result = new_work_result.append(work_result)
+                                work_table = new_work_result.to_html(index=False)
 
                             item_detail = f'''
                                 <div class="info_box">
@@ -845,7 +867,7 @@ class PdfGenerator():
                                               </dl>
                                           </div>
                                     </div>
-                                    <h3>실행결과</h3> 
+                                    <h3>실행결과</h3>
                                     {work_table}
                                 </div>
                             '''
@@ -905,7 +927,7 @@ class PdfGenerator():
                                 </div>
                             </article>
                             <article>
-                                <h2><i>02</i>To-Do List</h2>                  
+                                <h2><i>02</i>To-Do List</h2>
                                 {todo_list}
                             </article>
                             <article class="week_data_table">
@@ -924,25 +946,39 @@ class PdfGenerator():
             html_list.append('<div> </body> </html>')
             html = ' '.join(html_list)
 
-            now = datetime.now()
-            now_date = now.strftime('%Y%m%d')
-            # with open(f'''./etc/{now_date}_일일점검리포트.html''', 'w', encoding='UTF-8') as f:
+            now_date = datetime.strptime(inspect_date, '%Y-%m-%d %H:%M:%S').strftime('%Y%m%d_%H%M%S')
             with open(f'''./etc/{now_date}_{inspect_name}.html''', 'w', encoding='UTF-8') as f:
 
                 f.write(html)
 
-            # pdfkit.from_file(f'''./etc/{now_date}_일일점검리포트.html''', f'''./pdf/{now_date}_일일점검리포트.pdf''', configuration=config, options=options)
+            '''
+            #cmd = f"""/usr/bin/wkhtmltopdf '/etc/{now_date}_{inspect_name}.html' '/pdf/{now_date}_{inspect_name}.pdf'"""
+            cmd = f"""/usr/local/bin/wkhtmltopdf --margin-bottom 10mm --margin-top 10mm --encoding UTF-8 --enable-local-file-access 'etc/{now_date}_{inspect_name}.html' 'pdf/{now_date}_{inspect_name}.pdf'"""
+            print(f'cmd={cmd}')
+            exec_cmd(cmd)
+
+            lpath = '/home/vagrant/ns/bin/script/pdf/'
+            lname = f''' '{now_date}_{inspect_name}.pdf' '''
+            transport = paramiko.Transport(('61.74.63.35',30002))
+            transport.connect(username='scanner', password='tmzosj1!')
+            sftp = paramiko.SFTPClient.from_transport(transport)
+            rpath = '/home/scanner/report/'
+            sftp.put(lpath + lname, rpath + lname)
+            return lname
+            '''
+
+            # local에서 pdfkit으로 돌릴 때
             pdfkit.from_file(f'''./etc/{now_date}_{inspect_name}.html''', f'''./pdf/{now_date}_{inspect_name}.pdf''', configuration=config, options=options)
+        
+        except:
+            print(traceback.format_exc())
 
-        except Exception as e:
-            print(e)
-            return {
-                "error": e,
-                "msg": False,
-                "succ": False
-            }
+            now_date = datetime.strptime(inspect_date, '%Y-%m-%d %H:%M:%S').strftime('%Y%m%d_%H%M%S')
+            lname = f'''{now_date}_{inspect_name}.pdf'''
+            return lname
 
-    # 비정상 장비 추세
+
+# 비정상 장비 추세
     def generate_trend(self, df, index):
 
         fig, ax = plt.subplots(figsize=(2.25, 1.75))
