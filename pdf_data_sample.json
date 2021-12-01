@@ -1,0 +1,374 @@
+{
+  "resultCode": 200,
+  "resultMessage": "SUCCESS",
+  "data": {
+    "workflowName": "장비점검",
+    "runDate": "2021-11-22 11:21:30",
+    "reportData": [
+      {
+        "groupName": "테스트베드 > 다산네트웍스",
+        "groupCheckResult": [
+          {
+            "deviceType": "AP",
+            "nochangeCount": 0,
+            "createCount": 0,
+            "updateCount": 0,
+            "deleteCount": 0
+          },
+          {
+            "deviceType": "APC",
+            "nochangeCount": 0,
+            "createCount": 0,
+            "updateCount": 0,
+            "deleteCount": 0
+          },
+          {
+            "deviceType": "Switch",
+            "nochangeCount": 2,
+            "createCount": 0,
+            "updateCount": 0,
+            "deleteCount": 0
+          }
+        ],
+        "deviceCheckResult": [
+          {
+            "rootName": "다산네트웍스",
+            "deviceName": "V2908GB_GES#1",
+            "checkState": "변동없음",
+            "ip": "49.160.138.121",
+            "title": "V2908GB",
+            "vendor": "다산네트웍스"
+          },
+          {
+            "rootName": "다산네트웍스",
+            "deviceName": "V6848XG_L3#2",
+            "checkState": "변동없음",
+            "ip": "49.160.138.124",
+            "title": "V6848XG",
+            "vendor": "다산네트웍스"
+          }
+        ],
+        "deviceTotalCount": 5,
+        "autoCheckResult": [
+          {
+            "deviceType": "AP",
+            "abnormalCount": 0
+          },
+          {
+            "deviceType": "APC",
+            "abnormalCount": 0
+          },
+          {
+            "deviceType": "Switch",
+            "abnormalCount": 1
+          }
+        ],
+        "abnormalDeviceCount": {
+          "currentAbnormalCount": 1,
+          "beforeAbnormalCount": 0
+        },
+        "abnormalDeviceStatus": [
+          {
+            "name": "다산네트웍스",
+            "deviceCount": 5,
+            "abnormalCount": 1
+          }
+        ],
+        "abnormalItemStatus": [
+          {
+            "name": "cpu",
+            "deviceCount": 1,
+            "abnormalCount": 1
+          },
+          {
+            "name": "memory",
+            "deviceCount": 1,
+            "abnormalCount": 1
+          },
+          {
+            "name": "temperature",
+            "deviceCount": 1,
+            "abnormalCount": 1
+          },
+          {
+            "name": "fan",
+            "deviceCount": 1,
+            "abnormalCount": 0
+          },
+          {
+            "name": "power",
+            "deviceCount": 1,
+            "abnormalCount": 0
+          },
+          {
+            "name": "process",
+            "deviceCount": 1,
+            "abnormalCount": 0
+          }
+        ],
+        "abnormalDeviceTrend": [
+          {
+            "groupDate": "2021-11-22 11:10:55",
+            "abnormalCount": 1
+          }
+        ],
+        "abnormalItemTrend": [
+          {
+            "groupDate": "2021-11-22 11:10:55",
+            "list": [
+              {
+                "name": "process",
+                "abnormalCount": 0
+              },
+              {
+                "name": "temperature",
+                "abnormalCount": 1
+              },
+              {
+                "name": "cpu",
+                "abnormalCount": 1
+              },
+              {
+                "name": "fan",
+                "abnormalCount": 0
+              },
+              {
+                "name": "memory",
+                "abnormalCount": 1
+              },
+              {
+                "name": "power",
+                "abnormalCount": 0
+              }
+            ]
+          }
+        ],
+        "toDoList": [
+          {
+            "groupName": "다산네트웍스",
+            "deviceName": "V6848XG_L3#2",
+            "workitemName": "cpu",
+            "workscriptGuide": "비정상 process restart 또는 Loop여부 확인"
+          },
+          {
+            "groupName": "다산네트웍스",
+            "deviceName": "V6848XG_L3#2",
+            "workitemName": "memory",
+            "workscriptGuide": "제조사 문의 필요"
+          },
+          {
+            "groupName": "다산네트웍스",
+            "deviceName": "V6848XG_L3#2",
+            "workitemName": "temperature",
+            "workscriptGuide": "None"
+          }
+        ],
+        "abnormalWeek": [
+          {
+            "deviceName": "V6848XG_L3#2",
+            "workitemName": "cpu",
+            "d6AbnormalCount": 0,
+            "d5AbnormalCount": 0,
+            "d4AbnormalCount": 0,
+            "d3AbnormalCount": 0,
+            "d2AbnormalCount": 0,
+            "d1AbnormalCount": 0,
+            "d0AbnormalCount": 1
+          },
+          {
+            "deviceName": "V6848XG_L3#2",
+            "workitemName": "fan",
+            "d6AbnormalCount": 0,
+            "d5AbnormalCount": 0,
+            "d4AbnormalCount": 0,
+            "d3AbnormalCount": 0,
+            "d2AbnormalCount": 0,
+            "d1AbnormalCount": 0,
+            "d0AbnormalCount": 0
+          },
+          {
+            "deviceName": "V6848XG_L3#2",
+            "workitemName": "memory",
+            "d6AbnormalCount": 0,
+            "d5AbnormalCount": 0,
+            "d4AbnormalCount": 0,
+            "d3AbnormalCount": 0,
+            "d2AbnormalCount": 0,
+            "d1AbnormalCount": 0,
+            "d0AbnormalCount": 1
+          },
+          {
+            "deviceName": "V6848XG_L3#2",
+            "workitemName": "power",
+            "d6AbnormalCount": 0,
+            "d5AbnormalCount": 0,
+            "d4AbnormalCount": 0,
+            "d3AbnormalCount": 0,
+            "d2AbnormalCount": 0,
+            "d1AbnormalCount": 0,
+            "d0AbnormalCount": 0
+          },
+          {
+            "deviceName": "V6848XG_L3#2",
+            "workitemName": "process",
+            "d6AbnormalCount": 0,
+            "d5AbnormalCount": 0,
+            "d4AbnormalCount": 0,
+            "d3AbnormalCount": 0,
+            "d2AbnormalCount": 0,
+            "d1AbnormalCount": 0,
+            "d0AbnormalCount": 0
+          },
+          {
+            "deviceName": "V6848XG_L3#2",
+            "workitemName": "temperature",
+            "d6AbnormalCount": 0,
+            "d5AbnormalCount": 0,
+            "d4AbnormalCount": 0,
+            "d3AbnormalCount": 0,
+            "d2AbnormalCount": 0,
+            "d1AbnormalCount": 0,
+            "d0AbnormalCount": 1
+          }
+        ],
+        "runResult": [
+          {
+            "deviceName": "V6848XG_L3#2",
+            "workitemName": "cpu",
+            "reportFilter": "{\"filter\": {\"join\": \"AND\", \"list\": [{\"join\": \"AND\", \"text\": \"\", \"group\": [{\"turn\": \"\", \"type\": \"number\", \"value\": \"5\", \"column\": \"USAGE_5SEC\", \"target\": \"\", \"operator\": \"\", \"condition\": \"lt\"}]}]}, \"report\": {\"turn\": \"\", \"type\": \"S\", \"target\": \"\", \"compare\": \"QUERY\", \"condition\": \"\"}}",
+            "keyJson": [],
+            "dataJson": [{"USAGE_5SEC": "6.38", "USAGE_1MIN": "6.64", "USAGE_5MIN": "-", "USAGE_10MIN": "6.49", "FILTER_RESULT": "NOK"}]
+          },
+          {
+            "deviceName": "V6848XG_L3#2",
+            "workitemName": "memory",
+            "reportFilter": "{\"filter\": {\"join\": \"AND\", \"list\": [{\"join\": \"AND\", \"text\": \"\", \"group\": [{\"turn\": \"\", \"type\": \"number\", \"value\": \"5\", \"column\": \"USED\", \"target\": \"\", \"operator\": \"\", \"condition\": \"lt\"}]}]}, \"report\": {\"turn\": \"\", \"type\": \"S\", \"target\": \"\", \"compare\": \"QUERY\", \"condition\": \"\"}}",
+            "keyJson": [],
+            "dataJson": []
+          },
+          {
+            "deviceName": "V6848XG_L3#2",
+            "workitemName": "temperature",
+            "reportFilter": "{\"filter\": {\"join\": \"AND\", \"list\": [{\"join\": \"AND\", \"text\": \"\", \"group\": [{\"turn\": \"\", \"type\": \"number\", \"value\": \"10\", \"column\": \"TEMP\", \"target\": \"\", \"operator\": \"\", \"condition\": \"lt\"}]}]}, \"report\": {\"turn\": \"\", \"type\": \"S\", \"target\": \"\", \"compare\": \"QUERY\", \"condition\": \"\"}}",
+            "keyJson": [],
+            "dataJson": []
+          }
+        ]
+      },
+      {
+        "groupName": "테스트베드 > 유비쿼스",
+        "groupCheckResult": [
+          {
+            "deviceType": "AP",
+            "nochangeCount": 0,
+            "createCount": 0,
+            "updateCount": 0,
+            "deleteCount": 0
+          },
+          {
+            "deviceType": "APC",
+            "nochangeCount": 0,
+            "createCount": 0,
+            "updateCount": 0,
+            "deleteCount": 0
+          },
+          {
+            "deviceType": "Switch",
+            "nochangeCount": 0,
+            "createCount": 0,
+            "updateCount": 0,
+            "deleteCount": 0
+          }
+        ],
+        "deviceCheckResult": [],
+        "deviceTotalCount": 0,
+        "autoCheckResult": [
+          {
+            "deviceType": "AP",
+            "abnormalCount": 0
+          },
+          {
+            "deviceType": "APC",
+            "abnormalCount": 0
+          },
+          {
+            "deviceType": "Switch",
+            "abnormalCount": 0
+          }
+        ],
+        "abnormalDeviceCount": {
+          "currentAbnormalCount": 0,
+          "beforeAbnormalCount": 0
+        },
+        "abnormalDeviceStatus": [],
+        "abnormalItemStatus": [
+          {
+            "name": "temperature",
+            "deviceCount": 1,
+            "abnormalCount": 1
+          },
+          {
+            "name": "cpu",
+            "deviceCount": 1,
+            "abnormalCount": 1
+          },
+          {
+            "name": "memory",
+            "deviceCount": 1,
+            "abnormalCount": 1
+          },
+          {
+            "name": "fan",
+            "deviceCount": 1,
+            "abnormalCount": 0
+          },
+          {
+            "name": "power",
+            "deviceCount": 1,
+            "abnormalCount": 0
+          },
+          {
+            "name": "process",
+            "deviceCount": 1,
+            "abnormalCount": 0
+          }
+        ],
+        "abnormalDeviceTrend": [],
+        "abnormalItemTrend": [
+          {
+            "groupDate": "2021-11-22 11:10:55",
+            "list": [
+              {
+                "name": "cpu",
+                "abnormalCount": 1
+              },
+              {
+                "name": "fan",
+                "abnormalCount": 0
+              },
+              {
+                "name": "memory",
+                "abnormalCount": 1
+              },
+              {
+                "name": "power",
+                "abnormalCount": 0
+              },
+              {
+                "name": "process",
+                "abnormalCount": 0
+              },
+              {
+                "name": "temperature",
+                "abnormalCount": 1
+              }
+            ]
+          }
+        ],
+        "toDoList": [],
+        "abnormalWeek": [],
+        "runResult": []
+      }
+    ]
+  }
+}
